@@ -13,18 +13,13 @@ import es.udc.acarballal.plugins.avidemux.exceptions.*;
  */
 public class FlvEncoder extends Encoder{
 	
-	private static String audio_options, video_options;
-	private static final String AUDIO_OPTIONS_PARAMETERS = "flv_options/audio";
-	private static final String VIDEO_OPTIONS_PARAMETERS = "flv_options/video";
-	
-	
+	private static final String GENERAL_OPTIONS_PARAMETERS = "application/flv/options";
 	
 	static {
 		
 		try {
 			
-			audio_options = ConfigurationParametersManager.getParameter(AUDIO_OPTIONS_PARAMETERS);
-			video_options = ConfigurationParametersManager.getParameter(VIDEO_OPTIONS_PARAMETERS);
+			general_options = ConfigurationParametersManager.getParameter(GENERAL_OPTIONS_PARAMETERS);
 			
 		} catch (MissingConfigurationParameterException e) {
 			// TODO Auto-generated catch block
@@ -39,7 +34,7 @@ public class FlvEncoder extends Encoder{
 	 */
 	public FlvEncoder(String input_path, String output_path){
 		
-		super(input_path, output_path, audio_options, video_options);				
+		super(input_path, output_path);				
 									
 	}
 	
