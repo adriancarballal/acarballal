@@ -1,6 +1,6 @@
 package es.udc.acarballal.plugins.avidemux.codecs;
 
-import es.udc.acarballal.plugins.avidemux.configuration.*;
+//import es.udc.acarballal.plugins.avidemux.configuration.*;
 
 /**
  * 
@@ -10,21 +10,9 @@ import es.udc.acarballal.plugins.avidemux.configuration.*;
  */
 public class Mp4Encoder extends Encoder{
 	
-	private static String audio_options, video_options;
-	private static final String AUDIO_OPTIONS_PARAMETERS = "mp4_options/audio";
-	private static final String VIDEO_OPTIONS_PARAMETERS = "mp4_options/video";
 	
 	static {
 		
-		try {
-			
-			audio_options = ConfigurationParametersManager.getParameter(AUDIO_OPTIONS_PARAMETERS);
-			video_options = ConfigurationParametersManager.getParameter(VIDEO_OPTIONS_PARAMETERS);
-			
-		} catch (MissingConfigurationParameterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
 	}
 	
 	/**
@@ -34,7 +22,7 @@ public class Mp4Encoder extends Encoder{
 	 */
 	public Mp4Encoder(String input_path, String output_path){
 		
-		super(input_path, output_path, audio_options, video_options);				
+		super(input_path, output_path);				
 									
 	}
 	

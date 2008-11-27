@@ -4,64 +4,24 @@
                         
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.udc.acarballal</groupId>
-    <artifactId>2historias</artifactId>
-	<packaging>war</packaging>
+    <artifactId>2historias-pojo</artifactId>
     <version>1.0</version>
-    <name>2Historias</name>
-    <url>http://www.jabba.es</url>
-	
-    <build>
-        <finalName>2historias</finalName>
-    </build>
-	
-	<!-- ========================================================== -->
-    <!-- Profiles -->
-    <profiles>
-        <profile>
-            <id>mysql</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <!-- JDBC driver properties -->
-                <jdbcDriver.groupId>mysql</jdbcDriver.groupId>
-                <jdbcDriver.artifactId>
-                    mysql-connector-java
-                </jdbcDriver.artifactId>
-                <jdbcDriver.version>5.0.5</jdbcDriver.version>
-                <jdbcDriver.className>
-                    com.mysql.jdbc.Driver
-                </jdbcDriver.className>
-                
-                <!--  Data source properties -->
-                <dataSource.url>jdbc:mysql://localhost/pojo</dataSource.url>
-                <dataSource.user>pojo</dataSource.user>
-                <dataSource.password>pojo</dataSource.password>
-                <dataSource.createTablesScript>
-                    MySQLCreateTables.sql
-                </dataSource.createTablesScript>
-
-                <!-- Hibernate properties -->
-                <hibernate.dialect>
-                    org.hibernate.dialect.MySQLDialect
-                </hibernate.dialect>
-                
-                <!-- Jetty properties -->
-                <jettyDataSource.className>
-                    com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource
-                </jettyDataSource.className>
-            </properties>
-        </profile>
-    </profiles>
-	
-	<dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>${jdbcDriver.groupId}</groupId>
-                <artifactId>${jdbcDriver.artifactId}</artifactId>
-                <version>${jdbcDriver.version}</version>
-                <scope>test</scope>
-            </dependency>
+    <packaging>war</packaging>
+    <name>POJO-Examples MiniPortal Subsystem</name>
+    <url>http://www.tic.udc.es/is-java</url>
+ 
+<dependencies>
+  	<dependency>
+  		<groupId>es.udc.pojo</groupId>
+  		<artifactId>pojo-modelutil</artifactId>
+  		<version>1.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<version>4.4</version>
+  		<scope>test</scope>
+  	</dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate</artifactId>
@@ -76,12 +36,6 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>3.3.1.ga</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.4</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -124,7 +78,25 @@
                 <artifactId>pojo-modelutil</artifactId>
                 <version>1.0</version>
             </dependency>         
-        </dependencies>
-    </dependencyManagement>
- 
+
+</dependencies>
+  
+  <build>
+          <plugins>
+
+            <!-- ========================================================== -->
+            <!-- Compiler configuration -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <verbose>true</verbose>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <encoding>UTF-8</encoding> 
+                </configuration>
+            </plugin>
+            </plugins>
+  </build>
+    
 </project>
