@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <!--  ======================= Spring Infrastructure ==================== -->
+
+    <!--  For translating native persistence exceptions to Spring's 
+          DataAccessException hierarchy. -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+    <!--  Data source. -->
+    <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+        p:driverClassName="${jdbcDriver.className}"
+        p:url="${dataSource.url}" p:username="${dataSource.user}"
+        p:password="${dataSource.password}" />
+
+    <!-- Hibernate Session Factory -->
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+        p:dataSource-ref="dataSource"
+        p:configLocation="classpath:pojo-elmas-hibernate.cfg.xml"/>
+        
+    <!-- Transaction manager for a single Hibernate SessionFactory.  -->
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+        p:sessionFactory-ref="sessionFactory" />
+
+    <!-- Enable the configuration of transactional behavior based on
+         annotations. -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!--  ======================== Business Objects ======================== -->
+
+    <!--  DAOs. -->
+    <bean id="userProfileDao"
+        class="es.udc.acarballal.elmas.model.userprofile.UserProfileDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+    <!--  Service layer. -->
+    <bean id="userService"
+        class="es.udc.acarballal.elmas.model.userservice.UserServiceImpl"
+        p:userProfileDao-ref="userProfileDao" />
+
+</beans>

@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
 
+
 @Entity
 public class UserProfile {
+	
+	public enum Privileges_TYPES {ADMIN, COMPETITOR, VOTER, NONE}
 
 	private Long userProfileId;
 	private String loginName;
@@ -17,6 +20,7 @@ public class UserProfile {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private Privileges_TYPES privileges; 
 	private long version;
 
 	public UserProfile() {
@@ -35,6 +39,7 @@ public class UserProfile {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.privileges = Privileges_TYPES.NONE;
 	}
 
 	@Column(name = "usrId")
@@ -92,6 +97,14 @@ public class UserProfile {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public Privileges_TYPES getPrivileges() {
+		return privileges;
+	}
+
+	public void setPrivileges(Privileges_TYPES privileges) {
+		this.privileges = privileges;
+	}
 
 	@Version
 	public long getVersion() {
@@ -117,6 +130,8 @@ public class UserProfile {
 				&& (firstName != null) && firstName.equals(theOther.firstName)
 				&& (lastName != null) && lastName.equals(theOther.lastName)
 				&& (email != null) && email.equals(theOther.email)
+				&& (privileges != null) && privileges.equals(theOther.privileges)
 				&& version == theOther.version;
 	}
+
 }

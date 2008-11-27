@@ -14,6 +14,7 @@ CREATE TABLE UserProfile (
     enPassword VARCHAR(13) NOT NULL, 
     firstName VARCHAR(30) NOT NULL,
     lastName VARCHAR(40) NOT NULL, email VARCHAR(60) NOT NULL,
+	privileges TINYINT NOT NULL,
     version BIGINT,
     CONSTRAINT UserProfile_PK PRIMARY KEY (usrId),
 	CONSTRAINT LoginNameUniqueKey UNIQUE (loginName)) 
