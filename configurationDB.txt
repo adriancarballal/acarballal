@@ -1,0 +1,8 @@
+Create a database with name "j2ee".
+	- mysqladmin -u root create elmas     
+Create a user with name "elmas" and password "elmas", and allow him to access from local host.
+    - mysql -u root
+    - GRANT ALL PRIVILEGES ON elmas.* to elmas@localhost IDENTIFIED BY 'elmas',
+         elmas@localhost.localdomain IDENTIFIED BY 'elmas';
+Try to access to "elmas" database as "elmas" user with password "elmas".
+	- mysql -u elmas --password=elmas elmas
