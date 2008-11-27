@@ -4,11 +4,12 @@
                         
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.udc.acarballal</groupId>
-    <artifactId>2historias-pojo</artifactId>
+    <artifactId>elmas-pojo</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>POJO-Examples MiniPortal Subsystem</name>
-    <url>http://www.tic.udc.es/is-java</url>
+    <name>El_mas Concurso-Reality multiplataforma</name>
+    <description>Proyecto Fin de Carrera Adrian Carballal Mato 2008-2009</description>
+    <url>http://fic.udc.es</url>
 
 <!-- ========================================================== -->
     <!-- Profiles -->
