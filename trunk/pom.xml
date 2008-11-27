@@ -53,6 +53,12 @@
 
  
 <dependencies>
+	<dependency>
+            <groupId>${jdbcDriver.groupId}</groupId>
+            <artifactId>${jdbcDriver.artifactId}</artifactId>
+            <version>${jdbcDriver.version}</version>
+            <scope>test</scope>
+      </dependency>
   	<dependency>
   		<groupId>es.udc.pojo</groupId>
   		<artifactId>pojo-modelutil</artifactId>
@@ -124,6 +130,29 @@
 </dependencies>
   
   <build>
+
+	   <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>../src/main/jetty</directory>
+                <includes>
+                    <include>jetty-env.xml</include>
+                </includes>
+                <targetPath>../jetty</targetPath>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
           <plugins>
 
             <!-- ========================================================== -->
