@@ -130,7 +130,7 @@ public class UserProfile {
 				&& (firstName != null) && firstName.equals(theOther.firstName)
 				&& (lastName != null) && lastName.equals(theOther.lastName)
 				&& (email != null) && email.equals(theOther.email)
-				&& (privileges != null) && privileges.equals(theOther.privileges)
+				&& (privileges != null) && privileges == theOther.privileges
 				&& version == theOther.version;
 	}
 

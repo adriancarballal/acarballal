@@ -2,6 +2,8 @@ package es.udc.acarballal.elmas.model.userservice;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
+import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
@@ -106,9 +108,14 @@ public class UserServiceImpl implements UserService {
 		userProfileDao.update(userProfile);
 	}
 	
-	public LoginResult changePrivileges(Long userProfileId, Privileges_TYPES privileges)
-			throws InstanceNotFoundException {
+	public LoginResult changePrivileges(Long adminId, Long userProfileId, 
+			Privileges_TYPES privileges) throws InstanceNotFoundException,
+			InsufficientPrivilegesException {
 		
+		UserProfile admin = userProfileDao.find(adminId);
+		if(admin.getPrivileges()!=Privileges_TYPES.ADMIN){
+			throw new InsufficientPrivilegesException(admin.getLoginName());
+		}
 		UserProfile userProfile;
 		userProfile = userProfileDao.find(userProfileId);
 

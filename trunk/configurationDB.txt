@@ -6,3 +6,5 @@ Create a user with name "elmas" and password "elmas", and allow him to access fr
          elmas@localhost.localdomain IDENTIFIED BY 'elmas';
 Try to access to "elmas" database as "elmas" user with password "elmas".
 	- mysql -u elmas --password=elmas elmas
+Shutdown database
+	- mysqladmin -u root shutdown
