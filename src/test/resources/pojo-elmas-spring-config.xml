@@ -44,9 +44,19 @@
         class="es.udc.acarballal.elmas.model.userprofile.UserProfileDaoHibernate"
         p:sessionFactory-ref="sessionFactory" />
         
+    <bean id="videoDao"
+        class="es.udc.acarballal.elmas.model.video.VideoDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+        
     <!--  Service layer. -->
     <bean id="userService"
         class="es.udc.acarballal.elmas.model.userservice.UserServiceImpl"
         p:userProfileDao-ref="userProfileDao" />
+        
+    <bean id="videoService"
+        class="es.udc.acarballal.elmas.model.videoservice.VideoServiceImpl"
+        p:userProfileDao-ref="userProfileDao" 
+        p:videoDao-ref="videoDao" />    
 
 </beans>

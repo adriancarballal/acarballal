@@ -1,4 +1,4 @@
-package es.udc.acarballal.elmas.model.userservice;
+package es.udc.acarballal.elmas.model.exceptions;
 
 @SuppressWarnings("serial")
 public class IncorrectPasswordException extends Exception {
