@@ -1,5 +1,7 @@
 package es.udc.acarballal.elmas.model.userservice;
 
+import java.util.Calendar;
+
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
@@ -30,7 +32,16 @@ public interface UserService {
 	public LoginResult changePrivileges(Long userProfileId, Privileges_TYPES privileges) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
+	//Añadir un adminService para este servicio?
 	public LoginResult changePrivilegesToAdmin(Long adminId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException;
+	
+	public Long commentUser(Long commentatorId, Long commentedId, 
+			String comment,	Calendar date) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException;
+	
+	//Añadir un adminService para este servicio?
+	public void deleteUserComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 
 }

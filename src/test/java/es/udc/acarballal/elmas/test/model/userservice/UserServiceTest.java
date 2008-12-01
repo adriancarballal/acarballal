@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.acarballal.elmas.test.model.util.UserProfileDbUtil;
+import es.udc.acarballal.elmas.test.model.util.DbUtil;
 import es.udc.acarballal.elmas.test.util.GlobalNames;
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
@@ -36,12 +36,12 @@ public class UserServiceTest {
 
 	@BeforeClass
 	public static void populateDb() {
-		UserProfileDbUtil.populateDb();
+		DbUtil.populateDb();
 	}
 
 	@AfterClass
 	public static void cleanDb() throws Exception {
-		UserProfileDbUtil.cleanDb();
+		DbUtil.cleanDb();
 	}
 
 	@Autowired
@@ -70,7 +70,7 @@ public class UserServiceTest {
 
 	@Test(expected = DuplicateInstanceException.class)
 	public void testRegisterDuplicatedUser() throws DuplicateInstanceException {
-		userService.registerUser(UserProfileDbUtil.getTestUserProfile().getLoginName(),
+		userService.registerUser(DbUtil.getTestUserProfile().getLoginName(),
 				"clearPassword", new UserProfileDetails("name", "lastName",
 						"user1@udc.es"));
 	}
@@ -78,45 +78,45 @@ public class UserServiceTest {
 	@Test
 	public void testLoginClearPassword() throws IncorrectPasswordException,
 			InstanceNotFoundException {
-		LoginResult loginResult = userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
-		assertEquals(loginResult.getFirstName(), UserProfileDbUtil.getTestUserProfile()
+		LoginResult loginResult = userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
+		assertEquals(loginResult.getFirstName(), DbUtil.getTestUserProfile()
 				.getFirstName());
-		assertEquals(loginResult.getEncryptedPassword(), UserProfileDbUtil
+		assertEquals(loginResult.getEncryptedPassword(), DbUtil
 				.getTestUserProfile().getEncryptedPassword());
 	}
 
 	@Test
 	public void testLoginEncryptedPassword() throws IncorrectPasswordException,
 			InstanceNotFoundException {
-		LoginResult loginResult = userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestUserProfile()
+		LoginResult loginResult = userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestUserProfile()
 				.getEncryptedPassword(), true);
-		assertEquals(loginResult.getFirstName(), UserProfileDbUtil.getTestUserProfile()
+		assertEquals(loginResult.getFirstName(), DbUtil.getTestUserProfile()
 				.getFirstName());
-		assertEquals(loginResult.getEncryptedPassword(), UserProfileDbUtil
+		assertEquals(loginResult.getEncryptedPassword(), DbUtil
 				.getTestUserProfile().getEncryptedPassword());
 	}
 
 	@Test(expected = IncorrectPasswordException.class)
 	public void testLoginIncorrectPasword() throws IncorrectPasswordException,
 			InstanceNotFoundException {
-		userService.login(UserProfileDbUtil.getTestUserProfile().getLoginName(),
+		userService.login(DbUtil.getTestUserProfile().getLoginName(),
 				INCORRECT_CLEAR_PASSWORD, false);
 	}
 
 	@Test(expected = InstanceNotFoundException.class)
 	public void testLoginWithNonExistentUser()
 			throws IncorrectPasswordException, InstanceNotFoundException {
-		userService.login(NON_EXISTENT_LOGIN_NAME, UserProfileDbUtil
+		userService.login(NON_EXISTENT_LOGIN_NAME, DbUtil
 				.getTestClearPassword(), false);
 	}
 
 	@Test
 	public void testUpdate() throws InstanceNotFoundException,
 			IncorrectPasswordException {
-		LoginResult loginResult = userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		LoginResult loginResult = userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 
 		UserProfileDetails userProfileDetails = new UserProfileDetails("name2",
 				"lastName2", "user2@udc.es");
@@ -141,21 +141,21 @@ public class UserServiceTest {
 	@Test
 	public void testChangePassword() throws InstanceNotFoundException,
 			IncorrectPasswordException {
-		LoginResult loginResult = userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		LoginResult loginResult = userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 
 		String newClearPassword = "newClearPassword";
-		userService.changePassword(loginResult.getUserProfileId(), UserProfileDbUtil
+		userService.changePassword(loginResult.getUserProfileId(), DbUtil
 				.getTestClearPassword(), newClearPassword);
-		userService.login(UserProfileDbUtil.getTestUserProfile().getLoginName(),
+		userService.login(DbUtil.getTestUserProfile().getLoginName(),
 				newClearPassword, false);
 	}
 
 	@Test(expected = IncorrectPasswordException.class)
 	public void testChangePasswordWithIncorrectPassword()
 			throws InstanceNotFoundException, IncorrectPasswordException {
-		LoginResult loginResult = userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		LoginResult loginResult = userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 
 		String newClearPassword = "newClearPassword";
 		userService.changePassword(loginResult.getUserProfileId(),
@@ -176,8 +176,8 @@ public class UserServiceTest {
 	public void testChangePrivilegesToNone() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
-				userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+				userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 		LoginResult newResult = 
 			userService.changePrivileges(loginResult.getUserProfileId(),	
 					Privileges_TYPES.NONE);
@@ -188,8 +188,8 @@ public class UserServiceTest {
 	public void testChangePrivilegesToAdminAsAdmin() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
-				userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+				userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 		userService.changePrivileges(loginResult.getUserProfileId(),	
 				Privileges_TYPES.ADMIN);
 	}
@@ -198,8 +198,8 @@ public class UserServiceTest {
 	public void testChangePrivilegesToAdminAsCompetitor() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
-				userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+				userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
 				Privileges_TYPES.COMPETITOR);
 		userService.changePrivileges(loginResult.getUserProfileId(),	
@@ -210,8 +210,8 @@ public class UserServiceTest {
 	public void testChangePrivilegesToAdminAsVoter() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
-				userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+				userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
 				Privileges_TYPES.VOTER);
 		userService.changePrivileges(loginResult.getUserProfileId(),	
@@ -222,8 +222,8 @@ public class UserServiceTest {
 	public void testChangePrivilegesToAdminAsNone() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
-				userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+				userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
 				Privileges_TYPES.NONE);
 		userService.changePrivileges(loginResult.getUserProfileId(),	
@@ -241,8 +241,8 @@ public class UserServiceTest {
 	public void testChangePrivilegesToAdminAsAdmin_2() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
-				userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+				userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 		userService.changePrivilegesToAdmin(loginResult.getUserProfileId(), 
 				loginResult.getUserProfileId());
 	}
@@ -251,8 +251,8 @@ public class UserServiceTest {
 	public void testChangePrivilegesToAdminAsCompetitor_2() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
-				userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+				userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
 				Privileges_TYPES.COMPETITOR);
 		userService.changePrivilegesToAdmin(loginResult.getUserProfileId(), 
@@ -263,8 +263,8 @@ public class UserServiceTest {
 	public void testChangePrivilegesToAdminAsVoter_2() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
-				userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+				userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
 				Privileges_TYPES.VOTER);
 		userService.changePrivilegesToAdmin(loginResult.getUserProfileId(), 
@@ -275,8 +275,8 @@ public class UserServiceTest {
 	public void testChangePrivilegesToAdminAsNone_2() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
-				userService.login(UserProfileDbUtil.getTestUserProfile()
-				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+				userService.login(DbUtil.getTestUserProfile()
+				.getLoginName(), DbUtil.getTestClearPassword(), false);
 		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
 				Privileges_TYPES.NONE);
 		userService.changePrivilegesToAdmin(loginResult.getUserProfileId(), 
