@@ -27,8 +27,10 @@ public interface UserService {
 			String newClearPassword) throws IncorrectPasswordException,
 			InstanceNotFoundException;
 	
-	public LoginResult changePrivileges(Long adminId, Long userProfileId, 
-			Privileges_TYPES privileges) 
+	public LoginResult changePrivileges(Long userProfileId, Privileges_TYPES privileges) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException;
+	
+	public LoginResult changePrivilegesToAdmin(Long adminId, Long userProfileId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 
 }
