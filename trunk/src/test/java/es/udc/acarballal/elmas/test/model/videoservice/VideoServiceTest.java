@@ -18,7 +18,7 @@ import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
-import es.udc.acarballal.elmas.test.model.util.VideoDbUtil;
+import es.udc.acarballal.elmas.test.model.util.DbUtil;
 import es.udc.acarballal.elmas.test.util.GlobalNames;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -35,12 +35,12 @@ public class VideoServiceTest {
 
 	@BeforeClass
 	public static void populateDb() {
-		VideoDbUtil.populateDb();
+		DbUtil.populateDb();
 	}
 
 	@AfterClass
 	public static void cleanDb() throws Exception {
-		VideoDbUtil.cleanDb();
+		DbUtil.cleanDb();
 	}
 	
 	@Autowired
@@ -55,9 +55,9 @@ public class VideoServiceTest {
 	
 	@Test
 	public void findVideoTest() throws InstanceNotFoundException {
-		long videoId = VideoDbUtil.getTestVideo().getVideoId();
+		long videoId = DbUtil.getTestVideo().getVideoId();
 		Video testResultVideo = videoService.findVideoById(videoId);
-		assertEquals(VideoDbUtil.getTestVideo(), testResultVideo);
+		assertEquals(DbUtil.getTestVideo(), testResultVideo);
 	}
 	
 	@Test(expected = InstanceNotFoundException.class)
@@ -69,7 +69,7 @@ public class VideoServiceTest {
 	public void addVideoTestPrivilegesAsAdmin() 
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 		
-		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
 		userService.changePrivilegesToAdmin(userProfileId, userProfileId);
 		
 		String title = "VideoExample";
@@ -91,7 +91,7 @@ public class VideoServiceTest {
 	public void addVideoTestPrivilegesAsCompetitor() 
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 		
-		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
 		userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);
 		
 		String title = "VideoExample";
@@ -113,7 +113,7 @@ public class VideoServiceTest {
 	public void addVideoTestPrivilegesAsVoter() 
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 		
-		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
 		userService.changePrivileges(userProfileId, Privileges_TYPES.VOTER);
 		
 		String title = "VideoExample";
@@ -129,7 +129,7 @@ public class VideoServiceTest {
 	public void addVideoTestPrivilegesAsNone() 
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 		
-		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
 		
 		String title = "VideoExample";
 		String comment = "CommentExample";
@@ -158,8 +158,8 @@ public class VideoServiceTest {
 	public void deleteVideoPrivilegesAsAdmin()
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 
-		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
-		long videoId = VideoDbUtil.getTestVideo().getVideoId();
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
+		long videoId = DbUtil.getTestVideo().getVideoId();
 		userService.changePrivilegesToAdmin(userProfileId, userProfileId);
 				
 		videoService.deleteVideo(videoId, userProfileId);
@@ -170,8 +170,8 @@ public class VideoServiceTest {
 	public void deleteVideoPrivilegesAsCompetitor()
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 
-		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
-		long videoId = VideoDbUtil.getTestVideo().getVideoId();
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
+		long videoId = DbUtil.getTestVideo().getVideoId();
 		userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);
 				
 		videoService.deleteVideo(videoId, userProfileId);
@@ -181,8 +181,8 @@ public class VideoServiceTest {
 	public void deleteVideoPrivilegesAsVoter()
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 
-		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
-		long videoId = VideoDbUtil.getTestVideo().getVideoId();
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
+		long videoId = DbUtil.getTestVideo().getVideoId();
 		userService.changePrivileges(userProfileId, Privileges_TYPES.VOTER);
 				
 		videoService.deleteVideo(videoId, userProfileId);
@@ -192,8 +192,8 @@ public class VideoServiceTest {
 	public void deleteVideoPrivilegesAsNone()
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 
-		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
-		long videoId = VideoDbUtil.getTestVideo().getVideoId();
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
+		long videoId = DbUtil.getTestVideo().getVideoId();
 		userService.changePrivileges(userProfileId, Privileges_TYPES.NONE);
 		
 		videoService.deleteVideo(videoId, userProfileId);

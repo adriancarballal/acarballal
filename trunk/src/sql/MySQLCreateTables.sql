@@ -5,7 +5,7 @@
 DROP TABLE PingTable;
 CREATE TABLE PingTable (foo CHAR(1));
 
-
+DROP TABLE UserComment;
 DROP TABLE Video;
 DROP TABLE UserProfile;
 
@@ -44,3 +44,19 @@ CREATE TABLE Video (
 CREATE INDEX VideoIndexByVidId ON Video (vidId);
 CREATE INDEX VideoIndexByUsrId ON Video (usrId);
 -- Necesitariamos un indice para las busquedas por titulo y por fecha???
+
+--------------------------------- UserComment------------------------------------
+CREATE TABLE UserComment (
+	cmmtId BIGINT NOT NULL AUTO_INCREMENT,
+	commented BIGINT NOT NULL,
+	commentator BIGINT NOT NULL,
+	cmmnt VARCHAR(300) NOT NULL,
+	date TIMESTAMP NOT NULL,
+	CONSTRAINT UserComment_PK PRIMARY KEY (cmmtId),
+	CONSTRAINT UsrCommented_FK FOREIGN KEY (commented)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE,
+	CONSTRAINT UsrCommentator_FK FOREIGN KEY (commentator)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
+    TYPE = InnoDB;
+
+CREATE INDEX UserCommentByUserCommented ON UserComment(commented);

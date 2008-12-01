@@ -1,9 +1,13 @@
 package es.udc.acarballal.elmas.model.userservice;
 
+import java.util.Calendar;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.usercomment.UserComment;
+import es.udc.acarballal.elmas.model.usercomment.UserCommentDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
@@ -15,11 +19,16 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class UserServiceImpl implements UserService {
 
 	private UserProfileDao userProfileDao;
+	private UserCommentDao userCommentDao;
 
 	public void setUserProfileDao(UserProfileDao userProfileDao) {
 		this.userProfileDao = userProfileDao;
 	}
-
+	
+	public void setUserCommentDao(UserCommentDao userCommentDao) {
+		this.userCommentDao = userCommentDao;
+	}
+	
 	public Long registerUser(String loginName, String clearPassword,
 			UserProfileDetails userProfileDetails)
 			throws DuplicateInstanceException {
@@ -125,6 +134,7 @@ public class UserServiceImpl implements UserService {
 				userProfile.getPrivileges());
 	}
 	
+	//Añadir un adminService para este servicio?
 	public LoginResult changePrivilegesToAdmin(Long adminId, Long userProfileId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException {
 		
@@ -142,5 +152,30 @@ public class UserServiceImpl implements UserService {
 				userProfile.getPrivileges());
 	}
 	
+	public Long commentUser(Long commentatorId, Long commentedId, 
+			String comment,	Calendar date) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile commentatorUser = userProfileDao.find(commentatorId);
+		UserProfile commentedUser = userProfileDao.find(commentedId);
+		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(commentatorUser.getLoginName());
+		}
+		UserComment userComment = new UserComment(commentatorUser, commentedUser, 
+				comment, date);
+		userCommentDao.create(userComment);
+		return userComment.getCommentId();
+	}
+	
+	//Añadir un adminService para este servicio?
+	public void deleteUserComment(Long commentId, Long userProfileId)
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		if(userProfile.getPrivileges()!=Privileges_TYPES.ADMIN){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		userCommentDao.remove(commentId);
+	}
 
 }
