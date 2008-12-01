@@ -70,7 +70,7 @@ public class VideoServiceTest {
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 		
 		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
-		userService.changePrivileges(userProfileId, userProfileId, Privileges_TYPES.ADMIN);
+		userService.changePrivilegesToAdmin(userProfileId, userProfileId);
 		
 		String title = "VideoExample";
 		String comment = "CommentExample";
@@ -92,7 +92,7 @@ public class VideoServiceTest {
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 		
 		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
-		userService.changePrivileges(userProfileId, userProfileId, Privileges_TYPES.COMPETITOR);
+		userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);
 		
 		String title = "VideoExample";
 		String comment = "CommentExample";
@@ -114,7 +114,7 @@ public class VideoServiceTest {
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
 		
 		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
-		userService.changePrivileges(userProfileId, userProfileId, Privileges_TYPES.VOTER);
+		userService.changePrivileges(userProfileId, Privileges_TYPES.VOTER);
 		
 		String title = "VideoExample";
 		String comment = "CommentExample";
@@ -160,7 +160,7 @@ public class VideoServiceTest {
 
 		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
 		long videoId = VideoDbUtil.getTestVideo().getVideoId();
-		userService.changePrivileges(userProfileId, userProfileId, Privileges_TYPES.ADMIN);
+		userService.changePrivilegesToAdmin(userProfileId, userProfileId);
 				
 		videoService.deleteVideo(videoId, userProfileId);
 		videoService.findVideoById(videoId);
@@ -172,7 +172,7 @@ public class VideoServiceTest {
 
 		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
 		long videoId = VideoDbUtil.getTestVideo().getVideoId();
-		userService.changePrivileges(userProfileId, userProfileId, Privileges_TYPES.COMPETITOR);
+		userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);
 				
 		videoService.deleteVideo(videoId, userProfileId);
 	}
@@ -183,7 +183,7 @@ public class VideoServiceTest {
 
 		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
 		long videoId = VideoDbUtil.getTestVideo().getVideoId();
-		userService.changePrivileges(userProfileId, userProfileId, Privileges_TYPES.VOTER);
+		userService.changePrivileges(userProfileId, Privileges_TYPES.VOTER);
 				
 		videoService.deleteVideo(videoId, userProfileId);
 	}
@@ -194,7 +194,7 @@ public class VideoServiceTest {
 
 		long userProfileId = VideoDbUtil.getTestUserProfile().getUserProfileId();
 		long videoId = VideoDbUtil.getTestVideo().getVideoId();
-		userService.changePrivileges(userProfileId, userProfileId, Privileges_TYPES.NONE);
+		userService.changePrivileges(userProfileId, Privileges_TYPES.NONE);
 		
 		videoService.deleteVideo(videoId, userProfileId);
 	}

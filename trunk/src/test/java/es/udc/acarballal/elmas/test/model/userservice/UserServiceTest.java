@@ -170,22 +170,117 @@ public class UserServiceTest {
 				newClearPassword, newClearPassword);
 	}
 	
+	
+	/* Tests for UserService.changePrivileges method */
 	@Test
-	public void testChangePrivileges() throws InstanceNotFoundException, 
+	public void testChangePrivilegesToNone() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
-		LoginResult loginResult = userService.login(UserProfileDbUtil.getTestUserProfile()
+		LoginResult loginResult = 
+				userService.login(UserProfileDbUtil.getTestUserProfile()
 				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
 		LoginResult newResult = 
-			userService.changePrivileges(UserProfileDbUtil.getTestUserProfile().getUserProfileId(), 
-					loginResult.getUserProfileId(),	Privileges_TYPES.NONE);
+			userService.changePrivileges(loginResult.getUserProfileId(),	
+					Privileges_TYPES.NONE);
 		assertEquals(newResult.getPrivileges(),Privileges_TYPES.NONE);
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void testChangePrivilegesToAdminAsAdmin() throws InstanceNotFoundException, 
+			IncorrectPasswordException, InsufficientPrivilegesException{
+		LoginResult loginResult = 
+				userService.login(UserProfileDbUtil.getTestUserProfile()
+				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		userService.changePrivileges(loginResult.getUserProfileId(),	
+				Privileges_TYPES.ADMIN);
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void testChangePrivilegesToAdminAsCompetitor() throws InstanceNotFoundException, 
+			IncorrectPasswordException, InsufficientPrivilegesException{
+		LoginResult loginResult = 
+				userService.login(UserProfileDbUtil.getTestUserProfile()
+				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.COMPETITOR);
+		userService.changePrivileges(loginResult.getUserProfileId(),	
+				Privileges_TYPES.ADMIN);
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void testChangePrivilegesToAdminAsVoter() throws InstanceNotFoundException, 
+			IncorrectPasswordException, InsufficientPrivilegesException{
+		LoginResult loginResult = 
+				userService.login(UserProfileDbUtil.getTestUserProfile()
+				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.VOTER);
+		userService.changePrivileges(loginResult.getUserProfileId(),	
+				Privileges_TYPES.ADMIN);
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void testChangePrivilegesToAdminAsNone() throws InstanceNotFoundException, 
+			IncorrectPasswordException, InsufficientPrivilegesException{
+		LoginResult loginResult = 
+				userService.login(UserProfileDbUtil.getTestUserProfile()
+				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.NONE);
+		userService.changePrivileges(loginResult.getUserProfileId(),	
+				Privileges_TYPES.ADMIN);
 	}
 	
 	@Test(expected = InstanceNotFoundException.class)
 	public void testChangePrivilegesWithNonExistentUser() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
-		userService.changePrivileges(UserProfileDbUtil.getTestUserProfile().getUserProfileId(),
-				NON_EXISTENT_USER_PROFILE_ID, Privileges_TYPES.ADMIN);
+		userService.changePrivileges(NON_EXISTENT_USER_PROFILE_ID, Privileges_TYPES.ADMIN);
+	}
+	
+	/* Tests for UserService.changePrivilegesToAdmin method */
+	@Test
+	public void testChangePrivilegesToAdminAsAdmin_2() throws InstanceNotFoundException, 
+			IncorrectPasswordException, InsufficientPrivilegesException{
+		LoginResult loginResult = 
+				userService.login(UserProfileDbUtil.getTestUserProfile()
+				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		userService.changePrivilegesToAdmin(loginResult.getUserProfileId(), 
+				loginResult.getUserProfileId());
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void testChangePrivilegesToAdminAsCompetitor_2() throws InstanceNotFoundException, 
+			IncorrectPasswordException, InsufficientPrivilegesException{
+		LoginResult loginResult = 
+				userService.login(UserProfileDbUtil.getTestUserProfile()
+				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.COMPETITOR);
+		userService.changePrivilegesToAdmin(loginResult.getUserProfileId(), 
+				loginResult.getUserProfileId());
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void testChangePrivilegesToAdminAsVoter_2() throws InstanceNotFoundException, 
+			IncorrectPasswordException, InsufficientPrivilegesException{
+		LoginResult loginResult = 
+				userService.login(UserProfileDbUtil.getTestUserProfile()
+				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.VOTER);
+		userService.changePrivilegesToAdmin(loginResult.getUserProfileId(), 
+				loginResult.getUserProfileId());
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void testChangePrivilegesToAdminAsNone_2() throws InstanceNotFoundException, 
+			IncorrectPasswordException, InsufficientPrivilegesException{
+		LoginResult loginResult = 
+				userService.login(UserProfileDbUtil.getTestUserProfile()
+				.getLoginName(), UserProfileDbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.NONE);
+		userService.changePrivilegesToAdmin(loginResult.getUserProfileId(), 
+				loginResult.getUserProfileId());
 	}
 
 }

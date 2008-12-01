@@ -108,9 +108,25 @@ public class UserServiceImpl implements UserService {
 		userProfileDao.update(userProfile);
 	}
 	
-	public LoginResult changePrivileges(Long adminId, Long userProfileId, 
+	public LoginResult changePrivileges(Long userProfileId, 
 			Privileges_TYPES privileges) throws InstanceNotFoundException,
 			InsufficientPrivilegesException {
+		
+		UserProfile userProfile;
+		userProfile = userProfileDao.find(userProfileId);
+		if(privileges == Privileges_TYPES.ADMIN){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+
+		userProfile.setPrivileges(privileges);
+		userProfileDao.update(userProfile);
+		return new LoginResult(userProfile.getUserProfileId(), userProfile
+				.getFirstName(), userProfile.getEncryptedPassword(), 
+				userProfile.getPrivileges());
+	}
+	
+	public LoginResult changePrivilegesToAdmin(Long adminId, Long userProfileId) 
+		throws InstanceNotFoundException, InsufficientPrivilegesException {
 		
 		UserProfile admin = userProfileDao.find(adminId);
 		if(admin.getPrivileges()!=Privileges_TYPES.ADMIN){
@@ -119,7 +135,7 @@ public class UserServiceImpl implements UserService {
 		UserProfile userProfile;
 		userProfile = userProfileDao.find(userProfileId);
 
-		userProfile.setPrivileges(privileges);
+		userProfile.setPrivileges(Privileges_TYPES.ADMIN);
 		userProfileDao.update(userProfile);
 		return new LoginResult(userProfile.getUserProfileId(), userProfile
 				.getFirstName(), userProfile.getEncryptedPassword(), 
