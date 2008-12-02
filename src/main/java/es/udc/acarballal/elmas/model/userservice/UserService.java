@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
@@ -37,8 +38,8 @@ public interface UserService {
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
 	public Long commentUser(Long commentatorId, Long commentedId, 
-			String comment,	Calendar date) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException;
+			String comment,	Calendar date) throws InstanceNotFoundException, 
+			InsufficientPrivilegesException, InvalidOperationException;
 	
 	//Añadir un adminService para este servicio?
 	public void deleteUserComment(Long commentId, Long userProfileId)
