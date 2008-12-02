@@ -57,7 +57,7 @@
     <bean id="userService"
         class="es.udc.acarballal.elmas.model.userservice.UserServiceImpl"
         p:userProfileDao-ref="userProfileDao"
-        p:usercommentDao-ref="userCommentDao" />
+        p:userCommentDao-ref="userCommentDao" />
         
     <bean id="videoService"
         class="es.udc.acarballal.elmas.model.videoservice.VideoServiceImpl"

@@ -46,15 +46,21 @@ public class DbUtil {
 	}
 	
 	private static UserProfile testUserProfile;
-	private static Video testVideo;
+	private static UserProfile commentatorProfile;
 	private static String testClearPassword = "user1ClearPassword";
-
 	private static UserProfileDao userProfileDao;
+	
+	private static Video testVideo;
 	private static VideoDao videoDao;
+	
 	private static PlatformTransactionManager transactionManager;
 	
 	public static UserProfile getTestUserProfile() {
 		return testUserProfile;
+	}
+	
+	public static UserProfile getCommentatorProfile(){
+		return commentatorProfile;
 	}
 	
 	public static String getTestClearPassword() {
@@ -64,7 +70,7 @@ public class DbUtil {
 	public static Video getTestVideo(){
 		return testVideo;
 	}
-
+	
 	public static void populateDb() {
 		/*
 		 * Since this method is supposed to be called form a @BeforeClass 
@@ -80,8 +86,15 @@ public class DbUtil {
 				.crypt(testClearPassword), "name1", "lastName1", "user1@udc.es");
 		testUserProfile.setPrivileges(Privileges_TYPES.ADMIN);
 		
+		commentatorProfile = new UserProfile("commentator", PasswordEncrypter
+				.crypt(testClearPassword), "commentator", "commentator", 
+				"commentator@udc.es");
+		commentatorProfile.setPrivileges(Privileges_TYPES.VOTER);
+		
+		
 		try {
 			userProfileDao.create(testUserProfile);
+			userProfileDao.create(commentatorProfile);
 			testVideo = new Video(testUserProfile, "VideoExample", "CommentExample", 
 					"-home-data-snapshots-001.jpg", Calendar.getInstance());
 			videoDao.create(testVideo);
@@ -106,8 +119,10 @@ public class DbUtil {
 		try {
 
 			videoDao.remove(testVideo.getVideoId());
+			userProfileDao.remove(commentatorProfile.getUserProfileId());
 			userProfileDao.remove(testUserProfile.getUserProfileId());
 			testUserProfile = null;
+			commentatorProfile = null;
 			testVideo = null;
 			
 		} catch (Throwable e) {

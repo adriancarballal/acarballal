@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.usercomment.UserComment;
 import es.udc.acarballal.elmas.model.usercomment.UserCommentDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
@@ -153,13 +154,18 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public Long commentUser(Long commentatorId, Long commentedId, 
-			String comment,	Calendar date) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
+			String comment,	Calendar date) throws InstanceNotFoundException, 
+			InsufficientPrivilegesException, InvalidOperationException{
 		
 		UserProfile commentatorUser = userProfileDao.find(commentatorId);
 		UserProfile commentedUser = userProfileDao.find(commentedId);
-		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE){
+		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE ||
+				commentatorUser.getPrivileges()==Privileges_TYPES.ADMIN){
 			throw new InsufficientPrivilegesException(commentatorUser.getLoginName());
+		}
+		if(commentatorUser.getUserProfileId() == commentedUser.getUserProfileId()){
+			throw new InvalidOperationException("Cannot comment yourself " + 
+					commentatorUser.getLoginName());
 		}
 		UserComment userComment = new UserComment(commentatorUser, commentedUser, 
 				comment, date);
