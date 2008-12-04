@@ -1,8 +1,6 @@
-#summary One-sentence summary of this page.
-PFC
-= Introduction =
-PFC Adrian Carballal Mato
-El_mas. Concurso-Reality multiplataforma
+#summary PFC
+= PFC Adrian Carballal Mato
+El_mas. Concurso-Reality multiplataforma =
 
 
 = Details =
