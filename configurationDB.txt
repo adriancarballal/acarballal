@@ -8,3 +8,12 @@ Try to access to "elmas" database as "elmas" user with password "elmas".
 	- mysql -u elmas --password=elmas elmas
 Shutdown database
 	- mysqladmin -u root shutdown
+	
+	
+	- no se puede votar dos veces!!!!
+	- mirar votos de un video
+	- mirar comentarios de un usuario
+	- mirar comentarios de un video
+	- obtener los mejor de la semana
+	- obtener videos aleatorios
+	

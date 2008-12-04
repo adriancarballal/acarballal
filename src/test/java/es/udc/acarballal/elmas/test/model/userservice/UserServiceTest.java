@@ -350,7 +350,20 @@ public class UserServiceTest {
 	}
 	
 	@Test(expected = InstanceNotFoundException.class)
-	public void addUserCommentNoCommentatedFound() 
+	public void addUserCommentNoCommentatedFoundAsNone() 
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		LoginResult loginResult = 
+			userService.login(DbUtil.getTestUserProfile()
+			.getLoginName(), DbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.NONE);
+		Long userId = loginResult.getUserProfileId();
+		userService.commentUser(userId,this.NON_EXISTENT_USER_PROFILE_ID, "", null);
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void addUserCommentNoCommentatedFoundAsVoter() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
 			InsufficientPrivilegesException, InvalidOperationException{
 		LoginResult loginResult = 
@@ -358,6 +371,30 @@ public class UserServiceTest {
 			.getLoginName(), DbUtil.getTestClearPassword(), false);
 		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
 				Privileges_TYPES.VOTER);
+		Long userId = loginResult.getUserProfileId();
+		userService.commentUser(userId,this.NON_EXISTENT_USER_PROFILE_ID, "", null);
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void addUserCommentNoCommentatedFoundAsCompetitor() 
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		LoginResult loginResult = 
+			userService.login(DbUtil.getTestUserProfile()
+			.getLoginName(), DbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.COMPETITOR);
+		Long userId = loginResult.getUserProfileId();
+		userService.commentUser(userId,this.NON_EXISTENT_USER_PROFILE_ID, "", null);
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void addUserCommentNoCommentatedFoundAsAdmin() 
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		LoginResult loginResult = 
+			userService.login(DbUtil.getTestUserProfile()
+			.getLoginName(), DbUtil.getTestClearPassword(), false);
 		Long userId = loginResult.getUserProfileId();
 		userService.commentUser(userId,this.NON_EXISTENT_USER_PROFILE_ID, "", null);
 	}

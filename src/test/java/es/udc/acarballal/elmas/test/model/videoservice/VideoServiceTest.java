@@ -13,11 +13,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
+import es.udc.acarballal.elmas.model.userservice.LoginResult;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
+import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.acarballal.elmas.test.model.util.DbUtil;
 import es.udc.acarballal.elmas.test.util.GlobalNames;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
@@ -29,6 +33,7 @@ public class VideoServiceTest {
 
 	private final long NON_EXISTENT_USER_PROFILE_ID = -1;
 	private final long NON_EXISTENT_VIDEO_ID = -1;
+	private final long NON_EXISTENT_VIDEO_COMMENT = -1;
 	
 	private VideoService videoService;
 	private UserService userService;
@@ -197,6 +202,196 @@ public class VideoServiceTest {
 		userService.changePrivileges(userProfileId, Privileges_TYPES.NONE);
 		
 		videoService.deleteVideo(videoId, userProfileId);
+	}
+
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void addVideoCommentAsAdmin() 
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		
+		LoginResult loginResult = 
+			userService.login(DbUtil.getTestUserProfile()
+			.getLoginName(), DbUtil.getTestClearPassword(), false);
+		Long userId = loginResult.getUserProfileId();
+		videoService.commentVideo(userId, userId, "", null);
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void addVideoCommentAsNone() 
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		
+		LoginResult loginResult = 
+			userService.login(DbUtil.getTestUserProfile()
+			.getLoginName(), DbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.NONE);
+		Long userId = loginResult.getUserProfileId();
+		videoService.commentVideo(userId, userId, "", null);
+	}
+
+	@Test(expected = InvalidOperationException.class)
+	public void addVideoCommentToOwnVideoAsCompetitor() 
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		
+		LoginResult loginResult = 
+			userService.login(DbUtil.getTestUserProfile()
+			.getLoginName(), DbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.COMPETITOR);
+		Long userId = loginResult.getUserProfileId();
+		Long videoId = DbUtil.getTestVideo().getVideoId();
+		videoService.commentVideo(userId, videoId, "", null);
+	}
+	
+	@Test(expected = InvalidOperationException.class)
+	public void addVideoCommentToYourselfAsVoter() 
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		
+		LoginResult loginResult = 
+			userService.login(DbUtil.getTestUserProfile()
+			.getLoginName(), DbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.VOTER);
+		Long userId = loginResult.getUserProfileId();
+		Long videoId = DbUtil.getTestVideo().getVideoId();
+		videoService.commentVideo(userId, videoId, "", null);
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void addVideoCommentNoCommentatorFound() 
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		
+		Long videoId = DbUtil.getTestVideo().getVideoId();
+		videoService.commentVideo(this.NON_EXISTENT_USER_PROFILE_ID, videoId, "", null);
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void addVideoCommentNoVideoFound() 
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		
+		LoginResult loginResult = 
+			userService.login(DbUtil.getTestUserProfile()
+			.getLoginName(), DbUtil.getTestClearPassword(), false);
+		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
+				Privileges_TYPES.VOTER);
+		Long userId = loginResult.getUserProfileId();
+		videoService.commentVideo(userId,NON_EXISTENT_VIDEO_COMMENT, "", null);
+	}
+	
+	@Test
+	public void addVideoComment_removeVideoComment()
+			throws InstanceNotFoundException, IncorrectPasswordException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		
+		LoginResult user = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		LoginResult commentator = 
+			userService.login(DbUtil.getCommentatorProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		userService.changePrivileges(commentator.getUserProfileId(), 
+				Privileges_TYPES.VOTER);		
+		Long commentId = videoService.commentVideo(commentator.getUserProfileId(), 
+				user.getUserProfileId(), "GOOD Video", Calendar.getInstance());
+		videoService.deleteVideoComment(commentId, user.getUserProfileId());
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void removeVideoComment() throws InstanceNotFoundException, 
+			IncorrectPasswordException, InsufficientPrivilegesException{
+		
+		LoginResult user = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		videoService.deleteVideoComment(NON_EXISTENT_VIDEO_COMMENT, 
+				user.getUserProfileId());
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void voteVideoNonExistentUser()
+			throws InstanceNotFoundException, InsufficientPrivilegesException, 
+			InvalidOperationException{
+		
+		videoService.voteVideo(NON_EXISTENT_USER_PROFILE_ID, 
+				DbUtil.getTestVideo().getVideoId(), VOTE_TYPES.GOOD, 
+				Calendar.getInstance());
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void voteVideoAsAdmin() 
+			throws InstanceNotFoundException, InsufficientPrivilegesException, 
+			IncorrectPasswordException, InvalidOperationException{
+		
+		LoginResult user = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		videoService.voteVideo(user.getUserProfileId(), 
+				DbUtil.getTestVideo().getVideoId(), VOTE_TYPES.GOOD, 
+				Calendar.getInstance());
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void voteVideoAsCompetitor() 
+			throws InstanceNotFoundException, InsufficientPrivilegesException, 
+			IncorrectPasswordException, InvalidOperationException{
+		
+		LoginResult user = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		userService.changePrivileges(user.getUserProfileId(), 
+				Privileges_TYPES.COMPETITOR);
+		videoService.voteVideo(user.getUserProfileId(), 
+				DbUtil.getTestVideo().getVideoId(), VOTE_TYPES.GOOD, 
+				Calendar.getInstance());
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void voteVideoAsNone() 
+			throws InstanceNotFoundException, InsufficientPrivilegesException, 
+			IncorrectPasswordException, InvalidOperationException{
+		
+		LoginResult user = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		userService.changePrivileges(user.getUserProfileId(), 
+				Privileges_TYPES.NONE);
+		videoService.voteVideo(user.getUserProfileId(), 
+				DbUtil.getTestVideo().getVideoId(), VOTE_TYPES.GOOD, 
+				Calendar.getInstance());
+	}
+	
+	@Test(expected = InvalidOperationException.class)
+	public void voteOwnVideo() 
+			throws InstanceNotFoundException, InsufficientPrivilegesException, 
+			IncorrectPasswordException, InvalidOperationException{
+		
+		LoginResult user = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		userService.changePrivileges(user.getUserProfileId(), 
+				Privileges_TYPES.VOTER);
+		videoService.voteVideo(user.getUserProfileId(), 
+				DbUtil.getTestVideo().getVideoId(), VOTE_TYPES.GOOD, 
+				Calendar.getInstance());
+	}
+	
+	@Test
+	public void voteVideo() 
+			throws InstanceNotFoundException, InsufficientPrivilegesException, 
+			IncorrectPasswordException, InvalidOperationException{
+		
+		LoginResult user = 
+			userService.login(DbUtil.getCommentatorProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		videoService.voteVideo(user.getUserProfileId(), 
+				DbUtil.getTestVideo().getVideoId(), VOTE_TYPES.GOOD, 
+				Calendar.getInstance());
+		
 	}
 
 

@@ -5,6 +5,8 @@
 DROP TABLE PingTable;
 CREATE TABLE PingTable (foo CHAR(1));
 
+DROP TABLE Vote;
+DROP TABLE VideoComment;
 DROP TABLE UserComment;
 DROP TABLE Video;
 DROP TABLE UserProfile;
@@ -60,3 +62,32 @@ CREATE TABLE UserComment (
     TYPE = InnoDB;
 
 CREATE INDEX UserCommentByUserCommented ON UserComment(commented);
+
+--------------------------------- VideoComment------------------------------------
+CREATE TABLE VideoComment (
+	cmmtId BIGINT NOT NULL AUTO_INCREMENT,
+	vidId BIGINT NOT NULL,
+	commentator BIGINT NOT NULL,
+	cmmnt VARCHAR(300) NOT NULL,
+	date TIMESTAMP NOT NULL,
+	CONSTRAINT VideoComment_PK PRIMARY KEY (cmmtId),
+	CONSTRAINT VidCommented_FK FOREIGN KEY (vidId)
+		REFERENCES Video(vidId) ON DELETE CASCADE,
+	CONSTRAINT VidCommentator_FK FOREIGN KEY (commentator)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
+    TYPE = InnoDB;
+-- Faltan los indices para las busquedas.
+
+------------------------------------ Vote ---------------------------------------
+CREATE TABLE Vote (
+	voteId BIGINT NOT NULL AUTO_INCREMENT,
+	vidId BIGINT NOT NULL,
+	voter BIGINT NOT NULL,
+	vote TINYINT NOT NULL,
+	date TIMESTAMP NOT NULL,
+	CONSTRAINT Vote_PK PRIMARY KEY (voteId),
+	CONSTRAINT VideoVoted_FK FOREIGN KEY (vidId)
+		REFERENCES Video(vidId) ON DELETE CASCADE,
+	CONSTRAINT Voter_FK FOREIGN KEY (voter)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
+    TYPE = InnoDB;

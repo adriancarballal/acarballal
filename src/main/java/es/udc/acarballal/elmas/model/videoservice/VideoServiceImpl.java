@@ -5,17 +5,25 @@ import java.util.Calendar;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.video.VideoDao;
+import es.udc.acarballal.elmas.model.videocomment.VideoComment;
+import es.udc.acarballal.elmas.model.videocomment.VideoCommentDao;
+import es.udc.acarballal.elmas.model.vote.Vote;
+import es.udc.acarballal.elmas.model.vote.VoteDao;
+import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class VideoServiceImpl implements VideoService{
 
 	private VideoDao videoDao;
 	private UserProfileDao userProfileDao;
+	private VideoCommentDao videoCommentDao;
+	private VoteDao voteDao;
 
 	public void setVideoDao(VideoDao videoDao) {
 		this.videoDao = videoDao;
@@ -23,6 +31,14 @@ public class VideoServiceImpl implements VideoService{
 	
 	public void setUserProfileDao(UserProfileDao userProfileDao){
 		this.userProfileDao = userProfileDao;
+	}
+	
+	public void setVideoCommentDao(VideoCommentDao videoCommentDao){
+		this.videoCommentDao = videoCommentDao;
+	}
+	
+	public void setVoteDao(VoteDao voteDao){
+		this.voteDao = voteDao;
 	}
 	
 	public Long addVideo(long userId, String title, String comment, 
@@ -54,5 +70,55 @@ public class VideoServiceImpl implements VideoService{
 		videoDao.remove(videoId);
 	}
 	
+	public Long commentVideo(Long commentatorId, Long videoId, 
+			String comment,	Calendar date) throws InstanceNotFoundException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+
+		UserProfile commentatorUser = userProfileDao.find(commentatorId);
+		Video video = videoDao.find(videoId);
+		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE ||
+				commentatorUser.getPrivileges()==Privileges_TYPES.ADMIN){
+			throw new InsufficientPrivilegesException(commentatorUser.getLoginName());
+		}
+		if(commentatorUser.getUserProfileId() == video.getVideoId()){
+			throw new InvalidOperationException("Cannot comment your own video " + 
+					commentatorUser.getLoginName());
+		}
+		VideoComment videoComment = new VideoComment(video, commentatorUser, 
+				comment, date);
+		videoCommentDao.create(videoComment);
+		return videoComment.getCommentId();
+	}
+	
+	//Añadir un adminService para este servicio?
+	public void deleteVideoComment(Long commentId, Long userProfileId)
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		if(userProfile.getPrivileges()!=Privileges_TYPES.ADMIN){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		videoCommentDao.remove(commentId);
+
+	}
+	
+	public void voteVideo(Long userProfileId, Long videoId, VOTE_TYPES vote, 
+			Calendar date) throws InstanceNotFoundException, 
+			InsufficientPrivilegesException, InvalidOperationException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		if(userProfile.getPrivileges()!=Privileges_TYPES.VOTER){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		Video video = videoDao.find(videoId);
+		if(video.getUserProfile().equals(userProfile)){
+			throw new InvalidOperationException("Cannot vote your own video");
+		}
+		Vote newVote = new Vote(video, userProfile, vote, date);
+		
+		voteDao.create(newVote);
+		
+	}
+
 	
 }
