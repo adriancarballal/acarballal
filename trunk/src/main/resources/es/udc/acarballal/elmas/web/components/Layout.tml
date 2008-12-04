@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>
+	<title>${pageTitle}</title>
+	<link rel="StyleSheet" href="${asset:context:/css/styles.css}"
+		  type="text/css" media="all"/>
+</head>
+
+<body>
+
+<!-- Window. -->
+ 
+<div id="window">
+
+<!-- Page title. -->    
+    
+<div id="pageTitle">
+	<div align="center">
+       ${message:header}
+	</div>
+</div> 
+ 
+<!-- Menu. -->
+
+<div id="menu">
+	<span id="menuWelcome">     
+  		<t:if t:test="userSessionExists">
+ 			${message:menu-hello} ${userSession.firstName}
+            <t:parameter name="else">
+            	${message:menu-welcome}
+            </t:parameter>
+		</t:if>
+    </span>
+    -
+    <t:if t:test="menuExplanation">
+	 	<span id="menuExplanation">
+ 			${menuExplanation}
+ 		</span>
+        <t:parameter name="else">
+		    <span id="menuLinks">
+				<t:if t:test="userSessionExists">
+				    <a href="#" t:type="PageLink" t:page="user/UpdateProfile">${message:menu-updateProfile}</a> -
+				    <a href="#" t:type="PageLink" t:page="user/Logout">${message:menu-logout}</a>
+			        <t:parameter name="else">
+				    	<a href="#" t:type="PageLink" t:page="user/Login">${message:menu-authenticate}</a>
+			        </t:parameter>
+				</t:if>
+			</span>
+        </t:parameter>
+ 	</t:if>
+</div>
+
+<!-- Content. -->
+
+<div id="content">
+  	<t:body/>
+</div>
+
+
+<!-- Body footer. -->
+
+<div id="footer">
+    <div align="center">
+       ${message:footer}
+    </div>
+</div>
+
+<!-- End of "window" id. -->
+
+</div>
+
+<!-- End of HTML body. -->
+
+</body>
+
+</html>

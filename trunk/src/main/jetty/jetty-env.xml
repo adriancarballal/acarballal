@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+
+  <New id="POJO-ExamplesDS" class="org.mortbay.jetty.plus.naming.Resource">
+    <Arg>jdbc/pojo-examples-ds</Arg>
+    <Arg>
+     <New class="${jettyDataSource.className}">
+                 <Set name="url">${dataSource.url}</Set>
+                 <Set name="user">${dataSource.user}</Set>
+                 <Set name="password">${dataSource.password}</Set>
+     </New>
+    </Arg>
+   </New>
+
+</Configure>
+
