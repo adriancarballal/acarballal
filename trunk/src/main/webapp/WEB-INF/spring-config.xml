@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+    
+    <!--  ======================= Spring Infrastructure ==================== -->
+    
+    <!--  For translating native persistence exceptions to Spring's 
+          DataAccessException hierarchy. -->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    
+	<!--  Data source. -->
+	<bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean"
+		p:jndiName="jdbc/pojo-examples-ds"
+		p:resourceRef="true" />
+		
+	<!-- Hibernate Session Factory -->
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+        p:dataSource-ref="dataSource"
+        p:configLocation="classpath:hibernate.cfg.xml"/>
+		
+    <!-- Transaction manager for a single Hibernate SessionFactory.  -->
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+        p:sessionFactory-ref="sessionFactory" />
+
+	<!-- Enable the configuration of transactional behavior based on
+	     annotations. -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    
+	<!--  ======================== Business Objects ======================== -->
+
+    <!--  DAOs. -->
+    <bean id="userProfileDao"
+        class="es.udc.acarballal.elmas.model.userprofile.UserProfileDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+    <bean id="videoDao"
+        class="es.udc.acarballal.elmas.model.video.VideoDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+    <bean id="userCommentDao"
+        class="es.udc.acarballal.elmas.model.usercomment.UserCommentDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+    <bean id="videoCommentDao"
+        class="es.udc.acarballal.elmas.model.videocomment.VideoCommentDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+    <bean id="voteDao"
+        class="es.udc.acarballal.elmas.model.vote.VoteDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+        
+    <!--  Service layer. -->
+    <bean id="userService"
+        class="es.udc.acarballal.elmas.model.userservice.UserServiceImpl"
+        p:userProfileDao-ref="userProfileDao"
+        p:userCommentDao-ref="userCommentDao" />
+        
+    <bean id="videoService"
+        class="es.udc.acarballal.elmas.model.videoservice.VideoServiceImpl"
+        p:userProfileDao-ref="userProfileDao" 
+        p:videoDao-ref="videoDao" 
+        p:videoCommentDao-ref="videoCommentDao"
+        p:voteDao-ref="voteDao" />   
+		    	
+</beans>
