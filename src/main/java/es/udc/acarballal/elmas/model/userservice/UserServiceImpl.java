@@ -1,6 +1,7 @@
 package es.udc.acarballal.elmas.model.userservice;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -182,6 +183,32 @@ public class UserServiceImpl implements UserService {
 			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}
 		userCommentDao.remove(commentId);
+	}
+	
+	public UserProfileBlock findAllAdmin(int startIndex, int count){
+		
+		List<UserProfile> users = userProfileDao.findAllAdmin(startIndex, count);
+		
+		boolean existMoreUsers = users.size() == (count + 1);
+
+		if (existMoreUsers) {
+			users.remove(users.size() - 1);
+		}
+		
+		return new UserProfileBlock(users, existMoreUsers);
+	}
+	
+	public UserProfileBlock findNonAdmin(int startIndex, int count){
+		
+		List<UserProfile> users = userProfileDao.findNonAdmin(startIndex, count);
+		
+		boolean existMoreUsers = users.size() == (count + 1);
+
+		if (existMoreUsers) {
+			users.remove(users.size() - 1);
+		}
+		
+		return new UserProfileBlock(users, existMoreUsers);
 	}
 
 }

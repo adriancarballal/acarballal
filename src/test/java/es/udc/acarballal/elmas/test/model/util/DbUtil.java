@@ -51,6 +51,7 @@ public class DbUtil {
 	private static UserProfileDao userProfileDao;
 	
 	private static Video testVideo;
+	private static Video testVideoMultiKey;
 	private static VideoDao videoDao;
 	
 	private static PlatformTransactionManager transactionManager;
@@ -69,6 +70,10 @@ public class DbUtil {
 	
 	public static Video getTestVideo(){
 		return testVideo;
+	}
+	
+	public static Video getTestVideoMultiKey(){
+		return testVideoMultiKey;
 	}
 	
 	public static void populateDb() {
@@ -95,6 +100,12 @@ public class DbUtil {
 		try {
 			userProfileDao.create(testUserProfile);
 			userProfileDao.create(commentatorProfile);
+			testVideo = new Video(testUserProfile, "Example Video file", "CommentExample", 
+					"-home-data-snapshots-001.jpg", Calendar.getInstance());
+			videoDao.create(testVideo);
+			testVideoMultiKey = new Video(testUserProfile, "Video n2 example", "CommentExample", 
+					"-home-data-snapshots-001.jpg", Calendar.getInstance());
+			videoDao.create(testVideoMultiKey);
 			testVideo = new Video(testUserProfile, "VideoExample", "CommentExample", 
 					"-home-data-snapshots-001.jpg", Calendar.getInstance());
 			videoDao.create(testVideo);
@@ -118,7 +129,7 @@ public class DbUtil {
 		
 		try {
 
-			videoDao.remove(testVideo.getVideoId());
+			//videoDao.remove(testVideo.getVideoId());
 			userProfileDao.remove(commentatorProfile.getUserProfileId());
 			userProfileDao.remove(testUserProfile.getUserProfileId());
 			testUserProfile = null;

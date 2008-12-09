@@ -30,5 +30,7 @@ public interface VideoService {
 	public void voteVideo(Long userProfileId, Long videoId, VOTE_TYPES vote, 
 			Calendar date) throws InstanceNotFoundException, 
 			InsufficientPrivilegesException, InvalidOperationException;
+	
+	public VideoBlock findVideosByTitle(String keys, int startIndex, int count);
 
 }

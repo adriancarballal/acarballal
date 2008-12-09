@@ -45,4 +45,9 @@ public interface UserService {
 	public void deleteUserComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 
+	//Añadir un adminService para este servicio?
+	public UserProfileBlock findAllAdmin(int startIndex, int count);
+	
+	//Añadir un adminService para este servicio?
+	public UserProfileBlock findNonAdmin(int startIndex, int count);
 }
