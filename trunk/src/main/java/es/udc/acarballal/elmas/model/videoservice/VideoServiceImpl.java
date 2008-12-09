@@ -1,6 +1,7 @@
 package es.udc.acarballal.elmas.model.videoservice;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,7 +81,7 @@ public class VideoServiceImpl implements VideoService{
 				commentatorUser.getPrivileges()==Privileges_TYPES.ADMIN){
 			throw new InsufficientPrivilegesException(commentatorUser.getLoginName());
 		}
-		if(commentatorUser.getUserProfileId() == video.getVideoId()){
+		if(commentatorUser.getUserProfileId() == video.getUserProfile().getUserProfileId()){
 			throw new InvalidOperationException("Cannot comment your own video " + 
 					commentatorUser.getLoginName());
 		}
@@ -118,6 +119,21 @@ public class VideoServiceImpl implements VideoService{
 		
 		voteDao.create(newVote);
 		
+	}
+	
+	@Transactional(readOnly = true)
+	public VideoBlock findVideosByTitle(String keys, int startIndex, int count){
+		
+		List<Video> videos = videoDao.findByTitle(keys, startIndex, count+1);
+
+		boolean existMoreVideos = videos.size() == (count + 1);
+
+		if (existMoreVideos) {
+			videos.remove(videos.size() - 1);
+		}
+		
+		return new VideoBlock(videos, existMoreVideos);
+
 	}
 
 	

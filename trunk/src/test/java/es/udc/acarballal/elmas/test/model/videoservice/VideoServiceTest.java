@@ -20,6 +20,7 @@ import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.LoginResult;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.video.Video;
+import es.udc.acarballal.elmas.model.videoservice.VideoBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.acarballal.elmas.test.model.util.DbUtil;
@@ -393,6 +394,47 @@ public class VideoServiceTest {
 				Calendar.getInstance());
 		
 	}
+		
+	@Test
+	public void findVideoByTitleUniqueKey() throws InstanceNotFoundException{
+		
+		String keys = DbUtil.getTestVideo().getTitle();
+		int startIndex = 0;
+		int count = 10;
+		VideoBlock block = videoService.findVideosByTitle(keys, startIndex, count);
+		assertTrue(block.getVideos().size()==1);
+		assertEquals(block.getVideos().get(0), DbUtil.getTestVideo());
+	}
+	
+	@Test
+	public void findVideoByTitleMultiKey() throws InstanceNotFoundException{
+		
+		String keys = DbUtil.getTestVideoMultiKey().getTitle();
+		int startIndex = 0;
+		int count = 10;
+		VideoBlock block = videoService.findVideosByTitle(keys, startIndex, count);
+		assertTrue(block.getVideos().size()==1);
+		assertEquals(block.getVideos().get(0), DbUtil.getTestVideoMultiKey());
+	}
+	
+	@Test
+	public void findVideoByTitle() throws InstanceNotFoundException{
+		
+		String keys = "xamp";
+		int startIndex = 0;
+		int count = 10;
+		VideoBlock block = videoService.findVideosByTitle(keys, startIndex, count);
+		assertTrue(block.getVideos().size()==3);
+	}
 
+	@Test
+	public void findVideoByTitleNoKey() throws InstanceNotFoundException{
+		
+		String keys = "";
+		int startIndex = 0;
+		int count = 10;
+		VideoBlock block = videoService.findVideosByTitle(keys, startIndex, count);
+		assertTrue(block.getVideos().size()==3);
+	}
 
 }

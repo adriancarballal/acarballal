@@ -1,5 +1,9 @@
 package es.udc.acarballal.elmas.model.video;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import es.udc.pojo.modelutil.dao.GenericDaoHibernate;
 
@@ -7,4 +11,17 @@ import es.udc.pojo.modelutil.dao.GenericDaoHibernate;
 public class VideoDaoHibernate extends
 		GenericDaoHibernate<Video, Long> implements VideoDao{
 	
+	@SuppressWarnings("unchecked")
+	public List<Video> findByTitle(String key, int startIndex, int count){
+		
+		String[] keys = key.split(" ");
+		Criteria q = getSession().createCriteria(Video.class);
+		
+		for(int i=0;i<keys.length;i++){
+			q.add(Restrictions.ilike("title","%"+keys[i]+"%"));
+		}
+		
+		return q.setFirstResult(startIndex).setMaxResults(count).list();
+		
+	}
 }

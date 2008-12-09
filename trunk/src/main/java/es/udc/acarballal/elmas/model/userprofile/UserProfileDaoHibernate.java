@@ -1,7 +1,10 @@
 package es.udc.acarballal.elmas.model.userprofile;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
+import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.pojo.modelutil.dao.GenericDaoHibernate;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -19,6 +22,20 @@ public class UserProfileDaoHibernate extends
 		} else {
 			return userProfile;
 		}
+	}
+	
+	public List<UserProfile> findAllAdmin(int startIndex, int count){
+		return getSession().createQuery("SELECT u FROM UserProfile u " +
+				"WHERE u.privileges=:privileges").
+				setParameter("privileges", Privileges_TYPES.ADMIN).		
+				setFirstResult(startIndex).setMaxResults(count).list();
+	}
+	
+	public List<UserProfile> findNonAdmin(int startIndex, int count){
+		return getSession().createQuery("SELECT u FROM UserProfile u " +
+				"WHERE u.privileges=:privileges").
+				setParameter("privileges", Privileges_TYPES.VOTER).		
+				setFirstResult(startIndex).setMaxResults(count).list();
 	}
 
 }

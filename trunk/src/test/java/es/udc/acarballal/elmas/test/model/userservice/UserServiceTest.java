@@ -1,6 +1,6 @@
 package es.udc.acarballal.elmas.test.model.userservice;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.Calendar;
 
@@ -20,6 +20,7 @@ import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.LoginResult;
+import es.udc.acarballal.elmas.model.userservice.UserProfileBlock;
 import es.udc.acarballal.elmas.model.userservice.UserProfileDetails;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
@@ -174,8 +175,8 @@ public class UserServiceTest {
 	}
 	
 	
-	/* Tests for UserService.changePrivileges method */
-	@Test
+/*	 Tests for UserService.changePrivileges method 
+*/	@Test
 	public void testChangePrivilegesToNone() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
@@ -239,7 +240,7 @@ public class UserServiceTest {
 		userService.changePrivileges(NON_EXISTENT_USER_PROFILE_ID, Privileges_TYPES.ADMIN);
 	}
 	
-	/* Tests for UserService.changePrivilegesToAdmin method */
+/*	 Tests for UserService.changePrivilegesToAdmin method*/ 
 	@Test
 	public void testChangePrivilegesToAdminAsAdmin_2() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
@@ -415,5 +416,23 @@ public class UserServiceTest {
 		Long commentId = userService.commentUser(commentator.getUserProfileId(), 
 				user.getUserProfileId(), "GOOD USER", Calendar.getInstance());
 		userService.deleteUserComment(commentId, user.getUserProfileId());
+	}
+	
+	@Test
+	public void findAllAdmin(){
+		int startIndex = 0;
+		int count = 10;
+		UserProfileBlock admins = userService.findAllAdmin(startIndex,count);
+		assertTrue(admins.getUsers().size()==1);
+		assertEquals(admins.getUsers().get(0),DbUtil.getTestUserProfile());
+	}
+	
+	@Test
+	public void findNonAdmin(){
+		int startIndex = 0;
+		int count = 10;
+		UserProfileBlock admins = userService.findNonAdmin(startIndex,count);
+		assertTrue(admins.getUsers().size()==1);
+		assertEquals(admins.getUsers().get(0),DbUtil.getCommentatorProfile());
 	}
 }
