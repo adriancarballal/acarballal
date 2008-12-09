@@ -24,35 +24,51 @@
 	</div>
 </div> 
  
+<!-- Logo. --> 
+ <div id="logo">Logo JPG</div>
+ 
 <!-- Menu. -->
 
-<div id="menu">
-	<span id="menuWelcome">     
+<div id="sidebar">
+	<div id="sidebarmenu">
+	<h3>     
   		<t:if t:test="userSessionExists">
  			${message:menu-hello} ${userSession.firstName}
             <t:parameter name="else">
             	${message:menu-welcome}
             </t:parameter>
 		</t:if>
-    </span>
-    -
+	</h3>	
+    </div>
     <t:if t:test="menuExplanation">
 	 	<span id="menuExplanation">
  			${menuExplanation}
  		</span>
+ 		
         <t:parameter name="else">
-		    <span id="menuLinks">
+		    <table class="menutable">
 				<t:if t:test="userSessionExists">
-				    <a href="#" t:type="PageLink" t:page="user/UpdateProfile">${message:menu-updateProfile}</a> -
-				    <a href="#" t:type="PageLink" t:page="user/Logout">${message:menu-logout}</a>
-			        <t:parameter name="else">
-				    	<a href="#" t:type="PageLink" t:page="user/Login">${message:menu-authenticate}</a>
-			        </t:parameter>
+					<tr><th>SideBar Menu</th></tr>
+					<tr><td>
+						<a href="#" t:type="PageLink" t:page="user/UpdateProfile">${message:menu-updateProfile}</a>
+					</td></tr>
+					<tr><td>
+						<a href="#" t:type="PageLink" t:page="user/Logout">${message:menu-logout}</a>
+					</td></tr>
+					<t:parameter name="else">
+						<tr><td>
+							<a href="#" t:type="PageLink" t:page="user/Login">${message:menu-authenticate}</a>
+						</td></tr>
+					</t:parameter>
 				</t:if>
-			</span>
+			</table>
         </t:parameter>
  	</t:if>
 </div>
+
+
+<!-- SearchBar. -->
+<div id="searchbar">SearchBar</div>
 
 <!-- Content. -->
 
@@ -63,11 +79,7 @@
 
 <!-- Body footer. -->
 
-<div id="footer">
-    <div align="center">
-       ${message:footer}
-    </div>
-</div>
+<div id="footer">${message:footer}</div>
 
 <!-- End of "window" id. -->
 
