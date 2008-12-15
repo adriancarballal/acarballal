@@ -32,5 +32,8 @@ public interface VideoService {
 			InsufficientPrivilegesException, InvalidOperationException;
 	
 	public VideoBlock findVideosByTitle(String keys, int startIndex, int count);
+	
+	public VideoCommentBlock findVideoCommentsByVideoId(Long videoId, 
+			int startIndex, int count);
 
 }

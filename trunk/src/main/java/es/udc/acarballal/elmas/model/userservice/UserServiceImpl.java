@@ -185,6 +185,7 @@ public class UserServiceImpl implements UserService {
 		userCommentDao.remove(commentId);
 	}
 	
+	//Añadir un adminService para este servicio?	
 	public UserProfileBlock findAllAdmin(int startIndex, int count){
 		
 		List<UserProfile> users = userProfileDao.findAllAdmin(startIndex, count);
@@ -198,6 +199,7 @@ public class UserServiceImpl implements UserService {
 		return new UserProfileBlock(users, existMoreUsers);
 	}
 	
+	//Añadir un adminService para este servicio?	
 	public UserProfileBlock findNonAdmin(int startIndex, int count){
 		
 		List<UserProfile> users = userProfileDao.findNonAdmin(startIndex, count);
@@ -211,4 +213,35 @@ public class UserServiceImpl implements UserService {
 		return new UserProfileBlock(users, existMoreUsers);
 	}
 
+	@Transactional(readOnly = true)
+	public UserCommentBlock findUserCommentsByCommentator(Long userProfileId,
+			int startIndex, int count){
+		
+		List<UserComment> comments = 
+			userCommentDao.findCommentByCommentator(userProfileId, startIndex, count);
+		
+		boolean existMoreUserComments = comments.size() == (count + 1);
+		
+		if(existMoreUserComments){
+			comments.remove(comments.size() - 1);
+		}
+		
+		return new UserCommentBlock(comments, existMoreUserComments);
+	}
+	
+	@Transactional(readOnly = true)
+	public UserCommentBlock findUserCommentsByCommented(Long userProfileId,
+			int startIndex, int count){
+
+		List<UserComment> comments = 
+			userCommentDao.findCommentByCommented(userProfileId, startIndex, count);
+		
+		boolean existMoreUserComments = comments.size() == (count + 1);
+		
+		if(existMoreUserComments){
+			comments.remove(comments.size() - 1);
+		}
+		
+		return new UserCommentBlock(comments, existMoreUserComments);
+	}
 }

@@ -26,4 +26,9 @@ public class Layout {
 	@Property
 	private boolean userSessionExists;
 	
+	@SuppressWarnings("unused")
+	@Property
+	@Parameter(required = false, defaultPrefix = "literal")
+	private String searchText;
+	
 }

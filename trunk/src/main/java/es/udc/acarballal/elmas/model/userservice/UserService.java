@@ -50,4 +50,10 @@ public interface UserService {
 	
 	//Añadir un adminService para este servicio?
 	public UserProfileBlock findNonAdmin(int startIndex, int count);
+	
+	public UserCommentBlock findUserCommentsByCommentator(Long userProfileId,
+			int startIndex, int count);
+	
+	public UserCommentBlock findUserCommentsByCommented(Long userProfileId,
+			int startIndex, int count);
 }

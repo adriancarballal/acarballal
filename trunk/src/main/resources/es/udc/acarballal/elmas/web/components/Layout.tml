@@ -48,12 +48,51 @@
         <t:parameter name="else">
 		    <table class="menutable">
 				<t:if t:test="userSessionExists">
-					<tr><th>SideBar Menu</th></tr>
+					<!-- <tr><th>SideBar Menu</th></tr> -->
 					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/UpdateProfile">${message:menu-updateProfile}</a>
+						<a href="#" t:type="PageLink" t:page="user/UpdateProfile">
+							${message:menu-updateProfile}
+						</a>
 					</td></tr>
 					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/Logout">${message:menu-logout}</a>
+						<a href="#" t:type="PageLink" t:page="user/MyVideos">
+							${message:menu-myVideos}
+						</a>
+					</td></tr>
+					<tr><td>
+						<a href="#" t:type="PageLink" t:page="user/InsertVideo">
+							${message:menu-insertVideo}
+						</a>
+					</td></tr>
+					<tr><td>
+						<a href="#" t:type="PageLink" t:page="user/AboutMe">
+							${message:menu-aboutMe}
+						</a>
+					</td></tr>
+					<tr><td>
+						<a href="#" t:type="PageLink" t:page="user/MyComments">
+							${message:menu-myComments}
+						</a>
+					</td></tr>
+					<tr><td>
+						<a href="#" t:type="PageLink" t:page="user/Vote">
+							${message:menu-vote}
+						</a>
+					</td></tr>
+					<tr><td>
+						<a href="#" t:type="PageLink" t:page="user/Statistics">
+							${message:menu-statistics}
+						</a>
+					</td></tr>
+					<tr><td>
+						<a href="#" t:type="PageLink" t:page="user/ChangeProfile">
+							${message:menu-changeProfile}
+						</a>
+					</td></tr>
+					<tr><td>
+						<a href="#" t:type="PageLink" t:page="user/Logout">
+							${message:menu-logout}
+						</a>
 					</td></tr>
 					<t:parameter name="else">
 						<tr><td>
@@ -61,6 +100,17 @@
 						</td></tr>
 					</t:parameter>
 				</t:if>
+<tr><td> .</td></tr>
+<tr><td> .</td></tr>
+<tr><td> .</td></tr>
+				<tr><th>Bases del concurso</th></tr>
+				<tr><td>
+					Soltar todo el rollazo, en modo corto, junto con un link a la informacion completa
+				</td></tr>
+				<tr><td>
+					<a href="#" t:type="PageLink" t:page="user/ReadMore">${message:menu-readmore}</a>
+					</td></tr>
+					
 			</table>
         </t:parameter>
  	</t:if>
@@ -68,7 +118,18 @@
 
 
 <!-- SearchBar. -->
-<div id="searchbar">SearchBar</div>
+<div id="searchbar">
+
+<form t:type="Form" t:id="findVideosForm">
+        <span class="entry">
+			<input t:type="TextField" t:id="searchText" size="24" maxlength="48"/>
+        </span>
+        <span class="button">
+			<input type="submit" value="${message:button-find}"/>
+    	</span>   
+</form>
+
+</div>
 
 <!-- Content. -->
 

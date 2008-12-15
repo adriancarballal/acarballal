@@ -20,7 +20,7 @@ import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 @org.hibernate.annotations.Entity(mutable=false)
 public class Video {
 
-	public long videoId;
+	public Long videoId;
 	public UserProfile userProfile;
 	public String title;
 	public String comment;
@@ -48,10 +48,10 @@ public class Video {
 	// generators.
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "VideoIdGenerator")
-	public long getVideoId() {
+	public Long getVideoId() {
 		return videoId;
 	}
-	public void setVideoId(long videoId) {
+	public void setVideoId(Long videoId) {
 		this.videoId = videoId;
 	}	
 	
@@ -104,7 +104,7 @@ public class Video {
 		Video theOther = (Video) obj;
 
 		return (title != null) && title.equals(theOther.title)
-			&& videoId == theOther.videoId	
+			&& videoId.equals(theOther.videoId)	
 			&& userProfile.getUserProfileId().equals(theOther.getUserProfile()
 					.getUserProfileId())
 			&& (comment != null) && comment.equals(theOther.comment)

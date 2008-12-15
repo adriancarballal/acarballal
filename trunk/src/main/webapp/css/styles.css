@@ -7,6 +7,7 @@ body {
 		padding: 0px 0px 0px 0px;
 		line-height: 16px;
 		height: 100%;
+		text-align:center;
 }
 
 /* Window. */
@@ -48,18 +49,20 @@ body {
 	margin: 0px 7px 7px 7px;
 	padding: 10px;
 	border: 1px solid red;
+	height:425px;
 }
 
 /* Search Bar. */
 
 #searchbar {
 	border: 1px solid red;
-	padding: 5px 5px 5px 5px;
+	padding: 1px 5px 1px 5px;
 	margin-right: 7px;
 	margin-bottom: 7px;
 	width: 745px;
 	float: right;
 	text-align:right;
+	
 }
 
 /* Content. */
@@ -71,6 +74,7 @@ body {
 	margin-bottom: 7px;
 	width: 745px;
 	float: right;
+	height:400px;
 }
 
 /* Footer. */
