@@ -99,7 +99,7 @@ public class VideoComment {
 
 		VideoComment theOther = (VideoComment) obj;
 
-		return commentId == theOther.commentId
+		return commentId.equals(theOther.commentId)
 			&& (video != null) && video.equals(theOther.getVideo())
 			&& (commentator != null) && commentator.equals(theOther.getCommentator())
 			&& (comment != null) && comment.equals(theOther.comment);

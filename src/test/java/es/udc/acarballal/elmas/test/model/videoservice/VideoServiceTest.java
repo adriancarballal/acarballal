@@ -21,6 +21,7 @@ import es.udc.acarballal.elmas.model.userservice.LoginResult;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoBlock;
+import es.udc.acarballal.elmas.model.videoservice.VideoCommentBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.acarballal.elmas.test.model.util.DbUtil;
@@ -107,7 +108,7 @@ public class VideoServiceTest {
 		
 		Long videoId = videoService.addVideo(userProfileId, title, comment, snapshot, date);
 		Video video = videoService.findVideoById(videoId);
-		assertTrue(video.videoId == videoId);
+		assertEquals(video.videoId, videoId);
 		assertEquals(video.title, title);
 		assertEquals(video.comment, comment);
 		assertEquals(video.snapshot, snapshot);
@@ -396,7 +397,7 @@ public class VideoServiceTest {
 	}
 		
 	@Test
-	public void findVideoByTitleUniqueKey() throws InstanceNotFoundException{
+	public void findVideoByTitleUniqueKey(){
 		
 		String keys = DbUtil.getTestVideo().getTitle();
 		int startIndex = 0;
@@ -407,7 +408,7 @@ public class VideoServiceTest {
 	}
 	
 	@Test
-	public void findVideoByTitleMultiKey() throws InstanceNotFoundException{
+	public void findVideoByTitleMultiKey(){
 		
 		String keys = DbUtil.getTestVideoMultiKey().getTitle();
 		int startIndex = 0;
@@ -418,7 +419,7 @@ public class VideoServiceTest {
 	}
 	
 	@Test
-	public void findVideoByTitle() throws InstanceNotFoundException{
+	public void findVideoByTitle(){
 		
 		String keys = "xamp";
 		int startIndex = 0;
@@ -428,7 +429,7 @@ public class VideoServiceTest {
 	}
 
 	@Test
-	public void findVideoByTitleNoKey() throws InstanceNotFoundException{
+	public void findVideoByTitleNoKey(){
 		
 		String keys = "";
 		int startIndex = 0;
@@ -436,5 +437,25 @@ public class VideoServiceTest {
 		VideoBlock block = videoService.findVideosByTitle(keys, startIndex, count);
 		assertTrue(block.getVideos().size()==3);
 	}
+	
+	@Test 
+	public void findVideoCommentByVideoId(){
+		int startIndex = 0;
+		int count = 10;
+		VideoCommentBlock block = 
+			videoService.findVideoCommentsByVideoId(DbUtil.getTestVideo().getVideoId(), 
+					startIndex, count);
+		assertTrue(block.getUserComments().size()==1);
+		assertEquals(block.getUserComments().get(0), DbUtil.getVideoComment());
+	}
 
+	@Test 
+	public void findVideoCommentByVideoIdNonVideo(){
+		int startIndex = 0;
+		int count = 10;
+		VideoCommentBlock block = 
+			videoService.findVideoCommentsByVideoId(NON_EXISTENT_VIDEO_ID, 
+					startIndex, count);
+		assertTrue(block.getUserComments().size()==0);
+	}
 }

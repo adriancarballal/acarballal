@@ -135,6 +135,22 @@ public class VideoServiceImpl implements VideoService{
 		return new VideoBlock(videos, existMoreVideos);
 
 	}
+	
+	@Transactional(readOnly = true)
+	public VideoCommentBlock findVideoCommentsByVideoId(Long videoId, 
+			int startIndex, int count){
+		
+		List<VideoComment> comments = 
+			videoCommentDao.findVideoCommentsByVideoId(videoId, startIndex, count+1);
+
+		boolean existMoreVideoComments = comments.size() == (count + 1);
+
+		if (existMoreVideoComments) {
+			comments.remove(comments.size() - 1);
+		}
+		
+		return new VideoCommentBlock(comments, existMoreVideoComments);
+	}
 
 	
 }

@@ -7,12 +7,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 
+import es.udc.acarballal.elmas.model.usercomment.UserComment;
+import es.udc.acarballal.elmas.model.usercomment.UserCommentDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.util.PasswordEncrypter;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.video.VideoDao;
+import es.udc.acarballal.elmas.model.videocomment.VideoComment;
+import es.udc.acarballal.elmas.model.videocomment.VideoCommentDao;
 import es.udc.acarballal.elmas.test.util.GlobalNames;
 
 /**
@@ -43,6 +47,8 @@ public class DbUtil {
 				.getBean("transactionManager");
 		userProfileDao = (UserProfileDao) context.getBean("userProfileDao");
 		videoDao = (VideoDao) context.getBean("videoDao");
+		userCommentDao = (UserCommentDao) context.getBean("userCommentDao");
+		videoCommentDao = (VideoCommentDao) context.getBean("videoCommentDao");
 	}
 	
 	private static UserProfile testUserProfile;
@@ -53,6 +59,14 @@ public class DbUtil {
 	private static Video testVideo;
 	private static Video testVideoMultiKey;
 	private static VideoDao videoDao;
+	
+	private static UserCommentDao userCommentDao;
+	private static UserComment userComment1;
+	private static UserComment userComment2;
+	private static UserComment userComment3;
+	
+	private static VideoCommentDao videoCommentDao;
+	private static VideoComment videoComment;
 	
 	private static PlatformTransactionManager transactionManager;
 	
@@ -74,6 +88,22 @@ public class DbUtil {
 	
 	public static Video getTestVideoMultiKey(){
 		return testVideoMultiKey;
+	}
+	
+	public static UserComment getUserComment1() {
+		return userComment1;
+	}
+
+	public static UserComment getUserComment2() {
+		return userComment2;
+	}
+
+	public static UserComment getUserComment3() {
+		return userComment3;
+	}
+	
+	public static VideoComment getVideoComment() {
+		return videoComment;
 	}
 	
 	public static void populateDb() {
@@ -109,6 +139,19 @@ public class DbUtil {
 			testVideo = new Video(testUserProfile, "VideoExample", "CommentExample", 
 					"-home-data-snapshots-001.jpg", Calendar.getInstance());
 			videoDao.create(testVideo);
+			userComment1 = new UserComment(testUserProfile, commentatorProfile,  
+					"He is a good administrator", Calendar.getInstance());
+			userCommentDao.create(userComment1);
+			userComment2 = new UserComment(commentatorProfile, testUserProfile,    
+					"He has been warnned", Calendar.getInstance());
+			userCommentDao.create(userComment2);
+			userComment3 = new UserComment(commentatorProfile, testUserProfile,    
+					"He has been warnned twice", Calendar.getInstance());
+			userCommentDao.create(userComment3);
+			videoComment = new VideoComment(testVideo, commentatorProfile, 
+					"Could be better...", Calendar.getInstance());
+			videoCommentDao.create(videoComment);
+			
 			
 		} catch (Throwable e) {
 			transactionManager.rollback(transactionStatus);
@@ -130,8 +173,8 @@ public class DbUtil {
 		try {
 
 			//videoDao.remove(testVideo.getVideoId());
-			userProfileDao.remove(commentatorProfile.getUserProfileId());
-			userProfileDao.remove(testUserProfile.getUserProfileId());
+			//userProfileDao.remove(commentatorProfile.getUserProfileId());
+			//userProfileDao.remove(testUserProfile.getUserProfileId());
 			testUserProfile = null;
 			commentatorProfile = null;
 			testVideo = null;

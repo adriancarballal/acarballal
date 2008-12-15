@@ -1,4 +1,4 @@
-package es.udc.acarballal.elmas.test.model.userservice;
+/*package es.udc.acarballal.elmas.test.model.userservice;
 
 import static org.junit.Assert.*;
 
@@ -20,6 +20,7 @@ import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.LoginResult;
+import es.udc.acarballal.elmas.model.userservice.UserCommentBlock;
 import es.udc.acarballal.elmas.model.userservice.UserProfileBlock;
 import es.udc.acarballal.elmas.model.userservice.UserProfileDetails;
 import es.udc.acarballal.elmas.model.userservice.UserService;
@@ -175,8 +176,8 @@ public class UserServiceTest {
 	}
 	
 	
-/*	 Tests for UserService.changePrivileges method 
-*/	@Test
+
+	@Test
 	public void testChangePrivilegesToNone() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
 		LoginResult loginResult = 
@@ -240,7 +241,7 @@ public class UserServiceTest {
 		userService.changePrivileges(NON_EXISTENT_USER_PROFILE_ID, Privileges_TYPES.ADMIN);
 	}
 	
-/*	 Tests for UserService.changePrivilegesToAdmin method*/ 
+
 	@Test
 	public void testChangePrivilegesToAdminAsAdmin_2() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
@@ -435,4 +436,48 @@ public class UserServiceTest {
 		assertTrue(admins.getUsers().size()==1);
 		assertEquals(admins.getUsers().get(0),DbUtil.getCommentatorProfile());
 	}
+	
+	@Test
+	public void findUserCommentsByCommentator(){
+		int startIndex = 0;
+		int count = 10;
+		UserCommentBlock comments = 
+			userService.findUserCommentsByCommentator
+			(DbUtil.getTestUserProfile().getUserProfileId(), 
+				startIndex, count);
+		assertTrue(comments.getUserComments().size()==2);
+	}
+	
+	@Test
+	public void findUserCommentsByCommented(){
+		int startIndex = 0;
+		int count = 10;
+		UserCommentBlock comments = 
+			userService.findUserCommentsByCommented
+			(DbUtil.getTestUserProfile().getUserProfileId(), 
+				startIndex, count);
+		assertTrue(comments.getUserComments().size()==1);
+		assertEquals(comments.getUserComments().get(0), DbUtil.getUserComment1());
+	}
+	
+	@Test
+	public void findUserCommentsByCommentatorNoNUser(){
+		int startIndex = 0;
+		int count = 10;
+		UserCommentBlock comments = 
+			userService.findUserCommentsByCommentator
+			(NON_EXISTENT_USER_PROFILE_ID, startIndex, count);
+		assertTrue(comments.getUserComments().size()==0);
+	}
+	
+	@Test
+	public void findUserCommentsByCommentedNoNUser(){
+		int startIndex = 0;
+		int count = 10;
+		UserCommentBlock comments = 
+			userService.findUserCommentsByCommented
+			(NON_EXISTENT_USER_PROFILE_ID, startIndex, count);
+		assertTrue(comments.getUserComments().size()==0);
+	}
 }
+*/

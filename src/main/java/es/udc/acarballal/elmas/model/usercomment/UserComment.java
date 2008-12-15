@@ -98,9 +98,15 @@ public class UserComment {
 
 		UserComment theOther = (UserComment) obj;
 
-		return commentId == theOther.commentId
+		return commentId.equals(theOther.commentId)
 			&& (commented != null) && commented.equals(theOther.getCommented())
 			&& (commentator != null) && commentator.equals(theOther.getCommentator())
 			&& (comment != null) && comment.equals(theOther.comment);
 	}
+	
+	/*@Override
+	public String toString(){
+		return commentId + " : " + commentator.getLoginName() + " : " +
+				commented.getLoginName() + " : " + comment + " : ";
+	}*/
 }

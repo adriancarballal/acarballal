@@ -11,8 +11,6 @@ public class VideoBlock {
 
     public VideoBlock(List<Video> videos, boolean existMoreVideos) {
         
-    	///////////////////////////////////////////////
-    	System.out.println("SIZE: " + videos.size());
         this.videos = videos;
         this.existMoreVideos = existMoreVideos;
 
