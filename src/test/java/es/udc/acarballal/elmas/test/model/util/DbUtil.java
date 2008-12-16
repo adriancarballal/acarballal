@@ -130,14 +130,17 @@ public class DbUtil {
 		try {
 			userProfileDao.create(testUserProfile);
 			userProfileDao.create(commentatorProfile);
-			testVideo = new Video(testUserProfile, "Example Video file", "CommentExample", 
-					"-home-data-snapshots-001.jpg", Calendar.getInstance());
+			testVideo = new Video(testUserProfile, "Example Video file", 
+					"CommentExample", "-home-data-snapshots-001.jpg", 
+					"video.vob", "video.flv", "video.mp4", Calendar.getInstance());
 			videoDao.create(testVideo);
-			testVideoMultiKey = new Video(testUserProfile, "Video n2 example", "CommentExample", 
-					"-home-data-snapshots-001.jpg", Calendar.getInstance());
+			testVideoMultiKey = new Video(testUserProfile, "Video n2 example", 
+					"CommentExample", "-home-data-snapshots-001.jpg", 
+					"video.vob", "video.flv", "video.mp4", Calendar.getInstance());
 			videoDao.create(testVideoMultiKey);
-			testVideo = new Video(testUserProfile, "VideoExample", "CommentExample", 
-					"-home-data-snapshots-001.jpg", Calendar.getInstance());
+			testVideo = new Video(testUserProfile, "VideoExample", 
+					"CommentExample", "-home-data-snapshots-001.jpg", 
+					"video.vob", "video.flv", "video.mp4", Calendar.getInstance());
 			videoDao.create(testVideo);
 			userComment1 = new UserComment(testUserProfile, commentatorProfile,  
 					"He is a good administrator", Calendar.getInstance());
@@ -173,8 +176,8 @@ public class DbUtil {
 		try {
 
 			//videoDao.remove(testVideo.getVideoId());
-			//userProfileDao.remove(commentatorProfile.getUserProfileId());
-			//userProfileDao.remove(testUserProfile.getUserProfileId());
+			userProfileDao.remove(commentatorProfile.getUserProfileId());
+			userProfileDao.remove(testUserProfile.getUserProfileId());
 			testUserProfile = null;
 			commentatorProfile = null;
 			testVideo = null;

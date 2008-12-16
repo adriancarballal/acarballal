@@ -1,4 +1,4 @@
-/*package es.udc.acarballal.elmas.test.model.userservice;
+package es.udc.acarballal.elmas.test.model.userservice;
 
 import static org.junit.Assert.*;
 
@@ -480,4 +480,3 @@ public class UserServiceTest {
 		assertTrue(comments.getUserComments().size()==0);
 	}
 }
-*/

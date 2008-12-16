@@ -25,6 +25,9 @@ public class Video {
 	public String title;
 	public String comment;
 	public String snapshot;
+	public String original;
+	public String flvVideo;
+	public String mp4Video;
 	public Calendar date;
 	
 	public Video(){
@@ -32,12 +35,16 @@ public class Video {
 	}
 	
 	public Video(UserProfile userProfile, String title, String comment,
-			String snapshot, Calendar date){
+			String snapshot, String original, String flvVideo, String mp4Video, 
+			Calendar date){
 		
 		this.userProfile = userProfile;
 		this.title = title;
 		this.comment = comment;
 		this.snapshot = snapshot;
+		this.original = original;
+		this.flvVideo = flvVideo;
+		this.mp4Video = mp4Video;
 		this.date = date;
 	}
 	
@@ -87,6 +94,32 @@ public class Video {
 		this.snapshot = snapshot;
 	}
 	
+	public String getOriginal() {
+		return original;
+	}
+
+	public void setOriginal(String original) {
+		this.original = original;
+	}
+
+	@Column(name = "urlflv")
+	public String getFlvVideo() {
+		return flvVideo;
+	}
+
+	public void setFlvVideo(String flvVideo) {
+		this.flvVideo = flvVideo;
+	}
+
+	@Column(name = "urlmp4")
+	public String getMp4Video() {
+		return mp4Video;
+	}
+
+	public void setMp4Video(String mp4Video) {
+		this.mp4Video = mp4Video;
+	}
+
 	@Temporal(TemporalType.TIMESTAMP)
 	public Calendar getDate() {
 		return date;
@@ -108,7 +141,10 @@ public class Video {
 			&& userProfile.getUserProfileId().equals(theOther.getUserProfile()
 					.getUserProfileId())
 			&& (comment != null) && comment.equals(theOther.comment)
-			&& (snapshot != null) && snapshot.equals(theOther.snapshot);
+			&& (snapshot != null) && snapshot.equals(theOther.snapshot)
+			&& (original != null) && original.equals(theOther.original)
+			&& (flvVideo != null) && flvVideo.equals(theOther.flvVideo)
+			&& (mp4Video != null) && mp4Video.equals(theOther.mp4Video);
 	}
-	
+		
 }
