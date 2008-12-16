@@ -11,7 +11,8 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public interface VideoService {
 	
 	public Long addVideo(long userId, String title, String comment, 
-			String snapshot, Calendar date)
+			String snapshot, String original, String flvVideo, 
+			String mp4Video, Calendar date)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
 	public void deleteVideo(long videoId, long userId) 
