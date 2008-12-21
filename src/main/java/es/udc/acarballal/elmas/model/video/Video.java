@@ -146,5 +146,6 @@ public class Video {
 			&& (flvVideo != null) && flvVideo.equals(theOther.flvVideo)
 			&& (mp4Video != null) && mp4Video.equals(theOther.mp4Video);
 	}
+
 		
 }

@@ -53,7 +53,8 @@ public class DbUtil {
 	
 	private static UserProfile testUserProfile;
 	private static UserProfile commentatorProfile;
-	private static String testClearPassword = "user1ClearPassword";
+	private static String testClearPassword = "admin";
+	//private static String testClearPassword = "user1ClearPassword";
 	private static UserProfileDao userProfileDao;
 	
 	private static Video testVideo;
@@ -121,7 +122,7 @@ public class DbUtil {
 				.crypt(testClearPassword), "name1", "lastName1", "user1@udc.es");
 		testUserProfile.setPrivileges(Privileges_TYPES.ADMIN);
 		
-		commentatorProfile = new UserProfile("commentator", PasswordEncrypter
+		commentatorProfile = new UserProfile("adrian", PasswordEncrypter
 				.crypt(testClearPassword), "commentator", "commentator", 
 				"commentator@udc.es");
 		commentatorProfile.setPrivileges(Privileges_TYPES.VOTER);
@@ -176,8 +177,8 @@ public class DbUtil {
 		try {
 
 			//videoDao.remove(testVideo.getVideoId());
-			userProfileDao.remove(commentatorProfile.getUserProfileId());
-			userProfileDao.remove(testUserProfile.getUserProfileId());
+			//userProfileDao.remove(commentatorProfile.getUserProfileId());
+			//userProfileDao.remove(testUserProfile.getUserProfileId());
 			testUserProfile = null;
 			commentatorProfile = null;
 			testVideo = null;

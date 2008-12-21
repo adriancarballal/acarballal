@@ -104,9 +104,4 @@ public class UserComment {
 			&& (comment != null) && comment.equals(theOther.comment);
 	}
 	
-	/*@Override
-	public String toString(){
-		return commentId + " : " + commentator.getLoginName() + " : " +
-				commented.getLoginName() + " : " + comment + " : ";
-	}*/
 }

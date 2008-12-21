@@ -2,5 +2,48 @@
 	t:type="Layout" t:pageTitle="${message:title}">
 
 <p>${message:ownVideos}.</p>
-   
+
+<t:block t:id="noVideoBlock">
+	
+	<t:if test="videoGridDataSource.videoNotFound">
+		<p>${message:accountNotFound}.</p>
+		<t:parameter name="else">
+			<p>${message:novideos}.</p>
+		</t:parameter>
+	</t:if>
+    
+</t:block>
+	
+<!--
++ It is necessary to explicitly add "date" property since "Grid" component does
+  not recognize "Calendar" properties.
+-->
+<t:grid source="videoGridDataSource" row="video"
+		rowsPerPage="rowsPerPage" add="date" 
+		exclude="original, flvVideo, mp4Video, videoId" 
+		reorder="title, comment, date"
+		empty="block:noVideoBlock" class="video" 
+		lean="literal:true">
+
+	<t:parameter name="titleHeader">
+		${message:video-title}
+	</t:parameter>
+	
+	<t:parameter name="commentHeader">
+		${message:video-comment}
+	</t:parameter>
+
+	<t:parameter name="dateHeader">
+		${message:date}
+	</t:parameter>
+	
+
+	<t:parameter name="dateCell">
+		<t:output value="video.date.time" format="dateFormat"/>
+	</t:parameter>
+		
+</t:grid>
+
+<br/>
+
 </html>

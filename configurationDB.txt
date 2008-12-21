@@ -17,3 +17,8 @@ Shutdown database
 	- obtener los mejor de la semana
 	- obtener videos aleatorios
 	
+	faltan los junit para los metodos:
+	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);
+	public int getNumberOfVideosByUser(Long userId);
+	public int getNumberOfUserCommentsByCommented(Long userProfileId);
+	

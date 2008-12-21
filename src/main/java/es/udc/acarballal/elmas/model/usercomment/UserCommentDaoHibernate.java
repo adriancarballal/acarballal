@@ -25,4 +25,14 @@ public class UserCommentDaoHibernate extends
 		setParameter("commented", userProfileId).		
 		setFirstResult(startIndex).setMaxResults(count).list();
 	}
+	
+	public int getNumberOfUserCommentByCommented(Long userProfileId){
+		
+		long numberOfComments = 
+			(Long) getSession().createQuery("SELECT count(*) FROM UserComment u " +
+			"WHERE u.commented.userProfileId=:commented").
+			setParameter("commented", userProfileId).uniqueResult();
+		
+		return (int) numberOfComments;
+	}
 }
