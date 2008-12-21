@@ -56,4 +56,6 @@ public interface UserService {
 	
 	public UserCommentBlock findUserCommentsByCommented(Long userProfileId,
 			int startIndex, int count);
+	
+	public int getNumberOfUserCommentsByCommented(Long userProfileId);
 }

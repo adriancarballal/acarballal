@@ -244,4 +244,9 @@ public class UserServiceImpl implements UserService {
 		
 		return new UserCommentBlock(comments, existMoreUserComments);
 	}
+	
+	@Transactional(readOnly = true)
+	public int getNumberOfUserCommentsByCommented(Long userProfileId){
+		return userCommentDao.getNumberOfUserCommentByCommented(userProfileId);
+	}
 }

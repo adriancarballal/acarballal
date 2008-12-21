@@ -139,6 +139,27 @@ public class VideoServiceImpl implements VideoService{
 	}
 	
 	@Transactional(readOnly = true)
+	public VideoBlock findVideosByUser(Long userId, int startIndex, int count){
+		
+		List<Video> videos = videoDao.findByUser(userId, startIndex, count+1);
+
+		boolean existMoreVideos = videos.size() == (count + 1);
+
+		if (existMoreVideos) {
+			videos.remove(videos.size() - 1);
+		}
+		
+		return new VideoBlock(videos, existMoreVideos);
+		
+	}
+	
+	@Transactional(readOnly = true)
+	public int getNumberOfVideosByUser(Long userId){
+		
+		return videoDao.getNumberOfVideosByUser(userId);
+	}
+	
+	@Transactional(readOnly = true)
 	public VideoCommentBlock findVideoCommentsByVideoId(Long videoId, 
 			int startIndex, int count){
 		

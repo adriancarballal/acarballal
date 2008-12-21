@@ -44,7 +44,7 @@ public class FlvEncoder extends Encoder{
     	
 		System.out.println("Encoding...");
     	long start = System.currentTimeMillis();
-    	FlvEncoder encFLV = new FlvEncoder("\"C:\\Documents and Settings\\Adrian\\Escritorio\\input.mp4\"", 
+    	FlvEncoder encFLV = new FlvEncoder("\"C:\\Documents and Settings\\Adrian\\Escritorio\\input.avi\"", 
     			"\"C:\\Documents and Settings\\Adrian\\Escritorio\\output.flv\"");
     	
     	try {
