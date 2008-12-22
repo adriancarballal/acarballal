@@ -77,6 +77,54 @@ body {
 	height:400px;
 }
 
+table td, th{
+	border: 1px solid red;
+	text-align: center;
+}
+
+table.video-table{
+	/* border: 5px solid black;*/
+	width:84%;
+	margin-left:8%;
+	
+}
+
+table td.snapshot{
+	height:120px;
+	width:150px;
+}
+
+table td.video-info{
+	height:120px;
+	width:450px;
+}
+
+
+table td.video-title{
+	border: 1px solid blue;
+	width:70%;
+}
+table td.video-user{
+	border: 1px solid yellow;
+	width:30%;
+}
+
+table td.video-comment{
+	border: 2px solid red;
+}
+
+div.previousNextLinks span.previousLink {
+    float: left;
+    text-align: left;
+    width: 49.5%;
+}
+
+div.previousNextLinks span.nextLink {
+    float: right;
+    text-align: right;
+    width: 49.5%;
+}
+
 /* Footer. */
 
 #footer {
@@ -90,4 +138,3 @@ body {
 		border: 1px solid red;		
 		text-align: center;
 }
-

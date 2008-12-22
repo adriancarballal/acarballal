@@ -16,7 +16,7 @@ DROP TABLE UserProfile;
 
 CREATE TABLE UserProfile (
 	usrId BIGINT NOT NULL AUTO_INCREMENT,
-    loginName VARCHAR(30) COLLATE latin1_bin NOT NULL,
+    loginName VARCHAR(15) COLLATE latin1_bin NOT NULL,
     enPassword VARCHAR(13) NOT NULL, 
     firstName VARCHAR(30) NOT NULL,
     lastName VARCHAR(40) NOT NULL, email VARCHAR(60) NOT NULL,
@@ -34,12 +34,12 @@ CREATE INDEX UserProfileIndexByLoginName ON UserProfile (loginName);
 CREATE TABLE Video (
 	vidId BIGINT NOT NULL AUTO_INCREMENT,
 	usrId BIGINT NOT NULL,
-	title VARCHAR(50) NOT NULL,
-	cmmnt VARCHAR(300) NOT NULL,
-	urlshot VARCHAR(50) NOT NULL,
-	original VARCHAR(50) NOT NULL,
-	urlflv VARCHAR(50) NOT NULL,
-	urlmp4 VARCHAR(50) NOT NULL,
+	title VARCHAR(30) NOT NULL,
+	cmmnt VARCHAR(200) NOT NULL,
+	urlshot VARCHAR(100) NOT NULL,
+	original VARCHAR(100) NOT NULL,
+	urlflv VARCHAR(100) NOT NULL,
+	urlmp4 VARCHAR(100) NOT NULL,
 	date TIMESTAMP NOT NULL,
 	CONSTRAINT Video_PK PRIMARY KEY (vidId),
 	CONSTRAINT Video_FK FOREIGN KEY (usrId)
@@ -104,13 +104,13 @@ CREATE TABLE Vote (
 --------------------------
 insert into userprofile values(1, 'admin','UDn64bBABog2A', 'admin', 'none', 'admin@gmail.com', 0, 0);
 -- Password for admin = admin
-insert into userprofile values(2, 'adrian','YZsowua7bk/lU', 'adrian', 'carballal', 'adriancarballal@gmail.com', 1, 0);
+insert into userprofile values(2, 'adrian xxxxxxxx','YZsowua7bk/lU', 'adrian', 'carballal', 'adriancarballal@gmail.com', 1, 0);
 -- Password for user adrian = adrian
 
 --------------------------
 --        Videos        --
 --------------------------
-insert into video values (1,2,"Episodio Chuck 01", "Parte 1", "C:\\elmas_data\\snapshots\\small\\1.jpg", "", "C:\\elmas_data\\flvs\1.flv", "", CURRENT_TIMESTAMP);
+insert into video values (1,2,"Episodio Chuck 01 xxxxxxxxxxxx", "Parte 1 x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x y z", "C:\\elmas_data\\snapshots\\small\\1.jpg", "", "C:\\elmas_data\\flvs\1.flv", "", CURRENT_TIMESTAMP);
 insert into video values (2,2,"Episodio Chuck 01", "Parte 2", "C:\\elmas_data\\snapshots\\small\\2.jpg", "", "C:\\elmas_data\\flvs\2.flv", "", CURRENT_TIMESTAMP);
 insert into video values (3,2,"Episodio Chuck 01", "Parte 3", "C:\\elmas_data\\snapshots\\small\\3.jpg", "", "C:\\elmas_data\\flvs\3.flv", "", CURRENT_TIMESTAMP);
 insert into video values (4,2,"Episodio Chuck 01", "Parte 4", "C:\\elmas_data\\snapshots\\small\\4.jpg", "", "C:\\elmas_data\\flvs\4.flv", "", CURRENT_TIMESTAMP);
