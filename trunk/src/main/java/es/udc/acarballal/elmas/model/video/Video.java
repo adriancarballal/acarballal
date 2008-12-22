@@ -62,7 +62,7 @@ public class Video {
 		this.videoId = videoId;
 	}	
 	
-	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
     @JoinColumn(name="usrId")
 	public UserProfile getUserProfile() {
 		return userProfile;
