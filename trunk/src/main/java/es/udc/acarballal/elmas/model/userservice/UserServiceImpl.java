@@ -188,7 +188,7 @@ public class UserServiceImpl implements UserService {
 	//Añadir un adminService para este servicio?	
 	public UserProfileBlock findAllAdmin(int startIndex, int count){
 		
-		List<UserProfile> users = userProfileDao.findAllAdmin(startIndex, count);
+		List<UserProfile> users = userProfileDao.findAllAdmin(startIndex, count+1);
 		
 		boolean existMoreUsers = users.size() == (count + 1);
 
@@ -202,7 +202,7 @@ public class UserServiceImpl implements UserService {
 	//Añadir un adminService para este servicio?	
 	public UserProfileBlock findNonAdmin(int startIndex, int count){
 		
-		List<UserProfile> users = userProfileDao.findNonAdmin(startIndex, count);
+		List<UserProfile> users = userProfileDao.findNonAdmin(startIndex, count+1);
 		
 		boolean existMoreUsers = users.size() == (count + 1);
 
@@ -218,7 +218,7 @@ public class UserServiceImpl implements UserService {
 			int startIndex, int count){
 		
 		List<UserComment> comments = 
-			userCommentDao.findCommentByCommentator(userProfileId, startIndex, count);
+			userCommentDao.findCommentByCommentator(userProfileId, startIndex, count+1);
 		
 		boolean existMoreUserComments = comments.size() == (count + 1);
 		
@@ -234,7 +234,7 @@ public class UserServiceImpl implements UserService {
 			int startIndex, int count){
 
 		List<UserComment> comments = 
-			userCommentDao.findCommentByCommented(userProfileId, startIndex, count);
+			userCommentDao.findCommentByCommented(userProfileId, startIndex, count+1);
 		
 		boolean existMoreUserComments = comments.size() == (count + 1);
 		
@@ -245,8 +245,4 @@ public class UserServiceImpl implements UserService {
 		return new UserCommentBlock(comments, existMoreUserComments);
 	}
 	
-	@Transactional(readOnly = true)
-	public int getNumberOfUserCommentsByCommented(Long userProfileId){
-		return userCommentDao.getNumberOfUserCommentByCommented(userProfileId);
-	}
 }

@@ -1,33 +1,53 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<p>${message:aboutMe}.</p>
-   
-   <t:block t:id="noCommentBlock">
-	
-	<t:if test="commentGridDataSource.commentsNotFound">
-		<p>${message:commentsNotFound}.</p>
-		<t:parameter name="else">
-			<p>${message:nocomments}.</p>
-		</t:parameter>
-	</t:if>
-    
-</t:block>
-	
-<!--
-+ It is necessary to explicitly add "date" property since "Grid" component does
-  not recognize "Calendar" properties.
--->
-<t:grid source="commentGridDataSource" row="userComment" 
-		reorder="comment, date" remove="commentId"
-		rowsPerPage="rowsPerPage" add="date">
+<t:if t:test="userComments.empty">
 
-	<t:parameter name="dateCell">
-		<t:output value="userComment.date.time" format="dateFormat"/>
-	</t:parameter>
+	<p>${message:nocomments}.</p>
+	
+<t:parameter name="else">
+
+	<p>${message:aboutMe}.</p>
+
+	<table class="comments">
+		<tr t:type="Loop" t:source="userComments" t:value="userComment">
+			<tr>
+				<td class="user-comment">${userComment.comment}</td>
+			</tr>
+			<tr><td class="commentator-info">
+				${message:user-header}: ${userComment.commentator.loginName}
+			 - 
+				${message:date}: <t:output value="userComment.date.time" format="dateFormat"/>
+				</td>
+			</tr>
+		</tr>
+	</table>
+	
 		
-</t:grid>
+	<!-- "Previous" and "Next" links. -->
+		
+	<div class="previousNextLinks">
+	<span class="previousLink">
+		<t:if t:test="previousLinkContext">
+			<a href="#" t:type="PageLink" page="user/AboutMe"
+	    		context="previousLinkContext">
+	    		${message:link-previous}
+	    	</a>
+		</t:if>
+	</span>
+	
+	<span class="nextLink">
+		<t:if t:test="nextLinkContext">
+			<a href="#" t:type="PageLink" page="user/AboutMe"
+	    		context="nextLinkContext">
+	    		${message:link-next}
+	    	</a>
+		</t:if>
+	</span>
+	</div>
+	
+</t:parameter>
+</t:if>
 
-<br/>
    
 </html>

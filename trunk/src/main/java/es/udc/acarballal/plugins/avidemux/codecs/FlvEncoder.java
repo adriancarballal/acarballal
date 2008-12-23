@@ -3,7 +3,7 @@ package es.udc.acarballal.plugins.avidemux.codecs;
 import es.udc.acarballal.plugins.avidemux.configuration.*;
 
 //Uncomment for testing.
-import es.udc.acarballal.plugins.avidemux.exceptions.*;
+//import es.udc.acarballal.plugins.avidemux.exceptions.*;
 
 /**
  * 
@@ -40,7 +40,7 @@ public class FlvEncoder extends Encoder{
 	
 	
 	//Test code. Uncomment for testing. 
-    public static void main (String[] args) {
+    /*public static void main (String[] args) {
     	
 		System.out.println("Encoding...");
     	long start = System.currentTimeMillis();
@@ -64,6 +64,6 @@ public class FlvEncoder extends Encoder{
     	long end = System.currentTimeMillis();
     	System.out.println("Execution time was "+(end-start)+" ms.");
 
-    }
+    }*/
 
 }

@@ -12,5 +12,4 @@ public interface UserCommentDao extends GenericDao<UserComment, Long>{
 	public List<UserComment> findCommentByCommented(Long userProfileId,
 			int startIndex, int count);
 	
-	public int getNumberOfUserCommentByCommented(Long userProfileId);
 }

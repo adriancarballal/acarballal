@@ -36,15 +36,4 @@ public class VideoDaoHibernate extends
 		
 	}
 	
-	@SuppressWarnings("unchecked")
-	public int getNumberOfVideosByUser(Long userId){
-		
-		long numberOfVideos = (Long) getSession().createQuery(
-                "SELECT COUNT(v) FROM Video v " +
-				"WHERE v.userProfile.userProfileId=:userId").
-        		setParameter("userId", userId).		
-                uniqueResult();
-		
-		return (int) numberOfVideos;
-	}
 }

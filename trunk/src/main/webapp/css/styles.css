@@ -80,6 +80,7 @@ body {
 table td, th{
 	border: 1px solid red;
 	text-align: center;
+	width:100%;
 }
 
 table.video-table{
@@ -111,6 +112,15 @@ table td.video-user{
 
 table td.video-comment{
 	border: 2px solid red;
+}
+
+table td.user-comment{
+	text-align: left;
+	width:750px;
+}
+
+table td.commentator-info{
+	text-align: right;
 }
 
 div.previousNextLinks span.previousLink {

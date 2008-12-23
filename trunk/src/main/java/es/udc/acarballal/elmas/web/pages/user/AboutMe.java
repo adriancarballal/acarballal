@@ -1,63 +1,79 @@
 package es.udc.acarballal.elmas.web.pages.user;
 
 import java.text.DateFormat;
-import java.text.ParseException;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.usercomment.UserComment;
+import es.udc.acarballal.elmas.model.userservice.UserCommentBlock;
 import es.udc.acarballal.elmas.model.userservice.UserService;
-import es.udc.acarballal.elmas.web.util.CommentGridDataSource;
 import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class AboutMe {
-
-private final static int ROWS_PER_PAGE = 10;
 	
-	private CommentGridDataSource commentGridDataSource;
+	private int startIndex = 0;
+	private int count = 4;
+	private UserCommentBlock userCommentBlock;
 	private UserComment userComment;
 	
 	@ApplicationState
 	private UserSession userSession;
-
-	@Inject
-	private Locale locale;
 	
 	@Inject
 	private UserService userService;
 	
-	public CommentGridDataSource getCommentGridDataSource() {
-		return commentGridDataSource;
-	}
+	@Inject
+	private Locale locale;
 	
+	public List<UserComment> getUserComments(){
+		return userCommentBlock.getUserComments();
+	}
+
 	public UserComment getUserComment() {
 		return userComment;
 	}
-	
+
 	public void setUserComment(UserComment userComment) {
 		this.userComment = userComment;
 	}
 	
 	public DateFormat getDateFormat() {
-		return DateFormat.getDateInstance(DateFormat.SHORT, locale);
+		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
 	
-	public int getRowsPerPage() {
-		return ROWS_PER_PAGE;
-	}
-	
-	void onActivate() 
-		throws ParseException {
+	public Object[] getPreviousLinkContext() {
 		
-		commentGridDataSource = 
-			new CommentGridDataSource(userService, userSession.getUserProfileId());
+		if (startIndex-count >= 0) {
+			return new Object[] {startIndex-count, count};
+		} else {
+			return null;
+		}
+		
+	}
+	
+	public Object[] getNextLinkContext() {
+		
+		if (userCommentBlock.getExistMoreUserComments()) {
+			return new Object[] {startIndex+count, count};
+		} else {
+			return null;
+		}
 		
 	}
 	
 	Object[] onPassivate() {
-		return new Object[] {};
+		return new Object[] {startIndex, count};
 	}
-
+	
+	void onActivate(int startIndex, int count) {
+		this.startIndex = startIndex;
+		this.count = count;
+		userCommentBlock = 
+			userService.findUserCommentsByCommented(userSession.getUserProfileId(), 
+					startIndex, count);
+	}
+	
 }

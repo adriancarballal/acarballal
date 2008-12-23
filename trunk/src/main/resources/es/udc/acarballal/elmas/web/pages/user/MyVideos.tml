@@ -14,7 +14,11 @@
 		<tr t:type="Loop" t:source="videos" t:value="video">
 			<table class="video-table">
 				<tr>
-					<td class="snapshot"></td>
+					<td class="snapshot">
+						<img src="${flag}"/>
+						<!--<img jwcid="@Image" image="ognl:flag" />-->
+						
+					</td>
 					<td class="video-info">
 						<table>
 							<tr><td class="video-title">

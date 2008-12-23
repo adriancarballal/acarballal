@@ -36,8 +36,6 @@ public interface VideoService {
 	
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);
 	
-	public int getNumberOfVideosByUser(Long userId);
-	
 	public VideoCommentBlock findVideoCommentsByVideoId(Long videoId, 
 			int startIndex, int count);
 
