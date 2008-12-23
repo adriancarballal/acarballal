@@ -152,13 +152,7 @@ public class VideoServiceImpl implements VideoService{
 		return new VideoBlock(videos, existMoreVideos);
 		
 	}
-	
-	@Transactional(readOnly = true)
-	public int getNumberOfVideosByUser(Long userId){
 		
-		return videoDao.getNumberOfVideosByUser(userId);
-	}
-	
 	@Transactional(readOnly = true)
 	public VideoCommentBlock findVideoCommentsByVideoId(Long videoId, 
 			int startIndex, int count){

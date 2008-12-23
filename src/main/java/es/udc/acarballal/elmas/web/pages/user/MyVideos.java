@@ -4,7 +4,10 @@ import java.text.DateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.ApplicationState;
+import org.apache.tapestry5.annotations.Path;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.video.Video;
@@ -27,7 +30,16 @@ public class MyVideos {
 	
 	@Inject
 	private Locale locale;
-
+	
+	@Inject
+	@Path("context:/logo/logo.jpg")
+	@Property
+	private Asset flag;
+	public Asset getFlag()	{
+		//flag = new ExternalAsset("http://www.carlitospaez.com/images/logos/logo_claro.jpg", null);
+		return flag;
+	}	
+	
 	public List<Video> getVideos() {
 		return videoBlock.getVideos();
 	}
@@ -73,67 +85,8 @@ public class MyVideos {
 		this.count = count;
 		videoBlock = videoService.findVideosByUser(userSession.getUserProfileId(), 
 				startIndex, count);
+		//System.out.println("FLAG: " + flag.getResource().toURL());
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*private final static int ROWS_PER_PAGE = 5;
-	
-	private VideoGridDataSource videoGridDataSource;
-	private Video video;
-	
-	@ApplicationState
-	private UserSession userSession;
-
-	@Inject
-	private Locale locale;
-	
-	@Inject
-	private VideoService videoService;
-	
-	public VideoGridDataSource getVideoGridDataSource() {
-		return videoGridDataSource;
-	}
-	
-	public Video getVideo() {
-		return video;
-	}
-	
-	public void setVideo(Video video) {
-		this.video = video;
-	}
-	
-	public DateFormat getDateFormat() {
-		return DateFormat.getDateInstance(DateFormat.SHORT, locale);
-	}
-	
-	public int getRowsPerPage() {
-		return ROWS_PER_PAGE;
-	}
-	
-	void onActivate() 
-		throws ParseException {
-		
-		videoGridDataSource = 
-			new VideoGridDataSource(videoService, userSession.getUserProfileId());
-		
-	}
-	
-	Object[] onPassivate() {
-		return new Object[] {};
-	}*/
-		
 }
+

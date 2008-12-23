@@ -80,11 +80,6 @@
 						</a>
 					</td></tr>
 					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/Statistics">
-							${message:menu-statistics}
-						</a>
-					</td></tr>
-					<tr><td>
 						<a href="#" t:type="PageLink" t:page="user/ChangeProfile">
 							${message:menu-changeProfile}
 						</a>
