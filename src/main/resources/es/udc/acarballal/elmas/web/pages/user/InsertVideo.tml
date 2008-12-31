@@ -1,6 +1,29 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<p>${message:insertVideo}.</p>
+	<p>${message:insertVideo}.</p>
+
+	<form t:type="Form" t:id="videoForm">
+        <t:errors/>
+        
+        <table class="videoUpload">        
+	        <tr><td><t:label t:for="title"/></td></tr>
+	        <tr><td><span class="entry">    
+	            <input type="text" t:id="title" t:type="TextArea"
+				       t:validate="required" value="title" style="overflow:hidden;"
+				       wrap="hard" maxlength="30" cols="30" rows="1" />
+	        </span></td></tr>
+
+	        <tr><td><t:label t:for="comment"/></td></tr>
+	        <tr><td><span class="entry">    
+	            <input type="text" t:id="comment" t:type="TextArea"
+				       t:validate="required" value="comment" style="overflow:hidden;"
+				       wrap="hard" maxlength="200" cols="30" rows="7" />
+	        </span></td></tr>
+ 
+        	<tr><td><input t:type="upload" t:id="file" validate="required"/></td></tr>
+        	<tr><td><input type="submit" value="Upload"/></td></tr>
+       	</table>
+    </form>
    
 </html>

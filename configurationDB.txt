@@ -9,6 +9,8 @@ Try to access to "elmas" database as "elmas" user with password "elmas".
 Shutdown database
 	- mysqladmin -u root shutdown
 	
+	jmf hay que instalarlo a mano
+	
 	
 	- no se puede votar dos veces!!!!
 	- mirar votos de un video
