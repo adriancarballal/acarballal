@@ -1,0 +1,33 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="Layout" t:pageTitle="${message:title}">
+	
+	<t:if t:test="foundVideo">
+		<p>${message:videoNotFound}.</p>
+	<t:parameter name="else">
+		<table class="showvideo">
+			<tr><td>
+				${video.title}
+			</td></tr>
+			<tr><td>
+				${video.userProfile.loginName}
+			</td></tr>
+			<tr><td>
+				<t:output value="video.date.time" format="dateFormat"/>
+			</td></tr>
+			<tr><td>
+				${video.comment}
+			</td></tr>
+			<tr><td>
+				<script type="text/javascript" src="${asset:context:/player/swfobject.js}"></script>
+				<embed src ="${asset:context:/player/player.swf}" 
+				width="400" height="300" 
+				allowfullscreen="false" />
+			</td></tr>
+			
+		</table>
+		
+	</t:parameter>
+	</t:if>
+
+	
+</html>	
