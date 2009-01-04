@@ -68,13 +68,13 @@ body {
 /* Content. */
 
 #content {
-	border: 1px solid red;
+	/* border: 1px solid red;*/
 	padding: 5px 5px 5px 5px;
 	margin-right: 7px;
 	margin-bottom: 7px;
 	width: 745px;
 	float: right;
-	height:400px;
+	/* height:400px;*/
 }
 
 table td, th{

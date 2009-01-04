@@ -1,0 +1,66 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="Layout" t:pageTitle="${message:title}">
+	
+<t:if t:test="videos.empty">
+
+	<p>${message:novideos}.</p>
+	
+<t:parameter name="else">
+
+	<table class="videos">
+		<tr t:type="Loop" t:source="videos" t:value="video">
+			<table class="video-table">
+				<tr>
+					<td class="snapshot">
+						<a href="#" t:type="PageLink" t:page="ShowVideo" t:context="video.videoId">
+						<img src="${flag}"/>
+						<!--<img jwcid="@Image" image="ognl:flag" />-->
+						</a>
+					</td>
+					<td class="video-info">
+						<table>
+							<tr><td class="video-title">
+									${message:video-title}: ${video.title}
+								</td>
+							</tr>
+							<tr><td class="video-user">
+									${message:video-user}: ${video.userProfile.loginName}
+									 - 
+									${message:date}: <t:output value="video.date.time" format="dateFormat"/>
+								</td>
+							</tr>
+							<tr><td class="video-comment">
+								${message:video-comment}: ${video.comment}</td></tr>	
+						</table>
+					</td>
+				</tr>
+			</table>
+		</tr>
+	</table>
+	
+	<!-- "Previous" and "Next" links. -->
+		
+	<div class="previousNextLinks">
+	<span class="previousLink">
+		<t:if t:test="previousLinkContext">
+			<a href="#" t:type="PageLink" page="FindVideos"
+	    		context="previousLinkContext">
+	    		${message:link-previous}
+	    	</a>
+		</t:if>
+	</span>
+	
+	<span class="nextLink">
+		<t:if t:test="nextLinkContext">
+			<a href="#" t:type="PageLink" page="FindVideos"
+	    		context="nextLinkContext">
+	    		${message:link-next}
+	    	</a>
+		</t:if>
+	</span>
+	</div>
+	
+</t:parameter>
+</t:if>
+
+</html>

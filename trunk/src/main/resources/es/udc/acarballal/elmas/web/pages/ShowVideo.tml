@@ -20,8 +20,46 @@
 			<tr><td>
 				<script type="text/javascript" src="${asset:context:/player/swfobject.js}"></script>
 				<embed src ="${asset:context:/player/player.swf}" 
-				width="400" height="300" 
+				width="244" height="210" 
 				allowfullscreen="false" />
+			</td>
+			<td>
+			<form t:type="Form" t:id="commentForm">
+        	<t:errors/>
+        	<table>
+			<tr><td>${message:addComment}</td></tr>
+	        <tr><td>
+	        	<span class="entry">    
+	            <input type="text" t:id="comment" t:type="TextArea"
+				       t:validate="required" value="comment" style="overflow:hidden;"
+				       wrap="hard" maxlength="200" cols="30" rows="7" />
+	        	</span>
+	        </td></tr>
+        	<tr><td><input type="submit" value="${message:addCommentButton}"/></td></tr>
+			</table>
+			</form>
+			</td>
+			</tr>
+			
+			<tr><td>
+			<!--<t:if t:test="userComments.empty">
+				<p>${message:nocomments}.</p>
+			<t:parameter name="else">
+				<p>${message:myComments}.</p>
+				<table class="comments">
+					<tr t:type="Loop" t:source="userComments" t:value="userComment">
+					<tr><td class="user-comment">${userComment.comment}</td></tr>
+					<tr><td class="commentator-info">
+						${message:user-header}: ${userComment.commentator.loginName}
+			 			- 
+						${message:date}: <t:output value="userComment.date.time" format="dateFormat"/>
+					</td>
+					</tr>
+					</tr>
+				</table>				
+			</t:parameter>
+			</t:if>-->
+			
 			</td></tr>
 			
 		</table>

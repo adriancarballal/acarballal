@@ -117,7 +117,7 @@
 
 <form t:type="Form" t:id="findVideosForm">
         <span class="entry">
-			<input t:type="TextField" t:id="searchText" size="24" maxlength="48"/>
+			<input t:type="TextField" t:id="keys" value="keys" size="24" maxlength="48"/>
         </span>
         <span class="button">
 			<input type="submit" value="${message:button-find}"/>
