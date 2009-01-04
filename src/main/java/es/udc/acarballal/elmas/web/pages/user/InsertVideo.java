@@ -15,21 +15,25 @@ import es.udc.acarballal.elmas.web.pages.Index;
 
 public class InsertVideo {
 
+	@SuppressWarnings("unused")
 	@Property
 	 private String title;
 
+	@SuppressWarnings("unused")
 	 @Property
 	 private String comment;
 	
 	 @Property
-    private UploadedFile file;
+	 private UploadedFile file;
 	 
 	 @Component
 	 private Form videoForm;
 	 
+	 @SuppressWarnings("unused")
 	 @Component(id = "title")
 	 private TextArea titleField;
 	 
+	 @SuppressWarnings("unused")
 	 @Component(id = "comment")
 	 private TextArea commentField;
 
@@ -48,6 +52,7 @@ public class InsertVideo {
     }
     
     @Persist(PersistenceConstants.FLASH)
+    @SuppressWarnings("unused")
     @Property
     private String message;
 
