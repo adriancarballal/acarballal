@@ -106,6 +106,8 @@ insert into userprofile values(1, 'admin','UDn64bBABog2A', 'admin', 'none', 'adm
 -- Password for admin = admin
 insert into userprofile values(2, 'adrian xxxxxxxx','YZsowua7bk/lU', 'adrian', 'carballal', 'adriancarballal@gmail.com', 1, 0);
 -- Password for user adrian = adrian
+insert into userprofile values(3, 'voter','LMcPpWzd49C7g', 'voter', 'voter', 'voter@gmail.com', 2, 0);
+-- Password for user voter = voter
 
 --------------------------
 --        Videos        --

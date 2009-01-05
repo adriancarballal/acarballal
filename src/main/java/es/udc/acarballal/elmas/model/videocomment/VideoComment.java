@@ -63,7 +63,7 @@ public class VideoComment {
 		this.video = video;
 	}
 
-	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
     @JoinColumn(name="commentator")
 	public UserProfile getCommentator() {
 		return commentator;
