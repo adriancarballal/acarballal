@@ -19,6 +19,7 @@ import es.udc.acarballal.elmas.model.vote.VoteDao;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
+@Transactional
 public class VideoServiceImpl implements VideoService{
 
 	private VideoDao videoDao;

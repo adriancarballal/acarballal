@@ -25,7 +25,9 @@
 </div> 
  
 <!-- Logo. --> 
- <div id="logo">Logo JPG</div>
+ <div id="logo">
+ 	<a href="#" t:type="PageLink" t:page="Index">Logo JPG</a>
+</div>
  
 <!-- Menu. -->
 
@@ -117,7 +119,8 @@
 
 <form t:type="Form" t:id="findVideosForm">
         <span class="entry">
-			<input t:type="TextField" t:id="keys" value="keys" size="24" maxlength="48"/>
+			<input t:type="TextField" t:id="keys" value="keys" 
+			t:validate="required" size="24" maxlength="48"/>
         </span>
         <span class="button">
 			<input type="submit" value="${message:button-find}"/>

@@ -3,10 +3,6 @@ package es.udc.acarballal.elmas.web.pages;
 import java.text.DateFormat;
 import java.util.Locale;
 
-import org.apache.tapestry5.annotations.Component;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.corelib.components.TextArea;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.video.Video;
@@ -19,35 +15,14 @@ public class ShowVideo {
 	private Video video;
 	private boolean foundVideo;
 	
+	private int startIndex = 0;
+	private int count = 4;
+	
 	@Inject
 	private VideoService videoService;
 	
 	@Inject
 	private Locale locale;
-	
-	@SuppressWarnings("unused")
-	@Property
-	 private String comment;
-	
-	@Component
-	private Form commentForm;
-	
-	@SuppressWarnings("unused")
-	@Component(id = "comment")
-	 private TextArea commentField;
-	
-	void onValidateForm() {
-
-		if (!commentForm.isValid()) {
-			return;
-		}
-	}
-	
-	Object onSuccess(){
-	   	 
-        return Index.class;
-    }
-
 	
 	public Video getVideo(){
 		 return this.video;
@@ -77,6 +52,14 @@ public class ShowVideo {
 		} catch (InstanceNotFoundException e) {
 			foundVideo = false;
 		}
+	}
+	
+	public Object[] getVideoContext() {
+		return new Object[] {video.getVideoId(), startIndex, count};
+	}
+
+	public Object[] getUserContext() {
+		return new Object[] {video.getUserProfile().getUserProfileId(), startIndex, count};
 	}
 
 }
