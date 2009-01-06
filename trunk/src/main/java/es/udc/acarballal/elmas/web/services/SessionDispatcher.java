@@ -9,6 +9,7 @@ import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.Response;
 
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
+import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.LoginResult;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.web.util.CookiesManager;
@@ -43,6 +44,8 @@ public class SessionDispatcher implements Dispatcher {
 			if (encryptedPassword == null) {
 				return false;
 			}
+			
+			Privileges_TYPES privileges = CookiesManager.getPrivileges(cookies);
 
 			try {
 
@@ -51,6 +54,7 @@ public class SessionDispatcher implements Dispatcher {
 				UserSession userSession = new UserSession();
 				userSession.setUserProfileId(loginResult.getUserProfileId());
 				userSession.setFirstName(loginResult.getFirstName());
+				userSession.setPrivileges(loginResult.getPrivileges());
 				applicationStateManager.set(UserSession.class, userSession);
 
 			} catch (InstanceNotFoundException e) {

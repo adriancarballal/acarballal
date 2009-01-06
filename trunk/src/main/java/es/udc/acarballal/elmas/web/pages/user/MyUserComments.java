@@ -12,7 +12,7 @@ import es.udc.acarballal.elmas.model.userservice.UserCommentBlock;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.web.util.UserSession;
 
-public class MyComments {
+public class MyUserComments {
 
 	private int startIndex = 0;
 	private int count = 4;

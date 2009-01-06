@@ -14,7 +14,9 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
+import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.UserProfileDetails;
+import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videocomment.VideoComment;
 import es.udc.acarballal.elmas.model.videoservice.VideoCommentBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
@@ -29,6 +31,8 @@ public class ShowVideoComments {
 	private int count = 4;
 	private VideoCommentBlock videoCommentBlock;
 	private VideoComment videoComment;
+	
+	private Privileges_TYPES privileges = Privileges_TYPES.NONE;
 	
 	@SuppressWarnings("unused")
 	@Property
@@ -107,7 +111,6 @@ public class ShowVideoComments {
 		this.count = count;
 		videoCommentBlock = 
 			videoService.findVideoCommentsByVideoId(videoId, startIndex, count);
-		
 	}
 
 	Object[] onPassivate() {
@@ -132,6 +135,15 @@ public class ShowVideoComments {
 			return null;
 		}
 		
+	}
+	
+	public boolean getDeletable(){
+		if (!userSessionExists) return false;
+		if (userSession.getPrivileges()==Privileges_TYPES.ADMIN || 
+			userSession.getUserProfileId().equals(
+					videoComment.getCommentator().getUserProfileId()))
+			return true;
+		return false;
 	}
 
 }
