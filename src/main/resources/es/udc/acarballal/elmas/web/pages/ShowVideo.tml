@@ -23,7 +23,7 @@
 				width="244" height="210" 
 				allowfullscreen="false" />
 			</td></tr>
-			
+			<t:if t:test="userSessionExists">
 			<tr><td>
 				<a href="#" t:type="PageLink" page="ShowVideoComments"
 		    		context="videoContext">
@@ -34,8 +34,8 @@
 		    		context="userContext">
 					${message:showUserComments}		    	
 	    		</a>
-			
 			</td></tr>
+			</t:if>
 			
 		</table>
 		
