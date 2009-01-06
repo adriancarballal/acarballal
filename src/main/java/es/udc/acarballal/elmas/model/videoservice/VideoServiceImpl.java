@@ -98,8 +98,10 @@ public class VideoServiceImpl implements VideoService{
 	public void deleteVideoComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		
+		VideoComment comment = videoCommentDao.find(commentId);
 		UserProfile userProfile = userProfileDao.find(userProfileId);
-		if(userProfile.getPrivileges()!=Privileges_TYPES.ADMIN){
+		if(!comment.getCommentator().getUserProfileId().equals((userProfileId))
+				&& userProfile.getPrivileges()!=Privileges_TYPES.ADMIN){
 			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}
 		videoCommentDao.remove(commentId);

@@ -178,8 +178,10 @@ public class UserServiceImpl implements UserService {
 	public void deleteUserComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		
+		UserComment comment = userCommentDao.find(commentId);
 		UserProfile userProfile = userProfileDao.find(userProfileId);
-		if(userProfile.getPrivileges()!=Privileges_TYPES.ADMIN){
+		if(!comment.getCommentator().getUserProfileId().equals((userProfileId))
+				&& userProfile.getPrivileges()!=Privileges_TYPES.ADMIN){
 			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}
 		userCommentDao.remove(commentId);

@@ -18,7 +18,11 @@
 				${message:user-header}: ${userComment.commentator.loginName}
 			 - 
 				${message:date}: <t:output value="userComment.date.time" format="dateFormat"/>
-			 - Delete?
+			 - 
+			 <a href="#" t:type="PageLink" page="user/DeleteUserComment"
+	    		context="userComment.commentId">
+	    		${message:delete}
+	    	</a>
 				</td>
 			</tr>
 		</tr>
@@ -30,7 +34,7 @@
 	<div class="previousNextLinks">
 	<span class="previousLink">
 		<t:if t:test="previousLinkContext">
-			<a href="#" t:type="PageLink" page="user/MyComments"
+			<a href="#" t:type="PageLink" page="user/MyUserComments"
 	    		context="previousLinkContext">
 	    		${message:link-previous}
 	    	</a>
@@ -39,7 +43,7 @@
 	
 	<span class="nextLink">
 		<t:if t:test="nextLinkContext">
-			<a href="#" t:type="PageLink" page="user/MyComments"
+			<a href="#" t:type="PageLink" page="user/MyUserComments"
 	    		context="nextLinkContext">
 	    		${message:link-next}
 	    	</a>

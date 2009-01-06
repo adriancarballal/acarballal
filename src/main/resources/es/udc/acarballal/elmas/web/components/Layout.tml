@@ -71,19 +71,16 @@
 							${message:menu-aboutMe}
 						</a>
 					</td></tr>
+					<tr><td>${message:menu-myComments}</td></tr>
 					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/MyComments">
-							${message:menu-myComments}
+						<a href="#" t:type="PageLink" t:page="user/MyUserComments">
+							____ ${message:menu-myUserComments}
 						</a>
 					</td></tr>
+					<tr><td>_____ ${message:menu-myVideoComments}</td></tr>
 					<tr><td>
 						<a href="#" t:type="PageLink" t:page="user/Vote">
 							${message:menu-vote}
-						</a>
-					</td></tr>
-					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/ChangeProfile">
-							${message:menu-changeProfile}
 						</a>
 					</td></tr>
 					<tr><td>
@@ -129,11 +126,18 @@
 
 </div>
 
-<!-- Content. -->
 
+<!-- Most voted -->
+<div id="most_voted">
+
+</div>
+
+<!-- Content. -->
 <div id="content">
   	<t:body/>
 </div>
+
+
 
 
 <!-- Body footer. -->
