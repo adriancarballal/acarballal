@@ -39,4 +39,7 @@ public interface VideoService {
 	public VideoCommentBlock findVideoCommentsByVideoId(Long videoId, 
 			int startIndex, int count);
 
+	public VideoCommentBlock findVideoCommentsByUserId(Long userId, 
+			int startIndex, int count);
+
 }

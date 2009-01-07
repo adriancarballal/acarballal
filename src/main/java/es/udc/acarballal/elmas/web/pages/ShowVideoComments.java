@@ -86,12 +86,15 @@ public class ShowVideoComments {
 			videoService.commentVideo(userSession.getUserProfileId(), 
 					videoId, comment, Calendar.getInstance());
 		} catch (InstanceNotFoundException e) {
+			System.out.println("--> ERROR 1");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InsufficientPrivilegesException e) {
+			System.out.println("--> ERROR 2");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidOperationException e) {
+			System.out.println("--> ERROR 3");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e){
