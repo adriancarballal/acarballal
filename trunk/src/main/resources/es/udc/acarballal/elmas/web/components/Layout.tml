@@ -77,7 +77,11 @@
 							____ ${message:menu-myUserComments}
 						</a>
 					</td></tr>
-					<tr><td>_____ ${message:menu-myVideoComments}</td></tr>
+					<tr><td>
+					<a href="#" t:type="PageLink" t:page="user/MyVideoComments">
+							_____ ${message:menu-myVideoComments}
+						</a>
+					</td></tr>
 					<tr><td>
 						<a href="#" t:type="PageLink" t:page="user/Vote">
 							${message:menu-vote}
