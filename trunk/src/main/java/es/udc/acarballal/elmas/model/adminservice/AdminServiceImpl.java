@@ -1,5 +1,61 @@
 package es.udc.acarballal.elmas.model.adminservice;
 
-public class AdminServiceImpl {
+import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.usercomment.UserCommentDao;
+import es.udc.acarballal.elmas.model.userprofile.UserProfile;
+import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
+import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
+import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDao;
+import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
+
+@Transactional
+public class AdminServiceImpl implements AdminService{
+
+	private UserProfileDao userProfileDao;
+	private VideoComplaintDao videoComplaintDao;
+	
+	public void setUserProfileDao(UserProfileDao userProfileDao) {
+		this.userProfileDao = userProfileDao;
+	}
+	
+	public void setVideoComplaintDao(VideoComplaintDao videoComplaintDao) {
+		this.videoComplaintDao = videoComplaintDao;
+	}
+
+
+	public int getNumberOfVideoComplaints(Long userProfileId) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException{
+		
+		UserProfile userProfile;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
+				return videoComplaintDao.countVideoComplaints();
+			}
+			else{
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		} catch (InstanceNotFoundException e) {
+			throw e;
+		}
+	}
+	
+	public void deleteVideoComplaints(Long id, Long userProfileId) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException{
+		
+		UserProfile userProfile;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
+				videoComplaintDao.remove(id);
+			}
+			else{
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		} catch (InstanceNotFoundException e) {
+			throw e;
+		}
+	}
 }
