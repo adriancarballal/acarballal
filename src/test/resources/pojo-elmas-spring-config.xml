@@ -60,6 +60,9 @@
         class="es.udc.acarballal.elmas.model.vote.VoteDaoHibernate"
         p:sessionFactory-ref="sessionFactory" />
         
+    <bean id="videoComplaintDao"
+        class="es.udc.acarballal.elmas.model.videoComplaint.VideoComplaintDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
         
     <!--  Service layer. -->
     <bean id="userService"

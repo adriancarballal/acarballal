@@ -95,6 +95,20 @@ CREATE TABLE Vote (
 		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
     TYPE = InnoDB;
 
+------------------------------- VideoComplaint-----------------------------------
+
+CREATE TABLE VideoComplaint (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	complainer BIGINT NOT NULL,
+	ref BIGINT NOT NULL,
+	date TIMESTAMP NOT NULL,
+	CONSTRAINT VideoComplaint_PK PRIMARY KEY (id),
+	CONSTRAINT ComplaintedVideo_FK FOREIGN KEY (ref)
+		REFERENCES Video(vidId) ON DELETE CASCADE,
+	CONSTRAINT Complainer_FK FOREIGN KEY (complainer)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
+	TYPE = InnoDB;
+
 --------------------------
 -- Data for experiments --
 --------------------------
