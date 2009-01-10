@@ -47,7 +47,6 @@ public class VideoComplaint {
 		this.complaintId = complaintId;
 	}
 	
-	@Column(name = "ref")
 	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	public Video getReference() {
 		return reference;

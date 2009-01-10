@@ -5,6 +5,7 @@
 DROP TABLE PingTable;
 CREATE TABLE PingTable (foo CHAR(1));
 
+DROP TABLE VideoComplaint;
 DROP TABLE Vote;
 DROP TABLE VideoComment;
 DROP TABLE UserComment;
@@ -100,10 +101,10 @@ CREATE TABLE Vote (
 CREATE TABLE VideoComplaint (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	complainer BIGINT NOT NULL,
-	ref BIGINT NOT NULL,
+	reference BIGINT NOT NULL,
 	date TIMESTAMP NOT NULL,
 	CONSTRAINT VideoComplaint_PK PRIMARY KEY (id),
-	CONSTRAINT ComplaintedVideo_FK FOREIGN KEY (ref)
+	CONSTRAINT ComplaintedVideo_FK FOREIGN KEY (reference)
 		REFERENCES Video(vidId) ON DELETE CASCADE,
 	CONSTRAINT Complainer_FK FOREIGN KEY (complainer)
 		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
