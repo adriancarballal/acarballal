@@ -15,13 +15,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
-import es.udc.acarballal.elmas.model.userservice.UserProfileDetails;
-import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videocomment.VideoComment;
 import es.udc.acarballal.elmas.model.videoservice.VideoCommentBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.util.UserSession;
-import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class ShowVideoComments {
@@ -31,8 +28,6 @@ public class ShowVideoComments {
 	private int count = 4;
 	private VideoCommentBlock videoCommentBlock;
 	private VideoComment videoComment;
-	
-	private Privileges_TYPES privileges = Privileges_TYPES.NONE;
 	
 	@SuppressWarnings("unused")
 	@Property

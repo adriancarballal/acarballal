@@ -9,7 +9,6 @@ import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.Response;
 
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
-import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.LoginResult;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.web.util.CookiesManager;
@@ -45,8 +44,6 @@ public class SessionDispatcher implements Dispatcher {
 				return false;
 			}
 			
-			Privileges_TYPES privileges = CookiesManager.getPrivileges(cookies);
-
 			try {
 
 				LoginResult loginResult = userService.login(loginName,

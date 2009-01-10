@@ -69,10 +69,11 @@ public class Login {
 
 		userSession.setUserProfileId(loginResult.getUserProfileId());
 		userSession.setFirstName(loginResult.getFirstName());
+		userSession.setPrivileges(loginResult.getPrivileges());
 
 		if (rememberMyPassword) {
 			CookiesManager.leaveCookies(cookies, loginName, loginResult
-					.getEncryptedPassword());
+					.getEncryptedPassword(), loginResult.getPrivileges().toString());
 		}
 		return Index.class;
 

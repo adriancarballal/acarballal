@@ -3,7 +3,6 @@ package es.udc.acarballal.elmas.model.adminservice;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
-import es.udc.acarballal.elmas.model.usercomment.UserCommentDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
