@@ -1,0 +1,19 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="Layout" t:pageTitle="${message:title}">
+
+<table>
+	<tr>
+		<td>${message:videoComplaints}</td>
+		<td>${totalVideoComplaints}</td>
+	</tr>
+	<tr>
+		<td>${message:videoCommentsComplaints}</td>
+		<td>${totalVideoCommentComplaints}</td>
+	</tr>
+	<tr>
+		<td>${message:userComplaints}</td>
+		<td>${totalUserCommentComplaints}</td>
+	</tr>
+</table>
+
+</html>

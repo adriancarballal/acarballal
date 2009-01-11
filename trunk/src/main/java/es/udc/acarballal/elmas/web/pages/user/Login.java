@@ -73,7 +73,7 @@ public class Login {
 
 		if (rememberMyPassword) {
 			CookiesManager.leaveCookies(cookies, loginName, loginResult
-					.getEncryptedPassword(), loginResult.getPrivileges().toString());
+					.getEncryptedPassword());
 		}
 		return Index.class;
 

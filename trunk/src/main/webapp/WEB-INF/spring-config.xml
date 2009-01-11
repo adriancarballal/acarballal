@@ -59,6 +59,18 @@
         class="es.udc.acarballal.elmas.model.vote.VoteDaoHibernate"
         p:sessionFactory-ref="sessionFactory" />
         
+    <bean id="videoComplaintDao"
+        class="es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+    
+    <bean id="videoCommentComplaintDao"
+        class="es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaintDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+    <bean id="userCommentComplaintDao"
+        class="es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaintDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
         
     <!--  Service layer. -->
     <bean id="userService"
@@ -72,5 +84,12 @@
         p:videoDao-ref="videoDao" 
         p:videoCommentDao-ref="videoCommentDao"
         p:voteDao-ref="voteDao" />   
+        
+    <bean id="adminService"
+        class="es.udc.acarballal.elmas.model.adminservice.AdminServiceImpl"
+        p:userProfileDao-ref="userProfileDao" 
+        p:videoComplaintDao-ref="videoComplaintDao" 
+        p:videoCommentComplaintDao-ref="videoCommentComplaintDao" 
+        p:userCommentComplaintDao-ref="userCommentComplaintDao" />
 		    	
 </beans>

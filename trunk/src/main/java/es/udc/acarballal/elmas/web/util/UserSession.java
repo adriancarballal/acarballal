@@ -28,7 +28,7 @@ public class UserSession {
 	public Privileges_TYPES getPrivileges() {
 		return privileges;
 	}
-
+	
 	public void setPrivileges(Privileges_TYPES privileges) {
 		this.privileges = privileges;
 	}

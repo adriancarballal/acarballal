@@ -8,6 +8,12 @@ public interface AdminService {
 	public int getNumberOfVideoComplaints(Long userProfileId) 
 		throws InsufficientPrivilegesException, InstanceNotFoundException;
 	
+	public int getNumberOfVideoCommentComplaints(Long userProfileId) 
+		throws InsufficientPrivilegesException, InstanceNotFoundException;
+	
+	public int getNumberOfUserCommentComplaints(Long userProfileId) 
+	throws InsufficientPrivilegesException, InstanceNotFoundException;
+	
 	public void deleteVideoComplaints(Long id, Long userProfileId) 
 		throws InsufficientPrivilegesException, InstanceNotFoundException;
 

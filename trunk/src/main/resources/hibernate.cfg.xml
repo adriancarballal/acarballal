@@ -17,5 +17,7 @@
         <mapping class="es.udc.acarballal.elmas.model.videocomment.VideoComment" />
         <mapping class="es.udc.acarballal.elmas.model.vote.Vote" />
         <mapping class="es.udc.acarballal.elmas.model.videocomplaint.VideoComplaint" />
+        <mapping class="es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaint" />
+        <mapping class="es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaint" />
     </session-factory>
 </hibernate-configuration>
