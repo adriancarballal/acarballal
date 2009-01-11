@@ -11,10 +11,10 @@ public class VideoComplaintDaoHibernate extends
 		GenericDaoHibernate<VideoComplaint, Long> implements VideoComplaintDao {
 	
 	public int countVideoComplaints(){
-		int count = 
-			(Integer) getSession().createQuery("SELECT count(*) FROM VideoComplaint c ").
+		long count = 
+			(Long) getSession().createQuery("SELECT count(c) FROM VideoComplaint c ").
 			uniqueResult(); 
-		return count;
+		return (int)count;
 	}
 	
 	public List<VideoComplaint> findVideoComplaints(int startIndex, int count){

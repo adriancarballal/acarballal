@@ -61,7 +61,7 @@
         p:sessionFactory-ref="sessionFactory" />
         
     <bean id="videoComplaintDao"
-        class="es.udc.acarballal.elmas.model.videoComplaint.VideoComplaintDaoHibernate"
+        class="es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDaoHibernate"
         p:sessionFactory-ref="sessionFactory" />
         
     <!--  Service layer. -->

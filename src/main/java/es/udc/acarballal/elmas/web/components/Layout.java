@@ -8,6 +8,7 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextField;
 
+import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.web.pages.FindVideos;
 import es.udc.acarballal.elmas.web.util.UserSession;
 
@@ -52,5 +53,12 @@ public class Layout {
 		findVideos.setKeys(keys);
         return findVideos;
     }
+	
+	public boolean getIsAdmin(){
+		if (userSessionExists && 
+				userSession.getPrivileges() == Privileges_TYPES.ADMIN)
+			return true;
+		return false;
+	}
 	
 }

@@ -99,7 +99,18 @@
 					</t:parameter>
 				</t:if>
 <tr><td> .</td></tr>
-<tr><td> .</td></tr>
+
+
+
+<t:if test="isAdmin">
+	<tr><td>	
+	<a href="#" t:type="PageLink" t:page="admin/Reports">${message:menu-reports}</a>
+	</td></tr>
+<t:parameter name="else">
+	<tr><td> .</td></tr>
+</t:parameter>
+</t:if>
+
 <tr><td> .</td></tr>
 				<tr><th>Bases del concurso</th></tr>
 				<tr><td>

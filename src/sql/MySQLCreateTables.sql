@@ -5,6 +5,8 @@
 DROP TABLE PingTable;
 CREATE TABLE PingTable (foo CHAR(1));
 
+DROP TABLE UserCommentComplaint;
+DROP TABLE VideoCommentComplaint;
 DROP TABLE VideoComplaint;
 DROP TABLE Vote;
 DROP TABLE VideoComment;
@@ -13,7 +15,7 @@ DROP TABLE Video;
 DROP TABLE UserProfile;
 
 
--- ------------------------------ UserProfile ----------------------------------
+-------------------------------- UserProfile ----------------------------------
 
 CREATE TABLE UserProfile (
 	usrId BIGINT NOT NULL AUTO_INCREMENT,
@@ -110,6 +112,37 @@ CREATE TABLE VideoComplaint (
 		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
 	TYPE = InnoDB;
 
+
+---------------------------- VideoCommentComplaint--------------------------------
+
+CREATE TABLE VideoCommentComplaint (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	complainer BIGINT NOT NULL,
+	reference BIGINT NOT NULL,
+	date TIMESTAMP NOT NULL,
+	CONSTRAINT VideoCommentComplaint_PK PRIMARY KEY (id),
+	CONSTRAINT ComplaintedVideoComment_FK FOREIGN KEY (reference)
+		REFERENCES VideoComment(cmmtId) ON DELETE CASCADE,
+	CONSTRAINT ComplainerVideoComment_FK FOREIGN KEY (complainer)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
+	TYPE = InnoDB;
+
+
+----------------------------- UserCommentComplaint--------------------------------
+
+CREATE TABLE UserCommentComplaint (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	complainer BIGINT NOT NULL,
+	reference BIGINT NOT NULL,
+	date TIMESTAMP NOT NULL,
+	CONSTRAINT UserCommentComplaint_PK PRIMARY KEY (id),
+	CONSTRAINT ComplaintedUserComment_FK FOREIGN KEY (reference)
+		REFERENCES UserComment(cmmtId) ON DELETE CASCADE,
+	CONSTRAINT ComplainerUserComment_FK FOREIGN KEY (complainer)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
+	TYPE = InnoDB;
+
+	
 --------------------------
 -- Data for experiments --
 --------------------------
