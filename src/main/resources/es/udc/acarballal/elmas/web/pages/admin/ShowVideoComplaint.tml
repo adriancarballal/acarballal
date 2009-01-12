@@ -1,8 +1,8 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 	
-	<t:if t:test="foundVideo">
-		<p>${message:videoNotFound}.</p>
+	<t:if t:test="videoComplaintExists">
+		<p>${message:videoComplaintNotFound}.</p>
 	<t:parameter name="else">
 		<table class="showvideo">
 			<tr><td>
@@ -23,30 +23,18 @@
 				width="244" height="210" 
 				allowfullscreen="false" />
 			</td></tr>
-			<t:if t:test="userSessionExists">
 			<tr><td>
-				<a href="#" t:type="PageLink" page="ShowVideoComments"
-		    		context="videoContext">
-		    		${message:showVideoComments}
+				<a href="#" t:type="PageLink" page="admin/DeleteVideo"
+		    		context="video.videoId">
+					${message:acceptComplaint}		    	
 	    		</a>
 	    		 | 
-	    		<a href="#" t:type="PageLink" page="ShowUserComments"
-		    		context="userContext">
-					${message:showUserComments}		    	
+	    		<a href="#" t:type="PageLink" page="admin/DeleteVideoComplaint"
+		    		context="videoComplaint.complaintId">
+		    		${message:rejectComplaint}
 	    		</a>
 			</td></tr>
-			<tr><td>
-				<a href="#" t:type="PageLink" page="user/ComplaintVideo"
-		    		context="video.videoId">
-					${message:complaintVideo}		    	
-	    		</a>
-			</td></tr>
-			</t:if>
-			
 		</table>
-		
 	</t:parameter>
 	</t:if>
-
-	
 </html>	

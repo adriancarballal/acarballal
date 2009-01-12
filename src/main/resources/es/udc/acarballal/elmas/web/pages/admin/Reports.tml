@@ -3,8 +3,16 @@
 
 <table>
 	<tr>
-		<td>${message:videoComplaints}</td>
-		<td>${totalVideoComplaints}</td>
+		<td>
+		<t:if t:test="existVideoComplaints">
+		<a href="#" t:type="PageLink" t:page="admin/ShowVideoComplaint">
+			${message:videoComplaints} (${totalVideoComplaints})
+		</a>
+		<t:parameter name="else">
+			${message:noVideoComplaints}
+		</t:parameter>
+		</t:if>
+		</td>		
 	</tr>
 	<tr>
 		<td>${message:videoCommentsComplaints}</td>
