@@ -29,7 +29,7 @@ public class DeleteVideo {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return Reports.class;
+		return ShowVideoComplaint.class;
 	}
 
 }

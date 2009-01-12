@@ -3,6 +3,11 @@
 	
 	<t:if t:test="videoComplaintExists">
 		<p>${message:videoComplaintNotFound}.</p>
+		<p>
+			<a href="#" t:type="PageLink" page="admin/Reports">
+				${message:return}		    	
+	    	</a>
+		</p>
 	<t:parameter name="else">
 		<table class="showvideo">
 			<tr><td>

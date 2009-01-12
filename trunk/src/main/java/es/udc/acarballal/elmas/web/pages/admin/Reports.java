@@ -54,4 +54,8 @@ public class Reports {
 	public int getTotalUserCommentComplaints(){
 		return totalUserCommentComplaints;
 	}
+	
+	public boolean getExistUserCommentComplaints(){
+		return totalUserCommentComplaints>0;
+	}
 }

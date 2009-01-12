@@ -1,13 +1,17 @@
 package es.udc.acarballal.elmas.model.adminservice;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaint;
 import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaintDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaintDao;
+import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaint;
 import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDao;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -88,6 +92,18 @@ public class AdminServiceImpl implements AdminService{
 		}
 	}
 	
+	@Transactional(readOnly = true)
+	public VideoComplaint findFirstVideoComplaints(){
+		
+		int startIndex = 0;
+		int count = 1;
+		List<VideoComplaint> complaints =
+			videoComplaintDao.findVideoComplaints(startIndex, count);
+		if(complaints.isEmpty()) return null;
+		return complaints.get(0);
+
+	}
+
 	public void deleteVideoComplaints(Long id, Long userProfileId) 
 			throws InsufficientPrivilegesException, InstanceNotFoundException{
 		
@@ -96,6 +112,37 @@ public class AdminServiceImpl implements AdminService{
 			userProfile = userProfileDao.find(userProfileId); 
 			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
 				videoComplaintDao.remove(id);
+			}
+			else{
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		} catch (InstanceNotFoundException e) {
+			throw e;
+		}
+	}
+	
+	public UserCommentComplaintBlock findUserCommentComplaints(int startIndex, int count){
+		
+		List<UserCommentComplaint> comments = 
+			userCommentComplaintDao.findUserCommentComplaints(startIndex, count+1);
+
+		boolean existMoreUserCommentsComplaints = comments.size() == (count + 1);
+
+		if (existMoreUserCommentsComplaints) {
+			comments.remove(comments.size() - 1);
+		}
+		
+		return new UserCommentComplaintBlock(comments, existMoreUserCommentsComplaints);
+	}
+	
+	public void deleteUserCommentComplaint(Long id, Long userProfileId) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException{
+		
+		UserProfile userProfile;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
+				userCommentComplaintDao.remove(id);
 			}
 			else{
 				throw new InsufficientPrivilegesException(userProfile.getLoginName());
