@@ -7,15 +7,15 @@ import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import es.udc.acarballal.elmas.model.adminservice.AdminService;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaint;
-import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class ShowVideoComplaint {
 
-	private VideoComplaint videoComplaint;
-	private Video video;
+	private VideoComplaint videoComplaint = null;
+	private Video video = null;
 	
 	@SuppressWarnings("unused")
 	@Property
@@ -27,7 +27,7 @@ public class ShowVideoComplaint {
 	private boolean userSessionExists;
 	
 	@Inject
-	private VideoService videoService;
+	private AdminService adminService;
 	
 	@Inject
 	private Locale locale;
@@ -50,8 +50,8 @@ public class ShowVideoComplaint {
 	
 	void onActivate(){
 		
-		videoComplaint = videoService.findFirstVideoComplaints();
-		video = videoComplaint.getReference();
+		videoComplaint = adminService.findFirstVideoComplaints();
+		if(videoComplaint!=null) video = videoComplaint.getReference();
 	}
 	
 }

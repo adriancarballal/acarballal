@@ -8,7 +8,7 @@ import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
-public class DeleteVideoComplaint {
+public class DeleteUserCommentComplaint {
 
 	@ApplicationState
 	private UserSession userSession;
@@ -16,10 +16,10 @@ public class DeleteVideoComplaint {
 	@Inject
 	private AdminService adminService;
 	
-	Object onActivate(Long videoComplaintId){
+	Object onActivate(Long userCommentComplaintId){
 		try {
-			adminService.deleteVideoComplaints(
-					videoComplaintId, userSession.getUserProfileId());
+			adminService.deleteUserCommentComplaint(
+					userCommentComplaintId, userSession.getUserProfileId());
 		} catch (InstanceNotFoundException e) {
 			//System.out.println("--- Error 1 ---");
 			// TODO Auto-generated catch block
@@ -29,6 +29,6 @@ public class DeleteVideoComplaint {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return ShowVideoComplaint.class;
+		return ShowUserCommentComplaint.class;
 	}
 }

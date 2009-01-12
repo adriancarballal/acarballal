@@ -3,23 +3,22 @@ package es.udc.acarballal.elmas.web.pages.admin;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import es.udc.acarballal.elmas.model.adminservice.AdminService;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
-public class DeleteVideoComplaint {
+public class DeleteUserComment {
 
 	@ApplicationState
 	private UserSession userSession;
 	
 	@Inject
-	private AdminService adminService;
+	private UserService userService;
 	
-	Object onActivate(Long videoComplaintId){
+	Object onActivate(Long commentId){
 		try {
-			adminService.deleteVideoComplaints(
-					videoComplaintId, userSession.getUserProfileId());
+			userService.deleteUserComment(commentId, userSession.getUserProfileId());
 		} catch (InstanceNotFoundException e) {
 			//System.out.println("--- Error 1 ---");
 			// TODO Auto-generated catch block
@@ -29,6 +28,6 @@ public class DeleteVideoComplaint {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return ShowVideoComplaint.class;
+		return ShowUserCommentComplaint.class;
 	}
 }

@@ -229,15 +229,4 @@ public class VideoServiceImpl implements VideoService{
 		videoCommentComplaintDao.create(complaint);
 	}
 	
-	@Transactional(readOnly = true)
-	public VideoComplaint findFirstVideoComplaints(){
-		
-		int startIndex = 0;
-		int count = 1;
-		List<VideoComplaint> complaints =
-			videoComplaintDao.findVideoComplaints(startIndex, count);
-		if(complaints.isEmpty()) return null;
-		return complaints.get(0);
-
-	}
 }
