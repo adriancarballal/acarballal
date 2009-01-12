@@ -14,6 +14,10 @@ import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.video.VideoDao;
 import es.udc.acarballal.elmas.model.videocomment.VideoComment;
 import es.udc.acarballal.elmas.model.videocomment.VideoCommentDao;
+import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaint;
+import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaintDao;
+import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaint;
+import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDao;
 import es.udc.acarballal.elmas.model.vote.Vote;
 import es.udc.acarballal.elmas.model.vote.VoteDao;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
@@ -26,6 +30,8 @@ public class VideoServiceImpl implements VideoService{
 	private UserProfileDao userProfileDao;
 	private VideoCommentDao videoCommentDao;
 	private VoteDao voteDao;
+	private VideoComplaintDao videoComplaintDao;
+	private VideoCommentComplaintDao videoCommentComplaintDao;
 
 	public void setVideoDao(VideoDao videoDao) {
 		this.videoDao = videoDao;
@@ -41,6 +47,15 @@ public class VideoServiceImpl implements VideoService{
 	
 	public void setVoteDao(VoteDao voteDao){
 		this.voteDao = voteDao;
+	}
+	
+	public void setVideoComplaintDao(VideoComplaintDao videoComplaintDao){
+		this.videoComplaintDao = videoComplaintDao;
+	}
+	
+	public void setVideoCommentComplaintDao(
+			VideoCommentComplaintDao videoCommentComplaintDao){
+		this.videoCommentComplaintDao = videoCommentComplaintDao;
 	}
 	
 	public Long addVideo(long userId, String title, String comment, 
@@ -188,4 +203,41 @@ public class VideoServiceImpl implements VideoService{
 		return new VideoCommentBlock(comments, existMoreVideoComments);
 	}
 	
+	public void complaintOfVideo(Long videoId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		Video video = videoDao.find(videoId);
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		VideoComplaint complaint = 
+			new VideoComplaint(video, userProfile, Calendar.getInstance());
+		videoComplaintDao.create(complaint);
+	}
+	
+	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		VideoComment comment = videoCommentDao.find(videoCommentId);
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		VideoCommentComplaint complaint =
+			new VideoCommentComplaint(comment, userProfile, Calendar.getInstance());
+		videoCommentComplaintDao.create(complaint);
+	}
+	
+	@Transactional(readOnly = true)
+	public VideoComplaint findFirstVideoComplaints(){
+		
+		int startIndex = 0;
+		int count = 1;
+		List<VideoComplaint> complaints =
+			videoComplaintDao.findVideoComplaints(startIndex, count);
+		if(complaints.isEmpty()) return null;
+		return complaints.get(0);
+
+	}
 }

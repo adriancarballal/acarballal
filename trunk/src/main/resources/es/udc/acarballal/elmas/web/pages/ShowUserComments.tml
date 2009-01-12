@@ -18,6 +18,14 @@
 				${message:user-header}: ${userComment.commentator.loginName}
 			 - 
 				${message:date}: <t:output value="userComment.date.time" format="dateFormat"/>
+			<t:if t:test="userSessionExists">
+			 - 
+				<a href="#" t:type="PageLink" page="user/ComplaintUserComment"
+		    		context="userComment.commentId">
+					${message:complaintUserComment}		    	
+	    		</a>
+
+			</t:if>
 				</td>
 			</tr>
 		</tr>

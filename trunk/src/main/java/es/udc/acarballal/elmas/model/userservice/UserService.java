@@ -41,7 +41,6 @@ public interface UserService {
 			String comment,	Calendar date) throws InstanceNotFoundException, 
 			InsufficientPrivilegesException, InvalidOperationException;
 	
-	//Añadir un adminService para este servicio?
 	public void deleteUserComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 
@@ -57,4 +56,6 @@ public interface UserService {
 	public UserCommentBlock findUserCommentsByCommented(Long userProfileId,
 			int startIndex, int count);
 	
+	public void complaintUserComment(Long userCommentId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException;
 }

@@ -16,14 +16,22 @@
 			</tr>
 			<tr><td class="commentator-info">
 				${message:user-header}: ${videoComment.commentator.loginName}
-			 - 
+			 	- 
 				${message:date}: <t:output value="videoComment.date.time" format="dateFormat"/>
 				<t:if t:test="deletable">
-			 - 
+			 	- 
 			 		<a href="#" t:type="PageLink" page="user/DeleteVideoComment"
 	    				context="videoComment.commentId">
 	    				${message:delete}
 	    			</a>
+				</t:if>
+				<t:if t:test="userSessionExists">
+			 	- 
+				<a href="#" t:type="PageLink" page="user/ComplaintVideoComment"
+		    		context="videoComment.commentId">
+					${message:complaintVideoComment}		    	
+	    		</a>
+
 				</t:if>
 				</td>
 			</tr>

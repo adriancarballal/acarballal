@@ -10,6 +10,8 @@ import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.usercomment.UserComment;
 import es.udc.acarballal.elmas.model.usercomment.UserCommentDao;
+import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaint;
+import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaintDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
@@ -22,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
 	private UserProfileDao userProfileDao;
 	private UserCommentDao userCommentDao;
+	private UserCommentComplaintDao userCommentComplaintDao;
 
 	public void setUserProfileDao(UserProfileDao userProfileDao) {
 		this.userProfileDao = userProfileDao;
@@ -29,6 +32,11 @@ public class UserServiceImpl implements UserService {
 	
 	public void setUserCommentDao(UserCommentDao userCommentDao) {
 		this.userCommentDao = userCommentDao;
+	}
+	
+	public void setUserCommentComplaintDao(
+			UserCommentComplaintDao userCommentComplaintDao){
+		this.userCommentComplaintDao = userCommentComplaintDao;
 	}
 	
 	public Long registerUser(String loginName, String clearPassword,
@@ -245,6 +253,19 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return new UserCommentBlock(comments, existMoreUserComments);
+	}
+	
+	public void complaintUserComment(Long userCommentId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		UserComment comment = userCommentDao.find(userCommentId);
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		UserCommentComplaint complaint = 
+			new UserCommentComplaint(comment, userProfile, Calendar.getInstance());
+		userCommentComplaintDao.create(complaint);
 	}
 	
 }
