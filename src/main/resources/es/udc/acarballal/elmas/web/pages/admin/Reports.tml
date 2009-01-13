@@ -15,8 +15,16 @@
 		</td>		
 	</tr>
 	<tr>
-		<td>${message:videoCommentsComplaints}</td>
-		<td>${totalVideoCommentComplaints}</td>
+		<td>
+		<t:if t:test="existVideoCommentComplaints">
+		<a href="#" t:type="PageLink" t:page="admin/ShowVideoCommentComplaint">
+			${message:videoComplaints} (${totalVideoCommentComplaints})
+		</a>
+		<t:parameter name="else">
+			${message:noVideoCommentComplaints}
+		</t:parameter>
+		</t:if>
+		</td>
 	</tr>
 	<tr>
 	<td>

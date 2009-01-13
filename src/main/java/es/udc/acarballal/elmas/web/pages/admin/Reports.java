@@ -51,6 +51,9 @@ public class Reports {
 		return totalVideoCommentComplaints;
 	}
 	
+	public boolean getExistVideoCommentComplaints(){
+		return totalVideoCommentComplaints>0;
+	}
 	public int getTotalUserCommentComplaints(){
 		return totalUserCommentComplaints;
 	}
