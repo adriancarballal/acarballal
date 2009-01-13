@@ -24,5 +24,10 @@ public interface AdminService {
 	
 	public void deleteUserCommentComplaint(Long id, Long userProfileId) 
 	throws InsufficientPrivilegesException, InstanceNotFoundException;
+	
+	public VideoCommentComplaintBlock findVideoCommentComplaints(int startIndex, int count);
+	
+	public void deleteVideoCommentComplaint(Long id, Long userProfileId) 
+		throws InsufficientPrivilegesException, InstanceNotFoundException;
 
 }

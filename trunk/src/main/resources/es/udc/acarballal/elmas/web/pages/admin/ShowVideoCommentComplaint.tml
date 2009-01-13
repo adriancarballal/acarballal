@@ -1,0 +1,65 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="Layout" t:pageTitle="${message:title}">
+	
+	<t:if t:test="videoCommentComplaints.empty">
+
+		<p>${message:noVideoCommentComplaints}.</p>
+		<p>
+			<a href="#" t:type="PageLink" page="admin/Reports">
+				${message:return}		    	
+	    	</a>
+		</p>
+		
+	<t:parameter name="else">
+
+	<table class="comments">
+		<tr t:type="Loop" t:source="VideoCommentComplaints" t:value="videoCommentComplaint">
+			<tr>
+				<td class="user-comment">${videoCommentComplaint.reference.comment}</td>
+			</tr>
+			<tr><td class="commentator-info">
+				${message:user-header}: ${videoCommentComplaint.reference.commentator.loginName}
+			 - 
+				${message:date}: <t:output value="videoCommentComplaint.reference.date.time" format="dateFormat"/>
+			 - 
+			 <a href="#" t:type="PageLink" page="admin/DeleteVideoComment"
+		    		context="videoCommentComplaint.reference.commentId">
+					${message:acceptComplaint}		    	
+	    		</a>
+	    	 | 
+	    		<a href="#" t:type="PageLink" page="admin/DeleteVideoCommentComplaint"
+		    		context="videoCommentComplaint.complaintId">
+		    		${message:rejectComplaint}
+	    		</a>
+			</td></tr>
+		</tr>
+        	
+	</table>
+</t:parameter>
+</t:if>
+
+		
+	<!-- "Previous" and "Next" links. -->
+		
+	<div class="previousNextLinks">
+	<span class="previousLink">
+		<t:if t:test="previousLinkContext">
+			<a href="#" t:type="PageLink" page="admin/ShowVideoCommentComplaint"
+	    		context="previousLinkContext">
+	    		${message:link-previous}
+	    	</a>
+		</t:if>
+	</span>
+	<span class="nextLink">
+		<t:if t:test="nextLinkContext">
+			<a href="#" t:type="PageLink" page="admin/ShowVideoCommentComplaint"
+	    		context="nextLinkContext">
+	    		${message:link-next}
+	    	</a>
+		</t:if>
+	</span>
+	</div>
+	
+
+   
+</html>	

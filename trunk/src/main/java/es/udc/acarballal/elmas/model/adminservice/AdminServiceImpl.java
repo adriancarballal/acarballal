@@ -10,6 +10,7 @@ import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaintDa
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
+import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaint;
 import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaintDao;
 import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaint;
 import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDao;
@@ -102,6 +103,37 @@ public class AdminServiceImpl implements AdminService{
 		if(complaints.isEmpty()) return null;
 		return complaints.get(0);
 
+	}
+	
+	public VideoCommentComplaintBlock findVideoCommentComplaints(int startIndex, int count){
+		
+		List<VideoCommentComplaint> comments = 
+			videoCommentComplaintDao.findVideoCommentComplaints(startIndex, count+1);
+
+		boolean existMoreVideoCommentsComplaints = comments.size() == (count + 1);
+
+		if (existMoreVideoCommentsComplaints) {
+			comments.remove(comments.size() - 1);
+		}
+		
+		return new VideoCommentComplaintBlock(comments, existMoreVideoCommentsComplaints);
+	}
+	
+	public void deleteVideoCommentComplaint(Long id, Long userProfileId) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException{
+
+		UserProfile userProfile;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
+				videoCommentComplaintDao.remove(id);
+			}
+			else{
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		} catch (InstanceNotFoundException e) {
+			throw e;
+		}
 	}
 
 	public void deleteVideoComplaints(Long id, Long userProfileId) 
