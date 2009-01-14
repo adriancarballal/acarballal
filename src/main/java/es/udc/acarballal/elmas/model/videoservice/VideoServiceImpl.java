@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
+import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
@@ -229,4 +230,23 @@ public class VideoServiceImpl implements VideoService{
 		videoCommentComplaintDao.create(complaint);
 	}
 	
+	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException, 
+				VideoAlreadyVotedException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		Video video = videoDao.find(videoId);
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		if(voteDao.alreadyVoted(videoId, userProfileId)){
+			throw new VideoAlreadyVotedException(userProfile.getLoginName(), video.getTitle());
+		}
+		Vote newVote = new Vote(video, userProfile, vote, Calendar.getInstance());
+		voteDao.create(newVote);
+	}
+	
+	public boolean isVideoVotable(Long videoId, Long userProfileId){
+		return voteDao.alreadyVoted(videoId, userProfileId);
+	}
 }
