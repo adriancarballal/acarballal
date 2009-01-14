@@ -14,4 +14,15 @@ public class VoteDaoHibernate extends
 		return null;
 	}
 	
+	public boolean alreadyVoted(Long videoId, Long userProfileId){
+		
+		long count = 
+			(Long) getSession().createQuery("SELECT count(c) FROM Vote c " +
+					"WHERE c.video.videoId=:videoId AND c.voter.userProfileId=:userProfileId").
+					setParameter("videoId", videoId).
+					setParameter("userProfileId", userProfileId).
+			uniqueResult();
+		return count>0;
+	}
+	
 }

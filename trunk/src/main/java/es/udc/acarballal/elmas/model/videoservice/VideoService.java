@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
+import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
@@ -29,9 +30,11 @@ public interface VideoService {
 	public void deleteVideoComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 
-	public void voteVideo(Long userProfileId, Long videoId, VOTE_TYPES vote, 
-			Calendar date) throws InstanceNotFoundException, 
-			InsufficientPrivilegesException, InvalidOperationException;
+	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException, 
+			VideoAlreadyVotedException;
+	
+	public boolean isVideoVotable(Long videoId, Long userProfileId);
 	
 	public VideoBlock findVideosByTitle(String keys, int startIndex, int count);
 	
