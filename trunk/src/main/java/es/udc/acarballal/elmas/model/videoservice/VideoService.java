@@ -34,7 +34,11 @@ public interface VideoService {
 			throws InstanceNotFoundException, InsufficientPrivilegesException, 
 			VideoAlreadyVotedException;
 	
-	public boolean isVideoVotable(Long videoId, Long userProfileId);
+	public boolean isVideoVotable(Long videoId, Long userProfileId) 
+		throws InstanceNotFoundException;
+	
+	public int getNumberVotesRemaining(Long userProfileId) 
+		throws InstanceNotFoundException;
 	
 	public VideoBlock findVideosByTitle(String keys, int startIndex, int count);
 	
@@ -51,4 +55,7 @@ public interface VideoService {
 	
 	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;
+	
+	public Video findRandomVotableVideo(Long userProfileId, int preSelected) 
+		throws InstanceNotFoundException;
 }

@@ -239,14 +239,26 @@ public class VideoServiceImpl implements VideoService{
 		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
 			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}
-		if(voteDao.alreadyVoted(videoId, userProfileId)){
+		if(voteDao.alreadyVoted(video.videoId, userProfileId)){
 			throw new VideoAlreadyVotedException(userProfile.getLoginName(), video.getTitle());
 		}
 		Vote newVote = new Vote(video, userProfile, vote, Calendar.getInstance());
 		voteDao.create(newVote);
 	}
 	
-	public boolean isVideoVotable(Long videoId, Long userProfileId){
+	public boolean isVideoVotable(Long videoId, Long userProfileId) 
+			throws InstanceNotFoundException{
+		userProfileDao.find(userProfileId);
 		return voteDao.alreadyVoted(videoId, userProfileId);
+	}
+	
+	public int getNumberVotesRemaining(Long userProfileId) throws InstanceNotFoundException{
+		userProfileDao.find(userProfileId);
+		return voteDao.votesRemaining(userProfileId, Calendar.getInstance());
+	}
+	
+	public Video findRandomVotableVideo(Long userProfileId, int preSelected) throws InstanceNotFoundException{
+		userProfileDao.find(userProfileId);
+		return videoDao.findRandomVotableVideo(userProfileId, preSelected);
 	}
 }

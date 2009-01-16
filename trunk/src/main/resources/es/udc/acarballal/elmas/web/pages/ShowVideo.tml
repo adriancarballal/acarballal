@@ -41,25 +41,7 @@
 					${message:complaintVideo}		    	
 	    		</a>
 			</td></tr>
-			<t:if t:test="isVotable">
-			<tr><td>
-				<form t:type="Form" t:id="voteForm">
-       			<table>
-       				<t:radiogroup t:value="vote">
-       					<input type="radio" t:type="radio" t:value="veryBad"/> ${message:veryBad}
-       					<input type="radio" t:type="radio" t:value="bad"/> ${message:bad}
-       					<input type="radio" t:type="radio" t:value="normal"/> ${message:normal}
-       					<input type="radio" t:type="radio" t:value="good"/> ${message:good}
-       					<input type="radio" t:type="radio" t:value="veryGood"/> ${message:veryGood}
-       				</t:radiogroup>
-       				<input type="submit" value="${message:voteButton}"/>
-      			</table>
-				</form>
-			</td></tr>
 			</t:if>
-			</t:if>
-			
-
 			
 		</table>
 		

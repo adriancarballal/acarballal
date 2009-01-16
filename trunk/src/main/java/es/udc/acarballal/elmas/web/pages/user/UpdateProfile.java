@@ -33,7 +33,7 @@ public class UpdateProfile {
 	void onPrepareForRender() throws InstanceNotFoundException {
 
 		UserProfileDetails userProfile;
-
+		System.out.println("PRUEBA");
 		userProfile = userService.findUserProfileDetails(userSession
 				.getUserProfileId());
 		firstName = userProfile.getFirstName();
