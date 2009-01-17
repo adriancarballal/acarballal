@@ -4,6 +4,8 @@ import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.UserProfileDetails;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.web.pages.Index;
@@ -23,6 +25,9 @@ public class UpdateProfile {
 
 	@Property
 	private String email;
+	
+	@Property
+	private boolean participate;
 
 	@ApplicationState
 	private UserSession userSession;
@@ -33,21 +38,38 @@ public class UpdateProfile {
 	void onPrepareForRender() throws InstanceNotFoundException {
 
 		UserProfileDetails userProfile;
-		System.out.println("PRUEBA");
+		
 		userProfile = userService.findUserProfileDetails(userSession
 				.getUserProfileId());
 		firstName = userProfile.getFirstName();
 		lastName = userProfile.getLastName();
 		email = userProfile.getEmail();
-
+		if(userSession.getPrivileges()==Privileges_TYPES.ADMIN ||
+					userSession.getPrivileges()==Privileges_TYPES.COMPETITOR)
+			participate = true;
+		else participate = false;
+		
 	}
 
 	Object onSuccess() throws InstanceNotFoundException {
+
+		Privileges_TYPES privileges;
+		if(participate) privileges=Privileges_TYPES.COMPETITOR;
+		else privileges=Privileges_TYPES.VOTER;
 		
 		userService.updateUserProfileDetails(
 				userSession.getUserProfileId(), new UserProfileDetails(
 						firstName, lastName, email));
+
 		userSession.setFirstName(firstName);
+		try {
+			userService.changePrivileges(userSession.getUserProfileId(), privileges);
+		} catch (InsufficientPrivilegesException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		userSession.setPrivileges(privileges);
+		
 		return Index.class;
 
 	}
