@@ -54,6 +54,5 @@ public class VideoDaoHibernate extends
 		int index = 0 + rand.nextInt(range);
 		return result.get(index);
 	}
-	
-	
+		
 }

@@ -1,9 +1,11 @@
 package es.udc.acarballal.elmas.model.vote;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.pojo.modelutil.dao.GenericDaoHibernate;
 
@@ -41,6 +43,24 @@ public class VoteDaoHibernate extends
 			uniqueResult();
 		
 		return MAX_VOTES_PER_WEEK - ((int) count);
+	}
+	
+	public List<Video> findMostVoted(Calendar startDate, Calendar endDate, int count){
+		
+		return (List<Video>)getSession().createQuery(
+			"SELECT v.video from Vote v " +
+			"WHERE v.date >= :startDate AND v.date <= :endDate " +
+			"group by v.video.videoId order by AVG(v.vote) DESC"). 
+			setParameter("startDate", startDate).		
+			setParameter("endDate", endDate).
+			setFirstResult(0).setMaxResults(count).list();
+	}
+	
+	public List<Video> findMostVoted(int count){
+		return (List<Video>)getSession().createQuery(
+				"select v.video from Vote v " +
+				"group by v.video.videoId order by AVG(v.vote) DESC"). 
+				setFirstResult(0).setMaxResults(count).list();
 	}
 	
 }

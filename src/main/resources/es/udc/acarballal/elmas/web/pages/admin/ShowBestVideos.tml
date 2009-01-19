@@ -1,0 +1,30 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="Layout" t:pageTitle="${message:title}">
+	
+<t:if t:test="videos.empty">
+
+	<p>${message:novideos}.</p>
+	
+<t:parameter name="else">
+
+	<table class="videos">
+		<tr t:type="Loop" t:source="videos" t:value="video">
+			<table>
+				<tr><td class="video-title">
+					${message:video-title}: ${video.title}
+				</td></tr>
+				<tr><td class="video-user">
+					${message:video-user}: ${video.userProfile.loginName}
+					 - 
+					${message:date}: <t:output value="video.date.time" format="dateFormat"/>
+					 - 
+					${message:download}
+				</td></tr>
+			</table>
+		</tr>
+	</table>
+	
+</t:parameter>
+</t:if>
+
+</html>

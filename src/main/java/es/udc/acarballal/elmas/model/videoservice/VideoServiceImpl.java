@@ -246,19 +246,32 @@ public class VideoServiceImpl implements VideoService{
 		voteDao.create(newVote);
 	}
 	
+	@Transactional(readOnly = true)
 	public boolean isVideoVotable(Long videoId, Long userProfileId) 
 			throws InstanceNotFoundException{
 		userProfileDao.find(userProfileId);
 		return voteDao.alreadyVoted(videoId, userProfileId);
 	}
 	
+	@Transactional(readOnly = true)
 	public int getNumberVotesRemaining(Long userProfileId) throws InstanceNotFoundException{
 		userProfileDao.find(userProfileId);
 		return voteDao.votesRemaining(userProfileId, Calendar.getInstance());
 	}
 	
+	@Transactional(readOnly = true)
 	public Video findRandomVotableVideo(Long userProfileId, int preSelected) throws InstanceNotFoundException{
 		userProfileDao.find(userProfileId);
 		return videoDao.findRandomVotableVideo(userProfileId, preSelected);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Video> findMostVoted(Calendar startDate, Calendar endDate, int count){
+		return voteDao.findMostVoted(startDate, endDate, count);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Video> findMostVoted(int count){
+		return voteDao.findMostVoted(count);
 	}
 }

@@ -1,6 +1,8 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
+<p>${message:complaints}</p>
+
 <table>
 	<tr>
 		<td>
@@ -39,5 +41,31 @@
 		</td>
 	</tr>
 </table>
+
+
+<p>${message:video}</p>
+
+${message:obtainVideos}
+<form t:type="Form" t:id="findForm">
+<table>
+
+	<t:radiogroup t:value="findType">
+   		<tr><td>${message:weekly}<input type="radio" t:type="radio" t:value="weekly"/></td></tr>
+   		<tr><td>${message:all}<input type="radio" t:type="radio" t:value="all"/></td></tr>
+   	</t:radiogroup>
+
+<tr><td>
+	${message:findNumber}
+	<input t:type="TextField" t:id="findNumber" t:validate="required, min=1"
+				   size="3" maxlength="3"/>
+</td></tr>
+
+<tr><td>
+	<input type="submit" value="${message:button-find}"/>
+</td></tr>
+	
+</table>
+</form>
+
 
 </html>

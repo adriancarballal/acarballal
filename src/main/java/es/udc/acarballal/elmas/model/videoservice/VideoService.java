@@ -1,6 +1,7 @@
 package es.udc.acarballal.elmas.model.videoservice;
 
 import java.util.Calendar;
+import java.util.List;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
@@ -58,4 +59,8 @@ public interface VideoService {
 	
 	public Video findRandomVotableVideo(Long userProfileId, int preSelected) 
 		throws InstanceNotFoundException;
+	
+	public List<Video> findMostVoted(Calendar startDate, Calendar endDate, int count);
+	
+	public List<Video> findMostVoted(int count);
 }

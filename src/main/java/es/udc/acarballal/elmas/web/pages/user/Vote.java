@@ -120,9 +120,19 @@ public class Vote {
 	
 	void setupRender(){
 		startDate = Calendar.getInstance();
-		endDate = (Calendar) startDate.clone();
 		startDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		startDate.set(Calendar.HOUR, 0);
+		startDate.set(Calendar.MINUTE, 0);
+		startDate.set(Calendar.SECOND, 0);
+		startDate.set(Calendar.AM_PM, Calendar.AM);
+		startDate.set(Calendar.MILLISECOND, 0);
+		endDate = Calendar.getInstance();
 		endDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		endDate.set(Calendar.HOUR, 23);
+		endDate.set(Calendar.MINUTE, 59);
+		endDate.set(Calendar.SECOND, 59);
+		endDate.set(Calendar.AM_PM, Calendar.PM);
+		endDate.set(Calendar.MILLISECOND, 999);
 		if(!getDoVoting()) return;
 		try {
 			video = 
