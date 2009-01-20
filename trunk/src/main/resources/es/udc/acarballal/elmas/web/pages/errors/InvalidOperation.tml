@@ -1,0 +1,15 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="Layout" t:pageTitle="${message:title}">
+	
+<p>
+	${message:error-message}
+</p>
+<p>
+	${message:later}
+</p>
+
+<p>
+	<a href="#" t:type="PageLink" t:page="Index">${message:back}</a>
+</p>
+
+</html>

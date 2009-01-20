@@ -9,6 +9,8 @@ import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.UserProfileDetails;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.web.pages.Index;
+import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
+import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
@@ -51,25 +53,25 @@ public class UpdateProfile {
 		
 	}
 
-	Object onSuccess() throws InstanceNotFoundException {
+	Object onSuccess() {
 
 		Privileges_TYPES privileges;
 		if(participate) privileges=Privileges_TYPES.COMPETITOR;
 		else privileges=Privileges_TYPES.VOTER;
 		
-		userService.updateUserProfileDetails(
+		try {
+			userService.updateUserProfileDetails(
 				userSession.getUserProfileId(), new UserProfileDetails(
 						firstName, lastName, email));
-
-		userSession.setFirstName(firstName);
-		try {
+			userSession.setFirstName(firstName);
 			userService.changePrivileges(userSession.getUserProfileId(), privileges);
+			userSession.setPrivileges(privileges);
+			
 		} catch (InsufficientPrivilegesException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		userSession.setPrivileges(privileges);
-		
+			return InsufficientPrivileges.class;
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		}		
 		return Index.class;
 
 	}

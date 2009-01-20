@@ -1,0 +1,23 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="Layout" t:pageTitle="${message:title}">
+	
+<p>${message:error-message}</p>
+
+<t:if t:test="userSessionExists">
+	<p>${message:solution2}</p>
+	<p>
+		<a href="#" t:type="PageLink" t:page="user/UpdateProfile">${message:participate}</a>
+	</p>
+<t:parameter name="else">
+	<p>${message:solution1}</p>
+	<p>
+		<a href="#" t:type="PageLink" t:page="user/Login">${message:login}</a>
+		 | 
+		<a href="#" t:type="PageLink" t:page="user/Register">${message:register}</a>
+	</p>
+</t:parameter>
+</t:if>
+
+<p><a href="#" t:type="PageLink" t:page="Index">${message:back}</a></p>
+
+</html>

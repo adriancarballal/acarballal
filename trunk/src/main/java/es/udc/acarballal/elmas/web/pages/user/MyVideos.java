@@ -36,7 +36,6 @@ public class MyVideos {
 	@Property
 	private Asset flag;
 	public Asset getFlag()	{
-		//flag = new ExternalAsset("http://www.carlitospaez.com/images/logos/logo_claro.jpg", null);
 		return flag;
 	}	
 	
@@ -85,7 +84,6 @@ public class MyVideos {
 		this.count = count;
 		videoBlock = videoService.findVideosByUser(userSession.getUserProfileId(), 
 				startIndex, count);
-		//System.out.println("FLAG: " + flag.getResource().toURL());
 	}
 	
 }

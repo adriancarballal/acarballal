@@ -10,6 +10,7 @@ import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextArea;
+import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
@@ -68,6 +69,9 @@ public class ShowVideoComments {
 	@Component
 	private Form commentForm;
 	
+	@Inject
+	private Messages messages;
+	
 	@SuppressWarnings("unused")
 	@Component(id = "comment")
 	 private TextArea commentField;
@@ -81,17 +85,11 @@ public class ShowVideoComments {
 			videoService.commentVideo(userSession.getUserProfileId(), 
 					videoId, comment, Calendar.getInstance());
 		} catch (InstanceNotFoundException e) {
-			System.out.println("--> ERROR 1");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			commentForm.recordError(messages.get("error-instancenotfound"));
 		} catch (InsufficientPrivilegesException e) {
-			System.out.println("--> ERROR 2");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			commentForm.recordError(messages.get("error-insufficientPrivileges"));
 		} catch (InvalidOperationException e) {
-			System.out.println("--> ERROR 3");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			commentForm.recordError(messages.get("error-insufficientPrivileges"));
 		} catch (Exception e){
 			return;
 		}

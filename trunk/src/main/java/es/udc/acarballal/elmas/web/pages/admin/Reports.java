@@ -49,24 +49,16 @@ public class Reports {
 	@InjectPage
 	private ShowBestVideos showBestVideos;
 	
-	void setupRender() {
-		try {
-			this.totalVideoComplaints = 
-				adminService.getNumberOfVideoComplaints(
-						userSession.getUserProfileId());
-			this.totalVideoCommentComplaints = 
-				adminService.getNumberOfVideoCommentComplaints(
-						userSession.getUserProfileId());
-			this.totalUserCommentComplaints =
-				adminService.getNumberOfUserCommentComplaints(
-						userSession.getUserProfileId());
-		} catch (InstanceNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InsufficientPrivilegesException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	void setupRender() throws InstanceNotFoundException, InsufficientPrivilegesException {
+		this.totalVideoComplaints = 
+			adminService.getNumberOfVideoComplaints(
+					userSession.getUserProfileId());
+		this.totalVideoCommentComplaints = 
+			adminService.getNumberOfVideoCommentComplaints(
+					userSession.getUserProfileId());
+		this.totalUserCommentComplaints =
+			adminService.getNumberOfUserCommentComplaints(
+					userSession.getUserProfileId());
 	}
 	
 	Object onSuccess(){

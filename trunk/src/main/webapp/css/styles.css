@@ -68,12 +68,13 @@ body {
 /* Content. */
 
 #content {
-	/*border: 1px solid red;*/
+	border: 1px solid red;
 	padding: 5px 5px 5px 5px;
 	margin-right: 7px;
 	margin-bottom: 7px;
 	width: 560px; 
 	float: right;
+	text-align:center;
 	/*height:400px;*/
 }
 
@@ -87,6 +88,11 @@ body {
 	height:400px;
 }
 
+table {
+	margin-right: auto;
+	margin-bottom: auto;
+}
+
 table td, th{
 	border: 1px solid red;
 	text-align: center;
@@ -96,8 +102,6 @@ table td, th{
 table.video-table{
 	/* border: 5px solid black;*/
 	width:84%;
-	margin-left:8%;
-	
 }
 
 table td.snapshot{

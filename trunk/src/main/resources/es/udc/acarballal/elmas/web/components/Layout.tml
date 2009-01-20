@@ -145,6 +145,21 @@
 <!-- Most voted -->
 <div id="most_voted">
 
+	<t:if t:test="best.empty">
+	<t:parameter name="else">
+		<table>
+			<tr t:type="Loop" t:source="best" t:value="video">
+				<tr><td class="video-title">${video.title}</td></tr>
+				<td>
+					<a href="#" t:type="PageLink" t:page="ShowVideo" t:context="video.videoId">
+						<img src="${flag}"/>
+					</a>
+				</td>
+			</tr>
+		</table>
+	</t:parameter>
+	</t:if>
+
 </div>
 
 <!-- Content. -->
