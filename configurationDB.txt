@@ -14,11 +14,8 @@ Shutdown database
 	
 	--> USO DE BACHSIZE!!!!!!!!
 	
-	- no se puede votar dos veces!!!!   
 	- mirar votos de un video
-	- obtener los mejor de la semana
-	- obtener videos aleatorios
-	
+	- setupRender en report.java y vote.java lanzan exceptions. ARREGLABLE???	
 	
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);

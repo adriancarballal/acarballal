@@ -10,6 +10,7 @@ import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextArea;
+import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
@@ -67,6 +68,9 @@ public class ShowUserComments {
 	@Component
 	private Form commentForm;
 	
+	@Inject
+	private Messages messages;
+	
 	@SuppressWarnings("unused")
 	@Component(id = "comment")
 	 private TextArea commentField;
@@ -80,14 +84,11 @@ public class ShowUserComments {
 			userService.commentUser(userId, userSession.getUserProfileId(),
 					comment, Calendar.getInstance());
 		} catch (InstanceNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			commentForm.recordError(messages.get("error-instancenotfound"));
 		} catch (InsufficientPrivilegesException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			commentForm.recordError(messages.get("error-insufficientPrivileges"));
 		} catch (InvalidOperationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			commentForm.recordError(messages.get("error-insufficientPrivileges"));
 		} catch (Exception e){
 			return;
 		}

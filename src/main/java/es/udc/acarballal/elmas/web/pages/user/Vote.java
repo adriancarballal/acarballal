@@ -16,6 +16,9 @@ import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
+import es.udc.acarballal.elmas.web.pages.errors.AlreadyVotedVideo;
+import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
+import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -118,7 +121,7 @@ public class Vote {
 		return VOTE_TYPES.VERY_GOOD;
 	}
 	
-	void setupRender(){
+	void setupRender() throws InstanceNotFoundException{
 		startDate = Calendar.getInstance();
 		startDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 		startDate.set(Calendar.HOUR, 0);
@@ -134,34 +137,23 @@ public class Vote {
 		endDate.set(Calendar.AM_PM, Calendar.PM);
 		endDate.set(Calendar.MILLISECOND, 999);
 		if(!getDoVoting()) return;
-		try {
-			video = 
-				videoService.findRandomVotableVideo(
-						userSession.getUserProfileId(), PRESELECTED_VIDEO_WINDOW);
-			videoId = video.getVideoId();
-			remainingVotes = videoService.getNumberVotesRemaining(userSession.getUserProfileId());
-		} catch (InstanceNotFoundException e) {
-			//System.out.println("NO VIDEO AVAILABLE:" + userSession.getFirstName());
-			e.printStackTrace();
-		
-		}
+		video = 
+			videoService.findRandomVotableVideo(
+					userSession.getUserProfileId(), PRESELECTED_VIDEO_WINDOW);
+		videoId = video.getVideoId();
+		remainingVotes = videoService.getNumberVotesRemaining(userSession.getUserProfileId());
+
 	}
 		
 	Object onSuccess(){
 		try {
 			videoService.voteVideo(vote, userSession.getUserProfileId(), video.getVideoId());
 		} catch (InstanceNotFoundException e) {
-			System.out.println("ERROR: 1");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return InstanceNotFound.class;
 		} catch (InsufficientPrivilegesException e) {
-			System.out.println("ERROR: 2");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return InsufficientPrivileges.class;
 		} catch (VideoAlreadyVotedException e) {
-			System.out.println("ERROR: 3");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return AlreadyVotedVideo.class;
 		}
         return Vote.class;
     }
