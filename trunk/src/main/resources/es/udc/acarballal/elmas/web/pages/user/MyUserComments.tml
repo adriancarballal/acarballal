@@ -7,6 +7,8 @@
 	
 <t:parameter name="else">
 
+	<t:zone t:id="comments">
+
 	<p>${message:myComments}.</p>
 
 	<table class="comments">
@@ -28,29 +30,24 @@
 		</tr>
 	</table>
 	
-		
 	<!-- "Previous" and "Next" links. -->
-		
+
 	<div class="previousNextLinks">
 	<span class="previousLink">
 		<t:if t:test="previousLinkContext">
-			<a href="#" t:type="PageLink" page="user/MyUserComments"
-	    		context="previousLinkContext">
-	    		${message:link-previous}
-	    	</a>
+			<t:actionLink t:id="previous" zone="comments">${message:link-previous}</t:actionLink>
 		</t:if>
 	</span>
 	
 	<span class="nextLink">
 		<t:if t:test="nextLinkContext">
-			<a href="#" t:type="PageLink" page="user/MyUserComments"
-	    		context="nextLinkContext">
-	    		${message:link-next}
-	    	</a>
+			<t:actionLink t:id="next" zone="comments">${message:link-next}</t:actionLink>
 		</t:if>
 	</span>
 	</div>
 	
+	</t:zone>
+		
 </t:parameter>
 </t:if>
 

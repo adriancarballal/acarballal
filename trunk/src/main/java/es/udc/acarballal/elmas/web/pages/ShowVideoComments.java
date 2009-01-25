@@ -28,6 +28,9 @@ public class ShowVideoComments {
 	private int startIndex = 0;
 	private int count = 4;
 	private VideoCommentBlock videoCommentBlock;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private VideoComment videoComment;
 	
 	@SuppressWarnings("unused")
@@ -45,14 +48,6 @@ public class ShowVideoComments {
 	@Inject
 	private Locale locale;
 	
-	public VideoComment getVideoComment() {
-		return videoComment;
-	}
-
-	public void setVideoComment(VideoComment videoComment) {
-		this.videoComment = videoComment;
-	}
-
 	public List<VideoComment> getVideoComments() {
 		return videoCommentBlock.getUserComments();
 	}
@@ -74,7 +69,7 @@ public class ShowVideoComments {
 	
 	@SuppressWarnings("unused")
 	@Component(id = "comment")
-	 private TextArea commentField;
+	private TextArea commentField;
 	
 	void onValidateForm() {
 
@@ -96,7 +91,6 @@ public class ShowVideoComments {
 
 	}
 	Object onSuccess(){
-	   	
         return this;
     }
 	

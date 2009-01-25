@@ -17,8 +17,13 @@ public class FindVideos {
 	
 	private int startIndex = 0;
 	private int count = 3;
-	private String keys;
+	
 	private VideoBlock videoBlock;
+	
+	private String keys;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private Video video;
 	
 	@Inject
@@ -27,19 +32,13 @@ public class FindVideos {
 	@Inject
 	private Locale locale;
 	
+	@SuppressWarnings("unused")
 	@Inject
 	@Path("context:/logo/logo.jpg")
 	@Property
 	private Asset flag;
-	public Asset getFlag()	{
-		return flag;
-	}	
 	
-	public String getKeys() {
-		return keys;
-	}
-
-	public void setKeys(String keys) {
+	public void setKeys(String keys){
 		this.keys = keys;
 	}
 	
@@ -47,14 +46,6 @@ public class FindVideos {
 		return videoBlock.getVideos();
 	}
 
-	public Video getVideo() {
-		return video;
-	}
-
-	public void setVideo(Video video) {
-		this.video = video;
-	}
-	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
