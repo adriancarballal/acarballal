@@ -18,6 +18,9 @@ public class ShowUserCommentComplaint {
 	private int startIndex = 0;
 	private int count = 4;
 	private UserCommentComplaintBlock userCommentComplaintBlock;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private UserCommentComplaint userCommentComplaint;
 	
 	@SuppressWarnings("unused")
@@ -34,14 +37,6 @@ public class ShowUserCommentComplaint {
 	
 	@Inject
 	private Locale locale;
-	
-	public UserCommentComplaint getUserCommentComplaint(){
-		return userCommentComplaint;
-	}
-	
-	public void setUserCommentComplaint(UserCommentComplaint userCommentComplaint){
-		this.userCommentComplaint = userCommentComplaint;
-	}
 	
 	public List<UserCommentComplaint> getUserCommentComplaints(){
 		return userCommentComplaintBlock.getUserCommentComplaints();

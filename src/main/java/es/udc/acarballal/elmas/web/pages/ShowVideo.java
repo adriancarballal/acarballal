@@ -14,10 +14,12 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class ShowVideo {
 
-	private Video video;
 	private boolean foundVideo;
-		private int startIndex = 0;
+	private int startIndex = 0;
 	private int count = 4;
+	
+	@Property
+	private Video video;
 	
 	@SuppressWarnings("unused")
 	@Property
@@ -33,10 +35,6 @@ public class ShowVideo {
 	
 	@Inject
 	private Locale locale;
-	
-	public Video getVideo(){
-		 return this.video;
-	}
 	
 	public boolean getFoundVideo(){
 		return !foundVideo;

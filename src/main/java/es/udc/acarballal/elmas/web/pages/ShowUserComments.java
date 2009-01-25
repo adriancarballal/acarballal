@@ -27,6 +27,9 @@ public class ShowUserComments {
 	private int startIndex = 0;
 	private int count = 4;
 	private UserCommentBlock userCommentBlock;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private UserComment userComment;
 	
 	@SuppressWarnings("unused")
@@ -44,22 +47,6 @@ public class ShowUserComments {
 	@Inject
 	private Locale locale;
 	
-	public UserComment getUserComment() {
-		return userComment;
-	}
-
-	public void setUserComment(UserComment userComment) {
-		this.userComment = userComment;
-	}
-
-	public List<UserComment> getUserComments() {
-		return userCommentBlock.getUserComments();
-	}
-	
-	public DateFormat getDateFormat() {
-		return DateFormat.getDateInstance(DateFormat.LONG, locale);
-	}
-	
 	@SuppressWarnings("unused")
 	@Property
 	 private String comment;
@@ -74,6 +61,14 @@ public class ShowUserComments {
 	@SuppressWarnings("unused")
 	@Component(id = "comment")
 	 private TextArea commentField;
+	
+	public List<UserComment> getUserComments() {
+		return userCommentBlock.getUserComments();
+	}
+	
+	public DateFormat getDateFormat() {
+		return DateFormat.getDateInstance(DateFormat.LONG, locale);
+	}
 	
 	void onValidateForm() {
 
@@ -94,8 +89,8 @@ public class ShowUserComments {
 		}
 
 	}
+	
 	Object onSuccess(){
-	   	
         return this;
     }
 	

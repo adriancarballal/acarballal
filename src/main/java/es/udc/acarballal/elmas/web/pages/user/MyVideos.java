@@ -20,6 +20,9 @@ public class MyVideos {
 	private int startIndex = 0;
 	private int count = 3;
 	private VideoBlock videoBlock;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private Video video;
 	
 	@ApplicationState
@@ -31,26 +34,16 @@ public class MyVideos {
 	@Inject
 	private Locale locale;
 	
+	@SuppressWarnings("unused")
 	@Inject
 	@Path("context:/logo/logo.jpg")
 	@Property
 	private Asset flag;
-	public Asset getFlag()	{
-		return flag;
-	}	
 	
 	public List<Video> getVideos() {
 		return videoBlock.getVideos();
 	}
 
-	public Video getVideo() {
-		return video;
-	}
-
-	public void setVideo(Video video) {
-		this.video = video;
-	}
-	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}

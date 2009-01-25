@@ -1,6 +1,5 @@
 package es.udc.acarballal.elmas.web.components;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tapestry5.Asset;
@@ -28,18 +27,17 @@ public class Layout {
 	private Video video;
 	
 	@Persist
-	private List<Video> best = new ArrayList<Video>();
+	private List<Video> best;
 		
 	@Inject
 	private VideoService videoService;
 	
+	//TODO
+	@SuppressWarnings("unused")
 	@Inject
 	@Path("context:/logo/logo.jpg")
 	@Property
 	private Asset flag;
-	public Asset getFlag()	{
-		return flag;
-	}
 	
 	// TODO esto no se prodrá quitar???
 	@SuppressWarnings("unused")

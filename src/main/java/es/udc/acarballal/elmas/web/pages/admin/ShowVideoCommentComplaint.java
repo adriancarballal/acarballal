@@ -18,6 +18,9 @@ public class ShowVideoCommentComplaint {
 	private int startIndex = 0;
 	private int count = 4;
 	private VideoCommentComplaintBlock videoCommentComplaintBlock;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private VideoCommentComplaint videoCommentComplaint;
 	
 	@SuppressWarnings("unused")
@@ -34,14 +37,6 @@ public class ShowVideoCommentComplaint {
 	
 	@Inject
 	private Locale locale;
-	
-	public VideoCommentComplaint getVideoCommentComplaint(){
-		return videoCommentComplaint;
-	}
-	
-	public void setVideoCommentComplaint(VideoCommentComplaint videoCommentComplaint){
-		this.videoCommentComplaint = videoCommentComplaint;
-	}
 	
 	public List<VideoCommentComplaint> getVideoCommentComplaints(){
 		return videoCommentComplaintBlock.getVideoCommentComplaints();

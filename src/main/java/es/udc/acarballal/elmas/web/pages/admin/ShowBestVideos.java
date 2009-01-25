@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.video.Video;
@@ -13,7 +14,12 @@ import es.udc.acarballal.elmas.web.pages.admin.Reports.SHOW_BEST_TYPE;
 
 public class ShowBestVideos {
 	
+	@SuppressWarnings("unused")
+	@Property
 	private List<Video> videos;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private Video video;
 	
 	private SHOW_BEST_TYPE type;
@@ -24,10 +30,6 @@ public class ShowBestVideos {
 	
 	@Inject
 	private Locale locale;
-
-	public Video getVideo() {
-		return video;
-	}
 
 	public SHOW_BEST_TYPE getType() {
 		return type;
@@ -45,18 +47,6 @@ public class ShowBestVideos {
 		this.count = count;
 	}
 
-	public void setVideo(Video video) {
-		this.video = video;
-	}
-
-	public List<Video> getVideos() {
-		return videos;
-	}
-
-	public void setVideos(List<Video> videos) {
-		this.videos = videos;
-	}
-	
 	Object[] onPassivate() {
 		return new Object[] {type, count};
 	}

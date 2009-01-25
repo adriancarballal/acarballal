@@ -25,15 +25,24 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class Vote {
 	
 	private static final int PRESELECTED_VIDEO_WINDOW = 100;
+	
+	@Property
 	private VOTE_TYPES vote = VOTE_TYPES.NORMAL;
 	
+	@Property
 	private Calendar endDate;
+	
+	@Property
 	private Calendar startDate;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private int remainingVotes;
 
 	@Persist
 	private Long videoId;
 	
+	@Property
 	@Persist
 	private Video video;
 	
@@ -51,22 +60,6 @@ public class Vote {
 	@Inject
 	private VideoService videoService;
 	
-	public Video getVideo(){
-		return video;
-	}
-	
-	public Calendar getEndDate() {
-		return endDate;
-	}
-
-	public Calendar getStartDate() {
-		return startDate;
-	}
-
-	public int getRemainingVotes() {
-		return remainingVotes;
-	}
-
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
@@ -92,14 +85,6 @@ public class Vote {
 	@SuppressWarnings("unused")
 	@Component
 	private Form voteForm;
-
-	public VOTE_TYPES getVote() {
-		return vote;
-	}
-
-	public void setVote(VOTE_TYPES vote) {
-		this.vote = vote;
-	}
 
 	public VOTE_TYPES getVeryBad(){
 		return VOTE_TYPES.VERY_BAD;

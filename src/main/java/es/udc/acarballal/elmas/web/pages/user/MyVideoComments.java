@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.tapestry5.annotations.ApplicationState;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.videocomment.VideoComment;
@@ -17,6 +18,9 @@ public class MyVideoComments {
 	private int startIndex = 0;
 	private int count = 4;
 	private VideoCommentBlock videoCommentBlock;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private VideoComment videoComment;
 	
 	@ApplicationState
@@ -32,14 +36,6 @@ public class MyVideoComments {
 		return videoCommentBlock.getUserComments();
 	}
 
-	public VideoComment getVideoComment() {
-		return videoComment;
-	}
-
-	public void setVideoComment(VideoComment videoComment) {
-		this.videoComment = videoComment;
-	}
-	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}

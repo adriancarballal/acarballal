@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.tapestry5.annotations.ApplicationState;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.usercomment.UserComment;
@@ -17,6 +18,9 @@ public class AboutMe {
 	private int startIndex = 0;
 	private int count = 4;
 	private UserCommentBlock userCommentBlock;
+	
+	@SuppressWarnings("unused")
+	@Property
 	private UserComment userComment;
 	
 	@ApplicationState
@@ -32,14 +36,6 @@ public class AboutMe {
 		return userCommentBlock.getUserComments();
 	}
 
-	public UserComment getUserComment() {
-		return userComment;
-	}
-
-	public void setUserComment(UserComment userComment) {
-		this.userComment = userComment;
-	}
-	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
