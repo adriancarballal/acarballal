@@ -11,6 +11,7 @@ import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
+// TODO hay que eliminar esta clase y el tml
 public class DeleteVideoComment {
 
 	@ApplicationState

@@ -1,56 +1,51 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<p>
-	${message:week}: 
-	<t:output value="startDate.time" format="dateFormat"/>
-	 - 
-	<t:output value="endDate.time" format="dateFormat"/>
-</p>
+<p>${message:week}: <t:output value="startDate.time"
+	format="dateFormat" /> - <t:output value="endDate.time"
+	format="dateFormat" /></p>
 
-<p>
-	${message:votesLeft}: ${remainingVotes}
-</p>
+<p>${message:votesLeft}: ${remainingVotes}</p>
 
-	<t:if t:test="doVoting">
+<t:if t:test="doVoting">
 	<table class="showvideo">
-		<tr><td>
-			${video.title}
-		</td></tr>
-		<tr><td>
-			${video.comment}
-		</td></tr>
-		<tr><td>
-			<script type="text/javascript" src="${asset:context:/player/swfobject.js}"></script>
-			<embed src ="${asset:context:/player/player.swf}" 
-			width="244" height="210" 
-			allowfullscreen="false" />
-		</td></tr>
+		<tr>
+			<td>${video.title}</td>
+		</tr>
+		<tr>
+			<td>${video.comment}</td>
+		</tr>
+		<tr>
+			<td><script type="text/javascript"
+				src="${asset:context:/player/swfobject.js}"></script> <embed
+				src="${asset:context:/player/player.swf}" width="244" height="210"
+				allowfullscreen="false" /></td>
+		</tr>
 		<t:if t:test="userSessionExists">
 
-		<tr><td>
-			<a href="#" t:type="PageLink" page="user/ComplaintVideo"
-	    		context="video.videoId">
-				${message:complaintVideo}		    	
-    		</a>
-		</td></tr>
-		<t:if t:test="isVotable">
-		<tr><td>
-		<form t:type="Form" t:id="voteForm">
-   			<table>
-   				<t:radiogroup t:value="vote">
-   					<input type="radio" t:type="radio" t:value="veryBad"/> ${message:veryBad}
-   					<input type="radio" t:type="radio" t:value="bad"/> ${message:bad}
-   					<input type="radio" t:type="radio" t:value="normal"/> ${message:normal}
-   					<input type="radio" t:type="radio" t:value="good"/> ${message:good}
-   					<input type="radio" t:type="radio" t:value="veryGood"/> ${message:veryGood}
+			<tr>
+				<td><a href="#" t:type="PageLink" page="user/ComplaintVideo"
+					context="video.videoId"> ${message:complaintVideo} </a></td>
+			</tr>
+			<t:if t:test="isVotable">
+				<tr>
+					<td>
+					<form t:type="Form" t:id="voteForm">
+					<table>
+						<t:radiogroup t:value="vote">
+							<input type="radio" t:type="radio" t:value="veryBad" /> ${message:veryBad}
+   					<input type="radio" t:type="radio" t:value="bad" /> ${message:bad}
+   					<input type="radio" t:type="radio" t:value="normal" /> ${message:normal}
+   					<input type="radio" t:type="radio" t:value="good" /> ${message:good}
+   					<input type="radio" t:type="radio" t:value="veryGood" /> ${message:veryGood}
    				</t:radiogroup>
-   				<input type="submit" value="${message:voteButton}"/>
-   			</table>
-		</form>
-		</td></tr>
+						<input type="submit" value="${message:voteButton}" />
+					</table>
+					</form>
+					</td>
+				</tr>
+			</t:if>
 		</t:if>
-		</t:if>
-	</table>   
-	</t:if>
+	</table>
+</t:if>
 </html>

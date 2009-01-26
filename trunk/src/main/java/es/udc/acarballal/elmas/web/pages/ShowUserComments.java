@@ -23,14 +23,35 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class ShowUserComments {
 	
-	private Long userId;	
-	private int startIndex = 0;
+	@SuppressWarnings("unused")
+	@Property
+	 private String comment;	
+	@SuppressWarnings("unused")
+	@Component(id = "comment")
+	 private TextArea commentField;
+	@SuppressWarnings("unused")
+	@Component
+	private Form commentForm;
 	private int count = 4;
-	private UserCommentBlock userCommentBlock;
+	
+	@Inject
+	private Locale locale;
+	
+	@Inject
+	private Messages messages;
+	
+	private int startIndex = 0;
 	
 	@SuppressWarnings("unused")
 	@Property
 	private UserComment userComment;
+	
+	private UserCommentBlock userCommentBlock;
+	
+	private Long userId;
+	
+	@Inject
+	private UserService userService;
 	
 	@SuppressWarnings("unused")
 	@Property
@@ -41,34 +62,51 @@ public class ShowUserComments {
 	@Property
 	private boolean userSessionExists;
 	
-	@Inject
-	private UserService userService;
+	public DateFormat getDateFormat() {
+		return DateFormat.getDateInstance(DateFormat.LONG, locale);
+	}
 	
-	@Inject
-	private Locale locale;
+	public Object[] getNextLinkContext() {
+		
+		if (userCommentBlock.getExistMoreUserComments()) {
+			return new Object[] {userId, startIndex+count, count};
+		} else {
+			return null;
+		}
+		
+	}
 	
-	@SuppressWarnings("unused")
-	@Property
-	 private String comment;
-	
-	@SuppressWarnings("unused")
-	@Component
-	private Form commentForm;
-	
-	@Inject
-	private Messages messages;
-	
-	@SuppressWarnings("unused")
-	@Component(id = "comment")
-	 private TextArea commentField;
+	public Object[] getPreviousLinkContext() {
+		
+		if (startIndex-count >= 0) {
+			return new Object[] {userId, startIndex-count, count};
+		} else {
+			return null;
+		}
+		
+	}
 	
 	public List<UserComment> getUserComments() {
 		return userCommentBlock.getUserComments();
 	}
 	
-	public DateFormat getDateFormat() {
-		return DateFormat.getDateInstance(DateFormat.LONG, locale);
+	void onActivate(Long userId, int startIndex, int count){
+		
+		this.userId = userId;
+		this.startIndex = startIndex;
+		this.count = count;
+		userCommentBlock =
+			userService.findUserCommentsByCommented(userId, startIndex, count);;
+		
 	}
+
+	Object[] onPassivate() {
+		return new Object[] {userId, startIndex, count};
+	}
+	
+	Object onSuccess(){
+        return this;
+    }
 	
 	void onValidateForm() {
 
@@ -88,44 +126,6 @@ public class ShowUserComments {
 			return;
 		}
 
-	}
-	
-	Object onSuccess(){
-        return this;
-    }
-	
-	void onActivate(Long userId, int startIndex, int count){
-		
-		this.userId = userId;
-		this.startIndex = startIndex;
-		this.count = count;
-		userCommentBlock =
-			userService.findUserCommentsByCommented(userId, startIndex, count);;
-		
-	}
-
-	Object[] onPassivate() {
-		return new Object[] {userId, startIndex, count};
-	}
-	
-	public Object[] getPreviousLinkContext() {
-		
-		if (startIndex-count >= 0) {
-			return new Object[] {userId, startIndex-count, count};
-		} else {
-			return null;
-		}
-		
-	}
-	
-	public Object[] getNextLinkContext() {
-		
-		if (userCommentBlock.getExistMoreUserComments()) {
-			return new Object[] {userId, startIndex+count, count};
-		} else {
-			return null;
-		}
-		
 	}
 
 }

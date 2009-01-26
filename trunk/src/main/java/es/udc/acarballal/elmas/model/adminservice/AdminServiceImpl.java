@@ -19,37 +19,19 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 @Transactional
 public class AdminServiceImpl implements AdminService{
 
-	private UserProfileDao userProfileDao;
-	private VideoComplaintDao videoComplaintDao;
-	private VideoCommentComplaintDao videoCommentComplaintDao;
 	private UserCommentComplaintDao userCommentComplaintDao;
+	private UserProfileDao userProfileDao;
+	private VideoCommentComplaintDao videoCommentComplaintDao;
+	private VideoComplaintDao videoComplaintDao;
 	
-	public void setUserProfileDao(UserProfileDao userProfileDao) {
-		this.userProfileDao = userProfileDao;
-	}
-	
-	public void setVideoComplaintDao(VideoComplaintDao videoComplaintDao) {
-		this.videoComplaintDao = videoComplaintDao;
-	}
-
-	public void setVideoCommentComplaintDao(
-			VideoCommentComplaintDao videoCommentComplaintDao){
-		this.videoCommentComplaintDao = videoCommentComplaintDao;
-	}
-	
-	public void setUserCommentComplaintDao(
-			UserCommentComplaintDao userCommentComplaintDao){
-		this.userCommentComplaintDao = userCommentComplaintDao;
-	}
-
-	public int getNumberOfVideoComplaints(Long userProfileId) 
+	public void deleteUserCommentComplaint(Long id, Long userProfileId) 
 			throws InsufficientPrivilegesException, InstanceNotFoundException{
 		
 		UserProfile userProfile;
 		try {
 			userProfile = userProfileDao.find(userProfileId); 
 			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
-				return videoComplaintDao.countVideoComplaints();
+				userCommentComplaintDao.remove(id);
 			}
 			else{
 				throw new InsufficientPrivilegesException(userProfile.getLoginName());
@@ -57,66 +39,6 @@ public class AdminServiceImpl implements AdminService{
 		} catch (InstanceNotFoundException e) {
 			throw e;
 		}
-	}
-	
-	public int getNumberOfVideoCommentComplaints(Long userProfileId) 
-			throws InsufficientPrivilegesException, InstanceNotFoundException{
-
-		UserProfile userProfile;
-		try {
-			userProfile = userProfileDao.find(userProfileId); 
-			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
-				return videoCommentComplaintDao.countVideoCommentComplaints();
-			}
-			else{
-				throw new InsufficientPrivilegesException(userProfile.getLoginName());
-			}
-		} catch (InstanceNotFoundException e) {
-			throw e;
-		}
-	}
-	
-	public int getNumberOfUserCommentComplaints(Long userProfileId) 
-			throws InsufficientPrivilegesException, InstanceNotFoundException{
-
-		UserProfile userProfile;
-		try {
-			userProfile = userProfileDao.find(userProfileId); 
-			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
-				return userCommentComplaintDao.countUserCommentComplaints();
-			}
-			else{
-				throw new InsufficientPrivilegesException(userProfile.getLoginName());
-			}
-		} catch (InstanceNotFoundException e) {
-			throw e;
-		}
-	}
-	
-	@Transactional(readOnly = true)
-	public VideoComplaint findFirstVideoComplaints(){
-		
-		int startIndex = 0;
-		int count = 1;
-		List<VideoComplaint> complaints =
-			videoComplaintDao.findVideoComplaints(startIndex, count);
-		if(complaints.isEmpty()) return null;
-		return complaints.get(0);
-
-	}
-	
-	public VideoCommentComplaintBlock findVideoCommentComplaints(int startIndex, int count){
-		
-		List<VideoCommentComplaint> comments = 
-			videoCommentComplaintDao.findVideoCommentComplaints(startIndex, count+1);
-
-		boolean existMoreVideoCommentsComplaints = comments.size() == (count + 1);
-
-		if (existMoreVideoCommentsComplaints) {
-			comments.remove(comments.size() - 1);
-		}
-		
-		return new VideoCommentComplaintBlock(comments, existMoreVideoCommentsComplaints);
 	}
 	
 	public void deleteVideoCommentComplaint(Long id, Long userProfileId) 
@@ -153,6 +75,18 @@ public class AdminServiceImpl implements AdminService{
 		}
 	}
 	
+	@Transactional(readOnly = true)
+	public VideoComplaint findFirstVideoComplaints(){
+		
+		int startIndex = 0;
+		int count = 1;
+		List<VideoComplaint> complaints =
+			videoComplaintDao.findVideoComplaints(startIndex, count);
+		if(complaints.isEmpty()) return null;
+		return complaints.get(0);
+
+	}
+
 	public UserCommentComplaintBlock findUserCommentComplaints(int startIndex, int count){
 		
 		List<UserCommentComplaint> comments = 
@@ -167,14 +101,28 @@ public class AdminServiceImpl implements AdminService{
 		return new UserCommentComplaintBlock(comments, existMoreUserCommentsComplaints);
 	}
 	
-	public void deleteUserCommentComplaint(Long id, Long userProfileId) 
-			throws InsufficientPrivilegesException, InstanceNotFoundException{
+	public VideoCommentComplaintBlock findVideoCommentComplaints(int startIndex, int count){
 		
+		List<VideoCommentComplaint> comments = 
+			videoCommentComplaintDao.findVideoCommentComplaints(startIndex, count+1);
+
+		boolean existMoreVideoCommentsComplaints = comments.size() == (count + 1);
+
+		if (existMoreVideoCommentsComplaints) {
+			comments.remove(comments.size() - 1);
+		}
+		
+		return new VideoCommentComplaintBlock(comments, existMoreVideoCommentsComplaints);
+	}
+	
+	public int getNumberOfUserCommentComplaints(Long userProfileId) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException{
+
 		UserProfile userProfile;
 		try {
 			userProfile = userProfileDao.find(userProfileId); 
 			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
-				userCommentComplaintDao.remove(id);
+				return userCommentComplaintDao.countUserCommentComplaints();
 			}
 			else{
 				throw new InsufficientPrivilegesException(userProfile.getLoginName());
@@ -182,5 +130,57 @@ public class AdminServiceImpl implements AdminService{
 		} catch (InstanceNotFoundException e) {
 			throw e;
 		}
+	}
+	
+	public int getNumberOfVideoCommentComplaints(Long userProfileId) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException{
+
+		UserProfile userProfile;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
+				return videoCommentComplaintDao.countVideoCommentComplaints();
+			}
+			else{
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		} catch (InstanceNotFoundException e) {
+			throw e;
+		}
+	}
+	
+	public int getNumberOfVideoComplaints(Long userProfileId) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException{
+		
+		UserProfile userProfile;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
+				return videoComplaintDao.countVideoComplaints();
+			}
+			else{
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		} catch (InstanceNotFoundException e) {
+			throw e;
+		}
+	}
+	
+	public void setUserCommentComplaintDao(
+			UserCommentComplaintDao userCommentComplaintDao){
+		this.userCommentComplaintDao = userCommentComplaintDao;
+	}
+
+	public void setUserProfileDao(UserProfileDao userProfileDao) {
+		this.userProfileDao = userProfileDao;
+	}
+	
+	public void setVideoCommentComplaintDao(
+			VideoCommentComplaintDao videoCommentComplaintDao){
+		this.videoCommentComplaintDao = videoCommentComplaintDao;
+	}
+	
+	public void setVideoComplaintDao(VideoComplaintDao videoComplaintDao) {
+		this.videoComplaintDao = videoComplaintDao;
 	}
 }

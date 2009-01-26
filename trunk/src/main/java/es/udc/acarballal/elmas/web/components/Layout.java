@@ -22,29 +22,39 @@ import es.udc.acarballal.elmas.web.pages.FindVideos;
 import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class Layout {
-	
+
 	private final static int BEST_TOTAL = 3;
-	private Video video;
-	
 	@Persist
 	private List<Video> best;
-		
-	@Inject
-	private VideoService videoService;
-	
-	//TODO
+
+	@InjectPage
+	private FindVideos findVideos;
+
+	@SuppressWarnings("unused")
+	@Component
+	private Form findVideosForm;
+
+	// TODO
 	@SuppressWarnings("unused")
 	@Inject
 	@Path("context:/logo/logo.jpg")
 	@Property
 	private Asset flag;
-	
+
+	@SuppressWarnings("unused")
+	@Property
+	private String keys;
+
+	@SuppressWarnings("unused")
+	@Component(id = "keys")
+	private TextField keysField;
+
 	// TODO esto no se prodrá quitar???
 	@SuppressWarnings("unused")
 	@Property
 	@Parameter(required = false, defaultPrefix = "literal")
 	private String menuExplanation;
-	
+
 	@SuppressWarnings("unused")
 	@Property
 	@Parameter(required = true, defaultPrefix = "literal")
@@ -54,58 +64,48 @@ public class Layout {
 	@Property
 	@ApplicationState
 	private UserSession userSession;
-	
+
 	@SuppressWarnings("unused")
 	@Property
 	private boolean userSessionExists;
-	
-	@SuppressWarnings("unused")
-	@Component
-	private Form findVideosForm;
-	
-	@SuppressWarnings("unused")
-	@Property
-	private String keys;
-	
-	@SuppressWarnings("unused")
-	@Component(id = "keys")
-	private TextField keysField;
-	
-	@InjectPage
-	private FindVideos findVideos;
-	
-	@BeginRender
-	void insertBest(){
-		best = videoService.findMostVoted(BEST_TOTAL);
-	}
-	
+
+	private Video video;
+
+	@Inject
+	private VideoService videoService;
+
 	public List<Video> getBest() {
 		return best;
 	}
 
-	public void setBest(List<Video> best) {
-		this.best = best;
+	public boolean getIsAdmin() {
+		if (userSessionExists
+				&& userSession.getPrivileges() == Privileges_TYPES.ADMIN)
+			return true;
+		return false;
 	}
 
 	public Video getVideo() {
 		return video;
 	}
 
+	@BeginRender
+	void insertBest() {
+		best = videoService.findMostVoted(BEST_TOTAL);
+	}
+
+	Object onSuccess() {
+
+		findVideos.setKeys(keys);
+		return findVideos;
+	}
+
+	public void setBest(List<Video> best) {
+		this.best = best;
+	}
+
 	public void setVideo(Video video) {
 		this.video = video;
 	}
 
-	Object onSuccess(){
-                 
-		findVideos.setKeys(keys);
-        return findVideos;
-    }
-	
-	public boolean getIsAdmin(){
-		if (userSessionExists && 
-				userSession.getPrivileges() == Privileges_TYPES.ADMIN)
-			return true;
-		return false;
-	}
-	
 }

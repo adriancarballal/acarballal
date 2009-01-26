@@ -15,49 +15,31 @@ import es.udc.acarballal.elmas.model.videoservice.VideoService;
 
 public class FindVideos {
 	
-	private int startIndex = 0;
 	private int count = 3;
-	
-	private VideoBlock videoBlock;
-	
-	private String keys;
-	
-	@SuppressWarnings("unused")
-	@Property
-	private Video video;
-	
-	@Inject
-	private VideoService videoService;
-	
-	@Inject
-	private Locale locale;
-	
 	@SuppressWarnings("unused")
 	@Inject
 	@Path("context:/logo/logo.jpg")
 	@Property
 	private Asset flag;
 	
-	public void setKeys(String keys){
-		this.keys = keys;
-	}
+	private String keys;
 	
-	public List<Video> getVideos() {
-		return videoBlock.getVideos();
-	}
-
+	@Inject
+	private Locale locale;
+	
+	private int startIndex = 0;
+	
+	@SuppressWarnings("unused")
+	@Property
+	private Video video;
+	
+	private VideoBlock videoBlock;
+	
+	@Inject
+	private VideoService videoService;
+	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
-	}
-	
-	public Object[] getPreviousLinkContext() {
-		
-		if (startIndex-count >= 0) {
-			return new Object[] {keys, startIndex-count, count};
-		} else {
-			return null;
-		}
-		
 	}
 	
 	public Object[] getNextLinkContext() {
@@ -69,9 +51,19 @@ public class FindVideos {
 		}
 		
 	}
+
+	public Object[] getPreviousLinkContext() {
+		
+		if (startIndex-count >= 0) {
+			return new Object[] {keys, startIndex-count, count};
+		} else {
+			return null;
+		}
+		
+	}
 	
-	Object[] onPassivate() {
-		return new Object[] {keys, startIndex, count};
+	public List<Video> getVideos() {
+		return videoBlock.getVideos();
 	}
 	
 	void onActivate(String keys, int startIndex, int count) {
@@ -79,6 +71,14 @@ public class FindVideos {
 		this.count = count;
 		this.keys = keys;
 		videoBlock =  videoService.findVideosByTitle(keys, startIndex, count);
+	}
+	
+	Object[] onPassivate() {
+		return new Object[] {keys, startIndex, count};
+	}
+	
+	public void setKeys(String keys){
+		this.keys = keys;
 	}
 
 }

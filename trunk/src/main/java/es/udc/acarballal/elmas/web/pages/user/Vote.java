@@ -27,26 +27,18 @@ public class Vote {
 	private static final int PRESELECTED_VIDEO_WINDOW = 100;
 	
 	@Property
-	private VOTE_TYPES vote = VOTE_TYPES.NORMAL;
-	
-	@Property
 	private Calendar endDate;
 	
-	@Property
-	private Calendar startDate;
+	@Inject
+	private Locale locale;
 	
 	@SuppressWarnings("unused")
 	@Property
 	private int remainingVotes;
-
-	@Persist
-	private Long videoId;
 	
 	@Property
-	@Persist
-	private Video video;
-	
-	
+	private Calendar startDate;
+
 	@ApplicationState
 	private UserSession userSession;
 	
@@ -54,16 +46,44 @@ public class Vote {
 	@Property
 	private boolean userSessionExists;
 	
-	@Inject
-	private Locale locale;
+	
+	@Property
+	@Persist
+	private Video video;
+	
+	@Persist
+	private Long videoId;
 	
 	@Inject
 	private VideoService videoService;
 	
+	@Property
+	private VOTE_TYPES vote = VOTE_TYPES.NORMAL;
+	
+	@SuppressWarnings("unused")
+	@Component
+	private Form voteForm;
+
+	public VOTE_TYPES getBad(){
+		return VOTE_TYPES.BAD;
+	}
+	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
+	
+	public boolean getDoVoting(){
+		try {
+			return videoService.getNumberVotesRemaining(userSession.getUserProfileId())>0;
+		} catch (InstanceNotFoundException e) {
+			return false;
+		}
+	}
 
+	public VOTE_TYPES getGood(){
+		return VOTE_TYPES.GOOD;
+	}
+	
 	public boolean getIsVotable(){
 		try {
 			return userSessionExists && 
@@ -74,38 +94,31 @@ public class Vote {
 		}
 	}
 	
-	public boolean getDoVoting(){
-		try {
-			return videoService.getNumberVotesRemaining(userSession.getUserProfileId())>0;
-		} catch (InstanceNotFoundException e) {
-			return false;
-		}
-	}
-	
-	@SuppressWarnings("unused")
-	@Component
-	private Form voteForm;
-
-	public VOTE_TYPES getVeryBad(){
-		return VOTE_TYPES.VERY_BAD;
-	}
-	
-	public VOTE_TYPES getBad(){
-		return VOTE_TYPES.BAD;
-	}
-	
 	public VOTE_TYPES getNormal(){
 		return VOTE_TYPES.NORMAL;
 	}
 	
-	public VOTE_TYPES getGood(){
-		return VOTE_TYPES.GOOD;
+	public VOTE_TYPES getVeryBad(){
+		return VOTE_TYPES.VERY_BAD;
 	}
 	
 	public VOTE_TYPES getVeryGood(){
 		return VOTE_TYPES.VERY_GOOD;
 	}
 	
+	Object onSuccess(){
+		try {
+			videoService.voteVideo(vote, userSession.getUserProfileId(), video.getVideoId());
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (InsufficientPrivilegesException e) {
+			return InsufficientPrivileges.class;
+		} catch (VideoAlreadyVotedException e) {
+			return AlreadyVotedVideo.class;
+		}
+        return Vote.class;
+    }
+		
 	void setupRender() throws InstanceNotFoundException{
 		startDate = Calendar.getInstance();
 		startDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -129,19 +142,6 @@ public class Vote {
 		remainingVotes = videoService.getNumberVotesRemaining(userSession.getUserProfileId());
 
 	}
-		
-	Object onSuccess(){
-		try {
-			videoService.voteVideo(vote, userSession.getUserProfileId(), video.getVideoId());
-		} catch (InstanceNotFoundException e) {
-			return InstanceNotFound.class;
-		} catch (InsufficientPrivilegesException e) {
-			return InsufficientPrivileges.class;
-		} catch (VideoAlreadyVotedException e) {
-			return AlreadyVotedVideo.class;
-		}
-        return Vote.class;
-    }
 
 
 

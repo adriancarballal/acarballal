@@ -2,9 +2,9 @@ package es.udc.acarballal.elmas.model.userservice;
 
 public class UserProfileDetails {
 
+	private String email;
 	private String firstName;
 	private String lastName;
-	private String email;
 
 	public UserProfileDetails(String firstName, String lastName, String email) {
 		this.firstName = firstName;
@@ -12,19 +12,7 @@ public class UserProfileDetails {
 		this.email = email;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-	
-	public String getLastName() {
-		return lastName;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-    @Override
+	@Override
     public boolean equals(Object obj) {
 
         if ((obj==null) || !(obj instanceof UserProfileDetails)) {
@@ -37,5 +25,17 @@ public class UserProfileDetails {
         	lastName.equals(theOther.lastName) &&
         	email==theOther.email;
     }
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+    public String getLastName() {
+		return lastName;
+	}
 	
 }

@@ -20,22 +20,22 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class UpdateProfile {
 
 	@Property
+	private String email;
+
+	@Property
 	private String firstName;
 
 	@Property
 	private String lastName;
-
-	@Property
-	private String email;
 	
 	@Property
 	private boolean participate;
 
-	@ApplicationState
-	private UserSession userSession;
-
 	@Inject
 	private UserService userService;
+
+	@ApplicationState
+	private UserSession userSession;
 
 	void onPrepareForRender() throws InstanceNotFoundException {
 

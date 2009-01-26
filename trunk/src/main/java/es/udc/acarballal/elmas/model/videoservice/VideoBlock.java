@@ -6,8 +6,8 @@ import es.udc.acarballal.elmas.model.video.Video;
 
 public class VideoBlock {
 
-    private List<Video> videos;
     private boolean existMoreVideos;
+    private List<Video> videos;
 
     public VideoBlock(List<Video> videos, boolean existMoreVideos) {
         
@@ -16,12 +16,12 @@ public class VideoBlock {
 
     }
 
-	public List<Video> getVideos() {
-		return videos;
-	}
-
 	public boolean getExistMoreVideos() {
 		return existMoreVideos;
+	}
+
+	public List<Video> getVideos() {
+		return videos;
 	}
     
 }

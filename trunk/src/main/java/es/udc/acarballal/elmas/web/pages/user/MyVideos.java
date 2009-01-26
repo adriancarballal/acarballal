@@ -17,35 +17,41 @@ import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class MyVideos {
 	
-	private int startIndex = 0;
 	private int count = 3;
-	private VideoBlock videoBlock;
-	
-	@SuppressWarnings("unused")
-	@Property
-	private Video video;
-	
-	@ApplicationState
-	private UserSession userSession;
-	
-	@Inject
-	private VideoService videoService;
-	
-	@Inject
-	private Locale locale;
-	
 	@SuppressWarnings("unused")
 	@Inject
 	@Path("context:/logo/logo.jpg")
 	@Property
 	private Asset flag;
+	@Inject
+	private Locale locale;
 	
-	public List<Video> getVideos() {
-		return videoBlock.getVideos();
-	}
-
+	private int startIndex = 0;
+	
+	@ApplicationState
+	private UserSession userSession;
+	
+	@SuppressWarnings("unused")
+	@Property
+	private Video video;
+	
+	private VideoBlock videoBlock;
+	
+	@Inject
+	private VideoService videoService;
+	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
+	}
+
+	public Object[] getNextLinkContext() {
+		
+		if (videoBlock.getExistMoreVideos()) {
+			return new Object[] {startIndex+count, count};
+		} else {
+			return null;
+		}
+		
 	}
 	
 	public Object[] getPreviousLinkContext() {
@@ -58,18 +64,8 @@ public class MyVideos {
 		
 	}
 	
-	public Object[] getNextLinkContext() {
-		
-		if (videoBlock.getExistMoreVideos()) {
-			return new Object[] {startIndex+count, count};
-		} else {
-			return null;
-		}
-		
-	}
-	
-	Object[] onPassivate() {
-		return new Object[] {startIndex, count};
+	public List<Video> getVideos() {
+		return videoBlock.getVideos();
 	}
 	
 	void onActivate(int startIndex, int count) {
@@ -77,6 +73,10 @@ public class MyVideos {
 		this.count = count;
 		videoBlock = videoService.findVideosByUser(userSession.getUserProfileId(), 
 				startIndex, count);
+	}
+	
+	Object[] onPassivate() {
+		return new Object[] {startIndex, count};
 	}
 	
 }

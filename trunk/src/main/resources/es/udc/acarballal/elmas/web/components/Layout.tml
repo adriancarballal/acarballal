@@ -2,170 +2,157 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 
 <head>
-	<title>${pageTitle}</title>
-	<link rel="StyleSheet" href="${asset:context:/css/styles.css}"
-		  type="text/css" media="all"/>
+<title>${pageTitle}</title>
+<link rel="StyleSheet" href="${asset:context:/css/styles.css}"
+	type="text/css" media="all" />
 </head>
 
 <body>
 
 <!-- Window. -->
- 
-<div id="window">
 
-<!-- Page title. -->    
-    
+<div id="window"><!-- Page title. -->
+
 <div id="pageTitle">
-	<div align="center">
-       ${message:header}
-	</div>
-</div> 
- 
-<!-- Logo. --> 
- <div id="logo">
- 	<a href="#" t:type="PageLink" t:page="Index">Logo JPG</a>
+<div align="center">${message:header}</div>
 </div>
- 
+
+<!-- Logo. -->
+<div id="logo"><a href="#" t:type="PageLink" t:page="Index">Logo
+JPG</a></div>
+
 <!-- Menu. -->
 
 <div id="sidebar">
-	<div id="sidebarmenu">
-	<h3>     
-  		<t:if t:test="userSessionExists">
+<div id="sidebarmenu">
+<h3><t:if t:test="userSessionExists">
  			${message:menu-hello} ${userSession.firstName}
             <t:parameter name="else">
             	${message:menu-welcome}
             </t:parameter>
-		</t:if>
-	</h3>	
-    </div>
-    <t:if t:test="menuExplanation">
-	 	<span id="menuExplanation">
- 			${menuExplanation}
- 		</span>
- 		
-        <t:parameter name="else">
-		    <table class="menutable">
-				<t:if t:test="userSessionExists">
-					<!-- <tr><th>SideBar Menu</th></tr> -->
-					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/UpdateProfile">
-							${message:menu-updateProfile}
-						</a>
-					</td></tr>
-					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/MyVideos">
-							${message:menu-myVideos}
-						</a>
-					</td></tr>
-					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/InsertVideo">
-							${message:menu-insertVideo}
-						</a>
-					</td></tr>
-					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/AboutMe">
-							${message:menu-aboutMe}
-						</a>
-					</td></tr>
-					<tr><td>${message:menu-myComments}</td></tr>
-					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/MyUserComments">
-							____ ${message:menu-myUserComments}
-						</a>
-					</td></tr>
-					<tr><td>
-					<a href="#" t:type="PageLink" t:page="user/MyVideoComments">
-							_____ ${message:menu-myVideoComments}
-						</a>
-					</td></tr>
-					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/Vote">
-							${message:menu-vote}
-						</a>
-					</td></tr>
-					<tr><td>
-						<a href="#" t:type="PageLink" t:page="user/Logout">
-							${message:menu-logout}
-						</a>
-					</td></tr>
-					<t:parameter name="else">
-						<tr><td>
-							<a href="#" t:type="PageLink" t:page="user/Login">${message:menu-authenticate}</a>
-						</td></tr>
-					</t:parameter>
-				</t:if>
-<tr><td> .</td></tr>
-
-
-
-<t:if test="isAdmin">
-	<tr><td>	
-	<a href="#" t:type="PageLink" t:page="admin/Reports">${message:menu-reports}</a>
-	</td></tr>
-<t:parameter name="else">
-	<tr><td> .</td></tr>
-</t:parameter>
-</t:if>
-
-<tr><td> .</td></tr>
-				<tr><th>Bases del concurso</th></tr>
-				<tr><td>
-					Soltar todo el rollazo, en modo corto, junto con un link a la informacion completa
-				</td></tr>
-				<tr><td>
-					<a href="#" t:type="PageLink" t:page="user/ReadMore">${message:menu-readmore}</a>
-					</td></tr>
-					
-			</table>
-        </t:parameter>
- 	</t:if>
+</t:if></h3>
 </div>
+<t:if t:test="menuExplanation">
+	<span id="menuExplanation"> ${menuExplanation} </span>
+
+	<t:parameter name="else">
+		<table class="menutable">
+			<t:if t:test="userSessionExists">
+				<!-- <tr><th>SideBar Menu</th></tr> -->
+				<tr>
+					<td><a href="#" t:type="PageLink" t:page="user/UpdateProfile">
+					${message:menu-updateProfile} </a></td>
+				</tr>
+				<tr>
+					<td><a href="#" t:type="PageLink" t:page="user/MyVideos">
+					${message:menu-myVideos} </a></td>
+				</tr>
+				<tr>
+					<td><a href="#" t:type="PageLink" t:page="user/InsertVideo">
+					${message:menu-insertVideo} </a></td>
+				</tr>
+				<tr>
+					<td><a href="#" t:type="PageLink" t:page="user/AboutMe">
+					${message:menu-aboutMe} </a></td>
+				</tr>
+				<tr>
+					<td>${message:menu-myComments}</td>
+				</tr>
+				<tr>
+					<td><a href="#" t:type="PageLink" t:page="user/MyUserComments">
+					____ ${message:menu-myUserComments} </a></td>
+				</tr>
+				<tr>
+					<td><a href="#" t:type="PageLink"
+						t:page="user/MyVideoComments"> _____
+					${message:menu-myVideoComments} </a></td>
+				</tr>
+				<tr>
+					<td><a href="#" t:type="PageLink" t:page="user/Vote">
+					${message:menu-vote} </a></td>
+				</tr>
+				<tr>
+					<td><a href="#" t:type="PageLink" t:page="user/Logout">
+					${message:menu-logout} </a></td>
+				</tr>
+				<t:parameter name="else">
+					<tr>
+						<td><a href="#" t:type="PageLink" t:page="user/Login">${message:menu-authenticate}</a>
+						</td>
+					</tr>
+				</t:parameter>
+			</t:if>
+			<tr>
+				<td>.</td>
+			</tr>
+
+
+
+			<t:if test="isAdmin">
+				<tr>
+					<td><a href="#" t:type="PageLink" t:page="admin/Reports">${message:menu-reports}</a>
+					</td>
+				</tr>
+				<t:parameter name="else">
+					<tr>
+						<td>.</td>
+					</tr>
+				</t:parameter>
+			</t:if>
+
+			<tr>
+				<td>.</td>
+			</tr>
+			<tr>
+				<th>Bases del concurso</th>
+			</tr>
+			<tr>
+				<td>Soltar todo el rollazo, en modo corto, junto con un link a
+				la informacion completa</td>
+			</tr>
+			<tr>
+				<td><a href="#" t:type="PageLink" t:page="user/ReadMore">${message:menu-readmore}</a>
+				</td>
+			</tr>
+
+		</table>
+	</t:parameter>
+</t:if></div>
 
 
 <!-- SearchBar. -->
 <div id="searchbar">
 
 <form t:type="Form" t:id="findVideosForm">
-        <span class="entry">
-			<input t:type="TextField" t:id="keys" value="keys" 
-			t:validate="required" size="24" maxlength="48"/>
-        </span>
-        <span class="button">
-			<input type="submit" value="${message:button-find}"/>
-    	</span>   
+<span class="entry"> <input t:type="TextField" t:id="keys"
+	value="keys" t:validate="required" size="24" maxlength="48" /> </span>
+<span class="button"> <input type="submit"
+	value="${message:button-find}" /> </span>
 </form>
 
 </div>
 
 
 <!-- Most voted -->
-<div id="most_voted">
-
-	<t:if t:test="best.empty">
+<div id="most_voted"><t:if t:test="best.empty">
 	<t:parameter name="else">
 		<table>
 			<tr t:type="Loop" t:source="best" t:value="video">
-				<tr><td class="video-title">${video.title}</td></tr>
-				<td>
-					<a href="#" t:type="PageLink" t:page="ShowVideo" t:context="video.videoId">
-						<img src="${flag}"/>
-					</a>
-				</td>
+			<tr>
+				<td class="video-title">${video.title}</td>
+			</tr>
+			<td><a href="#" t:type="PageLink" t:page="ShowVideo"
+				t:context="video.videoId"> <img src="${flag}" /> </a></td>
 			</tr>
 		</table>
 	</t:parameter>
-	</t:if>
-
-</div>
+</t:if></div>
 
 <!-- Content. -->
-<div id="content">
-  	<t:body/>
-</div>
+<div id="content"><t:body /></div>
 
 
 
@@ -174,9 +161,7 @@
 
 <div id="footer">${message:footer}</div>
 
-<!-- End of "window" id. -->
-
-</div>
+<!-- End of "window" id. --></div>
 
 <!-- End of HTML body. -->
 

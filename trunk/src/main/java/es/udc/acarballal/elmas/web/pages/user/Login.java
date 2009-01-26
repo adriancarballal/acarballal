@@ -21,8 +21,19 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 @AuthenticationPolicy(AuthenticationPolicyType.NON_AUTHENTICATED_USERS)
 public class Login {
 
+	@Inject
+	private Cookies cookies;
+
+	@Component
+	private Form loginForm;
+
 	@Property
 	private String loginName;
+
+	private LoginResult loginResult = null;
+
+	@Inject
+	private Messages messages;
 
 	@Property
 	private String password;
@@ -30,24 +41,27 @@ public class Login {
 	@Property
 	private boolean rememberMyPassword;
 
+	@Inject
+	private UserService userService;
+
 	@SuppressWarnings("unused")
 	@ApplicationState
 	private UserSession userSession;
 
-	@Inject
-	private Cookies cookies;
 
-	@Component
-	private Form loginForm;
+	Object onSuccess() {
 
-	@Inject
-	private Messages messages;
+		userSession.setUserProfileId(loginResult.getUserProfileId());
+		userSession.setFirstName(loginResult.getFirstName());
+		userSession.setPrivileges(loginResult.getPrivileges());
 
-	@Inject
-	private UserService userService;
+		if (rememberMyPassword) {
+			CookiesManager.leaveCookies(cookies, loginName, loginResult
+					.getEncryptedPassword());
+		}
+		return Index.class;
 
-	private LoginResult loginResult = null;
-
+	}
 
 	void onValidateForm() {
 
@@ -62,20 +76,6 @@ public class Login {
 		} catch (IncorrectPasswordException e) {
 			loginForm.recordError(messages.get("error-authenticationFailed"));
 		}
-
-	}
-
-	Object onSuccess() {
-
-		userSession.setUserProfileId(loginResult.getUserProfileId());
-		userSession.setFirstName(loginResult.getFirstName());
-		userSession.setPrivileges(loginResult.getPrivileges());
-
-		if (rememberMyPassword) {
-			CookiesManager.leaveCookies(cookies, loginName, loginResult
-					.getEncryptedPassword());
-		}
-		return Index.class;
 
 	}
 

@@ -12,67 +12,64 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.usercomment.UserComment;
 import es.udc.acarballal.elmas.model.userservice.UserCommentBlock;
 import es.udc.acarballal.elmas.model.userservice.UserService;
+import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
+import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.util.UserSession;
+import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class MyUserComments {
 
+	private final static int COUNT=4;
+	
+	@InjectComponent
+	private Zone comments;
+	
+	@Inject
+	private Locale locale;
+	
 	@Property
 	@Persist
 	private int startIndex;
-	
-	private int count;
-	
-	@Property
-	@Persist
-	private UserCommentBlock userCommentBlock;
 	
 	@SuppressWarnings("unused")
 	@Property
 	private UserComment userComment;
 	
-	@ApplicationState
-	private UserSession userSession;
+	@Property
+	@Persist
+	private UserCommentBlock userCommentBlock;
 	
 	@Inject
 	private UserService userService;
 	
-	@Inject
-	private Locale locale;
+	@ApplicationState
+	private UserSession userSession;
 	
-	@InjectComponent
-	private Zone comments;
-	
-	public List<UserComment> getUserComments(){
-		return userCommentBlock.getUserComments();
+	@OnEvent(component="delete")
+	Object deleteComment(Long commentId){
+		try {
+			userService.deleteUserComment(commentId, userSession.getUserProfileId());
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (InsufficientPrivilegesException e) {
+			return InsufficientPrivileges.class;
+		}
+		fill();
+		return comments;
 	}
 
+	private void fill(){
+		userCommentBlock = 
+			userService.findUserCommentsByCommentator(userSession.getUserProfileId(),
+					this.startIndex, COUNT);
+	}
+	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
-	}
-	
-	@OnEvent(component="next")
-	Object onShowNext(){
-		this.startIndex = this.startIndex + count;
-		fillData();
-		return comments.getBody();
-	}
-	
-	@OnEvent(component="previous")
-	Object onShowPrevious(){
-		this.startIndex = this.startIndex - count;
-		fillData();
-		return comments.getBody();
-	}
-	
-	public Boolean getPreviousLinkContext() {
-		
-		if (startIndex-count >= 0) 
-			return true;
-		return false;
-		
 	}
 	
 	public Boolean getNextLinkContext() {
@@ -83,14 +80,32 @@ public class MyUserComments {
 		
 	}
 	
-	void onActivate() {
-		count=1;
-		fillData();
+	public Boolean getPreviousLinkContext() {
+		
+		if (startIndex-COUNT >= 0) 
+			return true;
+		return false;
+		
 	}
 	
-	private void fillData(){
-		userCommentBlock = 
-			userService.findUserCommentsByCommentator(userSession.getUserProfileId(),
-					this.startIndex, this.count);
+	public List<UserComment> getUserComments(){
+		return userCommentBlock.getUserComments();
+	}
+	void onActivate() {
+		fill();
+	}
+	
+	@OnEvent(component="next")
+	Object onShowNext(){
+		this.startIndex = this.startIndex + COUNT;
+		fill();
+		return comments.getBody();
+	}
+	
+	@OnEvent(component="previous")
+	Object onShowPrevious(){
+		this.startIndex = this.startIndex - COUNT;
+		fill();
+		return comments.getBody();
 	}
 }

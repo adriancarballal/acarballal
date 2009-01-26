@@ -25,9 +25,14 @@ public class PasswordEncrypter {
 	private final static int A_ASCII_CODE = 65;
 	private final static int Z_ASCII_CODE = 90;
 	private final static int NUMBER_OF_LETTERS = Z_ASCII_CODE - A_ASCII_CODE
-			+ 1;
+			+ 1;	
 
-	private PasswordEncrypter() {
+	public final static String crypt(String clearPassword) {
+
+		String salt = generateRandomSalt();
+
+		return jcrypt.crypt(salt, clearPassword);
+
 	}
 
 	private final static String generateRandomSalt() {
@@ -44,14 +49,6 @@ public class PasswordEncrypter {
 
 	}
 
-	public final static String crypt(String clearPassword) {
-
-		String salt = generateRandomSalt();
-
-		return jcrypt.crypt(salt, clearPassword);
-
-	}
-
 	public final static boolean isClearPasswordCorrect(String clearPassword,
 			String encryptedPassword) {
 
@@ -60,6 +57,9 @@ public class PasswordEncrypter {
 
 		return encryptedClearPassword.equals(encryptedPassword);
 
+	}
+
+	private PasswordEncrypter() {
 	}
 
 }

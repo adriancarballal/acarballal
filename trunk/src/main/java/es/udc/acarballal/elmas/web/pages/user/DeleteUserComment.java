@@ -11,13 +11,14 @@ import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
+//TODO Esta clase hay que eliminarla
 public class DeleteUserComment {
 
-	@ApplicationState
-	private UserSession userSession;
-	
 	@Inject
 	private UserService userService;
+	
+	@ApplicationState
+	private UserSession userSession;
 	
 	Object onActivate(Long commentId){
 		try {

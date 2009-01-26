@@ -15,29 +15,35 @@ import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class AboutMe {
 	
-	private int startIndex = 0;
 	private int count = 4;
-	private UserCommentBlock userCommentBlock;
+	@Inject
+	private Locale locale;
+	private int startIndex = 0;
 	
 	@SuppressWarnings("unused")
 	@Property
 	private UserComment userComment;
 	
-	@ApplicationState
-	private UserSession userSession;
+	private UserCommentBlock userCommentBlock;
 	
 	@Inject
 	private UserService userService;
 	
-	@Inject
-	private Locale locale;
+	@ApplicationState
+	private UserSession userSession;
 	
-	public List<UserComment> getUserComments(){
-		return userCommentBlock.getUserComments();
-	}
-
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
+	}
+
+	public Object[] getNextLinkContext() {
+		
+		if (userCommentBlock.getExistMoreUserComments()) {
+			return new Object[] {startIndex+count, count};
+		} else {
+			return null;
+		}
+		
 	}
 	
 	public Object[] getPreviousLinkContext() {
@@ -50,18 +56,8 @@ public class AboutMe {
 		
 	}
 	
-	public Object[] getNextLinkContext() {
-		
-		if (userCommentBlock.getExistMoreUserComments()) {
-			return new Object[] {startIndex+count, count};
-		} else {
-			return null;
-		}
-		
-	}
-	
-	Object[] onPassivate() {
-		return new Object[] {startIndex, count};
+	public List<UserComment> getUserComments(){
+		return userCommentBlock.getUserComments();
 	}
 	
 	void onActivate(int startIndex, int count) {
@@ -70,6 +66,10 @@ public class AboutMe {
 		userCommentBlock = 
 			userService.findUserCommentsByCommented(userSession.getUserProfileId(), 
 					startIndex, count);
+	}
+	
+	Object[] onPassivate() {
+		return new Object[] {startIndex, count};
 	}
 	
 }

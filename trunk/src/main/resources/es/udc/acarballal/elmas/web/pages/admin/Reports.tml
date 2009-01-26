@@ -5,40 +5,32 @@
 
 <table>
 	<tr>
-		<td>
-		<t:if t:test="existVideoComplaints">
-		<a href="#" t:type="PageLink" t:page="admin/ShowVideoComplaint">
-			${message:videoComplaints} (${totalVideoComplaints})
-		</a>
-		<t:parameter name="else">
+		<td><t:if t:test="existVideoComplaints">
+			<a href="#" t:type="PageLink" t:page="admin/ShowVideoComplaint">
+			${message:videoComplaints} (${totalVideoComplaints}) </a>
+			<t:parameter name="else">
 			${message:noVideoComplaints}
 		</t:parameter>
-		</t:if>
-		</td>		
+		</t:if></td>
 	</tr>
 	<tr>
-		<td>
-		<t:if t:test="existVideoCommentComplaints">
-		<a href="#" t:type="PageLink" t:page="admin/ShowVideoCommentComplaint">
-			${message:videoComplaints} (${totalVideoCommentComplaints})
-		</a>
-		<t:parameter name="else">
+		<td><t:if t:test="existVideoCommentComplaints">
+			<a href="#" t:type="PageLink"
+				t:page="admin/ShowVideoCommentComplaint">
+			${message:videoComplaints} (${totalVideoCommentComplaints}) </a>
+			<t:parameter name="else">
 			${message:noVideoCommentComplaints}
 		</t:parameter>
-		</t:if>
-		</td>
+		</t:if></td>
 	</tr>
 	<tr>
-	<td>
-		<t:if t:test="existUserCommentComplaints">
-		<a href="#" t:type="PageLink" t:page="admin/ShowUserCommentComplaint">
-			${message:userComplaints} (${totalUserCommentComplaints})
-		</a>
-		<t:parameter name="else">
+		<td><t:if t:test="existUserCommentComplaints">
+			<a href="#" t:type="PageLink" t:page="admin/ShowUserCommentComplaint">
+			${message:userComplaints} (${totalUserCommentComplaints}) </a>
+			<t:parameter name="else">
 			${message:noUserCommentComplaints}
 		</t:parameter>
-		</t:if>
-		</td>
+		</t:if></td>
 	</tr>
 </table>
 
@@ -50,20 +42,26 @@ ${message:obtainVideos}
 <table>
 
 	<t:radiogroup t:value="findType">
-   		<tr><td>${message:weekly}<input type="radio" t:type="radio" t:value="weekly"/></td></tr>
-   		<tr><td>${message:all}<input type="radio" t:type="radio" t:value="all"/></td></tr>
-   	</t:radiogroup>
+		<tr>
+			<td>${message:weekly}<input type="radio" t:type="radio"
+				t:value="weekly" /></td>
+		</tr>
+		<tr>
+			<td>${message:all}<input type="radio" t:type="radio"
+				t:value="all" /></td>
+		</tr>
+	</t:radiogroup>
 
-<tr><td>
-	${message:findNumber}
-	<input t:type="TextField" t:id="findNumber" t:validate="required, min=1"
-				   size="3" maxlength="3"/>
-</td></tr>
+	<tr>
+		<td>${message:findNumber} <input t:type="TextField"
+			t:id="findNumber" t:validate="required, min=1" size="3" maxlength="3" />
+		</td>
+	</tr>
 
-<tr><td>
-	<input type="submit" value="${message:button-find}"/>
-</td></tr>
-	
+	<tr>
+		<td><input type="submit" value="${message:button-find}" /></td>
+	</tr>
+
 </table>
 </form>
 

@@ -14,43 +14,35 @@ import es.udc.acarballal.elmas.web.pages.admin.Reports.SHOW_BEST_TYPE;
 
 public class ShowBestVideos {
 	
-	@SuppressWarnings("unused")
-	@Property
-	private List<Video> videos;
+	private int count = 10;
 	
+	@Inject
+	private Locale locale;
+	
+	private SHOW_BEST_TYPE type;
 	@SuppressWarnings("unused")
 	@Property
 	private Video video;
 	
-	private SHOW_BEST_TYPE type;
-	private int count = 10;
+	@SuppressWarnings("unused")
+	@Property
+	private List<Video> videos;
 	
 	@Inject
 	private VideoService videoService;
-	
-	@Inject
-	private Locale locale;
-
-	public SHOW_BEST_TYPE getType() {
-		return type;
-	}
-
-	public void setType(SHOW_BEST_TYPE type) {
-		this.type = type;
-	}
 
 	public int getCount() {
 		return count;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public DateFormat getDateFormat() {
+		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
 
-	Object[] onPassivate() {
-		return new Object[] {type, count};
+	public SHOW_BEST_TYPE getType() {
+		return type;
 	}
-	
+
 	void onActivate(SHOW_BEST_TYPE type, int count) {
 		this.type = type;
 		this.count = count;
@@ -76,7 +68,15 @@ public class ShowBestVideos {
 		}
 	}
 
-	public DateFormat getDateFormat() {
-		return DateFormat.getDateInstance(DateFormat.LONG, locale);
+	Object[] onPassivate() {
+		return new Object[] {type, count};
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public void setType(SHOW_BEST_TYPE type) {
+		this.type = type;
 	}
 }

@@ -2,77 +2,58 @@
 	t:type="Layout" t:pageTitle="${message:title}">
 
 <t:if t:test="userComments.empty">
-
 	<p>${message:nocomments}.</p>
-	
-<t:parameter name="else">
-
-	<p>${message:myComments}.</p>
-
-	<table class="comments">
-		<tr t:type="Loop" t:source="userComments" t:value="userComment">
+	<t:parameter name="else">
+		<p>${message:myComments}.</p>
+		<table class="comments">
+			<tr t:type="Loop" t:source="userComments" t:value="userComment">
 			<tr>
 				<td class="user-comment">${userComment.comment}</td>
 			</tr>
-			<tr><td class="commentator-info">
-				${message:user-header}: ${userComment.commentator.loginName}
-			 - 
-				${message:date}: <t:output value="userComment.date.time" format="dateFormat"/>
-			<t:if t:test="userSessionExists">
+			<tr>
+				<td class="commentator-info">${message:user-header}:
+				${userComment.commentator.loginName} - ${message:date}: <t:output
+					value="userComment.date.time" format="dateFormat" /> <t:if
+					t:test="userSessionExists">
 			 - 
 				<a href="#" t:type="PageLink" page="user/ComplaintUserComment"
-		    		context="userComment.commentId">
-					${message:complaintUserComment}		    	
-	    		</a>
-
-			</t:if>
-				</td>
+						context="userComment.commentId">
+					${message:complaintUserComment} </a>
+				</t:if></td>
 			</tr>
-		</tr>
-        	
-	</table>
-</t:parameter>
+			</tr>
+		</table>
+	</t:parameter>
 </t:if>
 
 <t:if t:test="userSessionExists">
-	<form t:type="Form" t:id="commentForm">
-       	<t:errors/>
-       	<table>
+	<form t:type="Form" t:id="commentForm"><t:errors />
+	<table>
 		<tr><td>${message:addComment}</td></tr>
-        <tr><td>
-        	<span class="entry">    
-            <input type="text" t:id="comment" t:type="TextArea"
-			       t:validate="required" value="comment" style="overflow:hidden;"
-			       wrap="hard" maxlength="200" cols="30" rows="7" />
-        	</span>
-        </td></tr>
-       	<tr><td><input type="submit" value="${message:addCommentButton}"/></td></tr>
-      	</table>
+		<tr>
+			<td><span class="entry"> <input type="text"
+				t:id="comment" t:type="TextArea" t:validate="required"
+				value="comment" style="overflow: hidden;" wrap="hard"
+				maxlength="200" cols="30" rows="7" /> </span></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="${message:addCommentButton}" /></td>
+		</tr>
+	</table>
 	</form>
-</t:if>	
-		
-	<!-- "Previous" and "Next" links. -->
-		
-	<div class="previousNextLinks">
-	<span class="previousLink">
-		<t:if t:test="previousLinkContext">
-			<a href="#" t:type="PageLink" page="ShowUserComments"
-	    		context="previousLinkContext">
-	    		${message:link-previous}
-	    	</a>
-		</t:if>
-	</span>
-	
-	<span class="nextLink">
-		<t:if t:test="nextLinkContext">
-			<a href="#" t:type="PageLink" page="ShowUserComments"
-	    		context="nextLinkContext">
-	    		${message:link-next}
-	    	</a>
-		</t:if>
-	</span>
-	</div>
-	
+</t:if>
 
-   
+<!-- "Previous" and "Next" links. -->
+
+<div class="previousNextLinks"><span class="previousLink">
+<t:if t:test="previousLinkContext">
+	<a href="#" t:type="PageLink" page="ShowUserComments"
+		context="previousLinkContext"> ${message:link-previous} </a>
+</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
+	<a href="#" t:type="PageLink" page="ShowUserComments"
+		context="nextLinkContext"> ${message:link-next} </a>
+</t:if> </span></div>
+
+
+
 </html>

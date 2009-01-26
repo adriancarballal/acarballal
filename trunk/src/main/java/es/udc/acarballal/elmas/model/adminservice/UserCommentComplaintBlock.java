@@ -6,8 +6,8 @@ import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaint;
 
 public class UserCommentComplaintBlock {
 	
-	private List<UserCommentComplaint> userCommentComplaints;
 	private boolean existMoreUserCommentComplaints;
+	private List<UserCommentComplaint> userCommentComplaints;
 	
 	public UserCommentComplaintBlock(List<UserCommentComplaint> userCommentsComplaints, 
 			boolean existMoreUserCommentComplaints){
@@ -15,12 +15,12 @@ public class UserCommentComplaintBlock {
 		this.existMoreUserCommentComplaints = existMoreUserCommentComplaints;
 	}
 
-	public List<UserCommentComplaint> getUserCommentComplaints() {
-		return userCommentComplaints;
-	}
-
 	public boolean getExistMoreUserCommentComplaints() {
 		return existMoreUserCommentComplaints;
+	}
+
+	public List<UserCommentComplaint> getUserCommentComplaints() {
+		return userCommentComplaints;
 	}
 
 	

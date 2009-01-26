@@ -20,18 +20,6 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 @AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
 public class ChangePassword {
 
-	@Property
-	private String oldPassword;
-
-	@Property
-	private String newPassword;
-
-	@Property
-	private String retypeNewPassword;
-
-	@ApplicationState
-	private UserSession userSession;
-
 	@Component
 	private Form changePasswordForm;
 
@@ -41,8 +29,27 @@ public class ChangePassword {
 	@Inject
 	private Messages messages;
 
+	@Property
+	private String newPassword;
+
+	@Property
+	private String oldPassword;
+
+	@Property
+	private String retypeNewPassword;
+
 	@Inject
 	private UserService userService;
+
+	@ApplicationState
+	private UserSession userSession;
+
+	Object onSuccess() {
+
+		CookiesManager.removeCookies(cookies);
+		return Index.class;
+
+	}
 
 	void onValidateForm() throws InstanceNotFoundException {
 
@@ -64,13 +71,6 @@ public class ChangePassword {
 			}
 
 		}
-
-	}
-
-	Object onSuccess() {
-
-		CookiesManager.removeCookies(cookies);
-		return Index.class;
 
 	}
 

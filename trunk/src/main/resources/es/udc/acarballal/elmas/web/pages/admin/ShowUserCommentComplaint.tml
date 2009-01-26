@@ -1,65 +1,45 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
-	
+
+<t:zone t:id="complaints">
+	<p>${message:title}</p>
 	<t:if t:test="userCommentComplaints.empty">
-
 		<p>${message:noUserCommentComplaints}.</p>
-		<p>
-			<a href="#" t:type="PageLink" page="admin/Reports">
-				${message:return}		    	
-	    	</a>
-		</p>
-		
-	<t:parameter name="else">
+		<p><a href="#" t:type="PageLink" page="admin/Reports">${message:return}</a></p>
+		<t:parameter name="else">
+			<table class="comments">
+				<tr t:type="Loop" t:source="userCommentComplaints"
+					t:value="userCommentComplaint">
+				<tr>
+					<td class="user-comment">${userCommentComplaint.reference.comment}</td>
+				</tr>
+				<tr>
+					<td class="commentator-info">${message:user-header}:
+					${userCommentComplaint.reference.commentator.loginName} -
+					${message:date}: <t:output
+						value="userCommentComplaint.reference.date.time"
+						format="dateFormat" /> - 
+				<t:actionLink t:id="deleteComment"
+						zone="complaints" context="userCommentComplaint.complaintId">
+				 	${message:acceptComplaint}
+				</t:actionLink> | 
+				<t:actionLink t:id="deleteComplaint" zone="complaints"
+						context="userCommentComplaint.complaintId">
+			 		${message:rejectComplaint}
+			 	</t:actionLink></td>
+				</tr>
+				</tr>
+			</table>
+		</t:parameter>
+	</t:if>
 
-	<table class="comments">
-		<tr t:type="Loop" t:source="userCommentComplaints" t:value="userCommentComplaint">
-			<tr>
-				<td class="user-comment">${userCommentComplaint.reference.comment}</td>
-			</tr>
-			<tr><td class="commentator-info">
-				${message:user-header}: ${userCommentComplaint.reference.commentator.loginName}
-			 - 
-				${message:date}: <t:output value="userCommentComplaint.reference.date.time" format="dateFormat"/>
-			 - 
-			 <a href="#" t:type="PageLink" page="admin/DeleteUserComment"
-		    		context="userCommentComplaint.reference.commentId">
-					${message:acceptComplaint}		    	
-	    		</a>
-	    	 | 
-	    		<a href="#" t:type="PageLink" page="admin/DeleteUserCommentComplaint"
-		    		context="userCommentComplaint.complaintId">
-		    		${message:rejectComplaint}
-	    		</a>
-			</td></tr>
-		</tr>
-        	
-	</table>
-</t:parameter>
-</t:if>
-
-		
 	<!-- "Previous" and "Next" links. -->
-		
-	<div class="previousNextLinks">
-	<span class="previousLink">
-		<t:if t:test="previousLinkContext">
-			<a href="#" t:type="PageLink" page="admin/ShowUserCommentComplaint"
-	    		context="previousLinkContext">
-	    		${message:link-previous}
-	    	</a>
-		</t:if>
-	</span>
-	<span class="nextLink">
-		<t:if t:test="nextLinkContext">
-			<a href="#" t:type="PageLink" page="admin/ShowUserCommentComplaint"
-	    		context="nextLinkContext">
-	    		${message:link-next}
-	    	</a>
-		</t:if>
-	</span>
-	</div>
-	
+	<div class="previousNextLinks"><span class="previousLink"><t:if
+		t:test="previousLinkContext">
+		<t:actionLink t:id="previous" zone="complaints">${message:link-previous}</t:actionLink>
+	</t:if></span> <span class="nextLink"><t:if t:test="nextLinkContext">
+		<t:actionLink t:id="next" zone="complaints">${message:link-next}</t:actionLink>
+	</t:if></span></div>
 
-   
-</html>	
+</t:zone>
+</html>

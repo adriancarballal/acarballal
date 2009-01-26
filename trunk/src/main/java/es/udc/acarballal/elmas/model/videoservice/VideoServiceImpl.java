@@ -27,38 +27,13 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 @Transactional
 public class VideoServiceImpl implements VideoService{
 
-	private VideoDao videoDao;
 	private UserProfileDao userProfileDao;
-	private VideoCommentDao videoCommentDao;
-	private VoteDao voteDao;
-	private VideoComplaintDao videoComplaintDao;
 	private VideoCommentComplaintDao videoCommentComplaintDao;
+	private VideoCommentDao videoCommentDao;
+	private VideoComplaintDao videoComplaintDao;
+	private VideoDao videoDao;
+	private VoteDao voteDao;
 
-	public void setVideoDao(VideoDao videoDao) {
-		this.videoDao = videoDao;
-	}
-	
-	public void setUserProfileDao(UserProfileDao userProfileDao){
-		this.userProfileDao = userProfileDao;
-	}
-	
-	public void setVideoCommentDao(VideoCommentDao videoCommentDao){
-		this.videoCommentDao = videoCommentDao;
-	}
-	
-	public void setVoteDao(VoteDao voteDao){
-		this.voteDao = voteDao;
-	}
-	
-	public void setVideoComplaintDao(VideoComplaintDao videoComplaintDao){
-		this.videoComplaintDao = videoComplaintDao;
-	}
-	
-	public void setVideoCommentComplaintDao(
-			VideoCommentComplaintDao videoCommentComplaintDao){
-		this.videoCommentComplaintDao = videoCommentComplaintDao;
-	}
-	
 	public Long addVideo(long userId, String title, String comment, 
 			String snapshot,String original, String flvVideo, 
 			String mp4Video, Calendar date)
@@ -73,21 +48,6 @@ public class VideoServiceImpl implements VideoService{
 				flvVideo, mp4Video, date);
 		videoDao.create(video);
 		return video.getVideoId();
-	}
-	
-	@Transactional(readOnly = true)
-	public Video findVideoById(long videoId) throws InstanceNotFoundException{
-		return videoDao.find(videoId);
-	}
-	
-	public void deleteVideo(long videoId, long userId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
-
-		UserProfile userProfile = userProfileDao.find(userId);
-		if(userProfile.getPrivileges()!=Privileges_TYPES.ADMIN){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName()); 
-		}
-		videoDao.remove(videoId);
 	}
 	
 	public Long commentVideo(Long commentatorId, Long videoId, 
@@ -110,6 +70,42 @@ public class VideoServiceImpl implements VideoService{
 		return videoComment.getCommentId();
 	}
 	
+	public void complaintOfVideo(Long videoId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		Video video = videoDao.find(videoId);
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		VideoComplaint complaint = 
+			new VideoComplaint(video, userProfile, Calendar.getInstance());
+		videoComplaintDao.create(complaint);
+	}
+	
+	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		VideoComment comment = videoCommentDao.find(videoCommentId);
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		VideoCommentComplaint complaint =
+			new VideoCommentComplaint(comment, userProfile, Calendar.getInstance());
+		videoCommentComplaintDao.create(complaint);
+	}
+	
+	public void deleteVideo(long videoId, long userId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+
+		UserProfile userProfile = userProfileDao.find(userId);
+		if(userProfile.getPrivileges()!=Privileges_TYPES.ADMIN){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName()); 
+		}
+		videoDao.remove(videoId);
+	}
+	
 	//Añadir un adminService para este servicio?
 	public void deleteVideoComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
@@ -124,22 +120,57 @@ public class VideoServiceImpl implements VideoService{
 
 	}
 	
-	public void voteVideo(Long userProfileId, Long videoId, VOTE_TYPES vote, 
-			Calendar date) throws InstanceNotFoundException, 
-			InsufficientPrivilegesException, InvalidOperationException{
+	@Transactional(readOnly = true)
+	public List<Video> findMostVoted(Calendar startDate, Calendar endDate, int count){
+		return voteDao.findMostVoted(startDate, endDate, count);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Video> findMostVoted(int count){
+		return voteDao.findMostVoted(count);
+	}
+	
+	@Transactional(readOnly = true)
+	public Video findRandomVotableVideo(Long userProfileId, int preSelected) throws InstanceNotFoundException{
+		userProfileDao.find(userProfileId);
+		return videoDao.findRandomVotableVideo(userProfileId, preSelected);
+	}
+	
+	@Transactional(readOnly = true)
+	public Video findVideoById(long videoId) throws InstanceNotFoundException{
+		return videoDao.find(videoId);
+	}
+	
+	@Transactional(readOnly = true)
+	public VideoCommentBlock findVideoCommentsByUserId(Long userId, 
+			int startIndex, int count){
 		
-		UserProfile userProfile = userProfileDao.find(userProfileId);
-		if(userProfile.getPrivileges()!=Privileges_TYPES.VOTER){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		List<VideoComment> comments = 
+			videoCommentDao.findVideoCommentsByUserId(userId, startIndex, count+1);
+
+		boolean existMoreVideoComments = comments.size() == (count + 1);
+
+		if (existMoreVideoComments) {
+			comments.remove(comments.size() - 1);
 		}
-		Video video = videoDao.find(videoId);
-		if(video.getUserProfile().equals(userProfile)){
-			throw new InvalidOperationException("Cannot vote your own video");
+		
+		return new VideoCommentBlock(comments, existMoreVideoComments);
+	}
+	
+	@Transactional(readOnly = true)
+	public VideoCommentBlock findVideoCommentsByVideoId(Long videoId, 
+			int startIndex, int count){
+		
+		List<VideoComment> comments = 
+			videoCommentDao.findVideoCommentsByVideoId(videoId, startIndex, count+1);
+
+		boolean existMoreVideoComments = comments.size() == (count + 1);
+
+		if (existMoreVideoComments) {
+			comments.remove(comments.size() - 1);
 		}
-		Vote newVote = new Vote(video, userProfile, vote, date);
 		
-		voteDao.create(newVote);
-		
+		return new VideoCommentBlock(comments, existMoreVideoComments);
 	}
 	
 	@Transactional(readOnly = true)
@@ -173,61 +204,59 @@ public class VideoServiceImpl implements VideoService{
 	}
 		
 	@Transactional(readOnly = true)
-	public VideoCommentBlock findVideoCommentsByVideoId(Long videoId, 
-			int startIndex, int count){
-		
-		List<VideoComment> comments = 
-			videoCommentDao.findVideoCommentsByVideoId(videoId, startIndex, count+1);
-
-		boolean existMoreVideoComments = comments.size() == (count + 1);
-
-		if (existMoreVideoComments) {
-			comments.remove(comments.size() - 1);
-		}
-		
-		return new VideoCommentBlock(comments, existMoreVideoComments);
+	public int getNumberVotesRemaining(Long userProfileId) throws InstanceNotFoundException{
+		userProfileDao.find(userProfileId);
+		return voteDao.votesRemaining(userProfileId, Calendar.getInstance());
 	}
 
 	@Transactional(readOnly = true)
-	public VideoCommentBlock findVideoCommentsByUserId(Long userId, 
-			int startIndex, int count){
-		
-		List<VideoComment> comments = 
-			videoCommentDao.findVideoCommentsByUserId(userId, startIndex, count+1);
-
-		boolean existMoreVideoComments = comments.size() == (count + 1);
-
-		if (existMoreVideoComments) {
-			comments.remove(comments.size() - 1);
-		}
-		
-		return new VideoCommentBlock(comments, existMoreVideoComments);
+	public boolean isVideoVotable(Long videoId, Long userProfileId) 
+			throws InstanceNotFoundException{
+		userProfileDao.find(userProfileId);
+		return voteDao.alreadyVoted(videoId, userProfileId);
 	}
 	
-	public void complaintOfVideo(Long videoId, Long userProfileId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
+	public void setUserProfileDao(UserProfileDao userProfileDao){
+		this.userProfileDao = userProfileDao;
+	}
+	
+	public void setVideoCommentComplaintDao(
+			VideoCommentComplaintDao videoCommentComplaintDao){
+		this.videoCommentComplaintDao = videoCommentComplaintDao;
+	}
+	
+	public void setVideoCommentDao(VideoCommentDao videoCommentDao){
+		this.videoCommentDao = videoCommentDao;
+	}
+	
+	public void setVideoComplaintDao(VideoComplaintDao videoComplaintDao){
+		this.videoComplaintDao = videoComplaintDao;
+	}
+	
+	public void setVideoDao(VideoDao videoDao) {
+		this.videoDao = videoDao;
+	}
+	
+	public void setVoteDao(VoteDao voteDao){
+		this.voteDao = voteDao;
+	}
+	
+	public void voteVideo(Long userProfileId, Long videoId, VOTE_TYPES vote, 
+			Calendar date) throws InstanceNotFoundException, 
+			InsufficientPrivilegesException, InvalidOperationException{
 		
 		UserProfile userProfile = userProfileDao.find(userProfileId);
+		if(userProfile.getPrivileges()!=Privileges_TYPES.VOTER){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
 		Video video = videoDao.find(videoId);
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		if(video.getUserProfile().equals(userProfile)){
+			throw new InvalidOperationException("Cannot vote your own video");
 		}
-		VideoComplaint complaint = 
-			new VideoComplaint(video, userProfile, Calendar.getInstance());
-		videoComplaintDao.create(complaint);
-	}
-	
-	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		Vote newVote = new Vote(video, userProfile, vote, date);
 		
-		UserProfile userProfile = userProfileDao.find(userProfileId);
-		VideoComment comment = videoCommentDao.find(videoCommentId);
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
-		}
-		VideoCommentComplaint complaint =
-			new VideoCommentComplaint(comment, userProfile, Calendar.getInstance());
-		videoCommentComplaintDao.create(complaint);
+		voteDao.create(newVote);
+		
 	}
 	
 	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
@@ -244,34 +273,5 @@ public class VideoServiceImpl implements VideoService{
 		}
 		Vote newVote = new Vote(video, userProfile, vote, Calendar.getInstance());
 		voteDao.create(newVote);
-	}
-	
-	@Transactional(readOnly = true)
-	public boolean isVideoVotable(Long videoId, Long userProfileId) 
-			throws InstanceNotFoundException{
-		userProfileDao.find(userProfileId);
-		return voteDao.alreadyVoted(videoId, userProfileId);
-	}
-	
-	@Transactional(readOnly = true)
-	public int getNumberVotesRemaining(Long userProfileId) throws InstanceNotFoundException{
-		userProfileDao.find(userProfileId);
-		return voteDao.votesRemaining(userProfileId, Calendar.getInstance());
-	}
-	
-	@Transactional(readOnly = true)
-	public Video findRandomVotableVideo(Long userProfileId, int preSelected) throws InstanceNotFoundException{
-		userProfileDao.find(userProfileId);
-		return videoDao.findRandomVotableVideo(userProfileId, preSelected);
-	}
-	
-	@Transactional(readOnly = true)
-	public List<Video> findMostVoted(Calendar startDate, Calendar endDate, int count){
-		return voteDao.findMostVoted(startDate, endDate, count);
-	}
-	
-	@Transactional(readOnly = true)
-	public List<Video> findMostVoted(int count){
-		return voteDao.findMostVoted(count);
 	}
 }
