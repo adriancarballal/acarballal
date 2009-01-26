@@ -1,14 +1,11 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<p class="welcome">
-    ${message:welcome}
-</p>
+<p class="welcome">${message:welcome}</p>
 
-<p>
-	<script type="text/javascript" src="${asset:context:/player/swfobject.js}"></script>
-	<embed src ="${asset:context:/player/player.swf}" 
-		width="320" height="260" allowfullscreen="false" />
-</p>
-   
+<p><script type="text/javascript"
+	src="${asset:context:/player/swfobject.js}"></script> <embed
+	src="${asset:context:/player/player.swf}" width="320" height="260"
+	allowfullscreen="false" /></p>
+
 </html>

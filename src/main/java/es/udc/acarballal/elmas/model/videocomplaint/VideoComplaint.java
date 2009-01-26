@@ -21,10 +21,10 @@ import es.udc.acarballal.elmas.model.video.Video;
 @org.hibernate.annotations.Entity(mutable=false)
 public class VideoComplaint {
 	
-	private Long complaintId;
-	private Video reference;
 	private UserProfile complainer;
+	private Long complaintId;
 	private Calendar date;
+	private Video reference;
 	
 	public VideoComplaint(){ }
 	
@@ -32,6 +32,12 @@ public class VideoComplaint {
 		this.reference = ref;
 		this.complainer = user;
 		this.date = date;
+	}
+
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@JoinColumn(name="complainer")
+	public UserProfile getComplainer() {
+		return complainer;
 	}
 
 	@Column(name = "id")
@@ -43,9 +49,10 @@ public class VideoComplaint {
 	public Long getComplaintId() {
 		return complaintId;
 	}
-
-	public void setComplaintId(Long complaintId) {
-		this.complaintId = complaintId;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	public Calendar getDate() {
+		return date;
 	}
 	
 	@ManyToOne(optional=false, fetch=FetchType.EAGER)
@@ -53,27 +60,20 @@ public class VideoComplaint {
 	public Video getReference() {
 		return reference;
 	}
-	
-	public void setReference(Video reference) {
-		this.reference = reference;
-	}
-
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
-	@JoinColumn(name="complainer")
-	public UserProfile getComplainer() {
-		return complainer;
-	}
 
 	public void setComplainer(UserProfile complainer) {
 		this.complainer = complainer;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	public Calendar getDate() {
-		return date;
+	public void setComplaintId(Long complaintId) {
+		this.complaintId = complaintId;
 	}
 
 	public void setDate(Calendar date) {
 		this.date = date;
+	}
+
+	public void setReference(Video reference) {
+		this.reference = reference;
 	}
 }

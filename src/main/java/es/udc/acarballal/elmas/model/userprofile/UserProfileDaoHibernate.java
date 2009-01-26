@@ -12,6 +12,13 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class UserProfileDaoHibernate extends
 		GenericDaoHibernate<UserProfile, Long> implements UserProfileDao {
 
+	public List<UserProfile> findAllAdmin(int startIndex, int count){
+		return getSession().createQuery("SELECT u FROM UserProfile u " +
+				"WHERE u.privileges=:privileges").
+				setParameter("privileges", Privileges_TYPES.ADMIN).		
+				setFirstResult(startIndex).setMaxResults(count).list();
+	}
+	
 	public UserProfile findByLoginName(String loginName) throws InstanceNotFoundException {
 		UserProfile userProfile = (UserProfile) getSession().createQuery(
 				"SELECT u FROM UserProfile u WHERE u.loginName = :loginName")
@@ -22,13 +29,6 @@ public class UserProfileDaoHibernate extends
 		} else {
 			return userProfile;
 		}
-	}
-	
-	public List<UserProfile> findAllAdmin(int startIndex, int count){
-		return getSession().createQuery("SELECT u FROM UserProfile u " +
-				"WHERE u.privileges=:privileges").
-				setParameter("privileges", Privileges_TYPES.ADMIN).		
-				setFirstResult(startIndex).setMaxResults(count).list();
 	}
 	
 	public List<UserProfile> findNonAdmin(int startIndex, int count){

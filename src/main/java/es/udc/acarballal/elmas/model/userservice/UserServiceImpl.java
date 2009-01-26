@@ -22,91 +22,9 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	private UserProfileDao userProfileDao;
-	private UserCommentDao userCommentDao;
 	private UserCommentComplaintDao userCommentComplaintDao;
-
-	public void setUserProfileDao(UserProfileDao userProfileDao) {
-		this.userProfileDao = userProfileDao;
-	}
-	
-	public void setUserCommentDao(UserCommentDao userCommentDao) {
-		this.userCommentDao = userCommentDao;
-	}
-	
-	public void setUserCommentComplaintDao(
-			UserCommentComplaintDao userCommentComplaintDao){
-		this.userCommentComplaintDao = userCommentComplaintDao;
-	}
-	
-	public Long registerUser(String loginName, String clearPassword,
-			UserProfileDetails userProfileDetails)
-			throws DuplicateInstanceException {
-
-		try {
-			userProfileDao.findByLoginName(loginName);
-			throw new DuplicateInstanceException(loginName, UserProfile.class
-					.getName());
-		} catch (InstanceNotFoundException e) {
-			String encryptedPassword = PasswordEncrypter.crypt(clearPassword);
-
-			UserProfile userProfile = new UserProfile(loginName,
-					encryptedPassword, userProfileDetails.getFirstName(),
-					userProfileDetails.getLastName(), userProfileDetails
-							.getEmail());
-
-			userProfileDao.create(userProfile);
-			return userProfile.getUserProfileId();
-		}
-
-	}
-
-	@Transactional(readOnly = true)
-	public LoginResult login(String loginName, String password,
-			boolean passwordIsEncrypted) throws InstanceNotFoundException,
-			IncorrectPasswordException {
-
-		UserProfile userProfile = userProfileDao.findByLoginName(loginName);
-		String storedPassword = userProfile.getEncryptedPassword();
-
-		if (passwordIsEncrypted) {
-			if (!password.equals(storedPassword)) {
-				throw new IncorrectPasswordException(loginName);
-			}
-		} else {
-			if (!PasswordEncrypter.isClearPasswordCorrect(password,
-					storedPassword)) {
-				throw new IncorrectPasswordException(loginName);
-			}
-		}
-		return new LoginResult(userProfile.getUserProfileId(), userProfile
-				.getFirstName(), storedPassword, userProfile.getPrivileges());
-
-	}
-
-	@Transactional(readOnly = true)
-	public UserProfileDetails findUserProfileDetails(Long userProfileId)
-			throws InstanceNotFoundException {
-		UserProfile userProfile;
-
-		userProfile = userProfileDao.find(userProfileId);
-
-		return new UserProfileDetails(userProfile.getFirstName(), userProfile
-				.getLastName(), userProfile.getEmail());
-	}
-
-	public void updateUserProfileDetails(Long userProfileId,
-			UserProfileDetails userProfileDetails)
-			throws InstanceNotFoundException {
-
-		UserProfile userProfile = userProfileDao.find(userProfileId);
-		userProfile.setFirstName(userProfileDetails.getFirstName());
-		userProfile.setLastName(userProfileDetails.getLastName());
-		userProfile.setEmail(userProfileDetails.getEmail());
-
-		userProfileDao.update(userProfile);
-
-	}
+	private UserCommentDao userCommentDao;
+	private UserProfileDao userProfileDao;
 
 	public void changePassword(Long userProfileId, String oldClearPassword,
 			String newClearPassword) throws IncorrectPasswordException,
@@ -181,7 +99,20 @@ public class UserServiceImpl implements UserService {
 		userCommentDao.create(userComment);
 		return userComment.getCommentId();
 	}
-	
+
+	public void complaintUserComment(Long userCommentId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		UserComment comment = userCommentDao.find(userCommentId);
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		UserCommentComplaint complaint = 
+			new UserCommentComplaint(comment, userProfile, Calendar.getInstance());
+		userCommentComplaintDao.create(complaint);
+	}
+
 	//Añadir un adminService para este servicio?
 	public void deleteUserComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
@@ -194,7 +125,7 @@ public class UserServiceImpl implements UserService {
 		}
 		userCommentDao.remove(commentId);
 	}
-	
+
 	//Añadir un adminService para este servicio?	
 	public UserProfileBlock findAllAdmin(int startIndex, int count){
 		
@@ -208,7 +139,7 @@ public class UserServiceImpl implements UserService {
 		
 		return new UserProfileBlock(users, existMoreUsers);
 	}
-	
+
 	//Añadir un adminService para este servicio?	
 	public UserProfileBlock findNonAdmin(int startIndex, int count){
 		
@@ -222,7 +153,7 @@ public class UserServiceImpl implements UserService {
 		
 		return new UserProfileBlock(users, existMoreUsers);
 	}
-
+	
 	@Transactional(readOnly = true)
 	public UserCommentBlock findUserCommentsByCommentator(Long userProfileId,
 			int startIndex, int count){
@@ -255,17 +186,86 @@ public class UserServiceImpl implements UserService {
 		return new UserCommentBlock(comments, existMoreUserComments);
 	}
 	
-	public void complaintUserComment(Long userCommentId, Long userProfileId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
-		
-		UserProfile userProfile = userProfileDao.find(userProfileId);
-		UserComment comment = userCommentDao.find(userCommentId);
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+	@Transactional(readOnly = true)
+	public UserProfileDetails findUserProfileDetails(Long userProfileId)
+			throws InstanceNotFoundException {
+		UserProfile userProfile;
+
+		userProfile = userProfileDao.find(userProfileId);
+
+		return new UserProfileDetails(userProfile.getFirstName(), userProfile
+				.getLastName(), userProfile.getEmail());
+	}
+	
+	@Transactional(readOnly = true)
+	public LoginResult login(String loginName, String password,
+			boolean passwordIsEncrypted) throws InstanceNotFoundException,
+			IncorrectPasswordException {
+
+		UserProfile userProfile = userProfileDao.findByLoginName(loginName);
+		String storedPassword = userProfile.getEncryptedPassword();
+
+		if (passwordIsEncrypted) {
+			if (!password.equals(storedPassword)) {
+				throw new IncorrectPasswordException(loginName);
+			}
+		} else {
+			if (!PasswordEncrypter.isClearPasswordCorrect(password,
+					storedPassword)) {
+				throw new IncorrectPasswordException(loginName);
+			}
 		}
-		UserCommentComplaint complaint = 
-			new UserCommentComplaint(comment, userProfile, Calendar.getInstance());
-		userCommentComplaintDao.create(complaint);
+		return new LoginResult(userProfile.getUserProfileId(), userProfile
+				.getFirstName(), storedPassword, userProfile.getPrivileges());
+
+	}
+	
+	public Long registerUser(String loginName, String clearPassword,
+			UserProfileDetails userProfileDetails)
+			throws DuplicateInstanceException {
+
+		try {
+			userProfileDao.findByLoginName(loginName);
+			throw new DuplicateInstanceException(loginName, UserProfile.class
+					.getName());
+		} catch (InstanceNotFoundException e) {
+			String encryptedPassword = PasswordEncrypter.crypt(clearPassword);
+
+			UserProfile userProfile = new UserProfile(loginName,
+					encryptedPassword, userProfileDetails.getFirstName(),
+					userProfileDetails.getLastName(), userProfileDetails
+							.getEmail());
+
+			userProfileDao.create(userProfile);
+			return userProfile.getUserProfileId();
+		}
+
+	}
+	
+	public void setUserCommentComplaintDao(
+			UserCommentComplaintDao userCommentComplaintDao){
+		this.userCommentComplaintDao = userCommentComplaintDao;
+	}
+
+	public void setUserCommentDao(UserCommentDao userCommentDao) {
+		this.userCommentDao = userCommentDao;
+	}
+	
+	public void setUserProfileDao(UserProfileDao userProfileDao) {
+		this.userProfileDao = userProfileDao;
+	}
+	
+	public void updateUserProfileDetails(Long userProfileId,
+			UserProfileDetails userProfileDetails)
+			throws InstanceNotFoundException {
+
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		userProfile.setFirstName(userProfileDetails.getFirstName());
+		userProfile.setLastName(userProfileDetails.getLastName());
+		userProfile.setEmail(userProfileDetails.getEmail());
+
+		userProfileDao.update(userProfile);
+
 	}
 	
 }

@@ -7,6 +7,8 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public interface UserProfileDao extends GenericDao<UserProfile, Long>{
 
+    public List<UserProfile> findAllAdmin(int startIndex, int count);
+    
     /**
      * Returns an UserProfile by login name (not user identifier)
      *
@@ -14,8 +16,6 @@ public interface UserProfileDao extends GenericDao<UserProfile, Long>{
      * @return the UserProfile
      */
     public UserProfile findByLoginName(String loginName) throws InstanceNotFoundException;
-    
-    public List<UserProfile> findAllAdmin(int startIndex, int count);
     
     public List<UserProfile> findNonAdmin(int startIndex, int count);
 }

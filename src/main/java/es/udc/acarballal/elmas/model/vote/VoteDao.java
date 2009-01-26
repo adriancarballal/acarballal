@@ -11,13 +11,13 @@ public interface VoteDao extends GenericDao<Vote, Long>{
 	
 	final int MAX_VOTES_PER_WEEK = 10;
 	
-	public VOTE_TYPES findVoteMeanByVideoId();
-	
 	public boolean alreadyVoted(Long videoId, Long userProfileId);
-	
-	public int votesRemaining(Long userProfileId, Calendar today);
 	
 	public List<Video> findMostVoted(Calendar startDate, Calendar endDate, int count);
 	
 	public List<Video> findMostVoted(int count);
+	
+	public VOTE_TYPES findVoteMeanByVideoId();
+	
+	public int votesRemaining(Long userProfileId, Calendar today);
 }

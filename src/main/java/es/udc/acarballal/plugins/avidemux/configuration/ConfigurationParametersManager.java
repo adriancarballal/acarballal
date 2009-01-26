@@ -15,13 +15,13 @@ import javax.naming.InitialContext;
  */
 public final class ConfigurationParametersManager {
 
-    private static final String JNDI_PREFIX = "java:comp/env/";
-
     private static final String CONFIGURATION_FILE =
-        "ConfigurationParameters.properties";    
+        "ConfigurationParameters.properties";
 
-    private static boolean usesJNDI;
+    private static final String JNDI_PREFIX = "java:comp/env/";    
+
     private static Map parameters;
+    private static boolean usesJNDI;
     
     static {
 
@@ -67,11 +67,6 @@ public final class ConfigurationParametersManager {
     }
        
     /**
-     * Constructor used to create this object.
-     */
-    private ConfigurationParametersManager() {}
-    
-    /**
      * Used to obtain the string associated with any parameter name.
      * The parameters can be obtained by JNDI or file.
      * @param name Indicates the name of the required parameter.
@@ -107,6 +102,11 @@ public final class ConfigurationParametersManager {
         
         return value;
                                 
-    }     
+    }
+    
+    /**
+     * Constructor used to create this object.
+     */
+    private ConfigurationParametersManager() {}     
 
 }

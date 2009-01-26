@@ -2,52 +2,34 @@
 	t:type="Layout" t:pageTitle="${message:title}">
 
 <t:if t:test="userComments.empty">
-
 	<p>${message:nocomments}.</p>
-	
-<t:parameter name="else">
-
-	<p>${message:aboutMe}.</p>
-
-	<table class="comments">
-		<tr t:type="Loop" t:source="userComments" t:value="userComment">
+	<t:parameter name="else">
+		<p>${message:aboutMe}.</p>
+		<table class="comments">
+			<tr t:type="Loop" t:source="userComments" t:value="userComment">
+			<tr><td class="user-comment">${userComment.comment}</td></tr>
 			<tr>
-				<td class="user-comment">${userComment.comment}</td>
+				<td class="commentator-info">${message:user-header}:
+				${userComment.commentator.loginName} - ${message:date}: <t:output
+					value="userComment.date.time" format="dateFormat" /></td>
 			</tr>
-			<tr><td class="commentator-info">
-				${message:user-header}: ${userComment.commentator.loginName}
-			 - 
-				${message:date}: <t:output value="userComment.date.time" format="dateFormat"/>
-				</td>
 			</tr>
-		</tr>
-	</table>
-	
-		
-	<!-- "Previous" and "Next" links. -->
-		
-	<div class="previousNextLinks">
-	<span class="previousLink">
+		</table>
+
+
+		<!-- "Previous" and "Next" links. -->
+
+		<div class="previousNextLinks"><span class="previousLink">
 		<t:if t:test="previousLinkContext">
 			<a href="#" t:type="PageLink" page="user/AboutMe"
-	    		context="previousLinkContext">
-	    		${message:link-previous}
-	    	</a>
-		</t:if>
-	</span>
-	
-	<span class="nextLink">
-		<t:if t:test="nextLinkContext">
+				context="previousLinkContext"> ${message:link-previous} </a>
+		</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
 			<a href="#" t:type="PageLink" page="user/AboutMe"
-	    		context="nextLinkContext">
-	    		${message:link-next}
-	    	</a>
-		</t:if>
-	</span>
-	</div>
-	
-</t:parameter>
+				context="nextLinkContext"> ${message:link-next} </a>
+		</t:if> </span></div>
+
+	</t:parameter>
 </t:if>
 
-   
+
 </html>

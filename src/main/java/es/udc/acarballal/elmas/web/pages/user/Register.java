@@ -21,13 +21,7 @@ import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 public class Register {
 
 	@Property
-	private String loginName;
-
-	@Property
-	private String password;
-
-	@Property
-	private String retypePassword;
+	private String email;
 
 	@Property
 	private String firstName;
@@ -36,28 +30,42 @@ public class Register {
 	private String lastName;
 
 	@Property
-	private String email;
-
-	@SuppressWarnings("unused")
-	@ApplicationState
-	private UserSession userSession;
-
-	@Inject
-	private UserService userService;
-
-	@Component
-	private Form registrationForm;
+	private String loginName;
 
 	@Component(id = "loginName")
 	private TextField loginNameField;
 
+	@Inject
+	private Messages messages;
+
+	@Property
+	private String password;
+
 	@Component(id = "password")
 	private PasswordField passwordField;
 
-	@Inject
-	private Messages messages;
-	
+	@Component
+	private Form registrationForm;
+
+	@Property
+	private String retypePassword;
+
 	private Long userProfileId;
+
+	@Inject
+	private UserService userService;
+	
+	@SuppressWarnings("unused")
+	@ApplicationState
+	private UserSession userSession;
+
+	Object onSuccess() {
+		
+		userSession.setUserProfileId(userProfileId);
+		userSession.setFirstName(firstName);
+		return Index.class;
+		
+	}
 
 	void onValidateForm() {
 
@@ -80,14 +88,6 @@ public class Register {
 
 		}
 
-	}
-
-	Object onSuccess() {
-		
-		userSession.setUserProfileId(userProfileId);
-		userSession.setFirstName(firstName);
-		return Index.class;
-		
 	}
 
 }

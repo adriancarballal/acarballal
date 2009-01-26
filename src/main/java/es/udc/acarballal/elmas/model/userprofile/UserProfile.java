@@ -12,15 +12,15 @@ import javax.persistence.Version;
 @Entity
 public class UserProfile {
 	
-	public enum Privileges_TYPES {ADMIN, COMPETITOR, VOTER, NONE}
+	public enum Privileges_TYPES {ADMIN, COMPETITOR, NONE, VOTER}
 
-	private Long userProfileId;
-	private String loginName;
+	private String email;
 	private String encryptedPassword;
 	private String firstName;
 	private String lastName;
-	private String email;
-	private Privileges_TYPES privileges; 
+	private String loginName;
+	private Privileges_TYPES privileges;
+	private Long userProfileId; 
 	private long version;
 
 	public UserProfile() {
@@ -42,79 +42,6 @@ public class UserProfile {
 		this.privileges = Privileges_TYPES.NONE;
 	}
 
-	@Column(name = "usrId")
-	@SequenceGenerator( // It only takes effect for
-	name = "UserProfileIdGenerator", // databases providing identifier
-	sequenceName = "UserProfileSeq")
-	// generators.
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "UserProfileIdGenerator")
-	public Long getUserProfileId() {
-		return userProfileId;
-	}
-
-	public void setUserProfileId(Long userProfileId) {
-		this.userProfileId = userProfileId;
-	}
-
-	public String getLoginName() {
-		return loginName;
-	}
-
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
-
-	@Column(name = "enPassword")
-	public String getEncryptedPassword() {
-		return encryptedPassword;
-	}
-
-	public void setEncryptedPassword(String encryptedPassword) {
-		this.encryptedPassword = encryptedPassword;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public Privileges_TYPES getPrivileges() {
-		return privileges;
-	}
-
-	public void setPrivileges(Privileges_TYPES privileges) {
-		this.privileges = privileges;
-	}
-
-	@Version
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
-	}
-
 	public boolean equals(Object obj) {
 		if ((obj == null) || !(obj instanceof UserProfile)) {
 			return false;
@@ -132,6 +59,79 @@ public class UserProfile {
 				&& (email != null) && email.equals(theOther.email)
 				&& (privileges != null) && privileges == theOther.privileges
 				&& version == theOther.version;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	@Column(name = "enPassword")
+	public String getEncryptedPassword() {
+		return encryptedPassword;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public Privileges_TYPES getPrivileges() {
+		return privileges;
+	}
+
+	@Column(name = "usrId")
+	@SequenceGenerator( // It only takes effect for
+	name = "UserProfileIdGenerator", // databases providing identifier
+	sequenceName = "UserProfileSeq")
+	// generators.
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "UserProfileIdGenerator")
+	public Long getUserProfileId() {
+		return userProfileId;
+	}
+
+	@Version
+	public long getVersion() {
+		return version;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setEncryptedPassword(String encryptedPassword) {
+		this.encryptedPassword = encryptedPassword;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	public void setPrivileges(Privileges_TYPES privileges) {
+		this.privileges = privileges;
+	}
+
+	public void setUserProfileId(Long userProfileId) {
+		this.userProfileId = userProfileId;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 }

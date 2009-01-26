@@ -1,55 +1,39 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<t:if t:test="userComments.empty">
+<t:zone t:id="comments">
+	<t:if t:test="userComments.empty">
+		<p>${message:nocomments}.</p>
+		<t:parameter name="else">
+			<p>${message:myComments}.</p>
+			<table class="comments">
+				<tr t:type="Loop" t:source="userComments" t:value="userComment">
+				<tr>
+					<td class="user-comment">${userComment.comment}</td>
+				</tr>
+				<tr>
+					<td class="commentator-info">${message:user-header}:
+					${userComment.commentator.loginName} - ${message:date}: <t:output
+						value="userComment.date.time" format="dateFormat" /> - <t:actionLink
+						t:id="delete" zone="comments" context="userComment.commentId">
+			 	${message:delete}
+			 </t:actionLink></td>
+				</tr>
+				</tr>
+			</table>
 
-	<p>${message:nocomments}.</p>
-	
-<t:parameter name="else">
+			<!-- "Previous" and "Next" links. -->
 
-	<t:zone t:id="comments">
+			<div class="previousNextLinks"><span class="previousLink">
+			<t:if t:test="previousLinkContext">
+				<t:actionLink t:id="previous" zone="comments">${message:link-previous}</t:actionLink>
+			</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
+				<t:actionLink t:id="next" zone="comments">${message:link-next}</t:actionLink>
+			</t:if> </span></div>
 
-	<p>${message:myComments}.</p>
+		</t:parameter>
+	</t:if>
 
-	<table class="comments">
-		<tr t:type="Loop" t:source="userComments" t:value="userComment">
-			<tr>
-				<td class="user-comment">${userComment.comment}</td>
-			</tr>
-			<tr><td class="commentator-info">
-				${message:user-header}: ${userComment.commentator.loginName}
-			 - 
-				${message:date}: <t:output value="userComment.date.time" format="dateFormat"/>
-			 - 
-			 <a href="#" t:type="PageLink" page="user/DeleteUserComment"
-	    		context="userComment.commentId">
-	    		${message:delete}
-	    	</a>
-				</td>
-			</tr>
-		</tr>
-	</table>
-	
-	<!-- "Previous" and "Next" links. -->
+</t:zone>
 
-	<div class="previousNextLinks">
-	<span class="previousLink">
-		<t:if t:test="previousLinkContext">
-			<t:actionLink t:id="previous" zone="comments">${message:link-previous}</t:actionLink>
-		</t:if>
-	</span>
-	
-	<span class="nextLink">
-		<t:if t:test="nextLinkContext">
-			<t:actionLink t:id="next" zone="comments">${message:link-next}</t:actionLink>
-		</t:if>
-	</span>
-	</div>
-	
-	</t:zone>
-		
-</t:parameter>
-</t:if>
-
-   
 </html>

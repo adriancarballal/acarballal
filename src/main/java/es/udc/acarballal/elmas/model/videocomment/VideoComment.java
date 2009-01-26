@@ -21,11 +21,11 @@ import es.udc.acarballal.elmas.model.video.Video;
 @org.hibernate.annotations.Entity(mutable=false)
 public class VideoComment {
 
-	private Long commentId;
-	private Video video;
-	private UserProfile commentator;
 	private String comment;
+	private UserProfile commentator;
+	private Long commentId;
 	private Calendar date;
+	private Video video;
 	
 	public VideoComment(){ }
 	
@@ -35,6 +35,31 @@ public class VideoComment {
 		this.commentator = commentator;
 		this.comment = comment;
 		this.date = date;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if ((obj == null) || !(obj instanceof VideoComment)) {
+			return false;
+		}
+
+		VideoComment theOther = (VideoComment) obj;
+
+		return commentId.equals(theOther.commentId)
+			&& (video != null) && video.equals(theOther.getVideo())
+			&& (commentator != null) && commentator.equals(theOther.getCommentator())
+			&& (comment != null) && comment.equals(theOther.comment);
+	}
+
+	@Column(name = "cmmnt")
+	public String getComment() {
+		return comment;
+	}
+
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+    @JoinColumn(name="commentator")
+	public UserProfile getCommentator() {
+		return commentator;
 	}
 
 	@Column(name = "cmmtId")
@@ -49,8 +74,9 @@ public class VideoComment {
 		return commentId;
 	}
 
-	public void setCommentId(Long commentId) {
-		this.commentId = commentId;
+	@Temporal(TemporalType.TIMESTAMP)
+	public Calendar getDate() {
+		return date;
 	}
 
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
@@ -59,49 +85,23 @@ public class VideoComment {
 		return video;
 	}
 
-	public void setVideo(Video video) {
-		this.video = video;
-	}
-
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
-    @JoinColumn(name="commentator")
-	public UserProfile getCommentator() {
-		return commentator;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public void setCommentator(UserProfile commentator) {
 		this.commentator = commentator;
 	}
 
-	@Column(name = "cmmnt")
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	public Calendar getDate() {
-		return date;
+	public void setCommentId(Long commentId) {
+		this.commentId = commentId;
 	}
 
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if ((obj == null) || !(obj instanceof VideoComment)) {
-			return false;
-		}
-
-		VideoComment theOther = (VideoComment) obj;
-
-		return commentId.equals(theOther.commentId)
-			&& (video != null) && video.equals(theOther.getVideo())
-			&& (commentator != null) && commentator.equals(theOther.getCommentator())
-			&& (comment != null) && comment.equals(theOther.comment);
+	public void setVideo(Video video) {
+		this.video = video;
 	}
 }

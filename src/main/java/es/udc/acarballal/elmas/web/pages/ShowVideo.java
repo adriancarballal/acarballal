@@ -14,12 +14,12 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class ShowVideo {
 
-	private boolean foundVideo;
-	private int startIndex = 0;
 	private int count = 4;
+	private boolean foundVideo;
+	@Inject
+	private Locale locale;
 	
-	@Property
-	private Video video;
+	private int startIndex = 0;
 	
 	@SuppressWarnings("unused")
 	@Property
@@ -30,18 +30,26 @@ public class ShowVideo {
 	@Property
 	private boolean userSessionExists;
 	
+	@Property
+	private Video video;
+	
 	@Inject
 	private VideoService videoService;
 	
-	@Inject
-	private Locale locale;
+	public DateFormat getDateFormat() {
+		return DateFormat.getDateInstance(DateFormat.LONG, locale);
+	}
 	
 	public boolean getFoundVideo(){
 		return !foundVideo;
 	}
+
+	public Object[] getUserContext() {
+		return new Object[] {video.getUserProfile().getUserProfileId(), startIndex, count};
+	}
 	
-	public DateFormat getDateFormat() {
-		return DateFormat.getDateInstance(DateFormat.LONG, locale);
+	public Object[] getVideoContext() {
+		return new Object[] {video.getVideoId(), startIndex, count};
 	}
 
 	void onActivate(Long videoId){
@@ -51,14 +59,6 @@ public class ShowVideo {
 		} catch (InstanceNotFoundException e) {
 			foundVideo = false;
 		}
-	}
-	
-	public Object[] getVideoContext() {
-		return new Object[] {video.getVideoId(), startIndex, count};
-	}
-
-	public Object[] getUserContext() {
-		return new Object[] {video.getUserProfile().getUserProfileId(), startIndex, count};
 	}
 	
 }

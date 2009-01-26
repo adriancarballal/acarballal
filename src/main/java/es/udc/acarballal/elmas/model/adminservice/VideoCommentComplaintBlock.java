@@ -6,8 +6,8 @@ import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaint
 
 public class VideoCommentComplaintBlock {
 
-	private List<VideoCommentComplaint> videoCommentComplaints;
 	private boolean existMoreVideoCommentComplaints;
+	private List<VideoCommentComplaint> videoCommentComplaints;
 	
 	public VideoCommentComplaintBlock(List<VideoCommentComplaint> videoCommentsComplaints, 
 			boolean existMoreVideoCommentComplaints){
@@ -15,12 +15,12 @@ public class VideoCommentComplaintBlock {
 		this.existMoreVideoCommentComplaints = existMoreVideoCommentComplaints;
 	}
 
-	public List<VideoCommentComplaint> getVideoCommentComplaints() {
-		return videoCommentComplaints;
-	}
-
 	public boolean getExistMoreVideoCommentComplaints() {
 		return existMoreVideoCommentComplaints;
+	}
+
+	public List<VideoCommentComplaint> getVideoCommentComplaints() {
+		return videoCommentComplaints;
 	}
 
 }

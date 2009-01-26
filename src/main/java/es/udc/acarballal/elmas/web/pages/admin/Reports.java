@@ -13,41 +13,70 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class Reports {
 	
 	public enum SHOW_BEST_TYPE {
-		WEEKLY, ALL
+		ALL, WEEKLY
 	}
-	
-	private int totalVideoComplaints;
-	private int totalVideoCommentComplaints;
-	private int totalUserCommentComplaints;
-	private SHOW_BEST_TYPE findType = SHOW_BEST_TYPE.WEEKLY;
-	
-	@ApplicationState
-	private UserSession userSession;
 	
 	@Inject
 	private AdminService adminService;
+	@Property
+	private int findNumber;
+	private SHOW_BEST_TYPE findType = SHOW_BEST_TYPE.WEEKLY;
+	@InjectPage
+	private ShowBestVideos showBestVideos;
 	
-	public SHOW_BEST_TYPE getFindType() {
-		return findType;
-	}
+	private int totalUserCommentComplaints;
+	
+	private int totalVideoCommentComplaints;
+	
+	private int totalVideoComplaints;
 
-	public void setFindType(SHOW_BEST_TYPE findType) {
-		this.findType = findType;
-	}	
-	
-	public SHOW_BEST_TYPE getWeekly(){
-		return SHOW_BEST_TYPE.WEEKLY;
-	}
+	@ApplicationState
+	private UserSession userSession;	
 	
 	public SHOW_BEST_TYPE getAll(){
 		return SHOW_BEST_TYPE.ALL;
 	}
 	
-	@Property
-	private int findNumber;
+	public boolean getExistUserCommentComplaints(){
+		return totalUserCommentComplaints>0;
+	}
 	
-	@InjectPage
-	private ShowBestVideos showBestVideos;
+	public boolean getExistVideoCommentComplaints(){
+		return totalVideoCommentComplaints>0;
+	}
+	
+	public boolean getExistVideoComplaints(){
+		return totalVideoComplaints>0;
+	}
+	
+	public SHOW_BEST_TYPE getFindType() {
+		return findType;
+	}
+	
+	public int getTotalUserCommentComplaints(){
+		return totalUserCommentComplaints;
+	}
+	
+	public int getTotalVideoCommentComplaints(){
+		return totalVideoCommentComplaints;
+	}
+	
+	public int getTotalVideoComplaints(){
+		return totalVideoComplaints;
+	}
+	public SHOW_BEST_TYPE getWeekly(){
+		return SHOW_BEST_TYPE.WEEKLY;
+	}
+	
+	Object onSuccess(){
+		showBestVideos.setType(this.findType);
+		showBestVideos.setCount(this.findNumber);
+		return showBestVideos;
+
+	}
+	public void setFindType(SHOW_BEST_TYPE findType) {
+		this.findType = findType;
+	}
 	
 	void setupRender() throws InstanceNotFoundException, InsufficientPrivilegesException {
 		this.totalVideoComplaints = 
@@ -59,34 +88,5 @@ public class Reports {
 		this.totalUserCommentComplaints =
 			adminService.getNumberOfUserCommentComplaints(
 					userSession.getUserProfileId());
-	}
-	
-	Object onSuccess(){
-		showBestVideos.setType(this.findType);
-		showBestVideos.setCount(this.findNumber);
-		return showBestVideos;
-
-	}
-	
-	public int getTotalVideoComplaints(){
-		return totalVideoComplaints;
-	}
-	
-	public boolean getExistVideoComplaints(){
-		return totalVideoComplaints>0;
-	}
-	public int getTotalVideoCommentComplaints(){
-		return totalVideoCommentComplaints;
-	}
-	
-	public boolean getExistVideoCommentComplaints(){
-		return totalVideoCommentComplaints>0;
-	}
-	public int getTotalUserCommentComplaints(){
-		return totalUserCommentComplaints;
-	}
-	
-	public boolean getExistUserCommentComplaints(){
-		return totalUserCommentComplaints>0;
 	}
 }

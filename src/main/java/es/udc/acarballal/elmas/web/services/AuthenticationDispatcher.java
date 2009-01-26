@@ -14,8 +14,8 @@ import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class AuthenticationDispatcher implements Dispatcher {
 	
-	private final static String LOGIN_PAGE = "/user/login";
 	private final static String INIT_PAGE = "/";
+	private final static String LOGIN_PAGE = "/user/login";
 
 	private ApplicationStateManager applicationStateManager;
 	private ComponentClassResolver componentClassResolver;

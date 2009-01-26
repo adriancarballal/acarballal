@@ -12,10 +12,10 @@ import es.udc.acarballal.plugins.avidemux.exceptions.*;
  */
 public abstract class Encoder {
 
-	private String application_path;
-	protected static String general_options;
-	private String input_path, output_path;
 	private static final String APPLICATION_PATH_PARAMETER ="application/path";
+	protected static String general_options;
+	private String application_path;
+	private String input_path, output_path;
 	
 	/**
 	 * Constructor used to create this object.

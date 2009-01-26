@@ -20,10 +20,10 @@ import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 @org.hibernate.annotations.Entity(mutable=false)
 public class UserComment {
 
-	private Long commentId;
-	private UserProfile commented;
-	private UserProfile commentator;
 	private String comment;
+	private UserProfile commentator;
+	private UserProfile commented;
+	private Long commentId;
 	private Calendar date;
 	
 	public UserComment(){	}
@@ -37,59 +37,6 @@ public class UserComment {
 		this.date = date;
 	}
 
-	@Column(name = "cmmtId")
-	@SequenceGenerator( // It only takes effect for
-	name = "CommentIdGenerator", // databases providing identifier
-	sequenceName = "UserCommentSeq")
-	// generators.
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "CommentIdGenerator")
-	public Long getCommentId() {
-		return commentId;
-	}
-
-	public void setCommentId(Long commentId) {
-		this.commentId = commentId;
-	}
-
-	@ManyToOne(optional=false, fetch=FetchType.LAZY)
-    @JoinColumn(name="commented")
-	public UserProfile getCommented() {
-		return commented;
-	}
-
-	public void setCommented(UserProfile commented) {
-		this.commented = commented;
-	}
-
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
-    @JoinColumn(name="commentator")
-	public UserProfile getCommentator() {
-		return commentator;
-	}
-
-	public void setCommentator(UserProfile commentator) {
-		this.commentator = commentator;
-	}
-
-	@Column(name = "cmmnt")
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	public Calendar getDate() {
-		return date;
-	}
-
-	public void setDate(Calendar date) {
-		this.date = date;
-	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if ((obj == null) || !(obj instanceof UserComment)) {
@@ -102,6 +49,59 @@ public class UserComment {
 			&& (commented != null) && commented.equals(theOther.getCommented())
 			&& (commentator != null) && commentator.equals(theOther.getCommentator())
 			&& (comment != null) && comment.equals(theOther.comment);
+	}
+
+	@Column(name = "cmmnt")
+	public String getComment() {
+		return comment;
+	}
+
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+    @JoinColumn(name="commentator")
+	public UserProfile getCommentator() {
+		return commentator;
+	}
+
+	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+    @JoinColumn(name="commented")
+	public UserProfile getCommented() {
+		return commented;
+	}
+
+	@Column(name = "cmmtId")
+	@SequenceGenerator( // It only takes effect for
+	name = "CommentIdGenerator", // databases providing identifier
+	sequenceName = "UserCommentSeq")
+	// generators.
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "CommentIdGenerator")
+	public Long getCommentId() {
+		return commentId;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	public Calendar getDate() {
+		return date;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public void setCommentator(UserProfile commentator) {
+		this.commentator = commentator;
+	}
+
+	public void setCommented(UserProfile commented) {
+		this.commented = commented;
+	}
+
+	public void setCommentId(Long commentId) {
+		this.commentId = commentId;
+	}
+	
+	public void setDate(Calendar date) {
+		this.date = date;
 	}
 	
 }

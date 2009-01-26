@@ -16,33 +16,31 @@ import es.udc.acarballal.elmas.web.pages.Index;
 public class InsertVideo {
 
 	@SuppressWarnings("unused")
-	@Property
-	 private String title;
-
-	@SuppressWarnings("unused")
 	 @Property
 	 private String comment;
+
+	@SuppressWarnings("unused")
+	 @Component(id = "comment")
+	 private TextArea commentField;
 	
 	 @Property
 	 private UploadedFile file;
 	 
-	 @Component
-	 private Form videoForm;
+	 @Persist(PersistenceConstants.FLASH)
+    @SuppressWarnings("unused")
+    @Property
+    private String message;
+	 
+	 @SuppressWarnings("unused")
+	@Property
+	 private String title;
 	 
 	 @SuppressWarnings("unused")
 	 @Component(id = "title")
 	 private TextArea titleField;
-	 
-	 @SuppressWarnings("unused")
-	 @Component(id = "comment")
-	 private TextArea commentField;
 
-	 void onValidateForm() {
-
-			if (!videoForm.isValid()) {
-				return;
-			}
-	 }
+	 @Component
+	 private Form videoForm;
 	 
     Object onSuccess(){
    	 
@@ -51,17 +49,19 @@ public class InsertVideo {
         return Index.class;
     }
     
-    @Persist(PersistenceConstants.FLASH)
-    @SuppressWarnings("unused")
-    @Property
-    private String message;
-
-
     Object onUploadException(FileUploadException ex)
     {
         message = "Upload exception: " + ex.getMessage();
 
         return this;
     }
+
+
+    void onValidateForm() {
+
+			if (!videoForm.isValid()) {
+				return;
+			}
+	 }
 
 }

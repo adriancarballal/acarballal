@@ -24,14 +24,24 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class ShowVideoComments {
 	
-	private Long videoId;	
-	private int startIndex = 0;
-	private int count = 4;
-	private VideoCommentBlock videoCommentBlock;
-	
 	@SuppressWarnings("unused")
 	@Property
-	private VideoComment videoComment;
+	 private String comment;	
+	@SuppressWarnings("unused")
+	@Component(id = "comment")
+	private TextArea commentField;
+	@SuppressWarnings("unused")
+	@Component
+	private Form commentForm;
+	private int count = 4;
+	
+	@Inject
+	private Locale locale;
+	
+	@Inject
+	private Messages messages;
+	
+	private int startIndex = 0;
 	
 	@SuppressWarnings("unused")
 	@Property
@@ -42,34 +52,69 @@ public class ShowVideoComments {
 	@Property
 	private boolean userSessionExists;
 	
+	@SuppressWarnings("unused")
+	@Property
+	private VideoComment videoComment;
+	
+	private VideoCommentBlock videoCommentBlock;
+	
+	private Long videoId;
+	
 	@Inject
 	private VideoService videoService;
-	
-	@Inject
-	private Locale locale;
-	
-	public List<VideoComment> getVideoComments() {
-		return videoCommentBlock.getUserComments();
-	}
 	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
 	
-	@SuppressWarnings("unused")
-	@Property
-	 private String comment;
+	public boolean getDeletable(){
+		if (!userSessionExists) return false;
+		if (userSession.getPrivileges()==Privileges_TYPES.ADMIN || 
+			userSession.getUserProfileId().equals(
+					videoComment.getCommentator().getUserProfileId()))
+			return true;
+		return false;
+	}
 	
-	@SuppressWarnings("unused")
-	@Component
-	private Form commentForm;
+	public Object[] getNextLinkContext() {
+		
+		if (videoCommentBlock.getExistMoreUserComments()) {
+			return new Object[] {videoId, startIndex+count, count};
+		} else {
+			return null;
+		}
+		
+	}
+	public Object[] getPreviousLinkContext() {
+		
+		if (startIndex-count >= 0) {
+			return new Object[] {videoId, startIndex-count, count};
+		} else {
+			return null;
+		}
+		
+	}
 	
-	@Inject
-	private Messages messages;
+	public List<VideoComment> getVideoComments() {
+		return videoCommentBlock.getUserComments();
+	}
+
+	void onActivate(Long videoId, int startIndex, int count){
+		
+		this.videoId = videoId;
+		this.startIndex = startIndex;
+		this.count = count;
+		videoCommentBlock = 
+			videoService.findVideoCommentsByVideoId(videoId, startIndex, count);
+	}
 	
-	@SuppressWarnings("unused")
-	@Component(id = "comment")
-	private TextArea commentField;
+	Object[] onPassivate() {
+		return new Object[] {videoId, startIndex, count};
+	}
+	
+	Object onSuccess(){
+        return this;
+    }
 	
 	void onValidateForm() {
 
@@ -89,51 +134,6 @@ public class ShowVideoComments {
 			return;
 		}
 
-	}
-	Object onSuccess(){
-        return this;
-    }
-	
-	void onActivate(Long videoId, int startIndex, int count){
-		
-		this.videoId = videoId;
-		this.startIndex = startIndex;
-		this.count = count;
-		videoCommentBlock = 
-			videoService.findVideoCommentsByVideoId(videoId, startIndex, count);
-	}
-
-	Object[] onPassivate() {
-		return new Object[] {videoId, startIndex, count};
-	}
-	
-	public Object[] getPreviousLinkContext() {
-		
-		if (startIndex-count >= 0) {
-			return new Object[] {videoId, startIndex-count, count};
-		} else {
-			return null;
-		}
-		
-	}
-	
-	public Object[] getNextLinkContext() {
-		
-		if (videoCommentBlock.getExistMoreUserComments()) {
-			return new Object[] {videoId, startIndex+count, count};
-		} else {
-			return null;
-		}
-		
-	}
-	
-	public boolean getDeletable(){
-		if (!userSessionExists) return false;
-		if (userSession.getPrivileges()==Privileges_TYPES.ADMIN || 
-			userSession.getUserProfileId().equals(
-					videoComment.getCommentator().getUserProfileId()))
-			return true;
-		return false;
 	}
 
 }

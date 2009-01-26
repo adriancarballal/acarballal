@@ -20,13 +20,13 @@ import es.udc.acarballal.elmas.model.video.Video;
 @org.hibernate.annotations.Entity(mutable=false)
 public class Vote {
 
-	public enum VOTE_TYPES {VERY_BAD, BAD, NORMAL, GOOD, VERY_GOOD}
+	public enum VOTE_TYPES {BAD, GOOD, NORMAL, VERY_BAD, VERY_GOOD}
 	
-	private Long voteId;
-	private Video video;
-	private UserProfile voter;
-	private VOTE_TYPES vote;
 	private Calendar date;
+	private Video video;
+	private VOTE_TYPES vote;
+	private Long voteId;
+	private UserProfile voter;
 	
 	public Vote(){ }
 	
@@ -35,6 +35,21 @@ public class Vote {
 		this.voter = voter;
 		this.vote = vote;
 		this.date = date;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	public Calendar getDate() {
+		return date;
+	}
+
+	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+    @JoinColumn(name="vidId")
+	public Video getVideo() {
+		return video;
+	}
+
+	public VOTE_TYPES getVote() {
+		return vote;
 	}
 
 	@SequenceGenerator( // It only takes effect for
@@ -47,44 +62,29 @@ public class Vote {
 		return voteId;
 	}
 
-	public void setVoteId(Long voteId) {
-		this.voteId = voteId;
-	}
-
-	@ManyToOne(optional=false, fetch=FetchType.LAZY)
-    @JoinColumn(name="vidId")
-	public Video getVideo() {
-		return video;
-	}
-
-	public void setVideo(Video video) {
-		this.video = video;
-	}
-
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
     @JoinColumn(name="voter")
 	public UserProfile getVoter() {
 		return voter;
 	}
 
-	public void setVoter(UserProfile voter) {
-		this.voter = voter;
+	public void setDate(Calendar date) {
+		this.date = date;
 	}
 
-	public VOTE_TYPES getVote() {
-		return vote;
+	public void setVideo(Video video) {
+		this.video = video;
 	}
 
 	public void setVote(VOTE_TYPES vote) {
 		this.vote = vote;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	public Calendar getDate() {
-		return date;
+	public void setVoteId(Long voteId) {
+		this.voteId = voteId;
 	}
 
-	public void setDate(Calendar date) {
-		this.date = date;
+	public void setVoter(UserProfile voter) {
+		this.voter = voter;
 	}
 }

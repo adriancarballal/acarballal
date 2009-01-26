@@ -1,52 +1,39 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
-	
-	<t:if t:test="foundVideo">
-		<p>${message:videoNotFound}.</p>
+
+<t:if t:test="foundVideo">
+	<p>${message:videoNotFound}.</p>
 	<t:parameter name="else">
 		<table class="showvideo">
-			<tr><td>
-				${video.title}
-			</td></tr>
-			<tr><td>
-				${video.userProfile.loginName}
-			</td></tr>
-			<tr><td>
-				<t:output value="video.date.time" format="dateFormat"/>
-			</td></tr>
-			<tr><td>
-				${video.comment}
-			</td></tr>
-			<tr><td>
-				<script type="text/javascript" src="${asset:context:/player/swfobject.js}"></script>
-				<embed src ="${asset:context:/player/player.swf}" 
-				width="244" height="210" 
-				allowfullscreen="false" />
-			</td></tr>
+			<tr><td>${video.title}</td></tr>
+			<tr><td>${video.userProfile.loginName}</td></tr>
+			<tr>
+				<td><t:output value="video.date.time" format="dateFormat" /></td>
+			</tr>
+			<tr><td>${video.comment}</td></tr>
+			<tr>
+				<td><script type="text/javascript"
+					src="${asset:context:/player/swfobject.js}"></script> <embed
+					src="${asset:context:/player/player.swf}" width="244" height="210"
+					allowfullscreen="false" /></td>
+			</tr>
 			<t:if t:test="userSessionExists">
-			<tr><td>
-				<a href="#" t:type="PageLink" page="ShowVideoComments"
-		    		context="videoContext">
-		    		${message:showVideoComments}
-	    		</a>
-	    		 | 
-	    		<a href="#" t:type="PageLink" page="ShowUserComments"
-		    		context="userContext">
-					${message:showUserComments}		    	
-	    		</a>
-			</td></tr>
-			<tr><td>
-				<a href="#" t:type="PageLink" page="user/ComplaintVideo"
-		    		context="video.videoId">
-					${message:complaintVideo}		    	
-	    		</a>
-			</td></tr>
+				<tr>
+					<td><a href="#" t:type="PageLink" page="ShowVideoComments"
+						context="videoContext"> ${message:showVideoComments} </a> | <a
+						href="#" t:type="PageLink" page="ShowUserComments"
+						context="userContext"> ${message:showUserComments} </a></td>
+				</tr>
+				<tr>
+					<td><a href="#" t:type="PageLink" page="user/ComplaintVideo"
+						context="video.videoId"> ${message:complaintVideo} </a></td>
+				</tr>
 			</t:if>
-			
-		</table>
-		
-	</t:parameter>
-	</t:if>
 
-	
-</html>	
+		</table>
+
+	</t:parameter>
+</t:if>
+
+
+</html>

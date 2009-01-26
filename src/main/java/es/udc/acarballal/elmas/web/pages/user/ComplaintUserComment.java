@@ -15,11 +15,11 @@ public class ComplaintUserComment {
 
 	private Long complaintedUserComment;
 	
-	@ApplicationState
-	private UserSession userSession;
-	
 	@Inject
 	private UserService userService;
+	
+	@ApplicationState
+	private UserSession userSession;
 	
 	Object onActivate(Long userCommentId){
 		this.complaintedUserComment = userCommentId;
