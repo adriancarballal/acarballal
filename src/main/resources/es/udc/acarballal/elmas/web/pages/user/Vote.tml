@@ -13,10 +13,9 @@
 		<tr><td>${video.comment}</td></tr>
 		<tr>
 			<td><script type="text/javascript"
-				src="${asset:context:/player/swfobject.js}"></script> <embed
-				src="${asset:context:/player/player.swf}" width="244" height="210"
-				allowfullscreen="false" />
-			</td>
+					src="${asset:context:/player/swfobject.js}"></script> <embed
+					src="${asset:context:/player/player.swf}" width="244" height="210"
+					allowfullscreen="true" flashvars="file=${video.flvVideo}"/></td>
 		</tr>
 		<t:if t:test="userSessionExists">
 			<tr>
