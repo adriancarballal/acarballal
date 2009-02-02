@@ -2,13 +2,11 @@ package es.udc.acarballal.elmas.web.components;
 
 import java.util.List;
 
-import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.BeginRender;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Parameter;
-import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
@@ -33,13 +31,6 @@ public class Layout {
 	@SuppressWarnings("unused")
 	@Component
 	private Form findVideosForm;
-
-	// TODO
-	@SuppressWarnings("unused")
-	@Inject
-	@Path("context:/logo/logo.jpg")
-	@Property
-	private Asset flag;
 
 	@SuppressWarnings("unused")
 	@Property

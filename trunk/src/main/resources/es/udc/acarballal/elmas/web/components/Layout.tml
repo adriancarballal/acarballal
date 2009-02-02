@@ -144,8 +144,11 @@ JPG</a></div>
 			<tr>
 				<td class="video-title">${video.title}</td>
 			</tr>
-			<td><a href="#" t:type="PageLink" t:page="ShowVideo"
-				t:context="video.videoId"> <img src="${flag}" /> </a></td>
+			<td>
+				<a href="#" t:type="PageLink" t:page="ShowVideo" t:context="video.videoId"> 
+					<img src="${video.snapshot}"/>
+				</a>
+			</td>
 			</tr>
 		</table>
 	</t:parameter>

@@ -10,8 +10,8 @@
 					<table class="video-table">
 						<tr>
 							<td class="snapshot"><a href="#" t:type="PageLink"
-								t:page="ShowVideo" t:context="video.videoId"> <img
-								src="${flag}" /> <!--<img jwcid="@Image" image="ognl:flag" />-->
+								t:page="ShowVideo" t:context="video.videoId"> 
+								<img src="${video.snapshot}"/>
 							</a></td>
 							<td class="video-info">
 							<table>
