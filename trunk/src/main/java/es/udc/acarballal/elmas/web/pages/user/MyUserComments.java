@@ -31,7 +31,6 @@ public class MyUserComments {
 	@Inject
 	private Locale locale;
 	
-	@Property
 	@Persist
 	private int startIndex;
 	
@@ -39,8 +38,6 @@ public class MyUserComments {
 	@Property
 	private UserComment userComment;
 	
-	@Property
-	@Persist
 	private UserCommentBlock userCommentBlock;
 	
 	@Inject

@@ -32,7 +32,6 @@ public class MyVideoComments {
 	private Locale locale;
 	
 	@Persist
-	@Property
 	private int startIndex;
 	
 	@ApplicationState
@@ -42,8 +41,6 @@ public class MyVideoComments {
 	@Property
 	private VideoComment videoComment;
 	
-	@Persist
-	@Property
 	private VideoCommentBlock videoCommentBlock;
 	
 	@Inject

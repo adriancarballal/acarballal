@@ -7,9 +7,13 @@ import java.util.Locale;
 
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.OnEvent;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextArea;
+import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
@@ -19,21 +23,29 @@ import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.videocomment.VideoComment;
 import es.udc.acarballal.elmas.model.videoservice.VideoCommentBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
+import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
+import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class ShowVideoComments {
 	
+	private static final int COUNT = 4;
+	
 	@SuppressWarnings("unused")
 	@Property
-	 private String comment;	
+	private String comment;
+	
 	@SuppressWarnings("unused")
 	@Component(id = "comment")
 	private TextArea commentField;
+	
 	@SuppressWarnings("unused")
 	@Component
 	private Form commentForm;
-	private int count = 4;
+	
+	@InjectComponent
+	private Zone comments;
 	
 	@Inject
 	private Locale locale;
@@ -41,7 +53,8 @@ public class ShowVideoComments {
 	@Inject
 	private Messages messages;
 	
-	private int startIndex = 0;
+	@Persist
+	private int startIndex;
 	
 	@SuppressWarnings("unused")
 	@Property
@@ -63,6 +76,11 @@ public class ShowVideoComments {
 	@Inject
 	private VideoService videoService;
 	
+	private void fill(){
+		videoCommentBlock = 
+			videoService.findVideoCommentsByVideoId(videoId, startIndex, COUNT);	
+	}
+	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
@@ -76,44 +94,49 @@ public class ShowVideoComments {
 		return false;
 	}
 	
-	public Object[] getNextLinkContext() {
-		
-		if (videoCommentBlock.getExistMoreUserComments()) {
-			return new Object[] {videoId, startIndex+count, count};
-		} else {
-			return null;
-		}
-		
-	}
-	public Object[] getPreviousLinkContext() {
-		
-		if (startIndex-count >= 0) {
-			return new Object[] {videoId, startIndex-count, count};
-		} else {
-			return null;
-		}
-		
+	public Boolean getNextLinkContext() {
+		if (videoCommentBlock.getExistMoreUserComments()) 
+			return true;
+		return false;
 	}
 	
+	public Boolean getPreviousLinkContext() {
+		if (startIndex-COUNT >= 0) 
+			return true;
+		return false;
+	}
+
 	public List<VideoComment> getVideoComments() {
 		return videoCommentBlock.getUserComments();
 	}
-
-	void onActivate(Long videoId, int startIndex, int count){
-		
+	
+	void onActivate(Long videoId){
 		this.videoId = videoId;
-		this.startIndex = startIndex;
-		this.count = count;
-		videoCommentBlock = 
-			videoService.findVideoCommentsByVideoId(videoId, startIndex, count);
+		fill();
 	}
 	
 	Object[] onPassivate() {
-		return new Object[] {videoId, startIndex, count};
+		return new Object[] {videoId};
+	}
+	
+	@OnEvent(component="next")
+	Object onShowNext(){
+		this.startIndex = this.startIndex + COUNT;
+		fill();
+		return comments.getBody();
+	}
+	
+	@OnEvent(component="previous")
+	Object onShowPrevious(){
+		this.startIndex = this.startIndex - COUNT;
+		fill();
+		return comments.getBody();
 	}
 	
 	Object onSuccess(){
-        return this;
+		this.startIndex=0;
+		fill();
+        return comments;
     }
 	
 	void onValidateForm() {
@@ -129,11 +152,36 @@ public class ShowVideoComments {
 		} catch (InsufficientPrivilegesException e) {
 			commentForm.recordError(messages.get("error-insufficientPrivileges"));
 		} catch (InvalidOperationException e) {
-			commentForm.recordError(messages.get("error-insufficientPrivileges"));
+			commentForm.recordError(messages.get("error-invalidOperation"));
 		} catch (Exception e){
 			return;
 		}
-
+	}
+	
+	@OnEvent(component="deleteComment")
+	Object deleteComment(Long commentId){
+		try {
+			videoService.deleteVideoComment(commentId, userSession.getUserProfileId());
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (InsufficientPrivilegesException e) {
+			return InsufficientPrivileges.class;
+		}
+		fill();
+		return comments;
+	}
+	
+	@OnEvent(component="complaintComment")
+	Object complaintComment(Long videoCommentId){
+		try {
+			videoService.complaintOfVideoComment(videoCommentId, userSession.getUserProfileId());
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (InsufficientPrivilegesException e) {
+			return InsufficientPrivileges.class;
+		}
+		fill();
+		return comments;
 	}
 
 }

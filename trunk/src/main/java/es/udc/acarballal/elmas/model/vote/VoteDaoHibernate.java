@@ -48,18 +48,28 @@ public class VoteDaoHibernate extends
 	}
 	
 	public int votesRemaining(Long userProfileId, Calendar today){
-		
 		Calendar startDate = (Calendar)today.clone();
 		startDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		startDate.set(Calendar.HOUR, 0);
+		startDate.set(Calendar.MINUTE, 0);
+		startDate.set(Calendar.SECOND, 0);
+		startDate.set(Calendar.AM_PM, Calendar.AM);
+		startDate.set(Calendar.MILLISECOND, 0);
+		Calendar endDate = (Calendar)today.clone();
+		endDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		endDate.set(Calendar.HOUR, 23);
+		endDate.set(Calendar.MINUTE, 59);
+		endDate.set(Calendar.SECOND, 59);
+		endDate.set(Calendar.AM_PM, Calendar.PM);
+		endDate.set(Calendar.MILLISECOND, 999);
 		long count = 
 			(Long) getSession().createQuery("SELECT count(c) FROM Vote c " +
 					"WHERE c.voter.userProfileId=:userProfileId AND " +
                 "c.date >= :startDate AND c.date <= :endDate").
 					setParameter("userProfileId", userProfileId).
 					setCalendar("startDate", startDate).
-	                setCalendar("endDate", today).
+	                setCalendar("endDate", endDate).
 			uniqueResult();
-		
 		return MAX_VOTES_PER_WEEK - ((int) count);
 	}
 	

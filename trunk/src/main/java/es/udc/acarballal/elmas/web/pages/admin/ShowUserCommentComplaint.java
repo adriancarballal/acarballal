@@ -36,15 +36,12 @@ public class ShowUserCommentComplaint {
 	private Locale locale;
 	
 	@Persist
-	@Property
 	private int startIndex;
 	
 	@SuppressWarnings("unused")
 	@Property
 	private UserCommentComplaint userCommentComplaint;
 	
-	@Persist
-	@Property
 	private UserCommentComplaintBlock userCommentComplaintBlock;
 	
 	@Inject 

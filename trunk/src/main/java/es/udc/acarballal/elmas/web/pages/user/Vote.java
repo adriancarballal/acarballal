@@ -4,11 +4,15 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
+import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
@@ -26,8 +30,17 @@ public class Vote {
 	
 	private static final int PRESELECTED_VIDEO_WINDOW = 100;
 	
+	@Inject
+	private Block alreadyComplaint;
+	
+	@SuppressWarnings("unused")
+	@InjectComponent
+	private Zone complaintZone;
+	
 	@Property
 	private Calendar endDate;
+	
+	private boolean founded = true;
 	
 	@Inject
 	private Locale locale;
@@ -35,17 +48,16 @@ public class Vote {
 	@SuppressWarnings("unused")
 	@Property
 	private int remainingVotes;
-	
+
 	@Property
 	private Calendar startDate;
-
+	
 	@ApplicationState
 	private UserSession userSession;
 	
 	@SuppressWarnings("unused")
 	@Property
 	private boolean userSessionExists;
-	
 	
 	@Property
 	@Persist
@@ -63,6 +75,18 @@ public class Vote {
 	@SuppressWarnings("unused")
 	@Component
 	private Form voteForm;
+	
+	@OnEvent(component="complaint")
+	Object complaintVideo(Long complaintedVideo){
+		try {
+			videoService.complaintOfVideo(complaintedVideo, userSession.getUserProfileId());
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (InsufficientPrivilegesException e) {
+			return InsufficientPrivileges.class;
+		}
+		return alreadyComplaint;
+	}
 
 	public VOTE_TYPES getBad(){
 		return VOTE_TYPES.BAD;
@@ -74,8 +98,10 @@ public class Vote {
 	
 	public boolean getDoVoting(){
 		try {
-			return videoService.getNumberVotesRemaining(userSession.getUserProfileId())>0;
+			return founded && videoService.getNumberVotesRemaining(userSession.getUserProfileId())>0;
 		} catch (InstanceNotFoundException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
 			return false;
 		}
 	}
@@ -86,7 +112,7 @@ public class Vote {
 	
 	public boolean getIsVotable(){
 		try {
-			return userSessionExists && 
+			return founded && userSessionExists && 
 			!videoService.isVideoVotable(videoId, userSession.getUserProfileId())
 			&& (videoService.getNumberVotesRemaining(userSession.getUserProfileId())>0);
 		} catch (InstanceNotFoundException e) {
@@ -119,7 +145,7 @@ public class Vote {
         return Vote.class;
     }
 		
-	void setupRender() throws InstanceNotFoundException{
+	void setupRender(){
 		startDate = Calendar.getInstance();
 		startDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 		startDate.set(Calendar.HOUR, 0);
@@ -135,11 +161,19 @@ public class Vote {
 		endDate.set(Calendar.AM_PM, Calendar.PM);
 		endDate.set(Calendar.MILLISECOND, 999);
 		if(!getDoVoting()) return;
-		video = 
-			videoService.findRandomVotableVideo(
-					userSession.getUserProfileId(), PRESELECTED_VIDEO_WINDOW);
-		videoId = video.getVideoId();
-		remainingVotes = videoService.getNumberVotesRemaining(userSession.getUserProfileId());
+		try {
+			video = 
+				videoService.findRandomVotableVideo(
+						userSession.getUserProfileId(), PRESELECTED_VIDEO_WINDOW);
+			videoId = video.getVideoId();
+			remainingVotes = videoService.getNumberVotesRemaining(userSession.getUserProfileId());
+		} catch (InstanceNotFoundException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			founded=false;
+			return;
+		}
+		
 
 	}
 

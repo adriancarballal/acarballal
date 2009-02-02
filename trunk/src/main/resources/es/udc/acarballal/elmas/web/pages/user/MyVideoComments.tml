@@ -2,52 +2,40 @@
 	t:type="Layout" t:pageTitle="${message:title}">
 
 <t:zone t:id="comments">
-<t:if t:test="videoComments.empty">
-	<p>${message:nocomments}.</p>
-	<t:parameter name="else">
-	<p>${message:myComments}.</p>
-	<table class="comments">
-		<tr t:type="Loop" t:source="videoComments" t:value="videoComment">
-			<tr>
-				<td class="user-comment">
-					${videoComment.comment} - 
-					<a href="#" t:type="PageLink" page="ShowVideo"
-	    			context="videoComment.video.videoId" >
-						${message:showvideo}
-	    			</a>
-				</td>
-			</tr>
-			<tr><td class="commentator-info">
-				${message:user-header}: ${videoComment.commentator.loginName}
-			 - 
-				${message:date}: <t:output value="videoComment.date.time" format="dateFormat"/>
-			 - 
-			 <t:actionLink t:id="delete" zone="comments" context="videoComment.commentId">
+	<t:if t:test="videoComments.empty">
+		<p>${message:nocomments}.</p>
+		<t:parameter name="else">
+			<p>${message:myComments}.</p>
+			<table class="comments">
+				<tr t:type="Loop" t:source="videoComments" t:value="videoComment">
+				<tr>
+					<td class="user-comment">${videoComment.comment} - <a href="#"
+						t:type="PageLink" page="ShowVideo"
+						context="videoComment.video.videoId"> ${message:showvideo} </a></td>
+				</tr>
+				<tr>
+					<td class="commentator-info">${message:user-header}:
+					${videoComment.commentator.loginName} - ${message:date}: <t:output
+						value="videoComment.date.time" format="dateFormat" /> - <t:actionLink
+						t:id="delete" zone="comments" context="videoComment.commentId">
 			 	${message:delete}
-			 </t:actionLink>
-			</td></tr>
-		</tr>
-	</table>
-			
-	<!-- "Previous" and "Next" links. -->
+			 </t:actionLink></td>
+				</tr>
+				</tr>
+			</table>
 
-	<div class="previousNextLinks">
-	<span class="previousLink">
-		<t:if t:test="previousLinkContext">
-			<t:actionLink t:id="previous" zone="comments">${message:link-previous}</t:actionLink>
-		</t:if>
-	</span>
-	
-	<span class="nextLink">
-		<t:if t:test="nextLinkContext">
-			<t:actionLink t:id="next" zone="comments">${message:link-next}</t:actionLink>
-		</t:if>
-	</span>
-	</div>
-	
-</t:parameter>
-</t:if>
+			<!-- "Previous" and "Next" links. -->
+
+			<div class="previousNextLinks"><span class="previousLink">
+			<t:if t:test="previousLinkContext">
+				<t:actionLink t:id="previous" zone="comments">${message:link-previous}</t:actionLink>
+			</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
+				<t:actionLink t:id="next" zone="comments">${message:link-next}</t:actionLink>
+			</t:if> </span></div>
+
+		</t:parameter>
+	</t:if>
 
 </t:zone>
-	   
+
 </html>

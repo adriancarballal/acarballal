@@ -20,13 +20,20 @@
 			<t:if t:test="userSessionExists">
 				<tr>
 					<td><a href="#" t:type="PageLink" page="ShowVideoComments"
-						context="videoContext"> ${message:showVideoComments} </a> | <a
+						context="video.videoId"> ${message:showVideoComments} </a> | <a
 						href="#" t:type="PageLink" page="ShowUserComments"
-						context="userContext"> ${message:showUserComments} </a></td>
+						context="video.userProfile.userProfileId"> ${message:showUserComments} </a></td>
 				</tr>
 				<tr>
-					<td><a href="#" t:type="PageLink" page="user/ComplaintVideo"
-						context="video.videoId"> ${message:complaintVideo} </a></td>
+					<td>
+					<t:zone t:id="complaintZone">
+						<t:actionLink t:id="complaint" zone="complaintZone" context="video.videoId">
+							${message:complaintVideo}</t:actionLink>
+					</t:zone>
+					<t:block t:id="alreadyComplaint">
+						${message:alreadyComplaint}
+					</t:block>
+					</td>
 				</tr>
 			</t:if>
 
