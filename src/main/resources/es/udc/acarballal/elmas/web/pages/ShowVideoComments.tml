@@ -1,62 +1,67 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<t:if t:test="videoComments.empty">
-	<p>${message:nocomments}.</p>
-	<t:parameter name="else">
-		<p>${message:myComments}.</p>
-		<table class="comments">
-			<tr t:type="Loop" t:source="videoComments" t:value="videoComment">
-			<tr>
-				<td class="user-comment">${videoComment.comment}</td>
-			</tr>
-			<tr>
-				<td class="commentator-info">${message:user-header}:
-				${videoComment.commentator.loginName} - ${message:date}: <t:output
-					value="videoComment.date.time" format="dateFormat" /> <t:if
-					t:test="deletable">
-			 	- 
-			 		<a href="#" t:type="PageLink" page="user/DeleteVideoComment"
-						context="videoComment.commentId"> ${message:delete} </a>
-				</t:if> <t:if t:test="userSessionExists">
-			 	- 
-				<a href="#" t:type="PageLink" page="user/ComplaintVideoComment"
-						context="videoComment.commentId">
-					${message:complaintVideoComment} </a>
-				</t:if></td>
-			</tr>
-			</tr>
+<t:zone t:id="comments">
+	<t:if t:test="videoComments.empty">
+		<p>${message:nocomments}.</p>
+		<t:parameter name="else">
+			<p>${message:myComments}.</p>
+			<table class="comments">
+				<tr t:type="Loop" t:source="videoComments" t:value="videoComment">
+				<tr>
+					<td class="user-comment">${videoComment.comment}</td>
+				</tr>
+				<tr>
+					<td class="commentator-info">${message:user-header}:
+					${videoComment.commentator.loginName} - ${message:date}: <t:output
+						value="videoComment.date.time" format="dateFormat" /> -   
+					<t:if t:test="deletable">
+						<t:actionLink t:id="deleteComment" zone="comments" 
+							context="videoComment.commentId">${message:delete}</t:actionLink>
+					<t:parameter name="else">
+						<t:actionLink t:id="complaintComment" zone="comments" 
+							context="videoComment.commentId">${message:complaintVideoComment}
+						</t:actionLink>					
+					</t:parameter>					
+					</t:if>
+					</td>
+				</tr>
+				</tr>
 
-		</table>
-	</t:parameter>
-</t:if>
+			</table>
+		</t:parameter>
+	</t:if>
 
+
+	<!-- "Previous" and "Next" links. -->
+	<p>
+	<div class="previousNextLinks"><span class="previousLink">
+	<t:if t:test="previousLinkContext">
+		<t:actionLink t:id="previous" zone="comments">${message:link-previous}</t:actionLink>
+	</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
+		<t:actionLink t:id="next" zone="comments">${message:link-next}</t:actionLink>
+	</t:if> </span></div>
+	</p>
+</t:zone>
+<br/><br/>
 <t:if t:test="userSessionExists">
 	<form t:type="Form" t:id="commentForm"><t:errors />
 	<table>
-		<tr><td>${message:addComment}</td></tr>
+		<tr>
+			<td>${message:addComment}</td>
+		</tr>
 		<tr>
 			<td><span class="entry"> <input type="text"
 				t:id="comment" t:type="TextArea" t:validate="required"
 				value="comment" style="overflow: hidden;" wrap="hard"
 				maxlength="200" cols="30" rows="7" /> </span></td>
 		</tr>
-		<tr><td><input type="submit" value="${message:addCommentButton}" /></td></tr>
+		<tr>
+			<td><input type="submit" value="${message:addCommentButton}" /></td>
+		</tr>
 	</table>
 	</form>
 </t:if>
-
-<!-- "Previous" and "Next" links. -->
-
-<div class="previousNextLinks"><span class="previousLink">
-<t:if t:test="previousLinkContext">
-	<a href="#" t:type="PageLink" page="ShowVideoComments"
-		context="previousLinkContext"> ${message:link-previous} </a>
-</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
-	<a href="#" t:type="PageLink" page="ShowVideoComments"
-		context="nextLinkContext"> ${message:link-next} </a>
-</t:if> </span></div>
-
 
 
 </html>

@@ -6,8 +6,12 @@ import java.util.Locale;
 
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.ApplicationState;
+import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Path;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.video.Video;
@@ -17,7 +21,8 @@ import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class MyVideos {
 	
-	private int count = 3;
+	private static final int COUNT = 3;
+	
 	@SuppressWarnings("unused")
 	@Inject
 	@Path("context:/logo/logo.jpg")
@@ -26,7 +31,8 @@ public class MyVideos {
 	@Inject
 	private Locale locale;
 	
-	private int startIndex = 0;
+	@Persist
+	private int startIndex;
 	
 	@ApplicationState
 	private UserSession userSession;
@@ -40,27 +46,31 @@ public class MyVideos {
 	@Inject
 	private VideoService videoService;
 	
+	@InjectComponent
+	private Zone videoZone;
+	
+	private void fill(){
+		videoBlock = videoService.findVideosByUser(userSession.getUserProfileId(), 
+				startIndex, COUNT);		
+	}
+
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
-
-	public Object[] getNextLinkContext() {
+	
+	public Boolean getNextLinkContext() {
 		
-		if (videoBlock.getExistMoreVideos()) {
-			return new Object[] {startIndex+count, count};
-		} else {
-			return null;
-		}
+		if (videoBlock.getExistMoreVideos()) 
+			return true;
+		return false;
 		
 	}
 	
-	public Object[] getPreviousLinkContext() {
+	public Boolean getPreviousLinkContext() {
 		
-		if (startIndex-count >= 0) {
-			return new Object[] {startIndex-count, count};
-		} else {
-			return null;
-		}
+		if (startIndex-COUNT >= 0) 
+			return true;
+		return false;
 		
 	}
 	
@@ -68,15 +78,22 @@ public class MyVideos {
 		return videoBlock.getVideos();
 	}
 	
-	void onActivate(int startIndex, int count) {
-		this.startIndex = startIndex;
-		this.count = count;
-		videoBlock = videoService.findVideosByUser(userSession.getUserProfileId(), 
-				startIndex, count);
+	void onActivate() {
+		fill();
 	}
 	
-	Object[] onPassivate() {
-		return new Object[] {startIndex, count};
+	@OnEvent(component="next")
+	Object onShowNext(){
+		this.startIndex = this.startIndex + COUNT;
+		fill();
+		return videoZone.getBody();
+	}
+	
+	@OnEvent(component="previous")
+	Object onShowPrevious(){
+		this.startIndex = this.startIndex - COUNT;
+		fill();
+		return videoZone.getBody();
 	}
 	
 }

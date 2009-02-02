@@ -1,35 +1,51 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<t:if t:test="userComments.empty">
-	<p>${message:nocomments}.</p>
-	<t:parameter name="else">
-		<p>${message:myComments}.</p>
-		<table class="comments">
-			<tr t:type="Loop" t:source="userComments" t:value="userComment">
-			<tr>
-				<td class="user-comment">${userComment.comment}</td>
-			</tr>
-			<tr>
-				<td class="commentator-info">${message:user-header}:
-				${userComment.commentator.loginName} - ${message:date}: <t:output
-					value="userComment.date.time" format="dateFormat" /> <t:if
-					t:test="userSessionExists">
-			 - 
-				<a href="#" t:type="PageLink" page="user/ComplaintUserComment"
-						context="userComment.commentId">
-					${message:complaintUserComment} </a>
-				</t:if></td>
-			</tr>
-			</tr>
-		</table>
-	</t:parameter>
-</t:if>
+<t:zone t:id="comments">
+	<t:if t:test="userComments.empty">
+		<p>${message:nocomments}.</p>
+		<t:parameter name="else">
+			<p>${message:myComments}.</p>
+			<table class="comments">
+				<tr t:type="Loop" t:source="userComments" t:value="userComment">
+				<tr>
+					<td class="user-comment">${userComment.comment}</td>
+				</tr>
+				<tr>
+					<td class="commentator-info">${message:user-header}:
+					${userComment.commentator.loginName} - ${message:date}: <t:output
+						value="userComment.date.time" format="dateFormat" /> - <t:if
+						t:test="deletable">
+						<t:actionLink t:id="deleteComment" zone="comments"
+							context="userComment.commentId">${message:delete}</t:actionLink>
+						<t:parameter name="else">
+							<t:actionLink t:id="complaintComment" zone="comments"
+								context="userComment.commentId">${message:complaintUserComment}
+						</t:actionLink>
+						</t:parameter>
+					</t:if></td>
+				</tr>
+				</tr>
+			</table>
+		</t:parameter>
+	</t:if>
 
+	<!-- "Previous" and "Next" links. -->
+	<div class="previousNextLinks"><span class="previousLink">
+	<t:if t:test="previousLinkContext">
+		<t:actionLink t:id="previous" zone="comments">${message:link-previous}</t:actionLink>
+	</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
+		<t:actionLink t:id="next" zone="comments">${message:link-next}</t:actionLink>
+	</t:if> </span></div>
+
+</t:zone>
+<br/><br/>
 <t:if t:test="userSessionExists">
 	<form t:type="Form" t:id="commentForm"><t:errors />
 	<table>
-		<tr><td>${message:addComment}</td></tr>
+		<tr>
+			<td>${message:addComment}</td>
+		</tr>
 		<tr>
 			<td><span class="entry"> <input type="text"
 				t:id="comment" t:type="TextArea" t:validate="required"
@@ -42,18 +58,4 @@
 	</table>
 	</form>
 </t:if>
-
-<!-- "Previous" and "Next" links. -->
-
-<div class="previousNextLinks"><span class="previousLink">
-<t:if t:test="previousLinkContext">
-	<a href="#" t:type="PageLink" page="ShowUserComments"
-		context="previousLinkContext"> ${message:link-previous} </a>
-</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
-	<a href="#" t:type="PageLink" page="ShowUserComments"
-		context="nextLinkContext"> ${message:link-next} </a>
-</t:if> </span></div>
-
-
-
 </html>

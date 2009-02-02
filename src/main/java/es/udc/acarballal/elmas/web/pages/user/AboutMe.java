@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.tapestry5.annotations.ApplicationState;
+import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.OnEvent;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.usercomment.UserComment;
@@ -15,10 +19,16 @@ import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class AboutMe {
 	
-	private int count = 4;
+	private static final int COUNT = 4;
+	
+	@InjectComponent
+	private Zone comments;
+	
 	@Inject
 	private Locale locale;
-	private int startIndex = 0;
+	
+	@Persist
+	private int startIndex;
 	
 	@SuppressWarnings("unused")
 	@Property
@@ -32,27 +42,29 @@ public class AboutMe {
 	@ApplicationState
 	private UserSession userSession;
 	
+	private void fill(){
+		userCommentBlock = 
+			userService.findUserCommentsByCommented(userSession.getUserProfileId(), 
+					startIndex, COUNT);
+	}
+
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
-
-	public Object[] getNextLinkContext() {
+	
+	public Boolean getNextLinkContext() {
 		
-		if (userCommentBlock.getExistMoreUserComments()) {
-			return new Object[] {startIndex+count, count};
-		} else {
-			return null;
-		}
+		if (userCommentBlock.getExistMoreUserComments()) 
+			return true;
+		return false;
 		
 	}
 	
-	public Object[] getPreviousLinkContext() {
+	public Boolean getPreviousLinkContext() {
 		
-		if (startIndex-count >= 0) {
-			return new Object[] {startIndex-count, count};
-		} else {
-			return null;
-		}
+		if (startIndex-COUNT >= 0) 
+			return true;
+		return false;
 		
 	}
 	
@@ -60,16 +72,23 @@ public class AboutMe {
 		return userCommentBlock.getUserComments();
 	}
 	
-	void onActivate(int startIndex, int count) {
-		this.startIndex = startIndex;
-		this.count = count;
-		userCommentBlock = 
-			userService.findUserCommentsByCommented(userSession.getUserProfileId(), 
-					startIndex, count);
+	void onActivate() {
+		fill();
 	}
 	
-	Object[] onPassivate() {
-		return new Object[] {startIndex, count};
+	@OnEvent(component="next")
+	Object onShowNext(){
+		this.startIndex = this.startIndex + COUNT;
+		fill();
+		return comments.getBody();
 	}
 	
+	@OnEvent(component="previous")
+	Object onShowPrevious(){
+		this.startIndex = this.startIndex - COUNT;
+		fill();
+		return comments.getBody();
+	}
+	
+		
 }

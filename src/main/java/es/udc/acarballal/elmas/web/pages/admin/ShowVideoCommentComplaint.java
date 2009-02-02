@@ -36,7 +36,6 @@ public class ShowVideoCommentComplaint {
 	private Locale locale;
 	
 	@Persist
-	@Property
 	private int startIndex;
 
 	@SuppressWarnings("unused")
@@ -52,8 +51,6 @@ public class ShowVideoCommentComplaint {
 	@Property
 	private VideoCommentComplaint videoCommentComplaint;
 
-	@Persist
-	@Property
 	private VideoCommentComplaintBlock videoCommentComplaintBlock;
 
 	@Inject
