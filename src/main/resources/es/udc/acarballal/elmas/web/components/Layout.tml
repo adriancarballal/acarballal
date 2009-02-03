@@ -28,17 +28,13 @@ JPG</a></div>
 
 <div id="sidebar">
 <div id="sidebarmenu">
-<h3><t:if t:test="userSessionExists">
+<t:if t:test="userSessionExists">
  			${message:menu-hello} ${userSession.firstName}
             <t:parameter name="else">
             	${message:menu-welcome}
             </t:parameter>
-</t:if></h3>
+</t:if>
 </div>
-<t:if t:test="menuExplanation">
-	<span id="menuExplanation"> ${menuExplanation} </span>
-
-	<t:parameter name="else">
 		<table class="menutable">
 			<t:if t:test="userSessionExists">
 				<!-- <tr><th>SideBar Menu</th></tr> -->
@@ -86,7 +82,7 @@ JPG</a></div>
 				</t:parameter>
 			</t:if>
 			<tr>
-				<td>.</td>
+				<td><br/><br/></td>
 			</tr>
 
 
@@ -96,15 +92,12 @@ JPG</a></div>
 					<td><a href="#" t:type="PageLink" t:page="admin/Reports">${message:menu-reports}</a>
 					</td>
 				</tr>
-				<t:parameter name="else">
-					<tr>
-						<td>.</td>
-					</tr>
+				<t:parameter name="else"><tr><td><br/></td></tr>
 				</t:parameter>
 			</t:if>
 
 			<tr>
-				<td>.</td>
+				<td><br/><br/></td>
 			</tr>
 			<tr>
 				<th>Bases del concurso</th>
@@ -119,8 +112,7 @@ JPG</a></div>
 			</tr>
 
 		</table>
-	</t:parameter>
-</t:if></div>
+</div>
 
 
 <!-- SearchBar. -->

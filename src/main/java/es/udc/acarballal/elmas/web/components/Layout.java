@@ -40,12 +40,6 @@ public class Layout {
 	@Component(id = "keys")
 	private TextField keysField;
 
-	// TODO esto no se prodrá quitar???
-	@SuppressWarnings("unused")
-	@Property
-	@Parameter(required = false, defaultPrefix = "literal")
-	private String menuExplanation;
-
 	@SuppressWarnings("unused")
 	@Property
 	@Parameter(required = true, defaultPrefix = "literal")

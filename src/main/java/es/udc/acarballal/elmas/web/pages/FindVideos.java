@@ -64,8 +64,11 @@ public class FindVideos {
 		return videoBlock.getVideos();
 	}
 	
-	void onActivate(String keys) {
+	void setupRender(){
 		startIndex=0;
+	}
+	
+	void onActivate(String keys) {
 		this.keys = keys;
 		fill();
 	}
