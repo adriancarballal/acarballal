@@ -100,8 +100,6 @@ public class Vote {
 		try {
 			return founded && videoService.getNumberVotesRemaining(userSession.getUserProfileId())>0;
 		} catch (InstanceNotFoundException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
 			return false;
 		}
 	}
@@ -168,8 +166,6 @@ public class Vote {
 			videoId = video.getVideoId();
 			remainingVotes = videoService.getNumberVotesRemaining(userSession.getUserProfileId());
 		} catch (InstanceNotFoundException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
 			founded=false;
 			return;
 		}

@@ -160,26 +160,26 @@ insert into userprofile values(3, 'voter','LMcPpWzd49C7g', 'voter', 'voter', 'vo
 --------------------------
 --        Videos        --
 --------------------------
-insert into video values (1,2,"Episodio Chuck 01 xxxxxxxxxxxx", "Parte 1 x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x y z", "http://localhost/imagenes/small/1.jpg", "", "http://localhost/videos_webService/1.flv", "", CURRENT_TIMESTAMP);
-insert into video values (2,2,"Episodio Chuck 01", "Parte 2", "http://localhost/imagenes/small/2.jpg", "", "http://localhost/videos_webService/2.flv", "", CURRENT_TIMESTAMP);
-insert into video values (3,2,"Episodio Chuck 01", "Parte 3", "http://localhost/imagenes/small/3.jpg", "", "http://localhost/videos_webService/3.flv", "", CURRENT_TIMESTAMP);
-insert into video values (4,2,"Episodio Chuck 01", "Parte 4", "http://localhost/imagenes/small/4.jpg", "", "http://localhost/videos_webService/4.flv", "", CURRENT_TIMESTAMP);
-insert into video values (5,2,"Episodio Chuck 01", "Parte 5", "http://localhost/imagenes/small/5.jpg", "", "http://localhost/videos_webService/5.flv", "", CURRENT_TIMESTAMP);
-insert into video values (6,2,"Episodio Chuck 01", "Parte 6", "http://localhost/imagenes/small/6.jpg", "", "http://localhost/videos_webService/6.flv", "", CURRENT_TIMESTAMP);
-insert into video values (7,2,"Episodio Chuck 01", "Parte 7", "http://localhost/imagenes/small/7.jpg", "", "http://localhost/videos_webService/7.flv", "", CURRENT_TIMESTAMP);
-insert into video values (8,2,"Episodio Chuck 01", "Parte 8", "http://localhost/imagenes/small/8.jpg", "", "http://localhost/videos_webService/8.flv", "", CURRENT_TIMESTAMP);
-insert into video values (9,2,"Episodio Chuck 01", "Parte 9", "http://localhost/imagenes/small/9.jpg", "", "http://localhost/videos_webService/9.flv", "", CURRENT_TIMESTAMP);
-insert into video values (10,2,"Episodio Chuck 01", "Parte 10", "http://localhost/imagenes/small/10.jpg", "", "http://localhost/videos_webService/10.flv", "", CURRENT_TIMESTAMP);
-insert into video values (11,2,"Episodio Chuck 01", "Parte 11", "http://localhost/imagenes/small/11.jpg", "", "http://localhost/videos_webService/11.flv", "", CURRENT_TIMESTAMP);
-insert into video values (12,2,"Episodio Chuck 01", "Parte 12", "http://localhost/imagenes/small/12.jpg", "", "http://localhost/videos_webService/12.flv", "", CURRENT_TIMESTAMP);
-insert into video values (13,2,"Episodio Chuck 01", "Parte 13", "http://localhost/imagenes/small/13.jpg", "", "http://localhost/videos_webService/13.flv", "", CURRENT_TIMESTAMP);
-insert into video values (14,2,"Episodio Chuck 01", "Parte 14", "http://localhost/imagenes/small/14.jpg", "", "http://localhost/videos_webService/14.flv", "", CURRENT_TIMESTAMP);
-insert into video values (15,2,"Episodio Chuck 01", "Parte 15", "http://localhost/imagenes/small/15.jpg", "", "http://localhost/videos_webService/15.flv", "", CURRENT_TIMESTAMP);
-insert into video values (16,2,"Episodio Chuck 01", "Parte 16", "http://localhost/imagenes/small/16.jpg", "", "http://localhost/videos_webService/16.flv", "", CURRENT_TIMESTAMP);
-insert into video values (17,2,"Episodio Chuck 01", "Parte 17", "http://localhost/imagenes/small/17.jpg", "", "http://localhost/videos_webService/17.flv", "", CURRENT_TIMESTAMP);
-insert into video values (18,2,"Episodio Chuck 01", "Parte 18", "http://localhost/imagenes/small/18.jpg", "", "http://localhost/videos_webService/18.flv", "", CURRENT_TIMESTAMP);
-insert into video values (19,2,"Episodio Chuck 01", "Parte 19", "http://localhost/imagenes/small/19.jpg", "", "http://localhost/videos_webService/19.flv", "", CURRENT_TIMESTAMP);
-insert into video values (20,2,"Episodio Chuck 01", "Parte 20", "http://localhost/imagenes/small/20.jpg", "", "http://localhost/videos_webService/20.flv", "", CURRENT_TIMESTAMP);
+insert into video values (1,2,"Episodio Chuck 01 xxxxxxxxxxxx", "Parte 1 x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x y z", "http://elmas.cadena.tv/imagenes/small/1.jpg", "", "http://elmas.cadena.tv/videos_webService/1.flv", "", CURRENT_TIMESTAMP);
+insert into video values (2,2,"Episodio Chuck 01", "Parte 2", "http://elmas.cadena.tv/imagenes/small/2.jpg", "", "http://192.168.0.11/videos_webService/2.flv", "", CURRENT_TIMESTAMP);
+insert into video values (3,2,"Episodio Chuck 01", "Parte 3", "http://elmas.cadena.tv/imagenes/small/3.jpg", "", "http://elmas.cadena.tv/videos_webService/3.flv", "", CURRENT_TIMESTAMP);
+insert into video values (4,2,"Episodio Chuck 01", "Parte 4", "http://elmas.cadena.tv/imagenes/small/4.jpg", "", "http://elmas.cadena.tv/videos_webService/4.flv", "", CURRENT_TIMESTAMP);
+insert into video values (5,2,"Episodio Chuck 01", "Parte 5", "http://elmas.cadena.tv/imagenes/small/5.jpg", "", "http://elmas.cadena.tv/videos_webService/5.flv", "", CURRENT_TIMESTAMP);
+insert into video values (6,2,"Episodio Chuck 01", "Parte 6", "http://elmas.cadena.tv/imagenes/small/6.jpg", "", "http://elmas.cadena.tv/videos_webService/6.flv", "", CURRENT_TIMESTAMP);
+insert into video values (7,2,"Episodio Chuck 01", "Parte 7", "http://elmas.cadena.tv/imagenes/small/7.jpg", "", "http://elmas.cadena.tv/videos_webService/7.flv", "", CURRENT_TIMESTAMP);
+insert into video values (8,2,"Episodio Chuck 01", "Parte 8", "http://elmas.cadena.tv/imagenes/small/8.jpg", "", "http://elmas.cadena.tv/videos_webService/8.flv", "", CURRENT_TIMESTAMP);
+insert into video values (9,2,"Episodio Chuck 01", "Parte 9", "http://elmas.cadena.tv/imagenes/small/9.jpg", "", "http://elmas.cadena.tv/videos_webService/9.flv", "", CURRENT_TIMESTAMP);
+insert into video values (10,2,"Episodio Chuck 01", "Parte 10", "http://elmas.cadena.tv/imagenes/small/10.jpg", "", "http://elmas.cadena.tv/videos_webService/10.flv", "", CURRENT_TIMESTAMP);
+insert into video values (11,2,"Episodio Chuck 01", "Parte 11", "http://elmas.cadena.tv/imagenes/small/11.jpg", "", "http://elmas.cadena.tv/videos_webService/11.flv", "", CURRENT_TIMESTAMP);
+insert into video values (12,2,"Episodio Chuck 01", "Parte 12", "http://elmas.cadena.tv/imagenes/small/12.jpg", "", "http://elmas.cadena.tv/videos_webService/12.flv", "", CURRENT_TIMESTAMP);
+insert into video values (13,2,"Episodio Chuck 01", "Parte 13", "http://elmas.cadena.tv/imagenes/small/13.jpg", "", "http://elmas.cadena.tv/videos_webService/13.flv", "", CURRENT_TIMESTAMP);
+insert into video values (14,2,"Episodio Chuck 01", "Parte 14", "http://elmas.cadena.tv/imagenes/small/14.jpg", "", "http://elmas.cadena.tv/videos_webService/14.flv", "", CURRENT_TIMESTAMP);
+insert into video values (15,2,"Episodio Chuck 01", "Parte 15", "http://elmas.cadena.tv/imagenes/small/15.jpg", "", "http://elmas.cadena.tv/videos_webService/15.flv", "", CURRENT_TIMESTAMP);
+insert into video values (16,2,"Episodio Chuck 01", "Parte 16", "http://elmas.cadena.tv/imagenes/small/16.jpg", "", "http://elmas.cadena.tv/videos_webService/16.flv", "", CURRENT_TIMESTAMP);
+insert into video values (17,2,"Episodio Chuck 01", "Parte 17", "http://elmas.cadena.tv/imagenes/small/17.jpg", "", "http://elmas.cadena.tv/videos_webService/17.flv", "", CURRENT_TIMESTAMP);
+insert into video values (18,2,"Episodio Chuck 01", "Parte 18", "http://elmas.cadena.tv/imagenes/small/18.jpg", "", "http://elmas.cadena.tv/videos_webService/18.flv", "", CURRENT_TIMESTAMP);
+insert into video values (19,2,"Episodio Chuck 01", "Parte 19", "http://elmas.cadena.tv/imagenes/small/19.jpg", "", "http://elmas.cadena.tv/videos_webService/19.flv", "", CURRENT_TIMESTAMP);
+insert into video values (20,2,"Episodio Chuck 01", "Parte 20", "http://elmas.cadena.tv/imagenes/small/20.jpg", "", "http://elmas.cadena.tv/videos_webService/20.flv", "", CURRENT_TIMESTAMP);
 
 --------------------------
 --     UserComments     --
