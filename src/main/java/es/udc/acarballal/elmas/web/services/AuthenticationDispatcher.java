@@ -10,12 +10,14 @@ import org.apache.tapestry5.services.Dispatcher;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.Response;
 
+import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class AuthenticationDispatcher implements Dispatcher {
 	
 	private final static String INIT_PAGE = "/";
 	private final static String LOGIN_PAGE = "/user/login";
+	private final static String PARTICIPATE_PAGE = "/user/updateprofile";
 
 	private ApplicationStateManager applicationStateManager;
 	private ComponentClassResolver componentClassResolver;
@@ -46,6 +48,23 @@ public class AuthenticationDispatcher implements Dispatcher {
 		boolean userAuthenticated = 
 			applicationStateManager.exists(UserSession.class);
 		
+		
+		
+		boolean isAdministrator = false;
+		boolean isParticipating = false;
+			
+		try{
+			UserSession userSession = 
+				applicationStateManager.getIfExists(UserSession.class);
+			if(userSession.getPrivileges()==Privileges_TYPES.ADMIN){
+				isParticipating = true;
+				isAdministrator = true;
+			}
+			if(userSession.getPrivileges()==Privileges_TYPES.COMPETITOR)
+				isParticipating = true;
+		}
+		catch (Exception e){}			
+			
 		switch (policyType) {
 		
 		case AUTHENTICATED_USERS:
@@ -66,6 +85,29 @@ public class AuthenticationDispatcher implements Dispatcher {
 			}
 			break;
 			
+		case ADMINISTRATORS:
+			
+			if (!isAdministrator) {
+				response.sendRedirect(request.getContextPath() + 
+					INIT_PAGE);
+				return true; // Leave the chain.
+			}
+			break;			
+			
+		case PARTICIPANTS:
+			
+			if (!userAuthenticated) {
+				response.sendRedirect(request.getContextPath() + 
+					INIT_PAGE);
+				return true; // Leave the chain.
+			}
+			if (!isParticipating) {
+				response.sendRedirect(request.getContextPath() + 
+						PARTICIPATE_PAGE);
+					return true; // Leave the chain.
+				}
+			break;			
+
 		default: break;
 		
 		}

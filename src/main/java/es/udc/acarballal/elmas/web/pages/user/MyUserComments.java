@@ -18,9 +18,12 @@ import es.udc.acarballal.elmas.model.userservice.UserCommentBlock;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
 import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
+@AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
 public class MyUserComments {
 
 	private final static int COUNT=4;

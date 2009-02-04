@@ -12,7 +12,10 @@ import org.apache.tapestry5.corelib.components.TextArea;
 import org.apache.tapestry5.upload.services.UploadedFile;
 
 import es.udc.acarballal.elmas.web.pages.Index;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 
+@AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
 public class InsertVideo {
 
 	@SuppressWarnings("unused")

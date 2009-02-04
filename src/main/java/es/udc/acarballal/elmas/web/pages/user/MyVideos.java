@@ -15,8 +15,11 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
 
+@AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
 public class MyVideos {
 	
 	private static final int COUNT = 3;
