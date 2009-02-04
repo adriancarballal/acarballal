@@ -11,7 +11,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.pages.admin.Reports.SHOW_BEST_TYPE;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 
+@AuthenticationPolicy(AuthenticationPolicyType.ADMINISTRATORS)
 public class ShowBestVideos {
 	
 	private int count = 10;

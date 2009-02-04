@@ -27,91 +27,95 @@ JPG</a></div>
 <!-- Menu. -->
 
 <div id="sidebar">
-<div id="sidebarmenu">
-<t:if t:test="userSessionExists">
+<div id="sidebarmenu"><t:if t:test="userSessionExists">
  			${message:menu-hello} ${userSession.firstName}
             <t:parameter name="else">
             	${message:menu-welcome}
             </t:parameter>
-</t:if>
-</div>
-		<table class="menutable">
-			<t:if t:test="userSessionExists">
-				<!-- <tr><th>SideBar Menu</th></tr> -->
-				<tr>
-					<td><a href="#" t:type="PageLink" t:page="user/UpdateProfile">
-					${message:menu-updateProfile} </a></td>
-				</tr>
-				<tr>
-					<td><a href="#" t:type="PageLink" t:page="user/MyVideos">
-					${message:menu-myVideos} </a></td>
-				</tr>
-				<tr>
-					<td><a href="#" t:type="PageLink" t:page="user/InsertVideo">
-					${message:menu-insertVideo} </a></td>
-				</tr>
-				<tr>
-					<td><a href="#" t:type="PageLink" t:page="user/AboutMe">
-					${message:menu-aboutMe} </a></td>
-				</tr>
-				<tr>
-					<td>${message:menu-myComments}</td>
-				</tr>
-				<tr>
-					<td><a href="#" t:type="PageLink" t:page="user/MyUserComments">
-					____ ${message:menu-myUserComments} </a></td>
-				</tr>
-				<tr>
-					<td><a href="#" t:type="PageLink"
-						t:page="user/MyVideoComments"> _____
-					${message:menu-myVideoComments} </a></td>
-				</tr>
-				<tr>
-					<td><a href="#" t:type="PageLink" t:page="user/Vote">
-					${message:menu-vote} </a></td>
-				</tr>
-				<tr>
-					<td><a href="#" t:type="PageLink" t:page="user/Logout">
-					${message:menu-logout} </a></td>
-				</tr>
-				<t:parameter name="else">
-					<tr>
-						<td><a href="#" t:type="PageLink" t:page="user/Login">${message:menu-authenticate}</a>
-						</td>
-					</tr>
-				</t:parameter>
-			</t:if>
+</t:if></div>
+<table class="menutable">
+	<t:if t:test="userSessionExists">
+		<t:parameter name="else">
 			<tr>
-				<td><br/><br/></td>
-			</tr>
-
-
-
-			<t:if test="isAdmin">
-				<tr>
-					<td><a href="#" t:type="PageLink" t:page="admin/Reports">${message:menu-reports}</a>
-					</td>
-				</tr>
-				<t:parameter name="else"><tr><td><br/></td></tr>
-				</t:parameter>
-			</t:if>
-
-			<tr>
-				<td><br/><br/></td>
-			</tr>
-			<tr>
-				<th>Bases del concurso</th>
-			</tr>
-			<tr>
-				<td>Soltar todo el rollazo, en modo corto, junto con un link a
-				la informacion completa</td>
-			</tr>
-			<tr>
-				<td><a href="#" t:type="PageLink" t:page="user/ReadMore">${message:menu-readmore}</a>
+				<td><a href="#" t:type="PageLink" t:page="user/Login">${message:menu-authenticate}</a>
 				</td>
 			</tr>
+		</t:parameter>
+	</t:if>
+	<tr>
+		<td><a href="#" t:type="PageLink" t:page="user/UpdateProfile">
+		${message:menu-updateProfile} </a></td>
+	</tr>
+	<tr>
+		<td><a href="#" t:type="PageLink" t:page="user/MyVideos">
+		${message:menu-myVideos} </a></td>
+	</tr>
+	<tr>
+		<td><a href="#" t:type="PageLink" t:page="user/InsertVideo">
+		${message:menu-insertVideo} </a></td>
+	</tr>
+	<tr>
+		<td><a href="#" t:type="PageLink" t:page="user/AboutMe">
+		${message:menu-aboutMe} </a></td>
+	</tr>
+	<tr>
+		<td>${message:menu-myComments}</td>
+	</tr>
+	<tr>
+		<td><a href="#" t:type="PageLink" t:page="user/MyUserComments">
+		____ ${message:menu-myUserComments} </a></td>
+	</tr>
+	<tr>
+		<td><a href="#" t:type="PageLink" t:page="user/MyVideoComments">
+		_____ ${message:menu-myVideoComments} </a></td>
+	</tr>
+	<tr>
+		<td><a href="#" t:type="PageLink" t:page="user/Vote">
+		${message:menu-vote} </a></td>
+	</tr>
+	<tr>
+		<td><a href="#" t:type="PageLink" t:page="user/Logout">
+		${message:menu-logout} </a></td>
+	</tr>
+	<tr>
+		<td><br />
+		<br />
+		</td>
+	</tr>
 
-		</table>
+
+
+	<t:if test="isAdmin">
+		<tr>
+			<td><a href="#" t:type="PageLink" t:page="admin/Reports">${message:menu-reports}</a>
+			</td>
+		</tr>
+		<t:parameter name="else">
+			<tr>
+				<td><br />
+				</td>
+			</tr>
+		</t:parameter>
+	</t:if>
+
+	<tr>
+		<td><br />
+		<br />
+		</td>
+	</tr>
+	<tr>
+		<th>Bases del concurso</th>
+	</tr>
+	<tr>
+		<td>Soltar todo el rollazo, en modo corto, junto con un link a la
+		informacion completa</td>
+	</tr>
+	<tr>
+		<td><a href="#" t:type="PageLink" t:page="user/ReadMore">${message:menu-readmore}</a>
+		</td>
+	</tr>
+
+</table>
 </div>
 
 
@@ -136,11 +140,8 @@ JPG</a></div>
 			<tr>
 				<td class="video-title">${video.title}</td>
 			</tr>
-			<td>
-				<a href="#" t:type="PageLink" t:page="ShowVideo" t:context="video.videoId"> 
-					<img src="${video.snapshot}"/>
-				</a>
-			</td>
+			<td><a href="#" t:type="PageLink" t:page="ShowVideo"
+				t:context="video.videoId"> <img src="${video.snapshot}" /> </a></td>
 			</tr>
 		</table>
 	</t:parameter>

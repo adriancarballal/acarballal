@@ -7,9 +7,12 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.adminservice.AdminService;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
+import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
+@AuthenticationPolicy(AuthenticationPolicyType.ADMINISTRATORS)
 public class Reports {
 	
 	public enum SHOW_BEST_TYPE {
