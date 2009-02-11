@@ -11,10 +11,10 @@ public abstract class Process {
 	private static final String FILE_FORMAT = "ISO8859-1";
 	protected OutputStreamWriter logWriter = null;
 	
-	public Process(String path, String logFileName){
+	public Process(String logFileName){
 		this.logFile = logFileName;
 		try {
-			logWriter = new OutputStreamWriter(new FileOutputStream(path + logFile), FILE_FORMAT);
+			logWriter = new OutputStreamWriter(new FileOutputStream(logFile), FILE_FORMAT);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,6 +39,6 @@ public abstract class Process {
 		return true;
 	}
 	
-	public abstract boolean run();
+	protected abstract boolean run();
 	
 }
