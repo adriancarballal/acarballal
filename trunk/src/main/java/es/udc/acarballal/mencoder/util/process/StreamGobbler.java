@@ -2,14 +2,14 @@ package es.udc.acarballal.mencoder.util.process;
 
 import java.io.*;
 
-class StreamGobbler extends Thread
+public class StreamGobbler extends Thread
 {
     InputStream is;
     String type;
     OutputStreamWriter writer;
     
     
-    StreamGobbler(InputStream is, String type, OutputStreamWriter writer)
+    public StreamGobbler(InputStream is, String type, OutputStreamWriter writer)
     {
         this.is = is;
         this.type = type;

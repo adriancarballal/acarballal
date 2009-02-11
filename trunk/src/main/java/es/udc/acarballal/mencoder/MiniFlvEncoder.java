@@ -2,9 +2,9 @@ package es.udc.acarballal.mencoder;
 
 import es.udc.acarballal.mencoder.configuration.*;
 
-public class FlvEncoder extends Encoder{
+public class MiniFlvEncoder extends Encoder{
 
-	private static final String GENERAL_OPTIONS_PARAMETERS = "application/flv/options";
+	private static final String GENERAL_OPTIONS_PARAMETERS = "application/miniflv/options";
 	
 	static {
 		try {
@@ -16,7 +16,7 @@ public class FlvEncoder extends Encoder{
 		}		
 	}
 	
-	public FlvEncoder(String input_file, String output_file, String logfile) {
+	public MiniFlvEncoder(String input_file, String output_file, String logfile) {
 		super(input_file, output_file, logfile);
 		
 	}
