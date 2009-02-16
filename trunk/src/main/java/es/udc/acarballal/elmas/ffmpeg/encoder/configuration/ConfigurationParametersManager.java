@@ -1,4 +1,4 @@
-package es.udc.acarballal.plugins.avidemux.configuration;
+package es.udc.acarballal.elmas.ffmpeg.encoder.configuration;
 
 import java.util.Properties;
 import java.util.Map;

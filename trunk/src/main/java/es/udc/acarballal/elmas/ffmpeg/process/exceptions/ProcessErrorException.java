@@ -1,4 +1,4 @@
-package es.udc.acarballal.mencoder.util.process;
+package es.udc.acarballal.elmas.ffmpeg.process.exceptions;
 
 @SuppressWarnings("serial")
 public class ProcessErrorException extends Exception{
