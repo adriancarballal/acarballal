@@ -1,4 +1,4 @@
-package es.udc.acarballal.mencoder.util;
+package es.udc.acarballal.elmas.ffmpeg.process.util;
 
 public class NameGenerator {
 	
