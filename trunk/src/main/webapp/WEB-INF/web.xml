@@ -29,5 +29,23 @@
     <listener>
     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    
+    <!--  ====================================================================== -->
+    <!--  		  			  	  VARIABLES DE ENTORNO 							 -->
+    <!--  ====================================================================== -->
+    
+    
+    <env-entry>
+    	<env-entry-name>temporal/directory</env-entry-name>
+    	<env-entry-value>C:\\carpeta_apache\\temporal\\</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+  	<env-entry>
+    	<env-entry-name>ffmpeg/application/path</env-entry-name>
+    	<env-entry-value>ffmpeg.exe</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+    
 
 </web-app>

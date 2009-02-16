@@ -1,17 +1,17 @@
 package es.udc.acarballal.elmas.ffmpeg;
 
-public class VideoPostProcessing {
+public class VideoPostProcessing extends Thread{
 	
 	static String ORIGINAL_FILE = "C:\\input3.mp4";
+	private String file;
+	
+	public VideoPostProcessing(String file){
+		this.file = file;
+	}
 
-	public static void main(String[] args) {
-		
-		long tiempoInicio = System.currentTimeMillis();
+	public void run(){
 		UploadTaskList taskList = UploadTaskList.instance();
-		UploadTask task = new UploadTask(new Long(-1), "nuevo", "nuevocomment", ORIGINAL_FILE);
+		UploadTask task = new UploadTask(new Long(-1), "nuevo", "nuevocomment", file);
 		taskList.addProcess(task);		
-		long totalTiempo = System.currentTimeMillis() - tiempoInicio;
-		System.out.println("[" + totalTiempo/60000 + " min (" + totalTiempo/1000 + "seg)]");
-		
 	}
 }
