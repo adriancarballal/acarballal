@@ -8,7 +8,7 @@ public class UploadTaskList {
 	private List<UploadTask> taskList;
 	private static UploadTaskList instance;
 	
-	static UploadTaskList instance() {
+	public static UploadTaskList instance() {
 	    if (instance == null) instance = new UploadTaskList();
 	    return instance;
 	}

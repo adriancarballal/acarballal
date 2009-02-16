@@ -11,6 +11,7 @@ import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextArea;
 import org.apache.tapestry5.upload.services.UploadedFile;
 
+import es.udc.acarballal.elmas.ffmpeg.VideoPostProcessing;
 import es.udc.acarballal.elmas.web.pages.Index;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
@@ -18,11 +19,11 @@ import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 @AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
 public class InsertVideo {
 
-	@SuppressWarnings("unused")
+	 @SuppressWarnings("unused")
 	 @Property
 	 private String comment;
 
-	@SuppressWarnings("unused")
+	 @SuppressWarnings("unused")
 	 @Component(id = "comment")
 	 private TextArea commentField;
 	
@@ -30,12 +31,12 @@ public class InsertVideo {
 	 private UploadedFile file;
 	 
 	 @Persist(PersistenceConstants.FLASH)
-    @SuppressWarnings("unused")
-    @Property
-    private String message;
+	 @SuppressWarnings("unused")
+	 @Property
+	 private String message;
 	 
 	 @SuppressWarnings("unused")
-	@Property
+	 @Property
 	 private String title;
 	 
 	 @SuppressWarnings("unused")
@@ -45,17 +46,19 @@ public class InsertVideo {
 	 @Component
 	 private Form videoForm;
 	 
-    Object onSuccess(){
+	 Object onSuccess(){
    	 
         File copied = new File("D:/temp/" + file.getFileName());
-        file.write(copied);         
+        file.write(copied); 
+        VideoPostProcessing proc = new VideoPostProcessing("D:/temp/" + file.getFileName());
+        proc.start();
+        
         return Index.class;
     }
     
     Object onUploadException(FileUploadException ex)
     {
         message = "Upload exception: " + ex.getMessage();
-
         return this;
     }
 
