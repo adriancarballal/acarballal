@@ -15,7 +15,7 @@ Shutdown database
 	--> USO DE BACHSIZE!!!!!!!!
 	
 	- mirar votos de un video
-	- setupRender en report.java y vote.java lanzan exceptions. ARREGLABLE???	
+	- revisar los autenticationPolicy por si no funcionan bien	
 	
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);
