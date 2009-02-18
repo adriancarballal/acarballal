@@ -34,10 +34,16 @@
     <!--  		  			  	  VARIABLES DE ENTORNO 							 -->
     <!--  ====================================================================== -->
     
+    <env-entry>
+    	<env-entry-name>unavailable/snapshot</env-entry-name>
+    	<env-entry-value>C:\carpeta_apache\container\unavailable.jpg</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+    
     
     <env-entry>
     	<env-entry-name>temporal/directory</env-entry-name>
-    	<env-entry-value>C:\\carpeta_apache\\videos_webService\\</env-entry-value>
+    	<env-entry-value>C:\\carpeta_apache\\temporal\\</env-entry-value>
     	<env-entry-type>java.lang.String</env-entry-type>
   	</env-entry>
   	
@@ -50,6 +56,18 @@
   	<env-entry>
     	<env-entry-name>portal/url</env-entry-name>
     	<env-entry-value>http://adriancarballal.dynalias.com/videos_webService/</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+  	<env-entry>
+    	<env-entry-name>container/directory</env-entry-name>
+    	<env-entry-value>C:\\carpeta_apache\\container</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+  	<env-entry>
+    	<env-entry-name>container/url</env-entry-name>
+    	<env-entry-value>http://adriancarballal.dynalias.com/container/</env-entry-value>
     	<env-entry-type>java.lang.String</env-entry-type>
   	</env-entry>
     

@@ -1,9 +1,11 @@
 package es.udc.acarballal.elmas.ffmpeg.encoder;
 
 public class RealPlayerEncoder extends AbstractVideoEncoder{
+	
+	private static final String extension = ".3gp";
 
 	public RealPlayerEncoder(String inputFilePath, String outputFilePath) {
-		super(inputFilePath, outputFilePath);
+		super(inputFilePath, outputFilePath + extension);
 		this.setVideoSize(VIDEO_SIZE.sqcif);
 		this.setFrameRate(25);
 		this.setVideoBitRate(300);
