@@ -20,7 +20,7 @@ public abstract class AbstractVideoEncoder implements IVideoEncoder{
 	private String outputFilePath;
 	
 	private static final String APPLICATION_PATH_PARAMETERS = "ffmpeg/application/path";
-	private static String application_path;
+	protected static String application_path;
 	static {
 		try {
 			application_path = 
