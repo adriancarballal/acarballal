@@ -1,7 +1,6 @@
 package es.udc.acarballal.elmas.web.pages.user;
 
 import java.io.File;
-import java.util.Calendar;
 
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Component;
@@ -12,16 +11,12 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.upload.services.UploadedFile;
 
 import es.udc.acarballal.elmas.ffmpeg.process.util.DirectoryGenerator;
-import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.pages.Index;
-import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
-import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.acarballal.elmas.web.util.VideoPostProcessing;
-import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
 public class InsertVideo {

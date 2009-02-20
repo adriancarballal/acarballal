@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>
+	<title>${pageTitle}</title>
+	<link rel="StyleSheet" href="${asset:context:/css/mobile.css}"
+		type="text/css" media="all" />
+</head>
+
+<body>
+
+<!-- Window. -->
+<div id="window">
+
+<!-- Page title. -->
+<div id="pageTitle">
+	<div align="center">${message:header}</div>
+</div>
+
+<!-- Menu. -->
+<div id="sidebar">
+	<div id="sidebarmenu">
+		<t:if t:test="userSessionExists">
+ 			${message:menu-hello} ${userSession.firstName} 
+ 			- 
+ 			<a class="mainlevel" href="#" t:type="PageLink" t:page="mobile/user/Logout">
+				${message:menu-logout} 
+			</a>
+            <t:parameter name="else">
+            	${message:menu-session}
+            </t:parameter>
+		</t:if>
+	</div>
+</div>
+<br/>
+
+<!-- Content. -->
+<div id="content"><t:body /></div>
+
+</div>
+</body>
+
+</html>
