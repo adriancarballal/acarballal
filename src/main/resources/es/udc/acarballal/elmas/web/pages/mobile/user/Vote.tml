@@ -1,0 +1,41 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="MobileLayout" t:pageTitle="${message:title}">
+
+<p>${message:week}: <t:output value="startDate.time"
+	format="dateFormat" /> - <t:output value="endDate.time"
+	format="dateFormat" /></p>
+
+<p>${message:votesLeft}: ${remainingVotes}</p>
+
+<t:if t:test="doVoting">
+	<table class="showvideo">
+		<tr><td>${video.title}</td></tr>
+		<tr><td>${video.comment}</td></tr>
+		<tr>
+			<td>Enlace al video</td>
+		</tr>
+		<t:if t:test="userSessionExists">
+			<t:if t:test="isVotable">
+				<tr>
+					<td>
+					<form t:type="Form" t:id="voteForm">
+					<table>
+						<t:radiogroup t:value="vote">
+							${message:vote}<br/>
+							<input type="radio" t:type="radio" t:value="veryBad" /> ${message:veryBad}<br/>
+   							<input type="radio" t:type="radio" t:value="bad" /> ${message:bad}<br/>
+   							<input type="radio" t:type="radio" t:value="normal" /> ${message:normal}<br/>
+   							<input type="radio" t:type="radio" t:value="good" /> ${message:good}<br/>
+   							<input type="radio" t:type="radio" t:value="veryGood" /> ${message:veryGood}<br/>
+   						</t:radiogroup>
+						<input type="submit" value="${message:voteButton}" />
+					</table>
+					</form>
+					</td>
+				</tr>
+			</t:if>
+		</t:if>
+	</table>
+</t:if>
+
+</html>
