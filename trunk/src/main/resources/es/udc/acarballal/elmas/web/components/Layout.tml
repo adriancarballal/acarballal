@@ -30,9 +30,9 @@ JPG</a></div>
 <br/>
 <div id="sidebarmenu">
 	<t:if t:test="userSessionExists">
- 			${message:menu-hello} ${userSession.firstName}
+ 			${message:menu-hello} <span class="username">${userSession.firstName}</span>
             <t:parameter name="else">
-            	${message:menu-welcome}
+            	<span class="important">${message:menu-welcome}</span>
             </t:parameter>
 	</t:if>
 </div>
