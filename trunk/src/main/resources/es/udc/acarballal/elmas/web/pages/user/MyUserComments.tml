@@ -7,6 +7,7 @@
 		<p>${message:nocomments}.</p>
 		<t:parameter name="else">
 			<p class="section">${message:myComments}.</p>
+			<div class="search">
 			<table class="comments">
 				<tr class="user-comment" t:type="Loop" t:source="userComments" t:value="userComment">
 					<td class="user-comment">${userComment.comment}</td>
@@ -26,7 +27,7 @@
 				</tr>
 				</tr>
 			</table>
-
+			</div>
 			<!-- "Previous" and "Next" links. -->
 
 			<div class="previousNextLinks"><span class="previousLink">

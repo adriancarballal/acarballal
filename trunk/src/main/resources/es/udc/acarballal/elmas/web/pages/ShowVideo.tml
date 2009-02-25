@@ -1,14 +1,14 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
+<br/>
 <t:if t:test="foundVideo">
 	<p>${message:videoNotFound}.</p>
 	<t:parameter name="else">
 		<table class="showvideo">
-			<tr><td>${video.title}</td></tr>
-			<tr><td>${video.userProfile.loginName}</td></tr>
-			<tr>
-				<td><t:output value="video.date.time" format="dateFormat" /></td>
+			<tr class="video-title"><td><span class="important">${video.title}</span></td></tr>
+			<tr class="video-owner"><td><span class="important2">${video.userProfile.loginName} - 
+				<t:output value="video.date.time" format="dateFormat" /></span></td>
 			</tr>
 			<tr><td>${video.comment}</td></tr>
 			<tr>

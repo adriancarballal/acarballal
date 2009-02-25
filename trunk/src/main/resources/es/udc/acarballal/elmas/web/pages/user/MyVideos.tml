@@ -1,10 +1,13 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
+<br/>
 <t:zone t:id="videoZone">
 	<t:if t:test="videos.empty">
 		<p>${message:novideos}.</p>
 		<t:parameter name="else">
+			<p class="section">${message:myvideos}.</p>
+			<div class="search">
 			<table class="videos">
 				<tr t:type="Loop" t:source="videos" t:value="video">
 					<table class="video-table">
@@ -17,16 +20,17 @@
 							<table>
 								<tr>
 									<td class="video-title">${message:video-title}:
-									${video.title}</td>
+									<span class="important2">${video.title}</span></td>
 								</tr>
 								<tr>
 									<td class="video-user">${message:video-user}:
-									${video.userProfile.loginName} - ${message:date}: <t:output
-										value="video.date.time" format="dateFormat" /></td>
+									<span class="important2">${video.userProfile.loginName}</span>
+									 - ${message:date}: <span class="important2"><t:output
+										value="video.date.time" format="dateFormat" /></span></td>
 								</tr>
 								<tr>
 									<td class="video-comment">${message:video-comment}:
-									${video.comment}</td>
+									<span class="important2">${video.comment}</span></td>
 								</tr>
 							</table>
 							</td>
@@ -34,6 +38,7 @@
 					</table>
 				</tr>
 			</table>
+			</div>
 
 			<!-- "Previous" and "Next" links. -->
 

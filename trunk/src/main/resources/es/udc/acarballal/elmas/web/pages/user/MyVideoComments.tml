@@ -1,18 +1,18 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
+<br/>
 <t:zone t:id="comments">
 	<t:if t:test="videoComments.empty">
 		<p>${message:nocomments}.</p>
 		<t:parameter name="else">
-			<p>${message:myComments}.</p>
+			<p class="section">${message:myComments}.</p>
+			<div class="search">
 			<table class="comments">
 				<tr t:type="Loop" t:source="videoComments" t:value="videoComment">
-				<tr>
 					<td class="user-comment">${videoComment.comment} - <a href="#"
 						t:type="PageLink" page="ShowVideo"
 						context="videoComment.video.videoId"> ${message:showvideo} </a></td>
-				</tr>
 				<tr>
 					<td class="commentator-info">${message:user-header}:
 					${videoComment.commentator.loginName} - ${message:date}: <t:output
@@ -23,7 +23,7 @@
 				</tr>
 				</tr>
 			</table>
-
+			</div>
 			<!-- "Previous" and "Next" links. -->
 
 			<div class="previousNextLinks"><span class="previousLink">
