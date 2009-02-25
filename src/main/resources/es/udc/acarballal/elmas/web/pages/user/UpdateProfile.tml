@@ -1,7 +1,13 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<p><a href="#" t:type="PageLink" t:page="user/ChangePassword">${message:changePassword}</a>
+<br/>
+<p class="section">${message:actualize}</p>
+<br/>
+
+
+<p><a href="#" t:type="PageLink" t:page="user/ChangePassword">
+	<span class="important2">${message:changePassword}</span></a>
 </p>
 
 <form t:type="Form" t:id="updateProfileForm"><t:errors />
@@ -20,11 +26,11 @@
 <input type="text" t:id="email" t:type="TextField" t:validate="regexp"
 	size="16" maxlength="30" /> </span></div>
 
-<div class="field"><t:label t:for="participate" /> <span
-	class="entry"> <input type="checkbox" t:type="Checkbox"
-	t:id="participate" /> </span></div>
-
 <div class="button"><input type="submit" value="${message:submit}" />
+<br/><br/><br/>
+<div><t:label t:for="participate" /><input type="checkbox" t:type="Checkbox"
+	t:id="participate" /></div>
+
 </div>
 
 </form>

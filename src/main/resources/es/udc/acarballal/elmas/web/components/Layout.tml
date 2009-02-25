@@ -93,10 +93,10 @@ JPG</a></div>
 	</tr>
 	<tr><td><br /></td></tr>
 	<tr>
-		<th>Bases del concurso</th>
+		<th>${message:bases}</th>
 	</tr>
 	<tr>
-		<td>Participa!!!... Averigua como.</td>
+		<td>${message:participa}.</td>
 	</tr>
 	<tr>
 		<td><a class="mainlevel" href="#" t:type="PageLink" t:page="user/ReadMore">${message:menu-readmore}</a>
@@ -123,14 +123,14 @@ JPG</a></div>
 <!-- Most voted -->
 <div id="most_voted"><t:if t:test="best.empty">
 	<t:parameter name="else">
-		<table>
+		<table class="most-voted">
 			<tr><td class="top">${message:top}</td></tr>
 			<tr t:type="Loop" t:source="best" t:value="video">
 			<tr>
-				<td class="video-title">${video.title}</td>
+				<td class="top-title">${video.title}</td>
 			</tr>
 			<tr>
-				<td class="video-owner">${video.userProfile.loginName}</td>
+				<td class="top-owner">${video.userProfile.loginName}</td>
 			</tr>
 			<tr>
 			<td><a href="#" t:type="PageLink" t:page="ShowVideo"

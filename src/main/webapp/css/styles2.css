@@ -100,6 +100,15 @@ input {
   margin-bottom     : 2px;
   color			    : #666666;
 }
+
+textarea{
+	border            : 1px solid #CCCCCC;
+  	background-color  : #FBFBFB;
+  	/*padding			: 2px;
+  	margin-top		: 2px;
+  	margin-bottom     : 2px;*/
+  	color			    : #666666;
+}
 input[type="submit"]{
 	line-height:normal !important;	/* NO FUNCIONA */  
  }
@@ -150,6 +159,7 @@ p.welcome2{
 	width: 165px;
 	float: right;
 	height:420px;
+	/*text-align:center;*/
 }
 
 div.previousNextLinks span.previousLink {
@@ -217,26 +227,30 @@ td.comments{
 	background-repeat:no-repeat;
 }
 
+
+/* MOST VOTED */
 td.top{
 	padding-top: 7px;
-	margin-top : 5px;
-	padding-bottom: 7px;
+	
 	font-size: 14px;
 	color: #CD1821;
+	text-align:center;
 	
 }
-td.video-title{
+td.top-title{
 	line-height: 1;
-	padding-top:5px;
+	padding-top:3px;
 	font-size: 10px;
 	color: #2B5497;
+	text-align:center;
 }
 
-td.video-owner{
+td.top-owner{
 	line-height: 1;
 	font-size: 10px;
 	color: #a1a1a1;
 	padding: 0px;
+	text-align:center;
 }
 
 /* sidebar menu */
@@ -277,7 +291,76 @@ a.mainlevel:hover {
 }
 
 
+/* BUSQUEDA DE VIDEOS */
+div.search{
+	width: 100%;
+	height: 315px;
+	max-height: 315px
+	min-height: 315px;
+	
+}
+
+/*div.search-mini{
+	width: 100%;
+	height: 215px;
+	max-height: 215px
+	min-height: 215px;
+	
+}*/
+
+
+td.snapshot{
+vertical-align: baseline;
+}
+
+table.video-table td.video-comment{
+	width:400px;
+	height:45px;
+	border: 1px solid #a1a1a1;
+	padding-bottom: 3px;
+}
+
+td.video-title{
+	border: 1px solid #a1a1a1;
+}
+
+td.video-user{
+	border: 1px solid #a1a1a1;
+}
+
+td.video-info{
+	font-size         : 12px;
+	color           : #a1a1a1;
+	vertical-align: middle;
+}
+
+/* MOSTRAR VIDEO */
+table.showvideo{
+	font-size: 12px;
+	color: #a1a1a1;
+}
+table.showvideo tr.video-title{
+	
+}
+	
+table.showvideo tr.video-owner{
+}
+a:link, a:visited {
+  color             : #a1a1a1;
+  background-color  : #FBFBFB;
+}
+a:hover {
+  background-color  : #f0f0f0 ;  
+  color             : #CD1821;
+}
+
+/*****************************************************/
 /* comentarios */
+table.comments-mini{
+	width: 100%;
+	height: 175px;
+}
+
 
 table.comments{
 	width: 100%;
@@ -286,6 +369,7 @@ table.comments{
 
 td.user-comment{
 	height: 60px;
+	width: 550px;
 	border: 1px solid #a1a1a1;
 	font-size: 11px;
 	text-align: left;
@@ -307,7 +391,44 @@ td.commentator-info{
 	color: #CD1821;
 }
 
+.important2{
+	color: #2B5497;
+}
+
 .username{
 	color: #2B5497;
 }
 
+table{
+	display: inline-table;
+}
+
+img{
+	vertical-align: middle;
+}
+
+div.field {
+    clear: both;
+    padding-top: 1em;
+    width: 100%;
+}
+
+div.field label {
+    float: left;    
+    text-align: right;
+    font-weight: bold;
+    width: 49.5%;
+}
+
+div.field span.entry {
+    float: right;    
+    text-align: left;
+    width: 49.5%;
+}
+
+div.button {
+    clear: both;
+    padding-top: 1em;
+    text-align: center;
+    width: 100%;
+}
