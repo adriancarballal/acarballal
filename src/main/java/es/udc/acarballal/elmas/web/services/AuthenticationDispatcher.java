@@ -95,17 +95,16 @@ public class AuthenticationDispatcher implements Dispatcher {
 			break;			
 			
 		case PARTICIPANTS:
-			
 			if (!userAuthenticated) {
 				response.sendRedirect(request.getContextPath() + 
-					INIT_PAGE);
+					LOGIN_PAGE);
 				return true; // Leave the chain.
 			}
 			if (!isParticipating) {
 				response.sendRedirect(request.getContextPath() + 
 						PARTICIPATE_PAGE);
 					return true; // Leave the chain.
-				}
+			}
 			break;			
 
 		default: break;

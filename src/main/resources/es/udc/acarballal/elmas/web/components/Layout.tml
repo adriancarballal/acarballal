@@ -142,7 +142,10 @@ JPG</a></div>
 </t:if></div>
 
 <!-- Content. -->
-<div id="content"><t:body /></div>
+<div id="content">
+	<span class="today"><t:output value="today.time" format="dateFormat" /></span>
+	<t:body />
+</div>
 
 
 

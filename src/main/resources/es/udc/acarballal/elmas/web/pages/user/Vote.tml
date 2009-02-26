@@ -1,7 +1,6 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<br/>
 <span class="important">${message:week}: <t:output value="startDate.time"
 	format="dateFormat" /> - <t:output value="endDate.time"
 	format="dateFormat" /></span><br/>

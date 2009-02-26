@@ -1,7 +1,6 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<br/>
 <t:zone t:id="comments">
 	<t:if t:test="videoComments.empty">
 		<p>${message:nocomments}.</p>
