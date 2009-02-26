@@ -1,6 +1,9 @@
 package es.udc.acarballal.elmas.web.components;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.BeginRender;
@@ -92,5 +95,17 @@ public class Layout {
 	public void setVideo(Video video) {
 		this.video = video;
 	}
+	
+	
+	// FECHA
+	@Inject
+	private Locale locale;
+	
+	public DateFormat getDateFormat() {
+		return DateFormat.getDateInstance(DateFormat.LONG, locale);
+	}
 
+	public Calendar getToday(){
+		return Calendar.getInstance();
+	}
 }

@@ -432,3 +432,10 @@ div.button {
     text-align: center;
     width: 100%;
 }
+
+.today{
+  display           : block;
+  font-size         : 10px;
+  color             : #2B5497;
+  text-align		: right;
+}
