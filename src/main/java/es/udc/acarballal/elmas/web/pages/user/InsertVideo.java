@@ -7,6 +7,7 @@ import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextArea;
+import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.upload.services.UploadedFile;
 
@@ -16,6 +17,7 @@ import es.udc.acarballal.elmas.web.pages.Index;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
+import es.udc.acarballal.elmas.web.util.VideoMimeDetection;
 import es.udc.acarballal.elmas.web.util.VideoPostProcessing;
 
 @AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
@@ -43,6 +45,9 @@ public class InsertVideo {
 	 @Component
 	 private Form videoForm;
 	 
+	 @Inject
+	 private Messages messages;
+	 
 	 @ApplicationState
 	 private UserSession userSession;
 	 
@@ -52,8 +57,6 @@ public class InsertVideo {
 	 Object onSuccess(){
 		 String originalDir = DirectoryGenerator.create().getAbsolutePath();
 		 
-		 //TODO borrar
-		System.out.println("ORIGINAL: " + originalDir + "\\" + file.getFileName());
         File copied = new File(originalDir + "\\" + file.getFileName());
         file.write(copied); 
 
@@ -68,6 +71,9 @@ public class InsertVideo {
     void onValidateForm() {
 			if (!videoForm.isValid()) {
 				return;
+			}
+			if (!VideoMimeDetection.isValidVideoFile(file.getFilePath())){
+				videoForm.recordError(messages.get("noValidVideo"));
 			}
 	 }
 
