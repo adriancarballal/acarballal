@@ -3,10 +3,11 @@
 /* Body. */
 
 body {
+	
 		font-family		: Tahoma,Helvetica, sans-serif;
 		font-stretch: extra-condensed;
 		font-weight: bold;
-		color			: #333333;
+		color			: #CCCCCC;
 		line-height		: 1.166;	
 		margin			: 0px;
 		padding			: 0px;	
@@ -27,6 +28,7 @@ body {
 /* Page title. */
 
 #pageTitle {
+	-moz-border-radius:7px;
 		margin-top		: 5px;
 		background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
 		background-repeat:repeat-x;
@@ -43,6 +45,7 @@ body {
 /* Logo. */
 
 #logo {
+	-moz-border-radius:7px;
 		line-height: 100px;
 		width: 97% center;
 		margin-top:7px;
@@ -60,9 +63,10 @@ body {
 /* Sidebar. */
 
 #sidebar {
+	-moz-border-radius:7px;
     width: 190px;
 	float: left;
-	height:456px;
+	min-height:730px;
 	background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
 	background-repeat:repeat-x;
 	background-color:#FFFFFF;
@@ -80,19 +84,22 @@ body {
 /* Search Bar. */
 
 #searchbar {
+	-moz-border-radius:7px;
 	/*border: 1px solid red;*/
 	width: 790px;
 	float: right;
 	text-align:right;
-	background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	/*background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);*/
 	background-repeat:repeat-x;
 	background-color:#FFFFFF;
-	border-left:1px solid #a1a1a1;
+	border:1px solid #a1a1a1;
+	/*border-left:1px solid #a1a1a1;
 	border-right:1px solid #a1a1a1;
-	border-bottom:1px solid #a1a1a1;
+	border-bottom:1px solid #a1a1a1;*/
 	
 }
 input {
+	-moz-border-radius:7px;
   border            : 1px solid #CCCCCC;
   background-color  : #FBFBFB;
   padding			: 2px;
@@ -109,27 +116,31 @@ textarea{
   	margin-bottom     : 2px;*/
   	color			    : #666666;
 }
-input[type="submit"]{
-	line-height:normal !important;	/* NO FUNCIONA */  
+input.search{
+	width: 20px;
+	-moz-border-radius:0px;
+	border: none;
+	background-color: background;
+	background-image: url(http://elmas.cadena.tv/css/images/search.jpg);
+	margin-right: 3px;  
  }
 
 /* Content. */
 
 #content {
+	-moz-border-radius:7px;
 	padding: 10px 10px 10px 10px;
 	margin-top: 7px;
 	margin-right: 7px;
-	margin-bottom: 7px;
 	background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
 	background-repeat:repeat-x;
 	background-color:#FFFFFF;
 	border-left:1px solid #a1a1a1;
 	border-right:1px solid #a1a1a1;
 	border-bottom:1px solid #a1a1a1;
-	/*border: 1px solid red;*/
 	width: 595px; 
 	float: right;
-	height: 400px;
+	min-height: 674px;
 	text-align:center;
 }
 
@@ -149,6 +160,7 @@ p.welcome2{
 	margin-top: -40px;
 }
 #most_voted {
+	-moz-border-radius:7px;
 	background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
 	background-repeat:repeat-x;
 	background-color:#FFFFFF;
@@ -158,8 +170,7 @@ p.welcome2{
 	margin-top: 7px;
 	width: 165px;
 	float: right;
-	height:420px;
-	/*text-align:center;*/
+	min-height: 694px;
 }
 
 div.previousNextLinks span.previousLink {
@@ -185,12 +196,6 @@ div.previousNextLinks span.nextLink {
 		padding-top: 5px;
 		clear: both;
 		font-size:10px;
-		background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
-		background-repeat:repeat-x;
-		background-color:#FFFFFF;
-		border-left:1px solid #a1a1a1;
-		border-right:1px solid #a1a1a1;
-		border-bottom:1px solid #a1a1a1;
 		text-align: center;
 		color:#a1a1a1;
 }
@@ -231,7 +236,6 @@ td.comments{
 /* MOST VOTED */
 td.top{
 	padding-top: 7px;
-	
 	font-size: 14px;
 	color: #CD1821;
 	text-align:center;
@@ -266,16 +270,11 @@ a.mainlevel {
   width             : 180px;
   text-indent       : 20px;
 }
-a.mainlevel:link {
-  padding           : 0px 0px 0px 0px;
-  font-size         : 12px;
-  width             : 180px;
+
+a.mainlevel:link, a.mainlevel:visited {
   text-indent       : 10px;
   font-weight       : bold;
-}
-a.mainlevel:link, a.mainlevel:visited {
   display           : block;
-  font-size         : 12px;
   margin-left		: 4px;
   padding           : 0px 0px 2px 0px;
   color             : #2B5497;
@@ -284,8 +283,7 @@ a.mainlevel:link, a.mainlevel:visited {
   background-color  : #FBFBFB;
 }
 a.mainlevel:hover {
-  width				: 100%;
-  margin-left		: 0px;
+	-moz-border-radius:7px;
   background-color  : #f0f0f0 ;  
   color             : #CD1821;
 }
@@ -294,7 +292,7 @@ a.mainlevel:hover {
 /* BUSQUEDA DE VIDEOS */
 div.search{
 	width: 100%;
-	height: 315px;
+	height: 570px;
 	max-height: 315px
 	min-height: 315px;
 	
@@ -313,6 +311,10 @@ td.snapshot{
 vertical-align: baseline;
 }
 
+table.video-table{
+	padding-bottom: 12px;
+	}
+	
 table.video-table td.video-comment{
 	width:400px;
 	height:45px;
@@ -345,6 +347,7 @@ table.showvideo tr.video-title{
 	
 table.showvideo tr.video-owner{
 }
+
 a:link, a:visited {
   color             : #a1a1a1;
   background-color  : #FBFBFB;
@@ -357,8 +360,7 @@ a:hover {
 /*****************************************************/
 /* comentarios */
 table.comments-mini{
-	width: 100%;
-	height: 175px;
+	
 }
 
 
@@ -368,6 +370,8 @@ table.comments{
 }
 
 td.user-comment{
+	-moz-border-radius:7px;
+	text-indent: 5px;
 	height: 60px;
 	width: 550px;
 	border: 1px solid #a1a1a1;
@@ -438,4 +442,69 @@ div.button {
   font-size         : 10px;
   color             : #2B5497;
   text-align		: right;
+}
+
+/* ERRORES */
+div.t-error div {
+	background-color: #2B5497;
+}
+
+div.t-error {
+	border:1px solid #2B5497;
+}
+
+div.t-error ul {
+	color: #2B5497;
+}
+
+a.trash{
+	width: 50px;
+	height: 30px;
+	background-image:url(http://elmas.cadena.tv/css/images/trash.jpg);
+	background-color: #FFFFFF;
+	background-repeat:no-repeat;
+ }
+ 
+ 
+
+/* Admin Complaints */
+div.complaint{
+	-moz-border-radius:7px;
+	border:1px solid #CCCCCC;
+	width: 490px;
+	display: inline-table;
+}
+
+div.complaint:hover{
+	color             : #CD1821;
+	background-color: white;
+}
+
+div.number{
+	-moz-border-radius:7px;
+	border:1px solid #CCCCCC;
+	min-width: 60px;
+	display: inline-table;
+}
+
+div.number:hover{
+	color             : #CD1821;
+	background-color: white;
+}
+
+a.complaintrow{
+	color: red;
+}
+
+a.complaintrow:link, a.complaintrow:visited{
+	color: #2B5497;
+}
+a.complaintrow:hover{
+		background-color: white;
+}
+	
+.complaints{
+	color: #333333;
+	text-align: left;
+	text-indent: 20px;
 }

@@ -22,7 +22,7 @@ import es.udc.acarballal.elmas.web.util.UserSession;
 @AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
 public class AboutMe {
 	
-	private static final int COUNT = 4;
+	private static final int COUNT = 7;
 	
 	@InjectComponent
 	private Zone comments;

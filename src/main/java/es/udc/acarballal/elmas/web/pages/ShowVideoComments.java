@@ -30,7 +30,7 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class ShowVideoComments {
 	
-	private static final int COUNT = 2;
+	private static final int COUNT = 6;
 	
 	@SuppressWarnings("unused")
 	@Property
