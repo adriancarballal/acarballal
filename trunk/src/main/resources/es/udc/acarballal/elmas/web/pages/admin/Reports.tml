@@ -1,41 +1,59 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<p>${message:complaints}</p>
+<p class="section">${message:complaints}</p>
 
+<p class="complaints">${message:usercomplaints}</p>
 <table>
 	<tr>
 		<td><t:if t:test="existVideoComplaints">
-			<a href="#" t:type="PageLink" t:page="admin/ShowVideoComplaint">
-			${message:videoComplaints} (${totalVideoComplaints}) </a>
+			<a class="complaintrow" href="#" t:type="PageLink" t:page="admin/ShowVideoComplaint">
+				<div class="complaint">${message:videoComplaints}</div> 
+				<div class="number">${totalVideoComplaints}</div>
+			</a>
 			<t:parameter name="else">
-			${message:noVideoComplaints}
+				<div class="complaint">${message:videoComplaints}</div> 
+				<div class="number">${totalVideoComplaints}</div>
 		</t:parameter>
 		</t:if></td>
 	</tr>
 	<tr>
 		<td><t:if t:test="existVideoCommentComplaints">
-			<a href="#" t:type="PageLink"
-				t:page="admin/ShowVideoCommentComplaint">
-			${message:videoComplaints} (${totalVideoCommentComplaints}) </a>
+			<a class="complaintrow" href="#" t:type="PageLink" t:page="admin/ShowVideoCommentComplaint">
+				<div class="complaint">${message:videoComplaints}</div> 
+				<div class="number">${totalVideoCommentComplaints}</div> 
+			</a>
 			<t:parameter name="else">
-			${message:noVideoCommentComplaints}
-		</t:parameter>
+				<div class="complaint">${message:noVideoCommentComplaints}</div>
+				<div class="number">${totalVideoCommentComplaints}</div>
+			</t:parameter>
 		</t:if></td>
 	</tr>
 	<tr>
 		<td><t:if t:test="existUserCommentComplaints">
-			<a href="#" t:type="PageLink" t:page="admin/ShowUserCommentComplaint">
-			${message:userComplaints} (${totalUserCommentComplaints}) </a>
+			<a class="complaintrow" href="#" t:type="PageLink" t:page="admin/ShowUserCommentComplaint">
+				<div class="complaint">${message:userComplaints}</div>
+				<div class="number">(${totalUserCommentComplaints}</div>
+			</a>
 			<t:parameter name="else">
-			${message:noUserCommentComplaints}
+				<div class="complaint">${message:userComplaints}</div>
+				<div class="number">${totalUserCommentComplaints}</div>
 		</t:parameter>
 		</t:if></td>
 	</tr>
 </table>
 
+<p class="complaints">${message:uploadproblems}</p>
+<table>
+	<tr>
+		<td>
+			<div class="complaint">${message:uploads}</div>
+			<div class="number">0</div>
+		</td>
+	</tr>
+</table>
 
-<p>${message:video}</p>
+<p class="section">${message:video}</p>
 
 ${message:obtainVideos}
 <form t:type="Form" t:id="findForm">

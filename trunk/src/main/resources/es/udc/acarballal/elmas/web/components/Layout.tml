@@ -113,8 +113,9 @@ JPG</a></div>
 <form t:type="Form" t:id="findVideosForm">
 <span class="entry"> <input t:type="TextField" t:id="keys"
 	value="keys" t:validate="required" size="24" maxlength="48" /> </span>
-<span class="button"> <input type="submit"
-	value="${message:button-find}" /> </span>
+<span class="button"> 
+	<input class="search" type="submit" value="" />
+	</span>
 </form>
 
 </div>

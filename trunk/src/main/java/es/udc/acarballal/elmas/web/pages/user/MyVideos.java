@@ -22,7 +22,7 @@ import es.udc.acarballal.elmas.web.util.UserSession;
 @AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
 public class MyVideos {
 	
-	private static final int COUNT = 3;
+	private static final int COUNT = 5;
 	
 	@Inject
 	private Locale locale;

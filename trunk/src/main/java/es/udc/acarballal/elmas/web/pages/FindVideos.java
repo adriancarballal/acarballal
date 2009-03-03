@@ -17,7 +17,7 @@ import es.udc.acarballal.elmas.model.videoservice.VideoService;
 
 public class FindVideos {
 	
-	private static final int COUNT = 3;
+	private static final int COUNT = 5;
 	
 	@Persist
 	private String keys;

@@ -26,7 +26,7 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 @AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
 public class MyUserComments {
 
-	private final static int COUNT=4;
+	private final static int COUNT=7;
 	
 	@InjectComponent
 	private Zone comments;

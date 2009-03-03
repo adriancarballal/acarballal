@@ -24,7 +24,7 @@ import es.udc.acarballal.elmas.web.util.UserSession;
 
 public class Layout {
 
-	private final static int BEST_TOTAL = 3;
+	private final static int BEST_TOTAL = 5;
 	@Persist
 	private List<Video> best;
 
