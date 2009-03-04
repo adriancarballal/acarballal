@@ -2,6 +2,7 @@
 	t:type="Layout" t:pageTitle="${message:title}">
 
 <t:zone t:id="complaints">
+	<p class="section">${message:title}</p>
 	<t:if t:test="videoCommentComplaints.empty">
 		<p>${message:noVideoCommentComplaints}.</p>
 		<p><a href="#" t:type="PageLink" page="admin/Reports">
@@ -15,10 +16,10 @@
 				</tr>
 				<tr>
 					<td class="commentator-info">${message:user-header}:
-					${videoCommentComplaint.reference.commentator.loginName} -
-					${message:date}: <t:output
+					<span class="important2">${videoCommentComplaint.reference.commentator.loginName}</span> -
+					${message:date}: <span class="important2"><t:output
 						value="videoCommentComplaint.reference.date.time"
-						format="dateFormat" /> - <t:actionLink t:id="deleteComment"
+						format="dateFormat" /></span> - <t:actionLink t:id="deleteComment"
 						zone="complaints"
 						context="videoCommentComplaint.reference.commentId">
 				 	${message:acceptComplaint}

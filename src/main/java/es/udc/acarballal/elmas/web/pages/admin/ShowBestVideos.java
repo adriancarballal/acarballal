@@ -17,7 +17,7 @@ import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 @AuthenticationPolicy(AuthenticationPolicyType.ADMINISTRATORS)
 public class ShowBestVideos {
 	
-	private int count = 10;
+	private int count = 0;
 	
 	@Inject
 	private Locale locale;
@@ -49,6 +49,7 @@ public class ShowBestVideos {
 	void onActivate(SHOW_BEST_TYPE type, int count) {
 		this.type = type;
 		this.count = count;
+		
 		if(this.type==SHOW_BEST_TYPE.ALL){
 			videos=videoService.findMostVoted(count);
 		}

@@ -1,6 +1,8 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
+
+<p class="section">${message:bestList}</p>
 <t:if t:test="videos.empty">
 
 	<p>${message:novideos}.</p>
@@ -9,16 +11,18 @@
 
 		<table class="videos">
 			<tr t:type="Loop" t:source="videos" t:value="video">
-				<table>
+				<table class="video-table">
 					<tr>
 						<td class="video-title">${message:video-title}:
-						${video.title}</td>
+						<span class="important">${video.title}</span></td>
 					</tr>
 					<tr>
 						<td class="video-user">${message:video-user}:
-						${video.userProfile.loginName} - ${message:date}: <t:output
-							value="video.date.time" format="dateFormat" /> -
-						${message:download}</td>
+						<span class="important2">${video.userProfile.loginName}</span>
+						 - ${message:date}: <span class="important2"><t:output
+							value="video.date.time" format="dateFormat" /></span>
+						 - <a href="${video.original}">${message:download}</a>
+						</td>
 					</tr>
 				</table>
 			</tr>

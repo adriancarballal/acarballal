@@ -1,6 +1,7 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
+<br/>
 <t:zone t:id="complaint">
 	<t:if t:test="videoComplaintExists">
 		<p>${message:videoComplaintNotFound}.</p>
@@ -8,17 +9,17 @@
 		${message:return} </a></p>
 		<t:parameter name="else">
 			<table class="showvideo">
-				<tr><td>${video.title}</td></tr>
-				<tr><td>${video.userProfile.loginName}</td></tr>
-				<tr>
-					<td><t:output value="video.date.time" format="dateFormat" /></td>
-				</tr>
-				<tr><td>${video.comment}</td></tr>
-				<tr>
+				<tr class="video-title"><td><span class="important">${video.title}</span></td></tr>
+			<tr class="video-owner"><td><span class="important2">${video.userProfile.loginName} - 
+				<t:output value="video.date.time" format="dateFormat" /></span></td>
+			</tr>
+			<tr><td>${video.comment}</td></tr>
+			<tr>
 					<td><script type="text/javascript"
-						src="${asset:context:/player/swfobject.js}"></script> <embed
-						src="${asset:context:/player/player.swf}" width="244" height="210"
-						allowfullscreen="false" /></td>
+					src="${asset:context:/player/swfobject.js}"></script> <embed
+					src="${asset:context:/player/player.swf}" width="320" height="280"
+					allowfullscreen="true" 
+					flashvars="skin=${asset:context:/player/stijl.swf}${message:amp}file=${video.flvVideo}"/></td>
 				</tr>
 				<tr>
 					<td><t:actionLink t:id="deleteVideo" zone="complaint"

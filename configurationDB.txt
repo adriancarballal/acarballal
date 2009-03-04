@@ -9,13 +9,12 @@ Try to access to "elmas" database as "elmas" user with password "elmas".
 Shutdown database
 	- mysqladmin -u root shutdown
 	
-	jmf hay que instalarlo a mano
-	
-	
 	--> USO DE BACHSIZE!!!!!!!!
 	
 	- mirar votos de un video
-	- revisar los autenticationPolicy por si no funcionan bien	
+	- bug al eliminar el administrador quejas sobre comentarios de videos.
+	- redireccionamiento en el authenticationpolicy	
+	- fallos de compresion
 	
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);
