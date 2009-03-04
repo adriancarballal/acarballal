@@ -2,7 +2,7 @@
 	t:type="Layout" t:pageTitle="${message:title}">
 
 <t:zone t:id="complaints">
-	<p>${message:title}</p>
+	<p class="section">${message:title}</p>
 	<t:if t:test="userCommentComplaints.empty">
 		<p>${message:noUserCommentComplaints}.</p>
 		<p><a href="#" t:type="PageLink" page="admin/Reports">${message:return}</a></p>
@@ -15,11 +15,10 @@
 				</tr>
 				<tr>
 					<td class="commentator-info">${message:user-header}:
-					${userCommentComplaint.reference.commentator.loginName} -
-					${message:date}: <t:output
-						value="userCommentComplaint.reference.date.time"
-						format="dateFormat" /> - 
-				<t:actionLink t:id="deleteComment"
+					<span class="important2">${userCommentComplaint.reference.commentator.loginName}</span>
+					 - ${message:date}: <span class="important2">
+					<t:output value="userCommentComplaint.reference.date.time" format="dateFormat" /></span>
+					 - <t:actionLink t:id="deleteComment"
 						zone="complaints" context="userCommentComplaint.complaintId">
 				 	${message:acceptComplaint}
 				</t:actionLink> | 

@@ -27,7 +27,7 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 @AuthenticationPolicy(AuthenticationPolicyType.ADMINISTRATORS)
 public class ShowUserCommentComplaint {
 
-	private static final int COUNT = 4;
+	private static final int COUNT = 7;
 	
 	@Inject
 	private AdminService adminService;

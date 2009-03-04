@@ -1,7 +1,5 @@
 /* --------------------------- General -------------------------------------- */
-
 /* Body. */
-
 body {
 	
 		font-family		: Tahoma,Helvetica, sans-serif;
@@ -126,7 +124,6 @@ input.search{
  }
 
 /* Content. */
-
 #content {
 	-moz-border-radius:7px;
 	padding: 10px 10px 10px 10px;
@@ -159,6 +156,7 @@ p.welcome2{
 	color: 	#2B5497;
 	margin-top: -40px;
 }
+
 #most_voted {
 	-moz-border-radius:7px;
 	background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
@@ -288,7 +286,6 @@ a.mainlevel:hover {
   color             : #CD1821;
 }
 
-
 /* BUSQUEDA DE VIDEOS */
 div.search{
 	width: 100%;
@@ -298,17 +295,8 @@ div.search{
 	
 }
 
-/*div.search-mini{
-	width: 100%;
-	height: 215px;
-	max-height: 215px
-	min-height: 215px;
-	
-}*/
-
-
 td.snapshot{
-vertical-align: baseline;
+	vertical-align: baseline;
 }
 
 table.video-table{
@@ -322,12 +310,18 @@ table.video-table td.video-comment{
 	padding-bottom: 3px;
 }
 
+tr.list-video{
+	padding-bottom: 10px;
+}
+
 td.video-title{
 	border: 1px solid #a1a1a1;
+	-moz-border-radius:7px;	
 }
 
 td.video-user{
 	border: 1px solid #a1a1a1;
+	-moz-border-radius:7px;
 }
 
 td.video-info{
@@ -341,12 +335,6 @@ table.showvideo{
 	font-size: 12px;
 	color: #a1a1a1;
 }
-table.showvideo tr.video-title{
-	
-}
-	
-table.showvideo tr.video-owner{
-}
 
 a:link, a:visited {
   color             : #a1a1a1;
@@ -359,11 +347,6 @@ a:hover {
 
 /*****************************************************/
 /* comentarios */
-table.comments-mini{
-	
-}
-
-
 table.comments{
 	width: 100%;
 	height: 315px;
