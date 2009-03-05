@@ -15,6 +15,7 @@ import es.udc.acarballal.elmas.web.pages.Index;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.CookiesManager;
+import es.udc.acarballal.elmas.web.util.PageSession;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -48,9 +49,15 @@ public class Login {
 	@ApplicationState
 	private UserSession userSession;
 
+	@ApplicationState
+	private PageSession nextPage;
+	
+	@SuppressWarnings("unused")
+	@Property
+	private boolean nextPageExists;
 
 	Object onSuccess() {
-
+		
 		userSession.setUserProfileId(loginResult.getUserProfileId());
 		userSession.setFirstName(loginResult.getFirstName());
 		userSession.setPrivileges(loginResult.getPrivileges());
@@ -58,6 +65,12 @@ public class Login {
 		if (rememberMyPassword) {
 			CookiesManager.leaveCookies(cookies, loginName, loginResult
 					.getEncryptedPassword());
+		}
+		
+		if(nextPageExists){
+			Class page = nextPage.getPage();
+			nextPage = null;
+			return page;
 		}
 		return Index.class;
 

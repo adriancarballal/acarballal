@@ -12,8 +12,6 @@ Shutdown database
 	--> USO DE BACHSIZE!!!!!!!!
 	
 	- mirar votos de un video
-	- bug al eliminar el administrador quejas sobre comentarios de videos.
-	- redireccionamiento en el authenticationpolicy	
 	- fallos de compresion
 	
 	faltan los junit para los metodos:

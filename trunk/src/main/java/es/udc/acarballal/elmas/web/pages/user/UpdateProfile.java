@@ -13,6 +13,7 @@ import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
 import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
+import es.udc.acarballal.elmas.web.util.PageSession;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -36,6 +37,24 @@ public class UpdateProfile {
 
 	@ApplicationState
 	private UserSession userSession;
+	
+	@SuppressWarnings("unused")
+	@Property
+	private boolean userSessionExists;
+	
+	@ApplicationState
+	private PageSession nextPage;
+	
+	@SuppressWarnings("unused")
+	@Property
+	private boolean nextPageExists;
+	
+	public boolean getIsNotAdmin() {
+		if (userSessionExists
+				&& userSession.getPrivileges() == Privileges_TYPES.ADMIN)
+			return false;
+		return true;
+	}
 
 	void onPrepareForRender() throws InstanceNotFoundException {
 
@@ -50,7 +69,6 @@ public class UpdateProfile {
 					userSession.getPrivileges()==Privileges_TYPES.COMPETITOR)
 			participate = true;
 		else participate = false;
-		
 	}
 
 	Object onSuccess() {
@@ -72,6 +90,11 @@ public class UpdateProfile {
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
 		}		
+		if(nextPageExists){
+			Class page = nextPage.getPage();
+			nextPage = null;
+			return page;
+		}
 		return Index.class;
 
 	}

@@ -28,10 +28,13 @@
 
 <div class="button"><input type="submit" value="${message:submit}" />
 <br/><br/><br/>
-<div><t:label t:for="participate" /><input type="checkbox" t:type="Checkbox"
-	t:id="participate" /></div>
-
+<t:if test="isNotAdmin">
+	<div><t:label t:for="participate" />
+		<input type="checkbox" t:type="Checkbox" t:id="participate" />
+	</div>
+</t:if>
 </div>
+
 
 </form>
 
