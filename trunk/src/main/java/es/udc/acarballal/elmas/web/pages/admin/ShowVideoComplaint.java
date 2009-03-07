@@ -81,6 +81,20 @@ public class ShowVideoComplaint {
 		return complaint;
 	}
 	
+	@OnEvent(component="deleteUser")
+	Object deleteUser(Long userProfileId){
+		try {
+			adminService.deleteUserProfile(userProfileId, userSession.getUserProfileId());
+			
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (InsufficientPrivilegesException e) {
+			return InsufficientPrivileges.class;
+		}
+		fill();
+		return complaint;
+	}
+	
 	private void fill(){
 		videoComplaint = null;
 		video=null;
