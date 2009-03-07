@@ -2,7 +2,6 @@ package es.udc.acarballal.elmas.web.services;
 
 import java.io.IOException;
 
-import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.runtime.Component;
 import org.apache.tapestry5.services.ApplicationStateManager;
 import org.apache.tapestry5.services.ComponentClassResolver;
@@ -16,8 +15,6 @@ import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.web.util.PageSession;
 import es.udc.acarballal.elmas.web.util.UserSession;
 
-import es.udc.acarballal.elmas.web.pages.Index;
-
 public class AuthenticationDispatcher implements Dispatcher {
 	
 	
@@ -25,9 +22,6 @@ public class AuthenticationDispatcher implements Dispatcher {
 	private final static String LOGIN_PAGE = "/user/login";
 	private final static String PARTICIPATE_PAGE = "/user/updateprofile";
 	
-	//TODO
-	private final static String PAGE_REDIRECT_ATTRIBUTE = "nextPageRedirect";
-
 	private ApplicationStateManager applicationStateManager;
 	private ComponentClassResolver componentClassResolver;
 	private ComponentSource componentSource;
@@ -81,7 +75,6 @@ public class AuthenticationDispatcher implements Dispatcher {
 
 			if (!userAuthenticated) {
 				
-				//TODO
 				applicationStateManager.set(PageSession.class, new PageSession(page.getClass()));
 				response.sendRedirect(request.getContextPath() +
 					LOGIN_PAGE);

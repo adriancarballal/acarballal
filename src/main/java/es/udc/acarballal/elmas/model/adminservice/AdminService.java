@@ -6,8 +6,11 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public interface AdminService {
 	
+	public void deleteUserProfile(Long deleteUserId, Long userProfileId)
+		throws InsufficientPrivilegesException, InstanceNotFoundException;
+	
 	public void deleteUserCommentComplaint(Long id, Long userProfileId) 
-	throws InsufficientPrivilegesException, InstanceNotFoundException;
+		throws InsufficientPrivilegesException, InstanceNotFoundException;
 	
 	public void deleteVideoCommentComplaint(Long id, Long userProfileId) 
 		throws InsufficientPrivilegesException, InstanceNotFoundException;
@@ -22,7 +25,7 @@ public interface AdminService {
 	public VideoCommentComplaintBlock findVideoCommentComplaints(int startIndex, int count);
 	
 	public int getNumberOfUserCommentComplaints(Long userProfileId) 
-	throws InsufficientPrivilegesException, InstanceNotFoundException;
+		throws InsufficientPrivilegesException, InstanceNotFoundException;
 	
 	public int getNumberOfVideoCommentComplaints(Long userProfileId) 
 		throws InsufficientPrivilegesException, InstanceNotFoundException;

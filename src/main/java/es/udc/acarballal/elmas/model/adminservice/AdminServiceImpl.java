@@ -24,6 +24,24 @@ public class AdminServiceImpl implements AdminService{
 	private VideoCommentComplaintDao videoCommentComplaintDao;
 	private VideoComplaintDao videoComplaintDao;
 	
+	public void deleteUserProfile(Long deleteUserId, Long userProfileId)
+		throws InsufficientPrivilegesException, InstanceNotFoundException{
+		
+		UserProfile userProfile;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
+				userProfileDao.remove(deleteUserId);
+			}
+			else{
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		} catch (InstanceNotFoundException e) {
+			throw e;
+		}
+		
+	}
+	
 	public void deleteUserCommentComplaint(Long id, Long userProfileId) 
 			throws InsufficientPrivilegesException, InstanceNotFoundException{
 		

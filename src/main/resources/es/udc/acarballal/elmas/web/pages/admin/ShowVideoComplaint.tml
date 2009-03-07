@@ -26,6 +26,10 @@
 						context="video.videoId">
 			 				${message:acceptComplaint}
 			 			</t:actionLink> | 
+			 			<t:actionLink t:id="deleteUser" zone="complaint"
+						context="video.userProfile.userProfileId">
+			 				${message:deleteUser}
+			 			</t:actionLink> | 
 			 			<t:actionLink t:id="deleteComplaint" zone="complaint"
 						context="videoComplaint.complaintId">
 			 				${message:rejectComplaint}
