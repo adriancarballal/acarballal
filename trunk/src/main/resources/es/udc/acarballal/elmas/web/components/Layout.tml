@@ -51,6 +51,13 @@ JPG</a></div>
 		<td><a class="mainlevel" href="#" t:type="PageLink" t:page="user/UpdateProfile">
 		${message:menu-updateProfile} </a></td>
 	</tr>
+	<tr>
+		<td>
+			<a class="mainlevel" href="#" t:type="PageLink" t:page="user/InBox">
+				${message:menu-inBox}
+			</a>
+		</td>
+	</tr>
 	<t:if test="isAdmin">
 		<tr class="reports">
 			<td><a class="mainlevel" href="#" t:type="PageLink" t:page="admin/Reports">${message:menu-reports}</a>

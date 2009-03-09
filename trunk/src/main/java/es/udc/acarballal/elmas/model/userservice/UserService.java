@@ -32,10 +32,10 @@ public interface UserService {
 	public void deleteUserComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
-	//Añadir un adminService para este servicio?
+	//Añadir un adminService para este servicio? no es necesario!!!
 	public UserProfileBlock findAllAdmin(int startIndex, int count);
 	
-	//Añadir un adminService para este servicio?
+	//Añadir un adminService para este servicio? no es necesario!!!
 	public UserProfileBlock findNonAdmin(int startIndex, int count);
 	
 	public UserCommentBlock findUserCommentsByCommentator(Long userProfileId,
@@ -58,4 +58,18 @@ public interface UserService {
 	public void updateUserProfileDetails(Long userProfileId,
 			UserProfileDetails userProfileDetails)
 			throws InstanceNotFoundException;
+	
+	
+	/*MESSAGE SERVICE */
+	//TODO
+	public Long sendMessage(Long from, Long to, String text, String link) 
+			throws InstanceNotFoundException;
+	
+	public void removeMessage(Long messageId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException;
+	
+	public int getInBoxTotal(Long userProfileId);
+	
+	public MessageBlock findUserInBox(Long userProfileId, int startIndex, int count);
+	
 }

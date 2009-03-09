@@ -24,5 +24,7 @@
         <mapping class="es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaint" />
         
         <mapping class="es.udc.acarballal.elmas.model.favourite.Favourite" />
+        
+        <mapping class="es.udc.acarballal.elmas.model.message.Message" />
     </session-factory>
 </hibernate-configuration>

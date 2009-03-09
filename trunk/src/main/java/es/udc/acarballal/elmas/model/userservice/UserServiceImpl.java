@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
+import es.udc.acarballal.elmas.model.message.Message;
+import es.udc.acarballal.elmas.model.message.MessageDao;
 import es.udc.acarballal.elmas.model.usercomment.UserComment;
 import es.udc.acarballal.elmas.model.usercomment.UserCommentDao;
 import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaint;
@@ -25,6 +27,7 @@ public class UserServiceImpl implements UserService {
 	private UserCommentComplaintDao userCommentComplaintDao;
 	private UserCommentDao userCommentDao;
 	private UserProfileDao userProfileDao;
+	private MessageDao messageDao;
 
 	public void changePassword(Long userProfileId, String oldClearPassword,
 			String newClearPassword) throws IncorrectPasswordException,
@@ -251,6 +254,10 @@ public class UserServiceImpl implements UserService {
 		this.userCommentDao = userCommentDao;
 	}
 	
+	public void setMessageDao(MessageDao messageDao){
+		this.messageDao = messageDao;
+	}
+	
 	public void setUserProfileDao(UserProfileDao userProfileDao) {
 		this.userProfileDao = userProfileDao;
 	}
@@ -265,7 +272,44 @@ public class UserServiceImpl implements UserService {
 		userProfile.setEmail(userProfileDetails.getEmail());
 
 		userProfileDao.update(userProfile);
+	}
 
+	public void removeMessage(Long messageId, Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException {
+		
+		UserProfile userProfile = userProfileDao.find(userProfileId);
+		Message message = messageDao.find(messageId);
+		if(!message.getReceiver().equals(userProfile)){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		messageDao.remove(messageId);
+	}
+
+	public Long sendMessage(Long from, Long to, String text, String link) 
+			throws InstanceNotFoundException {
+		
+		UserProfile sender = userProfileDao.find(from);
+		UserProfile receiver = userProfileDao.find(to);
+		
+		Message message = new Message(sender, receiver, text, link);
+		messageDao.create(message);
+		
+		return message.getId();
+	}
+	
+	@Transactional(readOnly = true)
+	public int getInBoxTotal(Long userProfileId){
+		return messageDao.inBoxTotal(userProfileId);
+	}
+	
+	@Transactional(readOnly = true)
+	public MessageBlock findUserInBox(Long userProfileId, int startIndex, int count){
+		
+		List<Message> messages = 
+			messageDao.getInBox(userProfileId, startIndex, count+1);
+		boolean existMoreMessages = messages.size() == (count + 1);
+		if(existMoreMessages) messages.remove(messages.size() - 1);
+		return new MessageBlock(messages, existMoreMessages);
 	}
 	
 }

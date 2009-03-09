@@ -75,13 +75,18 @@
         class="es.udc.acarballal.elmas.model.favourite.FavouriteDaoHibernate"
         p:sessionFactory-ref="sessionFactory" />        
         
+	<bean id="messageDao"
+        class="es.udc.acarballal.elmas.model.message.MessageDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />        
+        
         
     <!--  Service layer. -->
     <bean id="userService"
         class="es.udc.acarballal.elmas.model.userservice.UserServiceImpl"
         p:userProfileDao-ref="userProfileDao"
         p:userCommentDao-ref="userCommentDao" 
-        p:userCommentComplaintDao-ref="userCommentComplaintDao" />
+        p:userCommentComplaintDao-ref="userCommentComplaintDao" 
+        p:messageDao-ref="messageDao" />
         
     <bean id="videoService"
         class="es.udc.acarballal.elmas.model.videoservice.VideoServiceImpl"

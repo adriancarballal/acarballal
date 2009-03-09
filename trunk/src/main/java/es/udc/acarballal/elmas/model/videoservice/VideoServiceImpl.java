@@ -288,6 +288,7 @@ public class VideoServiceImpl implements VideoService{
 		voteDao.create(newVote);
 	}
 	
+	@Transactional(readOnly = true)
 	public VideoBlock findFavourites(Long userId, int startIndex, int count) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException{
 		
@@ -305,6 +306,7 @@ public class VideoServiceImpl implements VideoService{
 		return new VideoBlock(videos, existMoreVideos);		
 	}
 	
+	@Transactional(readOnly = true)
 	public boolean isFavourite(Long userId, Long videoId){ 
 		return favouriteDao.isFavourite(userId, videoId);
 	}
