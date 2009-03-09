@@ -29,6 +29,13 @@ public class ShowVideo {
 	@InjectComponent
 	private Zone complaintZone;
 	
+	@Inject
+	private Block alreadyFavourite;
+	
+	@SuppressWarnings("unused")
+	@InjectComponent
+	private Zone favouriteZone;
+	
 	private boolean foundVideo;
 
 	@Inject
@@ -63,6 +70,18 @@ public class ShowVideo {
 		return alreadyComplaint;
 	}
 	
+	@OnEvent(component="addToFavourite")
+	Object addToFavourite(Long videoId){
+		try {
+			videoService.addToFavourites(userSession.getUserProfileId(), videoId);
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (InsufficientPrivilegesException e) {
+			return InsufficientPrivileges.class;
+		}
+		return alreadyFavourite;
+	}
+	
 	public DateFormat getDateFormat() {
 		return DateFormat.getDateInstance(DateFormat.LONG, locale);
 	}
@@ -80,6 +99,15 @@ public class ShowVideo {
 		}
 	}
 	
+	public boolean isNotFavourite(){
+		return !videoService.isFavourite(
+				userSession.getUserProfileId(), video.getVideoId());
+	}
+	
+	public boolean isNotComplainted(){
+		return !videoService.isComplaintedBy(
+				userSession.getUserProfileId(), video.getVideoId());
+	}
 }
 
 

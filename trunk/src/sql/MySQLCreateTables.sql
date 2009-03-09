@@ -5,6 +5,7 @@
 DROP TABLE PingTable;
 CREATE TABLE PingTable (foo CHAR(1));
 
+DROP TABLE Favourite;
 DROP TABLE UserCommentComplaint;
 DROP TABLE VideoCommentComplaint;
 DROP TABLE VideoComplaint;
@@ -142,6 +143,17 @@ CREATE TABLE UserCommentComplaint (
 		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
 	TYPE = InnoDB;
 
+CREATE TABLE Favourite (
+	favouriteId BIGINT NOT NULL AUTO_INCREMENT,
+	user BIGINT NOT NULL,
+	favourite BIGINT NOT NULL,
+	CONSTRAINT UserFavourite_PK PRIMARY KEY (favouriteId),
+	CONSTRAINT FavouriteVideo_FK FOREIGN KEY (favourite)
+		REFERENCES Video(vidId) ON DELETE CASCADE,
+	CONSTRAINT UserFavourite_FK FOREIGN KEY (user)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
+	TYPE = InnoDB;
+
 	
 --------------------------
 -- Data for experiments --
@@ -157,6 +169,10 @@ insert into userprofile values(2, 'adrian xxxxxxxx','YZsowua7bk/lU', 'adrian', '
 insert into userprofile values(3, 'voter','LMcPpWzd49C7g', 'voter', 'voter', 'voter@gmail.com', 2, 0);
 -- Password for user voter = voter
 
+--	admin=0
+--	competitor=1
+--	none=2
+--	voter=3
 --------------------------
 --        Videos        --
 --------------------------

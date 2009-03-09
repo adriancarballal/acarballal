@@ -1,0 +1,61 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="Layout" t:pageTitle="${message:title}">
+
+
+<t:zone t:id="videoZone">
+	<t:if t:test="videos.empty">
+		<p>${message:novideos}.</p>
+		<t:parameter name="else">
+			<p class="section">${message:myvideos}.</p>
+			<div class="search">
+			<table class="videos">
+				<tr t:type="Loop" t:source="videos" t:value="video">
+					<table class="video-table">
+						<tr>
+							<td class="snapshot"><a href="#" t:type="PageLink"
+								t:page="ShowVideo" t:context="video.videoId"> 
+								<img src="${video.snapshot}"/>
+							</a></td>
+							<td class="video-info">
+							<table>
+								<tr>
+									<td class="video-title">${message:video-title}:
+										<span class="important2">${video.title}</span>
+									</td>
+									<td>
+										<t:actionLink t:id="deleteFromFavourite" zone="videoZone" context="video.videoId">
+											<spam class="removeFavourite"  title="${message:remove}" />
+										</t:actionLink>
+									</td>
+								</tr>
+								<tr>
+									<td class="video-user">${message:video-user}:
+									<span class="important2">${video.userProfile.loginName}</span>
+									 - ${message:date}: <span class="important2"><t:output
+										value="video.date.time" format="dateFormat" /></span></td>
+								</tr>
+								<tr>
+									<td class="video-comment">${message:video-comment}:
+									<span class="important2">${video.comment}</span></td>
+								</tr>
+							</table>
+							</td>
+						</tr>
+					</table>
+				</tr>
+			</table>
+			</div>
+
+			<!-- "Previous" and "Next" links. -->
+
+			<div class="previousNextLinks"><span class="previousLink">
+			<t:if t:test="previousLinkContext">
+				<t:actionLink t:id="previous" zone="videoZone">${message:link-previous}</t:actionLink>
+			</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
+				<t:actionLink t:id="next" zone="videoZone">${message:link-next}</t:actionLink>
+			</t:if> </span></div>
+
+		</t:parameter>
+	</t:if>
+</t:zone>
+</html>

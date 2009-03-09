@@ -24,6 +24,8 @@ public interface VideoService {
 	public void complaintOfVideo(Long videoId, Long userProfileId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
+	public boolean isComplaintedBy(Long userId, Long videoId);
+	
 	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
@@ -63,4 +65,15 @@ public interface VideoService {
 	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException, 
 			VideoAlreadyVotedException;
+	
+	public VideoBlock findFavourites(Long userId, int startIndex, int count) 
+		throws InstanceNotFoundException, InsufficientPrivilegesException;
+	
+	public void addToFavourites(Long userId, Long videoId)
+		throws InstanceNotFoundException, InsufficientPrivilegesException;
+	
+	public void removeFromFavourites(Long userId, Long videoId) 
+		throws InstanceNotFoundException, InsufficientPrivilegesException;
+	
+	public boolean isFavourite(Long userId, Long videoId);
 }

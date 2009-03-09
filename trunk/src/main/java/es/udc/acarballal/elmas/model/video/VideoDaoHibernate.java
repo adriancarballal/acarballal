@@ -38,7 +38,8 @@ public class VideoDaoHibernate extends
 		
 	}
 	
-	public Video findRandomVotableVideo(Long userProfileId, int preSelected) throws InstanceNotFoundException{
+	public Video findRandomVotableVideo(Long userProfileId, int preSelected) 
+		throws InstanceNotFoundException{
 		List<Video> result = 
 			(List<Video>)getSession().createQuery(
 					"select v from Video v where v " +

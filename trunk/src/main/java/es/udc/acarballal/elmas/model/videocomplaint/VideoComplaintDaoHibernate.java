@@ -21,5 +21,16 @@ public class VideoComplaintDaoHibernate extends
 		return getSession().createQuery("SELECT c FROM VideoComplaint c ").
 		setFirstResult(startIndex).setMaxResults(count).list();
 	}
+	
+	public boolean hasComplaint(Long userId, Long videoId){
+		long count = 
+			(Long) getSession().createQuery("SELECT count(c) FROM VideoComplaint c " +
+					"WHERE c.reference.videoId=:videoId AND " +
+					"c.complainer.userProfileId=:userProfileId").
+					setParameter("videoId", videoId).
+					setParameter("userProfileId", userId).
+			uniqueResult();
+		return count>0;
+	}
 
 }

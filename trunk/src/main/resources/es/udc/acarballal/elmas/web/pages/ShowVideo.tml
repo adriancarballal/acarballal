@@ -23,17 +23,40 @@
 					<td><a href="#" t:type="PageLink" page="ShowVideoComments"
 						context="video.videoId"> ${message:showVideoComments} </a> | <a
 						href="#" t:type="PageLink" page="ShowUserComments"
-						context="video.userProfile.userProfileId"> ${message:showUserComments} </a></td>
+						context="video.userProfile.userProfileId"> ${message:showUserComments} </a>
+					</td>
 				</tr>
 				<tr>
 					<td>
+					<t:if t:test="notComplainted">
 					<t:zone t:id="complaintZone">
 						<t:actionLink t:id="complaint" zone="complaintZone" context="video.videoId">
-							${message:complaintVideo}</t:actionLink>
+							<spam class="nonVideoComplaint" title="${message:complaintVideo}" />
+						</t:actionLink>
 					</t:zone>
 					<t:block t:id="alreadyComplaint">
-						${message:alreadyComplaint}
+						<spam class="videoComplaint" title="${message:alreadyComplaint}" />
 					</t:block>
+					<t:parameter name="else">
+						<spam class="videoComplaint" title="${message:alreadyComplaint}" />
+					</t:parameter>
+					</t:if>
+					
+					<t:if t:test="notFavourite">
+						<t:zone t:id="favouriteZone">
+							<t:actionLink t:id="addToFavourite" zone="favouriteZone" 
+								context="video.videoId">
+								<spam class="nonFavourite"  title="${message:addFavourite}" />
+							</t:actionLink>
+						</t:zone>
+						<t:block t:id="alreadyFavourite">
+							<spam class="favourite" title="${message:markAsFavourite}" />
+						</t:block>
+						
+					<t:parameter name="else">
+						<spam class="favourite" title="${message:markAsFavourite}" />
+					</t:parameter>
+					</t:if>
 					</td>
 				</tr>
 			</t:if>
