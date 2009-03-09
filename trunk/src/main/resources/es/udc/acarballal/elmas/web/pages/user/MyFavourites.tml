@@ -49,11 +49,15 @@
 			<!-- "Previous" and "Next" links. -->
 
 			<div class="previousNextLinks"><span class="previousLink">
-			<t:if t:test="previousLinkContext">
-				<t:actionLink t:id="previous" zone="videoZone">${message:link-previous}</t:actionLink>
-			</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
-				<t:actionLink t:id="next" zone="videoZone">${message:link-next}</t:actionLink>
-			</t:if> </span></div>
+				<t:if t:test="previousLinkContext">
+					<t:actionLink t:id="previous" zone="videoZone">${message:link-previous}</t:actionLink>
+				</t:if> 
+			</span> 
+				<span class="nextLink"> <t:if t:test="nextLinkContext">
+					<t:actionLink t:id="next" zone="videoZone">${message:link-next}</t:actionLink>
+				</t:if> 
+			</span>
+			</div>
 
 		</t:parameter>
 	</t:if>

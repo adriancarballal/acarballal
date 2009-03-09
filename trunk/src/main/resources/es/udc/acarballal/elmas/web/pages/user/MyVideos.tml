@@ -20,7 +20,13 @@
 							<table>
 								<tr>
 									<td class="video-title">${message:video-title}:
-									<span class="important2">${video.title}</span></td>
+										<span class="important2">${video.title}</span>
+									</td>
+									<td>
+										<t:actionLink t:id="removeVideo" zone="videoZone" context="video.videoId">
+											<spam class="removeVideo"  title="${message:remove}" />
+										</t:actionLink>
+									</td>
 								</tr>
 								<tr>
 									<td class="video-user">${message:video-user}:

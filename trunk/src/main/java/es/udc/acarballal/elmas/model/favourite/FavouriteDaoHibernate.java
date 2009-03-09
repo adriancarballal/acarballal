@@ -32,8 +32,6 @@ public class FavouriteDaoHibernate extends
 	
 	public void removeFromFavourites(Long userProfileId, Long videoId){
 		
-		//TODO
-		System.out.println("ELIMINAR: User-" + userProfileId + ": Video-" + videoId);
 		getSession().createQuery("DELETE FROM Favourite c " +
 		"WHERE c.favourite.videoId=:videoId AND c.user.userProfileId=:userProfileId").
 		setParameter("videoId", videoId).

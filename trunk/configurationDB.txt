@@ -11,10 +11,13 @@ Shutdown database
 	
 	--> USO DE BACHSIZE!!!!!!!!
 	
-	- mirar votos de un video
-	- favoritos
+	- mirar votos de un video - preguntar
 	- fallos de compresion
 	- mensajes!?
+	- si eliminamos todos en una busqueda de una pagina no vuelve a la pagina anterior
+	  si esta existe
+	- los links de notificacion y favoritos si es tuyo el video no debe mostrarlos
+	- startIndex=0 en el activate de las busquedas
 	
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);

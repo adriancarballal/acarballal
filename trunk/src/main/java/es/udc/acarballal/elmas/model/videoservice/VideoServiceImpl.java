@@ -107,7 +107,9 @@ public class VideoServiceImpl implements VideoService{
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 
 		UserProfile userProfile = userProfileDao.find(userId);
-		if(userProfile.getPrivileges()!=Privileges_TYPES.ADMIN){
+		Video video = videoDao.find(videoId);
+		if(userProfile.getPrivileges()!=Privileges_TYPES.ADMIN &&
+				!userProfile.equals(video.getUserProfile())){
 			throw new InsufficientPrivilegesException(userProfile.getLoginName()); 
 		}
 		videoDao.remove(videoId);
@@ -295,7 +297,7 @@ public class VideoServiceImpl implements VideoService{
 			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}
 		
-		List<Video> videos = favouriteDao.findFavourites(userId, startIndex, count);
+		List<Video> videos = favouriteDao.findFavourites(userId, startIndex, count+1);
 		boolean existMoreVideos = videos.size() == (count + 1);
 
 		if (existMoreVideos) videos.remove(videos.size() - 1);
