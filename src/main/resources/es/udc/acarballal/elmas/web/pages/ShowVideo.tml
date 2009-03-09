@@ -1,33 +1,24 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<br/>
 <t:if t:test="foundVideo">
 	<p>${message:videoNotFound}.</p>
 	<t:parameter name="else">
 		<table class="showvideo">
-			<tr class="video-title"><td><span class="important">${video.title}</span></td></tr>
-			<tr class="video-owner"><td><span class="important2">${video.userProfile.loginName} - 
-				<t:output value="video.date.time" format="dateFormat" /></span></td>
-			</tr>
-			<tr><td>${video.comment}</td></tr>
+		
 			<tr>
-				<td><script type="text/javascript"
-					src="${asset:context:/player/swfobject.js}"></script> <embed
-					src="${asset:context:/player/player.swf}" width="320" height="280"
-					allowfullscreen="true" 
-					flashvars="skin=${asset:context:/player/stijl.swf}${message:amp}file=${video.flvVideo}"/></td>
-			</tr>
 			<t:if t:test="userSessionExists">
-				<tr>
-					<td><a href="#" t:type="PageLink" page="ShowVideoComments"
-						context="video.videoId"> ${message:showVideoComments} </a> | <a
-						href="#" t:type="PageLink" page="ShowUserComments"
-						context="video.userProfile.userProfileId"> ${message:showUserComments} </a>
-					</td>
-				</tr>
-				<tr>
+				<tr class="links">
 					<td>
+						<a href="#" t:type="PageLink" page="ShowVideoComments" 
+							context="video.videoId"> 
+							<spam class="showVideoComments" title="${message:showVideoComments}" /> 
+						</a> 
+						
+						<a ref="#" t:type="PageLink" page="ShowUserComments"
+							context="video.userProfile.userProfileId"> 
+							<spam class="showUserComments" title="${message:showUserComments}" /> 
+						</a>
 					<t:if t:test="notComplainted">
 					<t:zone t:id="complaintZone">
 						<t:actionLink t:id="complaint" zone="complaintZone" context="video.videoId">
@@ -60,9 +51,21 @@
 					</td>
 				</tr>
 			</t:if>
-
+			</tr>
+		
+			<tr class="video-title"><td><span class="important">${video.title}</span></td></tr>
+			<tr class="video-owner"><td><span class="important2">${video.userProfile.loginName} - 
+				<t:output value="video.date.time" format="dateFormat" /></span></td>
+			</tr>
+			<tr><td>${video.comment}</td></tr>
+			<tr>
+				<td><script type="text/javascript"
+					src="${asset:context:/player/swfobject.js}"></script> <embed
+					src="${asset:context:/player/player.swf}" width="320" height="280"
+					allowfullscreen="true" 
+					flashvars="skin=${asset:context:/player/stijl.swf}${message:amp}file=${video.flvVideo}"/></td>
+			</tr>
 		</table>
-
 	</t:parameter>
 </t:if>
 
