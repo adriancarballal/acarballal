@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
+import es.udc.acarballal.elmas.model.favourite.Favourite;
+import es.udc.acarballal.elmas.model.favourite.FavouriteDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
@@ -31,6 +33,7 @@ public class VideoServiceImpl implements VideoService{
 	private VideoCommentComplaintDao videoCommentComplaintDao;
 	private VideoCommentDao videoCommentDao;
 	private VideoComplaintDao videoComplaintDao;
+	private FavouriteDao favouriteDao;
 	private VideoDao videoDao;
 	private VoteDao voteDao;
 
@@ -81,6 +84,10 @@ public class VideoServiceImpl implements VideoService{
 		VideoComplaint complaint = 
 			new VideoComplaint(video, userProfile, Calendar.getInstance());
 		videoComplaintDao.create(complaint);
+	}
+	
+	public boolean isComplaintedBy(Long userId, Long videoId){
+		return videoComplaintDao.hasComplaint(userId, videoId);
 	}
 	
 	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
@@ -241,6 +248,10 @@ public class VideoServiceImpl implements VideoService{
 		this.voteDao = voteDao;
 	}
 	
+	public void setFavouriteDao(FavouriteDao favouriteDao){
+		this.favouriteDao = favouriteDao;
+	}
+	
 	public void voteVideo(Long userProfileId, Long videoId, VOTE_TYPES vote, 
 			Calendar date) throws InstanceNotFoundException, 
 			InsufficientPrivilegesException, InvalidOperationException{
@@ -268,10 +279,56 @@ public class VideoServiceImpl implements VideoService{
 		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
 			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}
-		if(voteDao.alreadyVoted(video.videoId, userProfileId)){
+		if(voteDao.alreadyVoted(video.getVideoId(), userProfileId)){
 			throw new VideoAlreadyVotedException(userProfile.getLoginName(), video.getTitle());
 		}
 		Vote newVote = new Vote(video, userProfile, vote, Calendar.getInstance());
 		voteDao.create(newVote);
 	}
+	
+	public VideoBlock findFavourites(Long userId, int startIndex, int count) 
+		throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userId);
+		
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		
+		List<Video> videos = favouriteDao.findFavourites(userId, startIndex, count);
+		boolean existMoreVideos = videos.size() == (count + 1);
+
+		if (existMoreVideos) videos.remove(videos.size() - 1);
+		
+		return new VideoBlock(videos, existMoreVideos);		
+	}
+	
+	public boolean isFavourite(Long userId, Long videoId){ 
+		return favouriteDao.isFavourite(userId, videoId);
+	}
+
+	public void addToFavourites(Long userId, Long videoId)
+			throws InstanceNotFoundException, InsufficientPrivilegesException {
+
+		UserProfile userProfile = userProfileDao.find(userId);
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		Video video = videoDao.find(videoId);
+		
+		Favourite newFav = new Favourite(userProfile, video);
+		favouriteDao.create(newFav);
+	}
+	
+	public void removeFromFavourites(Long userId, Long videoId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		
+		UserProfile userProfile = userProfileDao.find(userId);
+		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
+			throw new InsufficientPrivilegesException(userProfile.getLoginName());
+		}
+		favouriteDao.removeFromFavourites(userId, videoId);
+		
+	}
+	
 }

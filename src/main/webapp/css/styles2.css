@@ -1,171 +1,166 @@
 /* --------------------------- General -------------------------------------- */
-/* Body. */
+	/* Body. */
 body {
-	
-		font-family		: Tahoma,Helvetica, sans-serif;
-		font-stretch: extra-condensed;
-		font-weight: bold;
-		color			: #CCCCCC;
-		line-height		: 1.166;	
-		margin			: 0px;
-		padding			: 0px;	
-		height: 100%;
-		text-align:center;
-		background-image: url(http://elmas.cadena.tv/css/images/bg.gif);
-		
+	font-family: Tahoma, Helvetica, sans-serif;
+	font-stretch: extra-condensed;
+	font-weight: bold;
+	color: #CCCCCC;
+	line-height: 1.166;
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	text-align: center;
+	background-image: url(http://elmas.cadena.tv/css/images/bg.gif);
 }
 
 /* Window. */
-
 #window {
-		margin: 0px auto;
-		padding: 0px;
-		width: 990px;
-		/*border: 2px solid red;*/
+	margin: 0px auto;
+	padding: 0px;
+	width: 990px;
+	/*border: 2px solid red;*/
 }
 
 /* Page title. */
-
 #pageTitle {
-	-moz-border-radius:7px;
-		margin-top		: 5px;
-		background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
-		background-repeat:repeat-x;
-		background-color:#FFFFFF;
-		border-left:1px solid #a1a1a1;
-		border-right:1px solid #a1a1a1;
-		border-bottom:1px solid #a1a1a1;
-		line-height: 24px;
-		width: 97% center;
-		text-align:center;
-		color: #CD1821;
+	-moz-border-radius: 7px;
+	margin-top: 5px;
+	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-repeat: repeat-x;
+	background-color: #FFFFFF;
+	border-left: 1px solid #a1a1a1;
+	border-right: 1px solid #a1a1a1;
+	border-bottom: 1px solid #a1a1a1;
+	line-height: 24px;
+	width: 97% center;
+	text-align: center;
+	color: #CD1821;
 }
 
 /* Logo. */
-
 #logo {
-	-moz-border-radius:7px;
-		line-height: 100px;
-		width: 97% center;
-		margin-top:7px;
-		margin-bottom:7px;
-		background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
-		background-color:#eeeeee;
-	background-repeat:repeat-x;
-	background-color:#FFFFFF;
-	border-left:1px solid #a1a1a1;
-	border-right:1px solid #a1a1a1;
-	border-bottom:1px solid #a1a1a1;
-		text-align:center;
+	-moz-border-radius: 7px;
+	line-height: 100px;
+	width: 97% center;
+	margin-top: 7px;
+	margin-bottom: 7px;
+	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-color: #eeeeee;
+	background-repeat: repeat-x;
+	background-color: #FFFFFF;
+	border-left: 1px solid #a1a1a1;
+	border-right: 1px solid #a1a1a1;
+	border-bottom: 1px solid #a1a1a1;
+	text-align: center;
 }
 
 /* Sidebar. */
-
 #sidebar {
-	-moz-border-radius:7px;
-    width: 190px;
+	-moz-border-radius: 7px;
+	width: 190px;
 	float: left;
-	min-height:730px;
-	background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
-	background-repeat:repeat-x;
-	background-color:#FFFFFF;
-	border-left:1px solid #a1a1a1;
-	border-right:1px solid #a1a1a1;
-	border-bottom:1px solid #a1a1a1;
+	min-height: 730px;
+	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-repeat: repeat-x;
+	background-color: #FFFFFF;
+	border-left: 1px solid #a1a1a1;
+	border-right: 1px solid #a1a1a1;
+	border-bottom: 1px solid #a1a1a1;
 }
 
-#sidebarmenu{
+#sidebarmenu {
 	font-weight: bold;
-	color:#666666;
-	font-family:Arial,Helvetica,sans-serif;
-	font-size:14px;
+	color: #666666;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
 }
-/* Search Bar. */
 
+/* Search Bar. */
 #searchbar {
-	-moz-border-radius:7px;
+	-moz-border-radius: 7px;
 	/*border: 1px solid red;*/
 	width: 790px;
 	float: right;
-	text-align:right;
+	text-align: right;
 	/*background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);*/
-	background-repeat:repeat-x;
-	background-color:#FFFFFF;
-	border:1px solid #a1a1a1;
+	background-repeat: repeat-x;
+	background-color: #FFFFFF;
+	border: 1px solid #a1a1a1;
 	/*border-left:1px solid #a1a1a1;
 	border-right:1px solid #a1a1a1;
 	border-bottom:1px solid #a1a1a1;*/
-	
-}
-input {
-	-moz-border-radius:7px;
-  border            : 1px solid #CCCCCC;
-  background-color  : #FBFBFB;
-  padding			: 2px;
-  margin-top		: 2px;
-  margin-bottom     : 2px;
-  color			    : #666666;
 }
 
-textarea{
-	border            : 1px solid #CCCCCC;
-  	background-color  : #FBFBFB;
-  	/*padding			: 2px;
+input {
+	-moz-border-radius: 7px;
+	border: 1px solid #CCCCCC;
+	background-color: #FBFBFB;
+	padding: 2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	color: #666666;
+}
+
+textarea {
+	border: 1px solid #CCCCCC;
+	background-color: #FBFBFB;
+	/*padding			: 2px;
   	margin-top		: 2px;
   	margin-bottom     : 2px;*/
-  	color			    : #666666;
+	color: #666666;
 }
-input.search{
+
+input.search {
 	width: 20px;
-	-moz-border-radius:0px;
+	-moz-border-radius: 0px;
 	border: none;
 	background-color: background;
 	background-image: url(http://elmas.cadena.tv/css/images/search.jpg);
-	margin-right: 3px;  
- }
+	margin-right: 3px;
+}
 
 /* Content. */
 #content {
-	-moz-border-radius:7px;
+	-moz-border-radius: 7px;
 	padding: 10px 10px 10px 10px;
 	margin-top: 7px;
 	margin-right: 7px;
-	background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
-	background-repeat:repeat-x;
-	background-color:#FFFFFF;
-	border-left:1px solid #a1a1a1;
-	border-right:1px solid #a1a1a1;
-	border-bottom:1px solid #a1a1a1;
-	width: 595px; 
+	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-repeat: repeat-x;
+	background-color: #FFFFFF;
+	border-left: 1px solid #a1a1a1;
+	border-right: 1px solid #a1a1a1;
+	border-bottom: 1px solid #a1a1a1;
+	width: 595px;
 	float: right;
 	min-height: 674px;
-	text-align:center;
+	text-align: center;
 }
 
-p.section{
-	color:	#CD1821;
+p.section {
+	color: #CD1821;
 	font-size: large;
 }
 
-p.welcome{
-	color:	#CD1821;
+p.welcome {
+	color: #CD1821;
 	font-size: xx-large;
 	margin-top: -10px;
 }
 
-p.welcome2{
-	color: 	#2B5497;
+p.welcome2 {
+	color: #2B5497;
 	margin-top: -40px;
 }
 
 #most_voted {
-	-moz-border-radius:7px;
-	background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);
-	background-repeat:repeat-x;
-	background-color:#FFFFFF;
-	border-left:1px solid #a1a1a1;
-	border-right:1px solid #a1a1a1;
-	border-bottom:1px solid #a1a1a1;
+	-moz-border-radius: 7px;
+	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-repeat: repeat-x;
+	background-color: #FFFFFF;
+	border-left: 1px solid #a1a1a1;
+	border-right: 1px solid #a1a1a1;
+	border-bottom: 1px solid #a1a1a1;
 	margin-top: 7px;
 	width: 165px;
 	float: right;
@@ -173,188 +168,184 @@ p.welcome2{
 }
 
 div.previousNextLinks span.previousLink {
-    float: left;
-    text-align: left;
-    width: 49.5%;
-    
-    
+	float: left;
+	text-align: left;
+	width: 49.5%;
 }
 
 div.previousNextLinks span.nextLink {
-    float: right;
-    text-align: right;
-    width: 49.5%;
+	float: right;
+	text-align: right;
+	width: 49.5%;
 }
 
 /* Footer. */
-
 #footer {
-		height: 14px;
-		width: 100% center;
-		margin-top: 5px;
-		padding-top: 5px;
-		clear: both;
-		font-size:10px;
-		text-align: center;
-		color:#a1a1a1;
+	height: 14px;
+	width: 100% center;
+	margin-top: 5px;
+	padding-top: 5px;
+	clear: both;
+	font-size: 10px;
+	text-align: center;
+	color: #a1a1a1;
 }
 
 /* LINKS MENU PRINCIPAL */
-tr.info{
+tr.info {
 	color: #666666;
 	font-weight: bold;
-	font-family:Arial,Helvetica,sans-serif;
-	font-size:12px;
-	text-align:left;
-	text-indent:10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align: left;
+	text-indent: 10px;
 }
 
-td.user{
-	margin-top:5px;
-	line-height:20px;
-	text-align:center;
-	background-image:url(http://elmas.cadena.tv/css/images/bg.jpg);
-	background-repeat:no-repeat;
+td.user {
+	margin-top: 5px;
+	line-height: 20px;
+	text-align: center;
+	background-image: url(http://elmas.cadena.tv/css/images/bg.jpg);
+	background-repeat: no-repeat;
 }
 
-td.multimedia{
-	line-height:20px;
-	text-align:center;
-	background-image:url(http://elmas.cadena.tv/css/images/bg.jpg);
-	background-repeat:no-repeat;
+td.multimedia {
+	line-height: 20px;
+	text-align: center;
+	background-image: url(http://elmas.cadena.tv/css/images/bg.jpg);
+	background-repeat: no-repeat;
 }
 
-td.comments{
-	line-height:20px;
-	text-align:center;
-	background-image:url(http://elmas.cadena.tv/css/images/bg.jpg);
-	background-repeat:no-repeat;
+td.comments {
+	line-height: 20px;
+	text-align: center;
+	background-image: url(http://elmas.cadena.tv/css/images/bg.jpg);
+	background-repeat: no-repeat;
 }
-
 
 /* MOST VOTED */
-td.top{
+td.top {
 	padding-top: 7px;
 	font-size: 14px;
 	color: #CD1821;
-	text-align:center;
-	
-}
-td.top-title{
-	line-height: 1;
-	padding-top:3px;
-	font-size: 10px;
-	color: #2B5497;
-	text-align:center;
+	text-align: center;
 }
 
-td.top-owner{
+td.top-title {
+	line-height: 1;
+	padding-top: 3px;
+	font-size: 10px;
+	color: #2B5497;
+	text-align: center;
+}
+
+td.top-owner {
 	line-height: 1;
 	font-size: 10px;
 	color: #a1a1a1;
 	padding: 0px;
-	text-align:center;
+	text-align: center;
 }
 
 /* sidebar menu */
-a{
+a {
 	text-decoration: none;
 }
 
 a.mainlevel {
-  text-decoration	: none;
-  margin-top        : 1px;
-  padding-top       : 0px;
-  font-size         : 12px;
-  width             : 180px;
-  text-indent       : 20px;
+	text-decoration: none;
+	margin-top: 1px;
+	padding-top: 0px;
+	font-size: 12px;
+	width: 180px;
+	text-indent: 20px;
 }
 
-a.mainlevel:link, a.mainlevel:visited {
-  text-indent       : 10px;
-  font-weight       : bold;
-  display           : block;
-  margin-left		: 4px;
-  padding           : 0px 0px 2px 0px;
-  color             : #2B5497;
-  width             : 180px;
-  text-align		: left;
-  background-color  : #FBFBFB;
+a.mainlevel:link,a.mainlevel:visited {
+	text-indent: 10px;
+	font-weight: bold;
+	display: block;
+	margin-left: 4px;
+	padding: 0px 0px 2px 0px;
+	color: #2B5497;
+	width: 180px;
+	text-align: left;
+	background-color: #FBFBFB;
 }
+
 a.mainlevel:hover {
-	-moz-border-radius:7px;
-  background-color  : #f0f0f0 ;  
-  color             : #CD1821;
+	-moz-border-radius: 7px;
+	background-color: #f0f0f0;
+	color: #CD1821;
 }
 
 /* BUSQUEDA DE VIDEOS */
-div.search{
+div.search {
 	width: 100%;
 	height: 570px;
-	max-height: 315px
-	min-height: 315px;
-	
+	max-height: 315px min-height :   315px;
 }
 
-td.snapshot{
+td.snapshot {
 	vertical-align: baseline;
 }
 
-table.video-table{
+table.video-table {
 	padding-bottom: 12px;
-	}
-	
-table.video-table td.video-comment{
-	width:400px;
-	height:45px;
+}
+
+table.video-table td.video-comment {
+	width: 400px;
+	height: 45px;
 	border: 1px solid #a1a1a1;
 	padding-bottom: 3px;
 }
 
-tr.list-video{
+tr.list-video {
 	padding-bottom: 10px;
 }
 
-td.video-title{
+td.video-title {
 	border: 1px solid #a1a1a1;
-	-moz-border-radius:7px;	
+	-moz-border-radius: 7px;
 }
 
-td.video-user{
+td.video-user {
 	border: 1px solid #a1a1a1;
-	-moz-border-radius:7px;
+	-moz-border-radius: 7px;
 }
 
-td.video-info{
-	font-size         : 12px;
-	color           : #a1a1a1;
+td.video-info {
+	font-size: 12px;
+	color: #a1a1a1;
 	vertical-align: middle;
 }
 
 /* MOSTRAR VIDEO */
-table.showvideo{
+table.showvideo {
 	font-size: 12px;
 	color: #a1a1a1;
 }
 
-a:link, a:visited {
-  color             : #a1a1a1;
-  background-color  : #FBFBFB;
+a:link,a:visited {
+	color: #a1a1a1;
+	background-color: #FBFBFB;
 }
+
 a:hover {
-  background-color  : #f0f0f0 ;  
-  color             : #CD1821;
+	background-color: #f0f0f0;
+	color: #CD1821;
 }
 
 /*****************************************************/
-/* comentarios */
-table.comments{
+	/* comentarios */
+table.comments {
 	width: 100%;
 	height: 315px;
 }
 
-td.user-comment{
-	-moz-border-radius:7px;
+td.user-comment {
+	-moz-border-radius: 7px;
 	text-indent: 5px;
 	height: 60px;
 	width: 550px;
@@ -365,7 +356,7 @@ td.user-comment{
 	text-align: left;
 }
 
-td.commentator-info{
+td.commentator-info {
 	display: block;
 	font-size: 10px;
 	max-height: 12px;
@@ -375,57 +366,57 @@ td.commentator-info{
 	color: #a1a1a1;
 }
 
-.important{
+.important {
 	color: #CD1821;
 }
 
-.important2{
+.important2 {
 	color: #2B5497;
 }
 
-.username{
+.username {
 	color: #2B5497;
 }
 
-table{
+table {
 	display: inline-table;
 }
 
-img{
+img {
 	vertical-align: middle;
 }
 
 div.field {
-    clear: both;
-    padding-top: 1em;
-    width: 100%;
+	clear: both;
+	padding-top: 1em;
+	width: 100%;
 }
 
 div.field label {
-    float: left;    
-    text-align: right;
-    font-weight: bold;
-    width: 49.5%;
+	float: left;
+	text-align: right;
+	font-weight: bold;
+	width: 49.5%;
 }
 
 div.field span.entry {
-    float: right;    
-    text-align: left;
-    width: 49.5%;
+	float: right;
+	text-align: left;
+	width: 49.5%;
 }
 
 div.button {
-    clear: both;
-    padding-top: 1em;
-    text-align: center;
-    width: 100%;
+	clear: both;
+	padding-top: 1em;
+	text-align: center;
+	width: 100%;
 }
 
-.today{
-  display           : block;
-  font-size         : 10px;
-  color             : #2B5497;
-  text-align		: right;
+.today {
+	display: block;
+	font-size: 10px;
+	color: #2B5497;
+	text-align: right;
 }
 
 /* ERRORES */
@@ -434,61 +425,112 @@ div.t-error div {
 }
 
 div.t-error {
-	border:1px solid #2B5497;
+	border: 1px solid #2B5497;
 }
 
 div.t-error ul {
 	color: #2B5497;
 }
 
-a.trash{
+a.trash {
 	width: 50px;
 	height: 30px;
-	background-image:url(http://elmas.cadena.tv/css/images/trash.jpg);
+	background-image: url(http://elmas.cadena.tv/css/images/trash.jpg);
 	background-color: #FFFFFF;
-	background-repeat:no-repeat;
- }
- 
- 
+	background-repeat: no-repeat;
+}
 
 /* Admin Complaints */
-div.complaint{
-	-moz-border-radius:7px;
-	border:1px solid #CCCCCC;
+div.complaint {
+	-moz-border-radius: 7px;
+	border: 1px solid #CCCCCC;
 	width: 490px;
 	display: inline-table;
 }
 
-div.complaint:hover{
-	color             : #CD1821;
+div.complaint:hover {
+	color: #CD1821;
 	background-color: white;
 }
 
-div.number{
-	-moz-border-radius:7px;
-	border:1px solid #CCCCCC;
+div.number {
+	-moz-border-radius: 7px;
+	border: 1px solid #CCCCCC;
 	min-width: 60px;
 	display: inline-table;
 }
 
-div.number:hover{
-	color             : #CD1821;
+div.number:hover {
+	color: #CD1821;
 	background-color: white;
 }
 
-a.complaintrow{
+a.complaintrow {
 	color: red;
 }
 
-a.complaintrow:link, a.complaintrow:visited{
+a.complaintrow:link,a.complaintrow:visited {
 	color: #2B5497;
 }
-a.complaintrow:hover{
-		background-color: white;
+
+a.complaintrow:hover {
+	background-color: white;
 }
-	
-.complaints{
+
+.complaints {
 	color: #333333;
 	text-align: left;
 	text-indent: 20px;
+}
+
+
+/* SHOW VIDEO LINKS */
+div.t-zone{
+	display: inline-table;
+}
+
+.complaintZone{
+	display: inline-table;
+}
+	
+.favouriteZone{
+	display: inline-table;
+}
+
+.favourite {
+	background-image: url(http://elmas.cadena.tv/css/images/favourite.jpg);
+	height: 16px;
+	width: 16px;
+	display: inline-table;
+}
+
+.nonFavourite {
+	background-image:
+		url(http://elmas.cadena.tv/css/images/nonFavourite.jpg);
+	height: 16px;
+	width: 16px;
+	display: inline-table;
+}
+
+.videoComplaint {
+	background-image: url(http://elmas.cadena.tv/css/images/notify.jpg);
+	height: 16px;
+	width: 16px;
+	display: inline-table;
+}
+
+.nonVideoComplaint {
+	background-image: url(http://elmas.cadena.tv/css/images/nonNotify.jpg);
+	height: 16px;
+	width: 16px;
+	display: inline-table;
+}
+
+/* MIS FAVORITOS */
+.removeFavourite{
+	background-image: url(http://elmas.cadena.tv/css/images/delete.jpg);
+	height: 16px;
+	width: 16px;
+	display: inline-table;
+	float: right;
 }

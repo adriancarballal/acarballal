@@ -20,15 +20,15 @@ import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 @org.hibernate.annotations.Entity(mutable=false)
 public class Video {
 
-	public String comment;
-	public Calendar date;
-	public String flvVideo;
-	public String mp4Video;
-	public String original;
-	public String snapshot;
-	public String title;
-	public UserProfile userProfile;
-	public Long videoId;
+	private String comment;
+	private Calendar date;
+	private String flvVideo;
+	private String mp4Video;
+	private String original;
+	private String snapshot;
+	private String title;
+	private UserProfile userProfile;
+	private Long videoId;
 	
 	public Video(){
 		
@@ -66,6 +66,7 @@ public class Video {
 			&& (flvVideo != null) && flvVideo.equals(theOther.flvVideo)
 			&& (mp4Video != null) && mp4Video.equals(theOther.mp4Video);
 	}
+	
 	@Column(name = "cmmnt")
 	public String getComment() {
 		return comment;

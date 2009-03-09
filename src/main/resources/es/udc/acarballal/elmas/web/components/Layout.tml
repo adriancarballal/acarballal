@@ -70,6 +70,10 @@ JPG</a></div>
 		${message:menu-myVideos} </a></td>
 	</tr>
 	<tr>
+		<td><a class="mainlevel" href="#" t:type="PageLink" t:page="user/MyFavourites">
+		${message:menu-myFavourites} </a></td>
+	</tr>
+	<tr>
 		<td><a class="mainlevel" href="#" t:type="PageLink" t:page="user/InsertVideo">
 		${message:menu-insertVideo} </a></td>
 	</tr>

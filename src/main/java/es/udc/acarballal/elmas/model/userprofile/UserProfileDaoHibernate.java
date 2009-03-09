@@ -12,6 +12,7 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class UserProfileDaoHibernate extends
 		GenericDaoHibernate<UserProfile, Long> implements UserProfileDao {
 
+	//TODO lo estamos usando en algun lado?
 	public List<UserProfile> findAllAdmin(int startIndex, int count){
 		return getSession().createQuery("SELECT u FROM UserProfile u " +
 				"WHERE u.privileges=:privileges").
@@ -31,6 +32,7 @@ public class UserProfileDaoHibernate extends
 		}
 	}
 	
+	//TODO lo estamos usando en algun lado?
 	public List<UserProfile> findNonAdmin(int startIndex, int count){
 		return getSession().createQuery("SELECT u FROM UserProfile u " +
 				"WHERE u.privileges=:privileges").
