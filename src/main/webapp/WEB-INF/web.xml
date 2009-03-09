@@ -69,7 +69,6 @@
     	<env-entry-name>container/url</env-entry-name>
     	<env-entry-value>http://adriancarballal.dynalias.com/container/</env-entry-value>
     	<env-entry-type>java.lang.String</env-entry-type>
-  	</env-entry>
-    
+  	</env-entry>  
 
 </web-app>

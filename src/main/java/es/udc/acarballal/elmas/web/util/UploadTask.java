@@ -14,6 +14,7 @@ import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.MissingConfiguration
 import es.udc.acarballal.elmas.ffmpeg.process.IProcess;
 import es.udc.acarballal.elmas.ffmpeg.process.Process;
 import es.udc.acarballal.elmas.ffmpeg.process.util.DirectoryGenerator;
+import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 
 public class UploadTask {
@@ -53,15 +54,17 @@ public class UploadTask {
 	private String title;
 	private Long userId;
 	private VideoService videoService;
+	private UserService userService;
 	
 	public UploadTask(Long userId, String title, String comment, 
-			String originalFile, VideoService videoService){
+			String originalFile, VideoService videoService, UserService userService){
 		this.userId = userId;
 		this.title = title;
 		this.comment = comment;
 		this.originalFile = originalFile;
 		this.processes = new ArrayList<IProcess>();
 		this.videoService = videoService;
+		this.userService = userService;
 		createProcesses();
 	}
 	
@@ -139,6 +142,9 @@ public class UploadTask {
 		((VideoAccept)accept).setUserService(videoService);
 		processes.add(accept);
 
+		//Send Admin Confirmation Message
+		IProcess confirmation = new AdminMessage(userService, userId, "Video subido con exito", "url del video");
+		processes.add(confirmation);
 	}
 	
 	public void execute(){

@@ -108,6 +108,11 @@ public class ShowVideo {
 		return !videoService.isComplaintedBy(
 				userSession.getUserProfileId(), video.getVideoId());
 	}
+	
+	public boolean isNotOwnVideo(){
+		return !video.getUserProfile().getUserProfileId().
+			equals(userSession.getUserProfileId());
+	}
 }
 
 

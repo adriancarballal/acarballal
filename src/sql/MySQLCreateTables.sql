@@ -5,6 +5,7 @@
 DROP TABLE PingTable;
 CREATE TABLE PingTable (foo CHAR(1));
 
+DROP TABLE Message;
 DROP TABLE Favourite;
 DROP TABLE UserCommentComplaint;
 DROP TABLE VideoCommentComplaint;
@@ -154,6 +155,18 @@ CREATE TABLE Favourite (
 		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
 	TYPE = InnoDB;
 
+CREATE TABLE Message (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+    receiver BIGINT NOT NULL,
+	sender BIGINT NOT NULL,
+	text VARCHAR(300) NOT NULL,
+	link VARCHAR(300) NOT NULL,
+	CONSTRAINT Message_PK PRIMARY KEY (id),
+	CONSTRAINT ReceiverMessage_FK FOREIGN KEY (receiver)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE,
+	CONSTRAINT SenderMessage_FK FOREIGN KEY (sender)
+		REFERENCES UserProfile(usrId) ON DELETE CASCADE)
+	TYPE = InnoDB;    
 	
 --------------------------
 -- Data for experiments --

@@ -12,6 +12,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.upload.services.UploadedFile;
 
 import es.udc.acarballal.elmas.ffmpeg.process.util.DirectoryGenerator;
+import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.pages.Index;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
@@ -54,6 +55,9 @@ public class InsertVideo {
 	 @Inject
 	 private VideoService videoService;
 	 
+	 @Inject
+	 private UserService userService;
+	 
 	 Object onSuccess(){
 		 String originalDir = DirectoryGenerator.create().getAbsolutePath();
 		 
@@ -61,7 +65,7 @@ public class InsertVideo {
         file.write(copied); 
 
         VideoPostProcessing proc = new VideoPostProcessing(copied.getAbsolutePath(), 
-        		userSession.getUserProfileId(), title, comment, videoService);
+        		userSession.getUserProfileId(), title, comment, videoService, userService);
         proc.start();
         
         return Index.class;

@@ -19,6 +19,8 @@
 							context="video.userProfile.userProfileId"> 
 							<spam class="showUserComments" title="${message:showUserComments}" /> 
 						</a>
+						
+					<t:if t:test="notOwnVideo">	
 					<t:if t:test="notComplainted">
 					<t:zone t:id="complaintZone">
 						<t:actionLink t:id="complaint" zone="complaintZone" context="video.videoId">
@@ -47,6 +49,7 @@
 					<t:parameter name="else">
 						<spam class="favourite" title="${message:markAsFavourite}" />
 					</t:parameter>
+					</t:if>
 					</t:if>
 					</td>
 				</tr>

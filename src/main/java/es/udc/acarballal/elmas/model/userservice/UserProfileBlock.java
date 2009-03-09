@@ -21,8 +21,4 @@ public class UserProfileBlock {
 	public List<UserProfile> getUsers() {
 		return users;
 	}
-    
-    
-    
-    
 }
