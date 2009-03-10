@@ -18,4 +18,5 @@ public class MoveTempFolder implements IProcess{
 		return (new File(folder)).renameTo(new File(destination));
 	}
 
+	public void undo(){}
 }

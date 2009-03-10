@@ -41,5 +41,7 @@ public class FileCopy implements IProcess{
 		}
 	    return true;
 	}
+	
+	public void undo(){}
 
 }

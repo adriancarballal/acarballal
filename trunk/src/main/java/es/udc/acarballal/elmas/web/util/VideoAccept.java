@@ -62,5 +62,7 @@ public class VideoAccept implements IProcess{
 			return false;
 		}
 	}
+	
+	public void undo(){}
 
 }
