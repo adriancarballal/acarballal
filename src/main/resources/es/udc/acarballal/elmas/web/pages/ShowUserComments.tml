@@ -39,6 +39,7 @@
 </t:zone>
 <br/>
 <t:if t:test="userSessionExists">
+<t:if t:test="notMyself">
 	<form t:type="Form" t:id="commentForm"><t:errors />
 	<table>
 		<tr>
@@ -52,5 +53,6 @@
 		</tr>
 	</table>
 	</form>
+</t:if>
 </t:if>
 </html>
