@@ -69,6 +69,7 @@ public class FindVideos {
 	}
 	
 	void onActivate(String keys) {
+		startIndex=0;
 		this.keys = keys;
 		fill();
 	}

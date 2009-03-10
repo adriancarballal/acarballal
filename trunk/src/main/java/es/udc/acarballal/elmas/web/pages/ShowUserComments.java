@@ -114,6 +114,7 @@ public class ShowUserComments {
 	}
 
 	void onActivate(Long userId){
+		startIndex=0;
 		this.userId = userId;
 		fill();		
 	}

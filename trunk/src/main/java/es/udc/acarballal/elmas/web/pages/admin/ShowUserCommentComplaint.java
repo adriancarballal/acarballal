@@ -88,6 +88,7 @@ public class ShowUserCommentComplaint {
 	}
 	
 	void onActivate(){
+		startIndex=0;
 		fill();
 	}
 	
