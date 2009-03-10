@@ -22,5 +22,7 @@ public class LogDelete implements IProcess{
 		}
 		return flag;
 	}
+	
+	public void undo(){}
 
 }

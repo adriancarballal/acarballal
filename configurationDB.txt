@@ -13,7 +13,7 @@ Shutdown database
 	
 	- mirar votos de un video - preguntar
 	
-	
+	- cuando eliminamos un video eliminamos los archivos?
 	- no puedes comentar tus videos o tu usuario
 	- si eliminamos todos en una busqueda de una pagina no vuelve a la pagina anterior
 	  si esta existe

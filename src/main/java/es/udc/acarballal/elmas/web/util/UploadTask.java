@@ -151,12 +151,18 @@ public class UploadTask {
 		boolean flag = true;
 		while(flag && processes.size()>0){
 			flag = processes.get(0).execute();
-			processes.remove(0);
+			if(flag) processes.remove(0);
 		}
 		if(!flag){
+			
+			/*ASEGURARSE DE QUE LOS LOGS SE DESCONECTAN*/
+			undo();
+			
 			processes.clear();
 			IProcess error = new AdminMessage(userService, userId, title + ": Ha ocurrido un error. Vuelva a subirlo por favor.");
 			processes.add(error);
+			
+			
 			
 			IProcess deleteTemp = new DeleteTempFolder(temporalDirectory);
 			processes.add(deleteTemp);
@@ -164,5 +170,13 @@ public class UploadTask {
 			processes.get(1).execute();
 			processes.clear();
 		}
+	}
+
+	public void undo(){
+		/*ASEGURARSE DE QUE LOS LOGS SE DESCONECTAN*/
+		for (int i = 0; i < processes.size(); i++) {
+			processes.get(i).undo();		
+		}
+		
 	}
 }

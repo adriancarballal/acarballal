@@ -1,6 +1,7 @@
 package es.udc.acarballal.elmas.ffmpeg.process;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import es.udc.acarballal.elmas.ffmpeg.encoder.IVideoEncoder;
@@ -34,7 +35,6 @@ public class Process implements IProcess{
 			logWriter.flush();
 			logWriter.close();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -71,6 +71,14 @@ public class Process implements IProcess{
         }
         return true;
 
+	}
+	
+	public void undo(){
+		try {
+			logWriter.close();
+		} catch (IOException e) {
+			//UNREACHABLE
+		}
 	}
 	
 }

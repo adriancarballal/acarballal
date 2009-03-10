@@ -19,4 +19,6 @@ public class DeleteTempFolder implements IProcess{
 		}
 		return (new File(folder)).delete();
 	}
+	
+	public void undo(){}
 }

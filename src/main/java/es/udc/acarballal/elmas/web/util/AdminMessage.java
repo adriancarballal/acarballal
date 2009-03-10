@@ -25,6 +25,7 @@ public class AdminMessage implements IProcess{
 		}
 		return true;
 	}
-
+	
+	public void undo(){}
 
 }
