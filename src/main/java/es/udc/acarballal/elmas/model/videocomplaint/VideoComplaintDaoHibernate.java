@@ -18,7 +18,8 @@ public class VideoComplaintDaoHibernate extends
 	}
 	
 	public List<VideoComplaint> findVideoComplaints(int startIndex, int count){
-		return getSession().createQuery("SELECT c FROM VideoComplaint c ").
+		return getSession().createQuery("SELECT c " +
+				"FROM VideoComplaint c ORDER BY c.date DESC").
 		setFirstResult(startIndex).setMaxResults(count).list();
 	}
 	

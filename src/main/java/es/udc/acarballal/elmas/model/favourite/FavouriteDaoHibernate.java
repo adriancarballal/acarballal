@@ -13,7 +13,7 @@ public class FavouriteDaoHibernate extends
 
 	public List<Video> findFavourites(Long userProfileId, int startIndex, int count) {
 			return getSession().createQuery("SELECT v.favourite FROM Favourite v " +
-			"WHERE v.user.userProfileId=:userId").
+			"WHERE v.user.userProfileId=:userId order by v.id desc").
 			setParameter("userId", userProfileId).		
 			setFirstResult(startIndex).setMaxResults(count).list();
 	}

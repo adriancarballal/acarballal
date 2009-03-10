@@ -32,7 +32,7 @@ public class VideoDaoHibernate extends
 	public List<Video> findByUser(Long userId, int startIndex, int count){
 		
 		return getSession().createQuery("SELECT v FROM Video v " +
-		"WHERE v.userProfile.userProfileId=:userId").
+		"WHERE v.userProfile.userProfileId=:userId ORDER BY v.date DESC").
 		setParameter("userId", userId).		
 		setFirstResult(startIndex).setMaxResults(count).list();
 		

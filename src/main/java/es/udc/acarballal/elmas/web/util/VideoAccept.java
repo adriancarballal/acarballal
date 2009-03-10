@@ -56,7 +56,6 @@ public class VideoAccept implements IProcess{
 		try {
 			videoService.addVideo(userId, title, comment, snapshot, originalFile, 
 					flvFile, rtFile, Calendar.getInstance());
-			System.out.println("Creado");
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
