@@ -10,16 +10,17 @@ Shutdown database
 	- mysqladmin -u root shutdown
 	
 	--> USO DE BACHSIZE!!!!!!!!
-	
-	- mirar votos de un video - preguntar
-	
+	- mirar votos de un video - preguntar	
+	- usuarios no registrados pueden ver los comentarios? eleccion
+
+	- show usercomments boton siguiente no funciona bien? compr	obar videocomments
+	- cambiar el texto eliminar por el icono
+	- usuarios no registrados pueden ver los comentarios?
 	- cuando eliminamos un video eliminamos los archivos?
-	- no puedes comentar tus videos o tu usuario
 	- si eliminamos todos en una busqueda de una pagina no vuelve a la pagina anterior
 	  si esta existe
 	- ThreadGroup
 	- Utilizar en encoderService
-	- si falla un execute que pasa con el streamglobber?
 	
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);

@@ -20,6 +20,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
+import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videocomment.VideoComment;
 import es.udc.acarballal.elmas.model.videoservice.VideoCommentBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
@@ -72,6 +73,7 @@ public class ShowVideoComments {
 	private VideoCommentBlock videoCommentBlock;
 	
 	private Long videoId;
+	private Video video;
 	
 	@Inject
 	private VideoService videoService;
@@ -113,11 +115,23 @@ public class ShowVideoComments {
 	void onActivate(Long videoId){
 		startIndex=0;
 		this.videoId = videoId;
+		try {
+			video = videoService.findVideoById(videoId);
+		} catch (InstanceNotFoundException e) {
+			//TODO
+			//MAYBE BUG
+		}
 		fill();
 	}
 	
 	Object[] onPassivate() {
 		return new Object[] {videoId};
+	}
+	
+	public boolean isNotMyself(){
+		if(!userSessionExists) return true;
+		return !video.getUserProfile().getUserProfileId()
+			.equals(userSession.getUserProfileId());
 	}
 	
 	@OnEvent(component="next")
@@ -135,7 +149,6 @@ public class ShowVideoComments {
 	}
 	
 	Object onSuccess(){
-		this.startIndex=0;
 		fill();
         return comments;
     }

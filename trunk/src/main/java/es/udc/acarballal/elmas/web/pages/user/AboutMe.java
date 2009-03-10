@@ -76,7 +76,7 @@ public class AboutMe {
 	}
 	
 	void onActivate() {
-		startIndex=0;
+		//startIndex=0;
 		fill();
 	}
 	

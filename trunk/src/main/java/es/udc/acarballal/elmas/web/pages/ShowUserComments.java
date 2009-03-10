@@ -114,9 +114,13 @@ public class ShowUserComments {
 	}
 
 	void onActivate(Long userId){
-		startIndex=0;
 		this.userId = userId;
 		fill();		
+	}
+	
+	public boolean isNotMyself(){
+		if(!userSessionExists) return true;
+		return !userId.equals(userSession.getUserProfileId());
 	}
 	
 	Object[] onPassivate() {
@@ -138,7 +142,6 @@ public class ShowUserComments {
 	}
 	
 	Object onSuccess(){
-		this.startIndex = 0;
 		fill();
 		comment="";
 		return comments;
