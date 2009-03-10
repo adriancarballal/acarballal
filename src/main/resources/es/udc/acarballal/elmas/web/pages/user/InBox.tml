@@ -2,4 +2,43 @@
 	t:type="Layout" t:pageTitle="${message:title}">
 	
 	
+<t:zone t:id="messageZone">
+	<t:if t:test="messages.empty">
+		<p>${message:novideos}.</p>
+		<t:parameter name="else">
+			<p class="section">${message:myvideos}.</p>
+			<div class="search">
+			<table class="videos">
+				<tr t:type="Loop" t:source="messages" t:value="message">
+					<table class="video-table">
+						<tr>
+							<td class="message">
+								[De: <span class="important">${message.sender.loginName}</span>]
+								${message.text}
+							</td>
+							<td>
+								<t:actionLink t:id="removeMessage" zone="messageZone" context="message.id">
+									<spam class="removeMessage"  title="${message:remove}" />
+									</t:actionLink>
+								</td>
+						</tr>
+					</table>
+				</tr>
+			</table>
+			</div>
+
+			<!-- "Previous" and "Next" links. -->
+
+			<div class="previousNextLinks"><span class="previousLink">
+			<t:if t:test="previousLinkContext">
+				<t:actionLink t:id="previous" zone="messageZone">${message:link-previous}</t:actionLink>
+			</t:if> </span> <span class="nextLink"> <t:if t:test="nextLinkContext">
+				<t:actionLink t:id="next" zone="messageZone">${message:link-next}</t:actionLink>
+			</t:if> </span></div>
+
+		</t:parameter>
+	</t:if>
+	
+</t:zone>
+	
 </html>

@@ -285,13 +285,13 @@ public class UserServiceImpl implements UserService {
 		messageDao.remove(messageId);
 	}
 
-	public Long sendMessage(Long from, Long to, String text, String link) 
+	public Long sendMessage(Long from, Long to, String text) 
 			throws InstanceNotFoundException {
 		
 		UserProfile sender = userProfileDao.find(from);
 		UserProfile receiver = userProfileDao.find(to);
 		
-		Message message = new Message(sender, receiver, text, link);
+		Message message = new Message(sender, receiver, text);
 		messageDao.create(message);
 		
 		return message.getId();

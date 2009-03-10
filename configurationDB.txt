@@ -12,11 +12,10 @@ Shutdown database
 	--> USO DE BACHSIZE!!!!!!!!
 	
 	- mirar votos de un video - preguntar
-	- fallos de compresion
-	- mensajes!?
 	- si eliminamos todos en una busqueda de una pagina no vuelve a la pagina anterior
 	  si esta existe
 	- startIndex=0 en el activate de las busquedas
+	- eliminar temporal si no se completa la codificacion
 	
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);
@@ -24,3 +23,4 @@ Shutdown database
 	Para los complaints
 	Para vote
 	para favoritos
+	para mensajes

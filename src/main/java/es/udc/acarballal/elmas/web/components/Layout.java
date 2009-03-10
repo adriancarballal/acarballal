@@ -17,6 +17,7 @@ import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
+import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.pages.FindVideos;
@@ -61,6 +62,9 @@ public class Layout {
 
 	@Inject
 	private VideoService videoService;
+	
+	@Inject
+	private UserService userService;
 
 	public List<Video> getBest() {
 		return best;
@@ -96,8 +100,6 @@ public class Layout {
 		this.video = video;
 	}
 	
-	
-	// FECHA
 	@Inject
 	private Locale locale;
 	
@@ -107,5 +109,9 @@ public class Layout {
 
 	public Calendar getToday(){
 		return Calendar.getInstance();
+	}
+	
+	public int getInbox(){
+		return userService.getInBoxTotal(userSession.getUserProfileId());
 	}
 }

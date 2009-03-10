@@ -20,15 +20,13 @@ public class Message {
 	private UserProfile receiver;
 	private UserProfile sender;
 	private String text;
-	private String link;
 	
 	public Message(){}
 	
-	public Message(UserProfile from, UserProfile to, String text, String link){
+	public Message(UserProfile from, UserProfile to, String text){
 		this.sender = from;
 		this.receiver = to;
 		this.text = text;
-		this.link = link;
 	}
 	
 	@Column(name = "id")
@@ -68,11 +66,5 @@ public class Message {
 	}
 	public void setText(String text) {
 		this.text = text;
-	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
 	}
 }

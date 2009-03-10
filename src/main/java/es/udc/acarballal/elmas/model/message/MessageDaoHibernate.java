@@ -16,7 +16,8 @@ public class MessageDaoHibernate extends GenericDaoHibernate<Message, Long> impl
 	public int inBoxTotal(Long userProfileId){
 		long count = 
 			(Long) getSession().createQuery("SELECT count(c) FROM Message c " +
-					"WHERE v.receiver.userProfileId=:userId").
+					"WHERE c.receiver.userProfileId=:userId").
+			setParameter("userId", userProfileId).
 			uniqueResult(); 
 		return (int)count;
 	}

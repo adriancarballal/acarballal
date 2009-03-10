@@ -143,7 +143,7 @@ public class UploadTask {
 		processes.add(accept);
 
 		//Send Admin Confirmation Message
-		IProcess confirmation = new AdminMessage(userService, userId, "Video subido con exito", "url del video");
+		IProcess confirmation = new AdminMessage(userService, userId, title + ": Video subido con exito");
 		processes.add(confirmation);
 	}
 	
@@ -151,6 +151,13 @@ public class UploadTask {
 		boolean flag = true;
 		while(flag && processes.size()>0){
 			flag = processes.get(0).execute();
+			processes.remove(0);
+		}
+		if(!flag){
+			processes.clear();
+			IProcess error = new AdminMessage(userService, userId, title + ": Ha ocurrido un error. Vuelva a subirlo por favor.");
+			processes.add(error);
+			processes.get(0).execute();
 			processes.remove(0);
 		}
 	}
