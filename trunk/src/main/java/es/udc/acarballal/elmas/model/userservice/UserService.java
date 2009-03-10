@@ -62,7 +62,7 @@ public interface UserService {
 	
 	/*MESSAGE SERVICE */
 	//TODO
-	public Long sendMessage(Long from, Long to, String text, String link) 
+	public Long sendMessage(Long from, Long to, String text) 
 			throws InstanceNotFoundException;
 	
 	public void removeMessage(Long messageId, Long userProfileId) 

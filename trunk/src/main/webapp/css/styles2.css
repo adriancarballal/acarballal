@@ -10,7 +10,7 @@ body {
 	padding: 0px;
 	height: 100%;
 	text-align: center;
-	background-image: url(http://elmas.cadena.tv/css/images/bg.gif);
+	background-image: url(images/bg.gif);
 }
 
 /* Window. */
@@ -25,7 +25,7 @@ body {
 #pageTitle {
 	-moz-border-radius: 7px;
 	margin-top: 5px;
-	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-image: url(images/cell_top.jpg);
 	background-repeat: repeat-x;
 	background-color: #FFFFFF;
 	border-left: 1px solid #a1a1a1;
@@ -44,7 +44,7 @@ body {
 	width: 97% center;
 	margin-top: 7px;
 	margin-bottom: 7px;
-	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-image: url(images/cell_top.jpg);
 	background-color: #eeeeee;
 	background-repeat: repeat-x;
 	background-color: #FFFFFF;
@@ -60,7 +60,7 @@ body {
 	width: 190px;
 	float: left;
 	min-height: 730px;
-	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-image: url(images/cell_top.jpg);
 	background-repeat: repeat-x;
 	background-color: #FFFFFF;
 	border-left: 1px solid #a1a1a1;
@@ -82,7 +82,7 @@ body {
 	width: 790px;
 	float: right;
 	text-align: right;
-	/*background-image:url(http://elmas.cadena.tv/css/images/cell_top.jpg);*/
+	/*background-image:url(images/cell_top.jpg);*/
 	background-repeat: repeat-x;
 	background-color: #FFFFFF;
 	border: 1px solid #a1a1a1;
@@ -115,7 +115,7 @@ input.search {
 	-moz-border-radius: 0px;
 	border: none;
 	background-color: background;
-	background-image: url(http://elmas.cadena.tv/css/images/search.jpg);
+	background-image: url(images/search.jpg);
 	margin-right: 3px;
 }
 
@@ -125,7 +125,7 @@ input.search {
 	padding: 10px 10px 10px 10px;
 	margin-top: 7px;
 	margin-right: 7px;
-	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-image: url(images/cell_top.jpg);
 	background-repeat: repeat-x;
 	background-color: #FFFFFF;
 	border-left: 1px solid #a1a1a1;
@@ -155,7 +155,7 @@ p.welcome2 {
 
 #most_voted {
 	-moz-border-radius: 7px;
-	background-image: url(http://elmas.cadena.tv/css/images/cell_top.jpg);
+	background-image: url(images/cell_top.jpg);
 	background-repeat: repeat-x;
 	background-color: #FFFFFF;
 	border-left: 1px solid #a1a1a1;
@@ -205,21 +205,21 @@ td.user {
 	margin-top: 5px;
 	line-height: 20px;
 	text-align: center;
-	background-image: url(http://elmas.cadena.tv/css/images/bg.jpg);
+	background-image: url(images/bg.jpg);
 	background-repeat: no-repeat;
 }
 
 td.multimedia {
 	line-height: 20px;
 	text-align: center;
-	background-image: url(http://elmas.cadena.tv/css/images/bg.jpg);
+	background-image: url(images/bg.jpg);
 	background-repeat: no-repeat;
 }
 
 td.comments {
 	line-height: 20px;
 	text-align: center;
-	background-image: url(http://elmas.cadena.tv/css/images/bg.jpg);
+	background-image: url(images/bg.jpg);
 	background-repeat: no-repeat;
 }
 
@@ -436,7 +436,7 @@ div.t-error ul {
 a.trash {
 	width: 50px;
 	height: 30px;
-	background-image: url(http://elmas.cadena.tv/css/images/trash.jpg);
+	background-image: url(images/trash.jpg);
 	background-color: #FFFFFF;
 	background-repeat: no-repeat;
 }
@@ -506,53 +506,72 @@ div.t-zone{
 }*/
 
 .favourite {
-	background-image: url(http://elmas.cadena.tv/css/images/favourite.jpg);
+	background-image: url(images/favourite.jpg);
 	height: 16px;
 	width: 16px;
 	display: inline-table;
+	background-color: red;
 }
 
 .nonFavourite {
-	background-image:
-		url(http://elmas.cadena.tv/css/images/nonFavourite.jpg);
+	background-image: url(images/nonFavourite.jpg);
 	height: 16px;
 	width: 16px;
 	display: inline-table;
+	background-color: red;
 }
 
 .videoComplaint {
-	background-image: url(http://elmas.cadena.tv/css/images/notify.jpg);
+	background-image: url(images/notify.jpg);
 	height: 16px;
 	width: 16px;
 	display: inline-table;
+	background-color: red;
 }
 
 .nonVideoComplaint {
-	background-image: url(http://elmas.cadena.tv/css/images/nonNotify.jpg);
+	background-image: url(images/nonNotify.jpg);
 	height: 16px;
 	width: 16px;
 	display: inline-table;
+	background-color: red;
 }
 
 .showUserComments {
-	background-image: url(http://elmas.cadena.tv/css/images/user.jpg);
+	background-image: url(images/user.jpg);
 	height: 16px;
 	width: 16px;
 	display: inline-table;
+	background-color: red;
 }
 
 .showVideoComments {
-	background-image: url(http://elmas.cadena.tv/css/images/videoComment.jpg);
+	background-image: url(images/videoComment.jpg);
 	height: 16px;
 	width: 16px;
 	display: inline-table;
+	background-color: red;
 }
 
 /* MIS FAVORITOS */
-.removeFavourite, .removeVideo{
-	background-image: url(http://elmas.cadena.tv/css/images/delete.jpg);
+.removeFavourite, .removeVideo, .removeMessage{
+	background-image: url(images/delete.jpg);
 	height: 16px;
 	width: 16px;
 	display: inline-table;
 	float: right;
+	background-color: red;
+}
+
+/* MENSAJES */
+td.message {
+	-moz-border-radius: 7px;
+	text-indent: 5px;
+	width: 550px;
+	height: 30px;
+	border: 1px solid #a1a1a1;
+	font-size: 11px;
+	text-align: left;
+	color: #2B5497;
+	text-align: left;
 }
