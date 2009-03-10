@@ -85,6 +85,7 @@ public class ShowVideoCommentComplaint {
 	}
 
 	void onActivate() {
+		startIndex=0;
 		fill();
 	}
 

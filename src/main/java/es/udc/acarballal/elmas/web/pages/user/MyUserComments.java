@@ -92,6 +92,7 @@ public class MyUserComments {
 		return userCommentBlock.getUserComments();
 	}
 	void onActivate() {
+		startIndex=0;
 		fill();
 	}
 	

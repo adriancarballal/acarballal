@@ -92,6 +92,7 @@ public class MyVideoComments {
 	}
 	
 	void onActivate() {
+		startIndex=0;
 		fill();
 	}
 	

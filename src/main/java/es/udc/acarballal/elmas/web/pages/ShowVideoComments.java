@@ -111,6 +111,7 @@ public class ShowVideoComments {
 	}
 	
 	void onActivate(Long videoId){
+		startIndex=0;
 		this.videoId = videoId;
 		fill();
 	}

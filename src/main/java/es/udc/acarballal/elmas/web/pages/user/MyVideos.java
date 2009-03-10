@@ -79,6 +79,7 @@ public class MyVideos {
 	}
 	
 	void onActivate() {
+		startIndex=0;
 		fill();
 	}
 	
