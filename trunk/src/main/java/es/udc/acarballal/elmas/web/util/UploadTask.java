@@ -157,9 +157,12 @@ public class UploadTask {
 			processes.clear();
 			IProcess error = new AdminMessage(userService, userId, title + ": Ha ocurrido un error. Vuelva a subirlo por favor.");
 			processes.add(error);
+			
+			IProcess deleteTemp = new DeleteTempFolder(temporalDirectory);
+			processes.add(deleteTemp);
 			processes.get(0).execute();
-			processes.remove(0);
+			processes.get(1).execute();
+			processes.clear();
 		}
 	}
-
 }

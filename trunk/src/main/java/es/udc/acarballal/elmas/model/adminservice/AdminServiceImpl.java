@@ -28,9 +28,12 @@ public class AdminServiceImpl implements AdminService{
 		throws InsufficientPrivilegesException, InstanceNotFoundException{
 		
 		UserProfile userProfile;
+		UserProfile deleteProfile;
 		try {
 			userProfile = userProfileDao.find(userProfileId); 
-			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
+			deleteProfile = userProfileDao.find(deleteUserId);
+			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN &&
+					deleteProfile.getPrivileges()!= Privileges_TYPES.ADMIN){
 				userProfileDao.remove(deleteUserId);
 			}
 			else{

@@ -8,7 +8,7 @@ public class MessageDaoHibernate extends GenericDaoHibernate<Message, Long> impl
 
 	public List<Message> getInBox(Long userProfileId, int startIndex, int count) {
 		return getSession().createQuery("SELECT v FROM Message v " +
-		"WHERE v.receiver.userProfileId=:userId").
+		"WHERE v.receiver.userProfileId=:userId order by v.id desc").
 		setParameter("userId", userProfileId).		
 		setFirstResult(startIndex).setMaxResults(count).list();	
 	}	

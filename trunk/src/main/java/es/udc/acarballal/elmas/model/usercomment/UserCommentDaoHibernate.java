@@ -13,7 +13,7 @@ public class UserCommentDaoHibernate extends
 	public List<UserComment> findCommentByCommentator(Long userProfileId,
 			int startIndex, int count){
 		return getSession().createQuery("SELECT u FROM UserComment u " +
-		"WHERE u.commentator.userProfileId=:commentator ORDER BY u.date").
+		"WHERE u.commentator.userProfileId=:commentator ORDER BY u.date desc").
 		setParameter("commentator", userProfileId).		
 		setFirstResult(startIndex).setMaxResults(count).list();
 	}

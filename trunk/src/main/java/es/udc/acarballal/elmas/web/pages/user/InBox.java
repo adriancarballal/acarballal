@@ -23,7 +23,7 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class InBox {
 	
-private static final int COUNT = 5;
+	private static final int COUNT = 12;
 	
 	@Inject
 	private Locale locale;
