@@ -1,4 +1,4 @@
-package es.udc.acarballal.elmas.web.util;
+package es.udc.acarballal.elmas.model.encoderservice.util;
 
 import java.util.ArrayList;
 import java.util.List;

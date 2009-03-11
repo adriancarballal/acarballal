@@ -14,21 +14,16 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.upload.services.UploadedFile;
 
 import es.udc.acarballal.elmas.ffmpeg.process.util.DirectoryGenerator;
-import es.udc.acarballal.elmas.model.userservice.UserService;
-import es.udc.acarballal.elmas.model.videoservice.VideoService;
+import es.udc.acarballal.elmas.model.encoderservice.EncoderService;
 import es.udc.acarballal.elmas.web.pages.Index;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.acarballal.elmas.web.util.VideoMimeDetection;
-import es.udc.acarballal.elmas.web.util.VideoPostProcessing;
-import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
 public class InsertVideo {
 
-	 private static final Long AdminMessage = new Long(1);
-	 
 	 @SuppressWarnings("unused")
 	 @Property
 	 private String comment;
@@ -58,10 +53,7 @@ public class InsertVideo {
 	 private UserSession userSession;
 	 
 	 @Inject
-	 private VideoService videoService;
-	 
-	 @Inject
-	 private UserService userService;
+	 private EncoderService encoderService;
 	 
 	 Object onSuccess(){
 		 String originalDir = DirectoryGenerator.create().getAbsolutePath();
@@ -69,9 +61,9 @@ public class InsertVideo {
         File copied = new File(originalDir + "\\" + file.getFileName());
         file.write(copied); 
 
-        VideoPostProcessing proc = new VideoPostProcessing(copied.getAbsolutePath(), 
-        		userSession.getUserProfileId(), title, comment, videoService, userService);
-        proc.start();
+        encoderService.encodeVideo(copied.getAbsolutePath(), 
+        		userSession.getUserProfileId(), title, comment);
+        
         
         return Index.class;
     }
@@ -87,12 +79,8 @@ public class InsertVideo {
     
     @SuppressWarnings("deprecation")
 	void onUploadException(FileUploadException ex){
-    	try {
-			userService.sendMessage(AdminMessage, userSession.getUserProfileId(), 
-					messages.get("uploadError") + " [" + Calendar.getInstance().getTime().toGMTString() + "]");
-		} catch (InstanceNotFoundException e) {
-			//NOT BUG. NEVER REACHED
-		}
+    	encoderService.sendErrorMessage(userSession.getUserProfileId(), 
+				messages.get("uploadError") + " [" + Calendar.getInstance().getTime().toGMTString() + "]");
     }
 
 }

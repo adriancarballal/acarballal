@@ -13,8 +13,6 @@ Shutdown database
 	- mirar votos de un video - preguntar	
 
 	- cuando eliminamos un video eliminamos los archivos?
-	- ThreadGroup
-	- Utilizar en encoderService
 	
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);
