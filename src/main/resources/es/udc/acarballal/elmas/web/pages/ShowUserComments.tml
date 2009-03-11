@@ -9,6 +9,7 @@
 			<table class="comments-mini">
 				<tr t:type="Loop" t:source="userComments" t:value="userComment">
 					<td class="user-comment">${userComment.comment}</td>
+					<t:if t:test="userSessionExists">
 					<td class="remove">
 						<t:if t:test="deletable">
 							<t:actionLink t:id="deleteComment" zone="comments" 
@@ -16,13 +17,23 @@
 								<spam class="removeComment"  title="${message:delete}" />	
 							</t:actionLink>
 						<t:parameter name="else">
-							<t:actionLink t:id="complaintComment" zone="comments" 
-								context="userComment.commentId">
-								<spam class="nonVideoComplaint"  title="${message:complaintVideoComment}" />
-							</t:actionLink>					
+							<t:if t:test="notComplainted">
+								<t:zone t:id="complaintZone">
+									<t:actionLink t:id="complaintComment" zone="complaintZone" context="userComment.commentId">
+										<spam class="nonVideoComplaint" title="${message:complaintVideo}" />
+									</t:actionLink>
+								</t:zone>
+								<t:block t:id="alreadyComplaint">
+									<spam class="videoComplaint" title="${message:alreadyComplaint}" />
+								</t:block>
+							<t:parameter name="else">
+								<spam class="videoComplaint" title="${message:alreadyComplaint}" />
+							</t:parameter>
+						</t:if>
 						</t:parameter>					
 						</t:if>
 					</td>
+					</t:if>
 				<tr>
 					<td class="commentator-info">${message:user-header}:
 						<span class="important">${userComment.commentator.loginName}

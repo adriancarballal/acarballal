@@ -26,6 +26,8 @@ public interface VideoService {
 	
 	public boolean isComplaintedBy(Long userId, Long videoId);
 	
+	public boolean isVideoCommentComplaintedBy(Long userId, Long videoCommentId);
+	
 	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;
 	

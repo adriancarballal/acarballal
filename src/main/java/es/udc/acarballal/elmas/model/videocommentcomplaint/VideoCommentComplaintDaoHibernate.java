@@ -22,5 +22,17 @@ public class VideoCommentComplaintDaoHibernate extends
 				"FROM VideoCommentComplaint c ORDER BY c.date DESC").
 		setFirstResult(startIndex).setMaxResults(count).list();
 	}
+	
+	public boolean hasComplaint(Long userId, Long videoCommentId){
+		long count = 
+			(Long) getSession().createQuery("SELECT count(c) " +
+					"FROM VideoCommentComplaint c " +
+					"WHERE c.reference.commentId=:videoCommentId AND " +
+					"c.complainer.userProfileId=:userProfileId").
+					setParameter("videoCommentId", videoCommentId).
+					setParameter("userProfileId", userId).
+			uniqueResult();
+		return count>0;
+	}
 
 }

@@ -86,8 +86,14 @@ public class VideoServiceImpl implements VideoService{
 		videoComplaintDao.create(complaint);
 	}
 	
+	@Transactional(readOnly = true)
 	public boolean isComplaintedBy(Long userId, Long videoId){
 		return videoComplaintDao.hasComplaint(userId, videoId);
+	}
+	
+	@Transactional(readOnly = true)
+	public boolean isVideoCommentComplaintedBy(Long userId, Long videoCommentId){
+		return videoCommentComplaintDao.hasComplaint(userId, videoCommentId);
 	}
 	
 	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 

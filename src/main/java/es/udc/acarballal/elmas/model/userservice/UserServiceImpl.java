@@ -115,6 +115,11 @@ public class UserServiceImpl implements UserService {
 			new UserCommentComplaint(comment, userProfile, Calendar.getInstance());
 		userCommentComplaintDao.create(complaint);
 	}
+	
+	@Transactional(readOnly = true)
+	public boolean isUserCommentComplaintedBy(Long userId, Long userCommentId){
+		return userCommentComplaintDao.hasComplaint(userId, userCommentId);
+	}
 
 	//Añadir un adminService para este servicio?
 	public void deleteUserComment(Long commentId, Long userProfileId)
@@ -130,6 +135,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	//Añadir un adminService para este servicio?	
+	@Transactional(readOnly = true)
 	public UserProfileBlock findAllAdmin(int startIndex, int count){
 		
 		List<UserProfile> users = userProfileDao.findAllAdmin(startIndex, count+1);
@@ -143,7 +149,8 @@ public class UserServiceImpl implements UserService {
 		return new UserProfileBlock(users, existMoreUsers);
 	}
 
-	//Añadir un adminService para este servicio?	
+	//Añadir un adminService para este servicio?
+	@Transactional(readOnly = true)
 	public UserProfileBlock findNonAdmin(int startIndex, int count){
 		
 		List<UserProfile> users = userProfileDao.findNonAdmin(startIndex, count+1);
