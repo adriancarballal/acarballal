@@ -12,8 +12,6 @@ Shutdown database
 	--> USO DE BACHSIZE!!!!!!!!
 	- mirar votos de un video - preguntar	
 
-	- cuando eliminamos un video eliminamos los archivos?
-	
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);
 	public List<VideoComment> findVideoCommentsByUser(Long userId);
