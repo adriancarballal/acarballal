@@ -10,4 +10,5 @@ public interface VideoCommentComplaintDao extends GenericDao<VideoCommentComplai
 	
 	public List<VideoCommentComplaint> findVideoCommentComplaints(int startIndex, int count);
 	
+	public boolean hasComplaint(Long userId, Long videoCommentId);
 }

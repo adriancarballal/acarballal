@@ -45,16 +45,6 @@
 
 <p class="section">${message:video}</p>
 
-<p class="complaints">${message:uploadproblems}</p>
-<table>
-	<tr>
-		<td>
-			<div class="complaint">${message:uploads}</div>
-			<div class="number">0</div>
-		</td>
-	</tr>
-</table>
-
 <p class="complaints">${message:obtainVideos}</p>
 <form t:type="Form" t:id="findForm">
 <table>

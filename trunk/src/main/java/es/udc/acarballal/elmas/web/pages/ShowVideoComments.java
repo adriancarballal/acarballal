@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -47,6 +48,13 @@ public class ShowVideoComments {
 	
 	@InjectComponent
 	private Zone comments;
+	
+	@Inject
+	private Block alreadyComplaint;
+	
+	@SuppressWarnings("unused")
+	@InjectComponent
+	private Zone complaintZone;
 	
 	@Inject
 	private Locale locale;
@@ -134,6 +142,12 @@ public class ShowVideoComments {
 			.equals(userSession.getUserProfileId());
 	}
 	
+	public boolean isNotComplainted(){
+		return  !videoService.isVideoCommentComplaintedBy(
+				userSession.getUserProfileId(), 
+				videoComment.getCommentId());
+	}
+	
 	@OnEvent(component="next")
 	Object onShowNext(){
 		this.startIndex = this.startIndex + COUNT;
@@ -199,7 +213,7 @@ public class ShowVideoComments {
 			return InsufficientPrivileges.class;
 		}
 		fill();
-		return comments;
+		return alreadyComplaint;
 	}
 
 }

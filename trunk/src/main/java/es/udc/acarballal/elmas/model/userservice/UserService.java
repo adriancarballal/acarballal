@@ -29,6 +29,8 @@ public interface UserService {
 	public void complaintUserComment(Long userCommentId, Long userProfileId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
+	public boolean isUserCommentComplaintedBy(Long userId, Long userCommentId);
+	
 	public void deleteUserComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 	

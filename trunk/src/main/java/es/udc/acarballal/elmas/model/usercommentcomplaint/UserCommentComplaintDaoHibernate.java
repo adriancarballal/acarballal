@@ -22,5 +22,17 @@ public class UserCommentComplaintDaoHibernate extends
 				"FROM UserCommentComplaint c ORDER BY c.date desc").
 		setFirstResult(startIndex).setMaxResults(count).list();
 	}
+	
+	public boolean hasComplaint(Long userId, Long userCommentId){
+		long count = 
+			(Long) getSession().createQuery("SELECT count(c) " +
+					"FROM UserCommentComplaint c " +
+					"WHERE c.reference.commentId=:userCommentId AND " +
+					"c.complainer.userProfileId=:userProfileId").
+					setParameter("userCommentId", userCommentId).
+					setParameter("userProfileId", userId).
+			uniqueResult();
+		return count>0;
+	}
 
 }

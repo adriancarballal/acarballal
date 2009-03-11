@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -49,6 +50,13 @@ public class ShowUserComments {
 	
 	@Inject
 	private Locale locale;
+	
+	@Inject
+	private Block alreadyComplaint;
+	
+	@SuppressWarnings("unused")
+	@InjectComponent
+	private Zone complaintZone;
 	
 	@Inject
 	private Messages messages;
@@ -123,6 +131,11 @@ public class ShowUserComments {
 		return !userId.equals(userSession.getUserProfileId());
 	}
 	
+	public boolean isNotComplainted(){
+		return !userService.isUserCommentComplaintedBy(userSession.getUserProfileId(), 
+				userComment.getCommentId());
+	}
+	
 	Object[] onPassivate() {
 		return new Object[] {userId};
 	}
@@ -192,7 +205,7 @@ public class ShowUserComments {
 			return InsufficientPrivileges.class;
 		}
 		fill();
-		return comments;
+		return alreadyComplaint;
 	}
 
 }

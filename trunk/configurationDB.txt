@@ -12,7 +12,7 @@ Shutdown database
 	--> USO DE BACHSIZE!!!!!!!!
 	- mirar votos de un video - preguntar	
 
-	- una vez que protestas por un comentario no deberia poder protestar de nuevo
+	- css cambiar contraseña
 	- cuando eliminamos un video eliminamos los archivos?
 	- ThreadGroup
 	- Utilizar en encoderService

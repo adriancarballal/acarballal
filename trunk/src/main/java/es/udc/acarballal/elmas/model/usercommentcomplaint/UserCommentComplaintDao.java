@@ -9,5 +9,6 @@ public interface UserCommentComplaintDao extends GenericDao<UserCommentComplaint
 	public int countUserCommentComplaints();
 	
 	public List<UserCommentComplaint> findUserCommentComplaints(int startIndex, int count);
-	
+
+	public boolean hasComplaint(Long userId, Long userCommentId);
 }
