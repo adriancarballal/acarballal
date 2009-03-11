@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.ConfigurationParametersManager;
+import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.MissingConfigurationParameterException;
+import es.udc.acarballal.elmas.model.encoderservice.util.DeleteTempFolder;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
@@ -29,6 +32,8 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 @Transactional
 public class VideoServiceImpl implements VideoService{
 
+	private final static String CONTAINER_FOLDER_PARAMETER = "container/directory";
+	
 	private UserProfileDao userProfileDao;
 	private VideoCommentComplaintDao videoCommentComplaintDao;
 	private VideoCommentDao videoCommentDao;
@@ -118,7 +123,18 @@ public class VideoServiceImpl implements VideoService{
 				!userProfile.equals(video.getUserProfile())){
 			throw new InsufficientPrivilegesException(userProfile.getLoginName()); 
 		}
+		
+		/* Eliminamos la carpeta dentro del contenedor */
+		String folder = video.getOriginal()
+		.substring(1,video.getOriginal().lastIndexOf("/"));
+		try {
+			folder = ConfigurationParametersManager.
+				getParameter(CONTAINER_FOLDER_PARAMETER) + "\\" + 
+				folder.substring(folder.lastIndexOf("/")+1, folder.length());
+		} catch (MissingConfigurationParameterException e) {}
+		(new DeleteTempFolder(folder)).execute();
 		videoDao.remove(videoId);
+		
 	}
 	
 	//Añadir un adminService para este servicio?
