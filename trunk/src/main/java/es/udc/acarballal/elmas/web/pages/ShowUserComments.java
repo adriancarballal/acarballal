@@ -175,6 +175,9 @@ public class ShowUserComments {
 		} catch (InsufficientPrivilegesException e) {
 			return InsufficientPrivileges.class;
 		}
+		if(userCommentBlock.getUserComments().size()==1 && (startIndex-COUNT >= 0)){
+			startIndex = startIndex - COUNT;
+		}
 		fill();
 		return comments;
 	}

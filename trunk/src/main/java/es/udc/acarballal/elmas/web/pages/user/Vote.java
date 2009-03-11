@@ -40,6 +40,13 @@ public class Vote {
 	@InjectComponent
 	private Zone complaintZone;
 	
+	@Inject
+	private Block alreadyFavourite;
+	
+	@SuppressWarnings("unused")
+	@InjectComponent
+	private Zone favouriteZone;
+	
 	@Property
 	private Calendar endDate;
 	
@@ -90,6 +97,18 @@ public class Vote {
 		}
 		return alreadyComplaint;
 	}
+	
+	@OnEvent(component="addToFavourite")
+	Object addToFavourite(Long videoId){
+		try {
+			videoService.addToFavourites(userSession.getUserProfileId(), videoId);
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (InsufficientPrivilegesException e) {
+			return InsufficientPrivileges.class;
+		}
+		return alreadyFavourite;
+	}
 
 	public VOTE_TYPES getBad(){
 		return VOTE_TYPES.BAD;
@@ -119,6 +138,16 @@ public class Vote {
 		} catch (InstanceNotFoundException e) {
 			return false;
 		}
+	}
+	
+	public boolean isNotComplainted(){
+		return !videoService.isComplaintedBy(
+				userSession.getUserProfileId(), video.getVideoId());
+	}
+	
+	public boolean isNotFavourite(){
+		return !videoService.isFavourite(
+				userSession.getUserProfileId(), video.getVideoId());
 	}
 	
 	public VOTE_TYPES getNormal(){

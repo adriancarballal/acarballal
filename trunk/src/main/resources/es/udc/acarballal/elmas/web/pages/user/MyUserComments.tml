@@ -10,6 +10,12 @@
 			<table class="comments">
 				<tr class="user-comment" t:type="Loop" t:source="userComments" t:value="userComment">
 					<td class="user-comment">${userComment.comment}</td>
+					<td class="remove">
+						<t:actionLink	t:id="delete" 
+							zone="comments" context="userComment.commentId">
+								<spam class="removeComment"  title="${message:delete}" /> 
+			 		  	</t:actionLink>
+			 		</td>
 				<tr>
 					<td class="commentator-info">
 						${message:user-header}: 
@@ -18,11 +24,7 @@
 						<span class="important">
 							<t:output value="userComment.date.time" format="dateFormat" />
 						</span> 
-						- <t:actionLink	t:id="delete" 
-							zone="comments" context="userComment.commentId"> 
-								<span class="important">${message:delete}</span>
-			 		  	</t:actionLink>
-			 		</td>
+					</td>
 				</tr>
 				</tr>
 			</table>

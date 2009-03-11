@@ -58,6 +58,9 @@ public class MyUserComments {
 		} catch (InsufficientPrivilegesException e) {
 			return InsufficientPrivileges.class;
 		}
+		if(userCommentBlock.getUserComments().size()==1 && (startIndex-COUNT >= 0)){
+			startIndex = startIndex - COUNT;
+		}
 		fill();
 		return comments;
 	}
@@ -92,7 +95,6 @@ public class MyUserComments {
 		return userCommentBlock.getUserComments();
 	}
 	void onActivate() {
-		startIndex=0;
 		fill();
 	}
 	

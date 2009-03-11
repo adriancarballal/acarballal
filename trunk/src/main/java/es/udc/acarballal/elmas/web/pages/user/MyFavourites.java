@@ -115,6 +115,9 @@ private static final int COUNT = 5;
 		} catch (InsufficientPrivilegesException e) {
 			return InsufficientPrivileges.class;
 		}
+		if(videoBlock.getVideos().size()==1 && (startIndex-COUNT >= 0)){
+			startIndex = startIndex - COUNT;
+		}
 		fill();
 		return videoZone.getBody();
 	}
