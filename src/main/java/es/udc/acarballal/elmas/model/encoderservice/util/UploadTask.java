@@ -1,4 +1,4 @@
-package es.udc.acarballal.elmas.web.util;
+package es.udc.acarballal.elmas.model.encoderservice.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,7 +14,7 @@ import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.MissingConfiguration
 import es.udc.acarballal.elmas.ffmpeg.process.IProcess;
 import es.udc.acarballal.elmas.ffmpeg.process.Process;
 import es.udc.acarballal.elmas.ffmpeg.process.util.DirectoryGenerator;
-import es.udc.acarballal.elmas.model.userservice.UserService;
+import es.udc.acarballal.elmas.model.encoderservice.EncoderService;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 
 public class UploadTask {
@@ -54,17 +54,18 @@ public class UploadTask {
 	private String title;
 	private Long userId;
 	private VideoService videoService;
-	private UserService userService;
+	private EncoderService encoderService;
 	
 	public UploadTask(Long userId, String title, String comment, 
-			String originalFile, VideoService videoService, UserService userService){
+			String originalFile, VideoService videoService, 
+			EncoderService encoderService){
 		this.userId = userId;
 		this.title = title;
 		this.comment = comment;
 		this.originalFile = originalFile;
 		this.processes = new ArrayList<IProcess>();
 		this.videoService = videoService;
-		this.userService = userService;
+		this.encoderService = encoderService;
 		createProcesses();
 	}
 	
@@ -143,7 +144,7 @@ public class UploadTask {
 		processes.add(accept);
 
 		//Send Admin Confirmation Message
-		IProcess confirmation = new AdminMessage(userService, userId, title + ": Video subido con exito");
+		IProcess confirmation = new AdminMessage(encoderService, userId, title + ": Video subido con exito");
 		processes.add(confirmation);
 	}
 	
@@ -157,13 +158,9 @@ public class UploadTask {
 			
 			/*ASEGURARSE DE QUE LOS LOGS SE DESCONECTAN*/
 			undo();
-			
 			processes.clear();
-			IProcess error = new AdminMessage(userService, userId, title + ": Ha ocurrido un error. Vuelva a subirlo por favor.");
+			IProcess error = new AdminMessage(encoderService, userId, title + ": Ha ocurrido un error. Vuelva a subirlo por favor.");
 			processes.add(error);
-			
-			
-			
 			IProcess deleteTemp = new DeleteTempFolder(temporalDirectory);
 			processes.add(deleteTemp);
 			processes.get(0).execute();

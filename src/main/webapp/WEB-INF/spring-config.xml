@@ -104,5 +104,10 @@
         p:videoComplaintDao-ref="videoComplaintDao" 
         p:videoCommentComplaintDao-ref="videoCommentComplaintDao" 
         p:userCommentComplaintDao-ref="userCommentComplaintDao" />
+        
+    <bean id="encoderService"
+    	class="es.udc.acarballal.elmas.model.encoderservice.EncoderServiceImpl"
+    	p:videoService-ref="videoService"
+    	p:userService-ref="userService" />
 		    	
 </beans>
