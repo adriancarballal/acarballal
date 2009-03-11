@@ -360,9 +360,9 @@ td.user-comment {
 td.commentator-info {
 	display: block;
 	font-size: 10px;
-	max-height: 12px;
-	height: 12px;
-	min-height: 12px;
+	max-height: 16px;
+	height: 16px;
+	min-height: 16px;
 	text-align: right;
 	color: #a1a1a1;
 }
@@ -554,7 +554,7 @@ div.t-zone{
 }
 
 /* MIS FAVORITOS */
-.removeFavourite, .removeVideo, .removeMessage{
+.removeFavourite, .removeVideo, .removeMessage, .removeComment{
 	background-image: url(images/delete.jpg);
 	height: 16px;
 	width: 16px;
@@ -563,6 +563,19 @@ div.t-zone{
 	background-color: red;
 }
 
+td.remove{
+	vertical-align: top;
+}
+
+.showVideo{
+	background-image: url(images/play.jpg);
+	height: 16px;
+	width: 16px;
+	display: inline-table;
+	float: right;
+	background-color: red;
+	
+}
 /* MENSAJES */
 td.message {
 	-moz-border-radius: 7px;

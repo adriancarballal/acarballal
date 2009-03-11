@@ -7,19 +7,18 @@
 		<table class="showvideo">
 		
 			<tr>
-			<t:if t:test="userSessionExists">
 				<tr class="links">
-					<td>
-						<a href="#" t:type="PageLink" page="ShowVideoComments" 
-							context="video.videoId"> 
-							<spam class="showVideoComments" title="${message:showVideoComments}" /> 
-						</a> 
+				<td>
+					<a href="#" t:type="PageLink" page="ShowVideoComments" 
+						context="video.videoId"> 
+						<spam class="showVideoComments" title="${message:showVideoComments}" /> 
+					</a> 
 						
-						<a ref="#" t:type="PageLink" page="ShowUserComments"
-							context="video.userProfile.userProfileId"> 
-							<spam class="showUserComments" title="${message:showUserComments}" /> 
-						</a>
-						
+					<a ref="#" t:type="PageLink" page="ShowUserComments"
+						context="video.userProfile.userProfileId"> 
+						<spam class="showUserComments" title="${message:showUserComments}" /> 
+					</a>
+					<t:if t:test="userSessionExists">						
 					<t:if t:test="notOwnVideo">	
 					<t:if t:test="notComplainted">
 					<t:zone t:id="complaintZone">
@@ -51,9 +50,9 @@
 					</t:parameter>
 					</t:if>
 					</t:if>
-					</td>
+					</t:if>
+				</td>
 				</tr>
-			</t:if>
 			</tr>
 		
 			<tr class="video-title"><td><span class="important">${video.title}</span></td></tr>

@@ -9,6 +9,40 @@
 
 <t:if t:test="doVoting">
 	<table class="showvideo">
+		<tr class="links">
+			<td>
+				<t:if t:test="notComplainted">
+				<t:zone t:id="complaintZone">
+					<t:actionLink t:id="complaint" zone="complaintZone" context="video.videoId">
+						<spam class="nonVideoComplaint" title="${message:complaintVideo}" />
+					</t:actionLink>
+				</t:zone>
+				<t:block t:id="alreadyComplaint">
+					<spam class="videoComplaint" title="${message:alreadyComplaint}" />
+				</t:block>
+				<t:parameter name="else">
+						<spam class="videoComplaint" title="${message:alreadyComplaint}" />
+				</t:parameter>
+				</t:if>
+				
+				<t:if t:test="notFavourite">
+					<t:zone t:id="favouriteZone">
+						<t:actionLink t:id="addToFavourite" zone="favouriteZone" 
+							context="video.videoId">
+							<spam class="nonFavourite"  title="${message:addFavourite}" />
+						</t:actionLink>
+					</t:zone>
+					<t:block t:id="alreadyFavourite">
+						<spam class="favourite" title="${message:markAsFavourite}" />
+					</t:block>
+						
+				<t:parameter name="else">
+					<spam class="favourite" title="${message:markAsFavourite}" />
+				</t:parameter>
+				</t:if>
+			</td>
+		</tr>
+	
 		<tr><td>${video.title}</td></tr>
 		<tr>
 			<td><script type="text/javascript"
@@ -18,18 +52,6 @@
 					flashvars="skin=${asset:context:/player/stijl.swf}${message:amp}file=${video.flvVideo}"/></td>
 		</tr>
 		<t:if t:test="userSessionExists">
-			<tr>
-				<td>
-					<t:zone t:id="complaintZone">
-						<t:actionLink t:id="complaint" zone="complaintZone"	context="video.videoId">
-							${message:complaintVideo}
-						</t:actionLink>
-					</t:zone> 
-					<t:block t:id="alreadyComplaint">
-						${message:alreadyComplaint}
-					</t:block>
-				</td>
-			</tr>
 			<t:if t:test="isVotable">
 				<tr>
 					<td>

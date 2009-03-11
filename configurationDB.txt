@@ -11,14 +11,9 @@ Shutdown database
 	
 	--> USO DE BACHSIZE!!!!!!!!
 	- mirar votos de un video - preguntar	
-	- usuarios no registrados pueden ver los comentarios? eleccion
 
-	- show usercomments boton siguiente no funciona bien? compr	obar videocomments
-	- cambiar el texto eliminar por el icono
-	- usuarios no registrados pueden ver los comentarios?
+	- una vez que protestas por un comentario no deberia poder protestar de nuevo
 	- cuando eliminamos un video eliminamos los archivos?
-	- si eliminamos todos en una busqueda de una pagina no vuelve a la pagina anterior
-	  si esta existe
 	- ThreadGroup
 	- Utilizar en encoderService
 	

@@ -60,8 +60,7 @@ public class VideoServiceImpl implements VideoService{
 
 		UserProfile commentatorUser = userProfileDao.find(commentatorId);
 		Video video = videoDao.find(videoId);
-		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE ||
-				commentatorUser.getPrivileges()==Privileges_TYPES.ADMIN){
+		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE){
 			throw new InsufficientPrivilegesException(commentatorUser.getLoginName());
 		}
 		if(commentatorUser.getUserProfileId() == video.getUserProfile().getUserProfileId()){

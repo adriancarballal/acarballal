@@ -9,19 +9,29 @@
 			<table class="comments-mini">
 				<tr t:type="Loop" t:source="userComments" t:value="userComment">
 					<td class="user-comment">${userComment.comment}</td>
+					<td class="remove">
+						<t:if t:test="deletable">
+							<t:actionLink t:id="deleteComment" zone="comments" 
+								context="userComment.commentId">
+								<spam class="removeComment"  title="${message:delete}" />	
+							</t:actionLink>
+						<t:parameter name="else">
+							<t:actionLink t:id="complaintComment" zone="comments" 
+								context="userComment.commentId">
+								<spam class="nonVideoComplaint"  title="${message:complaintVideoComment}" />
+							</t:actionLink>					
+						</t:parameter>					
+						</t:if>
+					</td>
 				<tr>
 					<td class="commentator-info">${message:user-header}:
-					${userComment.commentator.loginName} - ${message:date}: <t:output
-						value="userComment.date.time" format="dateFormat" /> - <t:if
-						t:test="deletable">
-						<t:actionLink t:id="deleteComment" zone="comments"
-							context="userComment.commentId">${message:delete}</t:actionLink>
-						<t:parameter name="else">
-							<t:actionLink t:id="complaintComment" zone="comments"
-								context="userComment.commentId">${message:complaintUserComment}
-						</t:actionLink>
-						</t:parameter>
-					</t:if></td>
+						<span class="important">${userComment.commentator.loginName}
+						</span>
+						 - ${message:date}: 
+						<span class="important">
+							<t:output value="userComment.date.time" format="dateFormat" />
+						</span>
+					</td>
 				</tr>
 				</tr>
 			</table>
