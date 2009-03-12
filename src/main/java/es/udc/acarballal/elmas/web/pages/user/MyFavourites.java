@@ -88,7 +88,6 @@ private static final int COUNT = 5;
 	}
 	
 	void onActivate() {
-		startIndex=0;
 		fill();
 	}
 	
