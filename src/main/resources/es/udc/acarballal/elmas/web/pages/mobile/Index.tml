@@ -1,7 +1,18 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="MobileLayout" t:pageTitle="${message:title}">
 
+<p class="section">
+	${message:menu}:
+</p>
 <t:if t:test="userSessionExists">
+	<t:if t:test="participant">
+	<a class="mainlevel" href="#" t:type="PageLink" t:page="mobile/user/MyVideos">
+		${message:myVideos} 
+	</a>
+	</t:if>
+	<a class="mainlevel" href="#" t:type="PageLink" t:page="mobile/user/MyFavourites">
+		${message:myFavourites} 
+	</a>
 	<a class="mainlevel" href="#" t:type="PageLink" t:page="mobile/user/Vote">
 		${message:votePage} 
 	</a>

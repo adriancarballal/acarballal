@@ -1,8 +1,6 @@
-package es.udc.acarballal.elmas.web.pages.user;
+package es.udc.acarballal.elmas.web.pages.mobile.user;
 
-import java.text.DateFormat;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -16,20 +14,18 @@ import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
-import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
-import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
-@AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
-public class MyVideos {
+@AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
+public class MyFavourites {
 	
-	private static final int COUNT = 5;
+private static final int COUNT = 5;
 	
-	@Inject
-	private Locale locale;
+//	@Inject
+//	private Locale locale;
 	
 	@Persist
 	private int startIndex;
@@ -50,14 +46,19 @@ public class MyVideos {
 	private Zone videoZone;
 	
 	private void fill(){
-		videoBlock = videoService.findVideosByUser(userSession.getUserProfileId(), 
-				startIndex, COUNT);		
+		try {
+			videoBlock = videoService.findFavourites(userSession.getUserProfileId(), startIndex, COUNT);
+		} catch (InstanceNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("ERROR1");
+			e.printStackTrace();
+		} catch (InsufficientPrivilegesException e) {
+			// TODO Auto-generated catch block
+			System.out.println("ERROR2");
+			e.printStackTrace();
+		}		
 	}
 
-	public DateFormat getDateFormat() {
-		return DateFormat.getDateInstance(DateFormat.LONG, locale);
-	}
-	
 	public Boolean getNextLinkContext() {
 		
 		if (videoBlock.getExistMoreVideos()) 
@@ -79,6 +80,7 @@ public class MyVideos {
 	}
 	
 	void onActivate() {
+		startIndex=0;
 		fill();
 	}
 	
@@ -95,22 +97,5 @@ public class MyVideos {
 		fill();
 		return videoZone.getBody();
 	}
-	
-	@OnEvent(component="removeVideo")
-	Object onRemoveVideo(Long videoId){
-		try {
-			videoService.deleteVideo(videoId, userSession.getUserProfileId());
-		} catch (InstanceNotFoundException e) {
-			return InstanceNotFound.class;
-		} catch (InsufficientPrivilegesException e) {
-			return InsufficientPrivileges.class;
-		}
-		if(videoBlock.getVideos().size()==1 && (startIndex-COUNT >= 0)){
-			startIndex = startIndex - COUNT;
-		}
-		fill();
-		return videoZone.getBody();
-	}
-	
-}
 
+}

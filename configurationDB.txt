@@ -11,6 +11,10 @@ Shutdown database
 	
 	--> USO DE BACHSIZE!!!!!!!!
 	- mirar votos de un video - preguntar	
+	
+	- starRater
+	- comprobar los mensajes de error
+	- en video cambiar mp4video por rtvideo
 
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);

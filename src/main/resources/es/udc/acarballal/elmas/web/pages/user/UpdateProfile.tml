@@ -28,7 +28,7 @@
 
 <div class="button"><input type="submit" value="${message:submit}" />
 <br/><br/><br/>
-<t:if test="isNotAdmin">
+<t:if test="isNotParticipant">
 	<div><t:label t:for="participate" />
 		<input type="checkbox" t:type="Checkbox" t:id="participate" />
 	</div>
