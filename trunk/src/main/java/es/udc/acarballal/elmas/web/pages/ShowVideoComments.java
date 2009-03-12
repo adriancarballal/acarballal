@@ -121,7 +121,6 @@ public class ShowVideoComments {
 	}
 	
 	void onActivate(Long videoId){
-		startIndex=0;
 		this.videoId = videoId;
 		try {
 			video = videoService.findVideoById(videoId);
@@ -143,6 +142,7 @@ public class ShowVideoComments {
 	}
 	
 	public boolean isNotComplainted(){
+		if(!userSessionExists) return false;
 		return  !videoService.isVideoCommentComplaintedBy(
 				userSession.getUserProfileId(), 
 				videoComment.getCommentId());

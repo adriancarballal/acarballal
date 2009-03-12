@@ -127,11 +127,12 @@ public class ShowUserComments {
 	}
 	
 	public boolean isNotMyself(){
-		if(!userSessionExists) return true;
+		if(!userSessionExists) return false;;
 		return !userId.equals(userSession.getUserProfileId());
 	}
 	
 	public boolean isNotComplainted(){
+		if(!userSessionExists) return false;
 		return !userService.isUserCommentComplaintedBy(userSession.getUserProfileId(), 
 				userComment.getCommentId());
 	}
@@ -166,8 +167,7 @@ public class ShowUserComments {
 			return;
 		}
 		try {
-			userService.commentUser(userId, userSession.getUserProfileId(),
-					comment, Calendar.getInstance());
+			userService.commentUser(userId, userId,	comment, Calendar.getInstance());
 		} catch (InstanceNotFoundException e) {
 			commentForm.recordError(messages.get("error-instancenotfound"));
 		} catch (InsufficientPrivilegesException e) {
