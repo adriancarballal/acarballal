@@ -8,6 +8,7 @@ import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
+import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.acarballal.elmas.model.userservice.LoginResult;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
@@ -54,6 +55,11 @@ public class Index {
 
 	}
 
+	public boolean isParticipant(){
+		return userSessionExists && (
+				userSession.getPrivileges()==Privileges_TYPES.COMPETITOR ||
+				userSession.getPrivileges()==Privileges_TYPES.ADMIN);
+	}
 	void onValidateForm() {
 
 		if (!loginForm.isValid()) return;

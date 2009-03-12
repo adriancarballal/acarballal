@@ -588,3 +588,24 @@ td.message {
 	color: #2B5497;
 	text-align: left;
 }
+
+/* NO FUNCIONA ; BORRAR */
+
+ span.radio {
+   width: 19px;
+   height: 25px;
+   padding: 0 5px 0 0;
+   background: url(images/favourite.jpg) no-repeat;
+   display: block;
+   clear: left;
+   float: left;
+ }
+input[type="radio"], input[type="radio"]:checked{
+	font:11px Arial,Helvetica,sans-serif;;	
+		color: #336699 !important;
+		background-color: #FFFFFF !important;
+		border:solid 1px #999999 !important;
+
+    
+
+}

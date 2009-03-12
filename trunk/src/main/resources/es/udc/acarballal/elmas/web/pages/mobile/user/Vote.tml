@@ -1,23 +1,26 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="MobileLayout" t:pageTitle="${message:title}">
 
-<p>${message:week}: <t:output value="startDate.time"
-	format="dateFormat" /> - <t:output value="endDate.time"
-	format="dateFormat" /></p>
+<p class="section">${message:weekVote}</p>
 
-<p>${message:votesLeft}: ${remainingVotes}</p>
+<p><span class="important2">${message:week}: </span><span class="important"><t:output value="startDate.time"
+	format="dateFormat" /> - <t:output value="endDate.time"
+	format="dateFormat" /></span></p>
+
+<p><span class="important2">${message:votesLeft}: ${remainingVotes}</span></p>
 
 <t:if t:test="doVoting">
 	<table class="showvideo">
-		<tr><td>${video.title}</td></tr>
-		<tr><td>${video.comment}</td></tr>
 		<tr>
-			<td>Enlace al video</td>
+			<td><span class="important2">${video.title}</span></td>
+		</tr>
+		<tr>
+			<td><a href="${video.mp4video}"><span class="important">${message:show}</span></a></td>
 		</tr>
 		<t:if t:test="userSessionExists">
 			<t:if t:test="isVotable">
 				<tr>
-					<td>
+					<td class="form">
 					<form t:type="Form" t:id="voteForm">
 					<table>
 						<t:radiogroup t:value="vote">
@@ -37,5 +40,8 @@
 		</t:if>
 	</table>
 </t:if>
-
+<br/>
+<a class="mainlevel" href="#" t:type="PageLink" t:page="mobile/Index">
+	${message:index} 
+</a>
 </html>

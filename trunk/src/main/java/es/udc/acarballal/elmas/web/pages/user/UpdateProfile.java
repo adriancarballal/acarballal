@@ -49,9 +49,10 @@ public class UpdateProfile {
 	@Property
 	private boolean nextPageExists;
 	
-	public boolean getIsNotAdmin() {
-		if (userSessionExists
-				&& userSession.getPrivileges() == Privileges_TYPES.ADMIN)
+	public boolean getIsNotParticipant() {
+		if (userSessionExists && 
+				(userSession.getPrivileges() == Privileges_TYPES.ADMIN) ||
+				(userSession.getPrivileges() == Privileges_TYPES.COMPETITOR))
 			return false;
 		return true;
 	}

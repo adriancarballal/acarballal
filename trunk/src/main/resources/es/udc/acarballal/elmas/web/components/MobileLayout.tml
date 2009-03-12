@@ -24,13 +24,13 @@
 <div id="sidebar">
 	<div id="sidebarmenu">
 		<t:if t:test="userSessionExists">
- 			${message:menu-hello} ${userSession.firstName} 
- 			- 
- 			<a class="mainlevel" href="#" t:type="PageLink" t:page="mobile/user/Logout">
-				${message:menu-logout} 
+ 			<a href="#" t:type="PageLink" t:page="mobile/user/Logout">
+				<spam class="exit"  title="${message:exit}" /> 
 			</a>
+ 			<span class="nonImportant">   ${message:menu-hello} </span> <span class="important2">${userSession.firstName}</span>
+ 			
             <t:parameter name="else">
-            	${message:menu-session}
+            	<span class="important2"> - ${message:menu-session}</span>
             </t:parameter>
 		</t:if>
 	</div>
