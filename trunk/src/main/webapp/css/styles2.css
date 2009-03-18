@@ -308,6 +308,7 @@ tr.list-video {
 td.video-title {
 	border: 1px solid #a1a1a1;
 	-moz-border-radius: 7px;
+	width: 570px;
 }
 
 td.video-user {
@@ -404,6 +405,18 @@ div.field span.entry {
 	float: right;
 	text-align: left;
 	width: 49.5%;
+}
+
+div.field2 {
+	display: inline-table;
+	padding-top: -1 em;
+	width: 100%;
+}
+
+div.field2 label {
+}
+
+div.field2 span.entry {
 }
 
 div.button {
@@ -506,7 +519,7 @@ div.t-zone{
 }*/
 
 .favourite {
-	background-image: url(images/favourite.jpg);
+	background-image: url(images/star.gif);
 	height: 16px;
 	width: 16px;
 	display: inline-table;
@@ -514,7 +527,7 @@ div.t-zone{
 }
 
 .nonFavourite {
-	background-image: url(images/nonFavourite.jpg);
+	background-image: url(images/no_star.gif);
 	height: 16px;
 	width: 16px;
 	display: inline-table;
@@ -589,23 +602,71 @@ td.message {
 	text-align: left;
 }
 
-/* NO FUNCIONA ; BORRAR */
 
- span.radio {
-   width: 19px;
-   height: 25px;
-   padding: 0 5px 0 0;
-   background: url(images/favourite.jpg) no-repeat;
-   display: block;
-   clear: left;
-   float: left;
- }
-input[type="radio"], input[type="radio"]:checked{
-	font:11px Arial,Helvetica,sans-serif;;	
-		color: #336699 !important;
-		background-color: #FFFFFF !important;
-		border:solid 1px #999999 !important;
 
-    
 
+
+
+
+
+
+
+
+
+
+/* Star Rater */
+div.vote span.label{
+	float: left;
+	text-align: right;
+	width: 49.5%;	
+	
 }
+
+div.vote span.rater{
+	float: right;
+	text-align: left;
+	width: 49.5%;	
+	
+}
+
+div.star{
+	width:80px;
+	height:16px;
+	margin:0 0 20px 0;
+	padding:0;
+	list-style:none;
+	clear:both;
+	position:relative;
+	background: url(images/star-matrix.gif) no-repeat 0 0;
+}
+
+div.star a:link, div.star a:visited{
+	position:absolute;
+	top:0;
+	width:16px;
+	height:16px;
+	text-decoration:none;
+	z-index: 200;
+	left: 0px;
+	background: transparent;
+}
+
+div.star a:hover{
+	z-index:2;
+	width:80px;
+	height:16px;
+	overflow:hidden;
+	background: url(images/star-matrix.gif) no-repeat 0 0;
+}
+
+div.star a.one	{	left:0;		}
+div.star a.two	{	left:16px;	}
+div.star a.three{	left:32px;	}
+div.star a.four	{	left:48px;	}
+div.star a.five	{	left:64px;	}
+
+div.star a.one:hover	{	background-position:0 -96px;	left: 0px;	}
+div.star a.two:hover	{	background-position:0 -112px;	left: 0px;	}
+div.star a.three:hover	{	background-position:0 -128px;	left: 0px;	}
+div.star a.four:hover	{	background-position:0 -144px;	left: 0px;	}
+div.star a.five:hover	{	background-position:0 -160px;	left: 0px;	}

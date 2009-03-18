@@ -12,12 +12,6 @@ Shutdown database
 	--> USO DE BACHSIZE!!!!!!!!
 	- mirar votos de un video - preguntar	
 	
-	- starRater
-	- comprobar los mensajes de error
-	- en video cambiar mp4video por rtvideo
-	- las lista de videos a descargar, arreglar css, longitud
-	- en las busquedas, al darle al next se desajusta la pantalla
-
 	faltan los junit para los metodos:
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);
 	public List<VideoComment> findVideoCommentsByUser(Long userId);

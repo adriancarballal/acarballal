@@ -44,7 +44,7 @@ public class VideoServiceImpl implements VideoService{
 
 	public Long addVideo(long userId, String title, String comment, 
 			String snapshot,String original, String flvVideo, 
-			String mp4Video, Calendar date)
+			String rtVideo, Calendar date)
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		
 		UserProfile userProfile = userProfileDao.find(userId);
@@ -54,7 +54,7 @@ public class VideoServiceImpl implements VideoService{
 			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}
 		Video video = new Video(userProfile, title, comment, snapshot, original,
-				flvVideo, mp4Video, date);
+				flvVideo, rtVideo, date);
 		videoDao.create(video);
 		return video.getVideoId();
 	}

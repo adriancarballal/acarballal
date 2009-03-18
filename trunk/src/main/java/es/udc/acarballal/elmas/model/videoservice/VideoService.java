@@ -14,7 +14,7 @@ public interface VideoService {
 	
 	public Long addVideo(long userId, String title, String comment, 
 			String snapshot, String original, String flvVideo, 
-			String mp4Video, Calendar date)
+			String rtVideo, Calendar date)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
 	public Long commentVideo(Long commentatorId, Long videoId, 

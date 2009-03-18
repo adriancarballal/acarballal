@@ -13,9 +13,9 @@
 	</tr>
 	<tr>
 		<td><span class="entry"> <input type="text" t:id="title"
-			t:type="TextArea" t:validate="required" value="title"
-			style="overflow: visible;" wrap="hard" size="16" maxlength="15" cols="30"
-			rows="1" /></span></td>
+			t:label="${message:title-label}" t:type="TextArea" t:validate="required" 
+			value="title" style="overflow: visible;" wrap="hard" size="16" 
+			maxlength="15" cols="30" rows="1" /></span></td>
 	</tr>
 
 	<tr>
@@ -23,13 +23,14 @@
 	</tr>
 	<tr>
 		<td><span class="entry"> <input type="text" t:id="comment"
-			t:type="TextArea" t:validate="required" value="comment"
-			style="overflow: hidden;" wrap="hard" maxlength="200" cols="30"
-			rows="7" /> </span></td>
+			t:label="${message:comment-label}" t:type="TextArea" t:validate="required" 
+			value="comment" style="overflow: hidden;" wrap="hard" 
+			maxlength="200" cols="30" rows="7" /> </span></td>
 	</tr>
 
 	<tr>
-		<td><input t:type="upload" t:id="file" validate="required" /></td>
+		<td><input t:label="${message:file-label}" t:type="upload" 
+		t:id="file" validate="required" /></td>
 	</tr>
 	<tr>
 		<td><input type="submit" value="Upload" /></td>

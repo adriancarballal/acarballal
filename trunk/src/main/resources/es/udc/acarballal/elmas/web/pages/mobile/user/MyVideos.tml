@@ -21,7 +21,7 @@
 								<tr>
 									<td class="video-user">${message:video-user}:
 									<span class="important2">${video.userProfile.loginName}</span>
-									- <a href="${video.mp4video}">${message:show}</a>
+									- <a href="${video.rtVideo}">${message:show}</a>
 									</td>
 									
 								</tr>
