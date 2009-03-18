@@ -123,9 +123,9 @@ JPG</a></div>
 <div id="searchbar">
 
 <form t:type="Form" t:id="findVideosForm">
-<span class="entry"> <input t:type="TextField" t:id="keys"
-	value="keys" t:validate="required" size="24" maxlength="48" /> </span>
-<span class="button"> 
+<input t:type="TextField" t:id="keys"
+	t:label="${message:search-label}" value="keys" t:validate="required" size="30" maxlength="48" />
+	<span class="button"> 
 	<input class="search" type="submit" value="" />
 	</span>
 </form>

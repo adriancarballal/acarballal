@@ -23,7 +23,7 @@ public class Video {
 	private String comment;
 	private Calendar date;
 	private String flvVideo;
-	private String mp4Video;
+	private String rtVideo;
 	private String original;
 	private String snapshot;
 	private String title;
@@ -35,7 +35,7 @@ public class Video {
 	}
 	
 	public Video(UserProfile userProfile, String title, String comment,
-			String snapshot, String original, String flvVideo, String mp4Video, 
+			String snapshot, String original, String flvVideo, String rtVideo, 
 			Calendar date){
 		
 		this.userProfile = userProfile;
@@ -44,7 +44,7 @@ public class Video {
 		this.snapshot = snapshot;
 		this.original = original;
 		this.flvVideo = flvVideo;
-		this.mp4Video = mp4Video;
+		this.rtVideo = rtVideo;
 		this.date = date;
 	}
 	
@@ -64,7 +64,7 @@ public class Video {
 			&& (snapshot != null) && snapshot.equals(theOther.snapshot)
 			&& (original != null) && original.equals(theOther.original)
 			&& (flvVideo != null) && flvVideo.equals(theOther.flvVideo)
-			&& (mp4Video != null) && mp4Video.equals(theOther.mp4Video);
+			&& (rtVideo != null) && rtVideo.equals(theOther.rtVideo);
 	}
 	
 	@Column(name = "cmmnt")
@@ -81,9 +81,9 @@ public class Video {
 		return flvVideo;
 	}
 	
-	@Column(name = "urlmp4")
-	public String getMp4Video() {
-		return mp4Video;
+	@Column(name = "url3gp")
+	public String getRtVideo() {
+		return rtVideo;
 	}
 	public String getOriginal() {
 		return original;
@@ -125,8 +125,8 @@ public class Video {
 		this.flvVideo = flvVideo;
 	}
 
-	public void setMp4Video(String mp4Video) {
-		this.mp4Video = mp4Video;
+	public void setRtVideo(String rtVideo) {
+		this.rtVideo = rtVideo;
 	}
 
 	public void setOriginal(String original) {

@@ -6,12 +6,10 @@ import java.util.Locale;
 
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.ApplicationState;
-import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
@@ -78,13 +76,6 @@ public class Vote {
 	
 	@Inject
 	private VideoService videoService;
-	
-	@Property
-	private VOTE_TYPES vote = VOTE_TYPES.NORMAL;
-	
-	@SuppressWarnings("unused")
-	@Component
-	private Form voteForm;
 	
 	@OnEvent(component="complaint")
 	Object complaintVideo(Long complaintedVideo){
@@ -162,7 +153,7 @@ public class Vote {
 		return VOTE_TYPES.VERY_GOOD;
 	}
 	
-	Object onSuccess(){
+	private Object voteVideo(VOTE_TYPES vote){
 		try {
 			videoService.voteVideo(vote, userSession.getUserProfileId(), video.getVideoId());
 		} catch (InstanceNotFoundException e) {
@@ -172,8 +163,33 @@ public class Vote {
 		} catch (VideoAlreadyVotedException e) {
 			return AlreadyVotedVideo.class;
 		}
-        return Vote.class;
-    }
+		return Vote.class;
+	}
+	
+	@OnEvent(component="voteVeryBad")
+	Object voteVeryBad(){
+		return voteVideo(VOTE_TYPES.VERY_BAD);
+	}
+	
+	@OnEvent(component="voteBad")
+	Object voteBad(){
+		return voteVideo(VOTE_TYPES.BAD);
+	}
+	
+	@OnEvent(component="voteNormal")
+	Object voteNormal(){
+		return voteVideo(VOTE_TYPES.NORMAL);
+	}
+	
+	@OnEvent(component="voteGood")
+	Object voteGood(){
+		return voteVideo(VOTE_TYPES.NORMAL);
+	}
+	
+	@OnEvent(component="voteVeryGood")
+	Object voteVeryGood(){
+		return voteVideo(VOTE_TYPES.VERY_GOOD);
+	}
 		
 	void setupRender(){
 		startDate = Calendar.getInstance();

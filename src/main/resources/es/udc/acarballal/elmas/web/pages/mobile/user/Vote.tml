@@ -15,7 +15,7 @@
 			<td><span class="important2">${video.title}</span></td>
 		</tr>
 		<tr>
-			<td><a href="${video.mp4video}"><span class="important">${message:show}</span></a></td>
+			<td><a href="${video.rtVideo}"><span class="important">${message:show}</span></a></td>
 		</tr>
 		<t:if t:test="userSessionExists">
 			<t:if t:test="isVotable">

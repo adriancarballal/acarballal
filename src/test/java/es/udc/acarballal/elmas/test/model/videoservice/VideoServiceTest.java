@@ -84,11 +84,11 @@ public class VideoServiceTest {
 		String snapshot = "-home-data-snapshots-001.jpg";
 		String original = "video.vob";
 		String flvVideo = "video.flv";
-		String mp4Video = "video.mp4";
+		String rtVideo = "video.mp4";
 		Calendar date = Calendar.getInstance();
 		
 		Long videoId = videoService.addVideo(userProfileId, title, comment, snapshot, 
-				original, flvVideo, mp4Video, date);
+				original, flvVideo, rtVideo, date);
 		Video video = videoService.findVideoById(videoId);
 		assertTrue(video.videoId == videoId);
 		assertEquals(video.title, title);
@@ -111,10 +111,10 @@ public class VideoServiceTest {
 		Calendar date = Calendar.getInstance();
 		String original = "video.vob";
 		String flvVideo = "video.flv";
-		String mp4Video = "video.mp4";
+		String rtVideo = "video.mp4";
 		
 		Long videoId = videoService.addVideo(userProfileId, title, comment, snapshot, 
-				original, flvVideo, mp4Video, date);
+				original, flvVideo, rtVideo, date);
 		Video video = videoService.findVideoById(videoId);
 		assertEquals(video.videoId, videoId);
 		assertEquals(video.title, title);
@@ -136,11 +136,11 @@ public class VideoServiceTest {
 		String snapshot = "-home-data-snapshots-001.jpg";
 		String original = "video.vob";
 		String flvVideo = "video.flv";
-		String mp4Video = "video.mp4";
+		String rtVideo = "video.mp4";
 		Calendar date = Calendar.getInstance();
 		
 		videoService.addVideo(userProfileId, title, comment, snapshot, original, 
-				flvVideo, mp4Video, date);
+				flvVideo, rtVideo, date);
 		
 	}
 	
@@ -155,11 +155,11 @@ public class VideoServiceTest {
 		String snapshot = "-home-data-snapshots-001.jpg";
 		String original = "video.vob";
 		String flvVideo = "video.flv";
-		String mp4Video = "video.mp4";
+		String rtVideo = "video.mp4";
 		Calendar date = Calendar.getInstance();
 		
 		videoService.addVideo(userProfileId, title, comment, snapshot, 
-				original, flvVideo, mp4Video, date);
+				original, flvVideo, rtVideo, date);
 		
 	}
 	
@@ -173,11 +173,11 @@ public class VideoServiceTest {
 		String snapshot = "-home-data-snapshots-001.jpg";
 		String original = "video.vob";
 		String flvVideo = "video.flv";
-		String mp4Video = "video.mp4";
+		String rtVideo = "video.mp4";
 		Calendar date = Calendar.getInstance();
 		
 		videoService.addVideo(userId, title, comment, snapshot, 
-				original, flvVideo, mp4Video, date);
+				original, flvVideo, rtVideo, date);
 		
 	}
 	

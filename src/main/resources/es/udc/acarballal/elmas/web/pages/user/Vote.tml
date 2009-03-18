@@ -55,22 +55,26 @@
 			<t:if t:test="isVotable">
 				<tr>
 					<td>
-					<form t:type="Form" t:id="voteForm">
-					<table>
-						<t:radiogroup t:value="vote">
-							<input type="radio" t:type="radio" t:value="veryBad" /> ${message:veryBad}
-   					<input type="radio" t:type="radio" t:value="bad" /> ${message:bad}
-   					<input type="radio" t:type="radio" t:value="normal" /> ${message:normal}
-   					<input type="radio" t:type="radio" t:value="good" /> ${message:good}
-   					<input type="radio" t:type="radio" t:value="veryGood" /> ${message:veryGood}
-   				</t:radiogroup>
-						<input type="submit" value="${message:voteButton}" />
-					</table>
-					</form>
+						<div class="vote">
+							<span class="label">Vota!</span>
+							<span class="rater">
+								<div class="star">
+									<t:actionLink class="one" title="${message:veryBad}" t:id="voteVeryBad" />
+									<t:actionLink class="two" title="${message:bad}" t:id="voteBad" />
+									<t:actionLink class="three" title="${message:normal}" t:id="voteNormal" />			
+									<t:actionLink class="four" title="${message:good}" t:id="voteGood" />
+									<t:actionLink class="five" title="${message:veryGood}" t:id="voteVeryGood" />
+								</div>
+							</span>
+						</div>
 					</td>
 				</tr>
+					
 			</t:if>
 		</t:if>
 	</table>
 </t:if>
+
+
+
 </html>
