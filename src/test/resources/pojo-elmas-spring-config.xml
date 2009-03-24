@@ -37,7 +37,7 @@
          annotations. -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
-    <!--  ======================== Business Objects ======================== -->
+<!--  ======================== Business Objects ======================== -->
 
     <!--  DAOs. -->
     <bean id="userProfileDao"
@@ -63,23 +63,51 @@
     <bean id="videoComplaintDao"
         class="es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDaoHibernate"
         p:sessionFactory-ref="sessionFactory" />
+    
+    <bean id="videoCommentComplaintDao"
+        class="es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaintDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+    <bean id="userCommentComplaintDao"
+        class="es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaintDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />
+        
+	<bean id="favouriteDao"
+        class="es.udc.acarballal.elmas.model.favourite.FavouriteDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />        
+        
+	<bean id="messageDao"
+        class="es.udc.acarballal.elmas.model.message.MessageDaoHibernate"
+        p:sessionFactory-ref="sessionFactory" />        
+        
         
     <!--  Service layer. -->
     <bean id="userService"
         class="es.udc.acarballal.elmas.model.userservice.UserServiceImpl"
         p:userProfileDao-ref="userProfileDao"
-        p:userCommentDao-ref="userCommentDao" />
+        p:userCommentDao-ref="userCommentDao" 
+        p:userCommentComplaintDao-ref="userCommentComplaintDao" 
+        p:messageDao-ref="messageDao" />
         
     <bean id="videoService"
         class="es.udc.acarballal.elmas.model.videoservice.VideoServiceImpl"
         p:userProfileDao-ref="userProfileDao" 
         p:videoDao-ref="videoDao" 
         p:videoCommentDao-ref="videoCommentDao"
-        p:voteDao-ref="voteDao" />    
+        p:voteDao-ref="voteDao" 
+        p:videoComplaintDao-ref="videoComplaintDao" 
+        p:videoCommentComplaintDao-ref="videoCommentComplaintDao" 
+        p:favouriteDao-ref="favouriteDao" />   
         
     <bean id="adminService"
         class="es.udc.acarballal.elmas.model.adminservice.AdminServiceImpl"
         p:userProfileDao-ref="userProfileDao" 
-        p:videoComplaintDao-ref="videoComplaintDao" />
-
+        p:videoComplaintDao-ref="videoComplaintDao" 
+        p:videoCommentComplaintDao-ref="videoCommentComplaintDao" 
+        p:userCommentComplaintDao-ref="userCommentComplaintDao" />
+        
+    <bean id="encoderService"
+    	class="es.udc.acarballal.elmas.model.encoderservice.EncoderServiceImpl"
+    	p:videoService-ref="videoService"
+    	p:userService-ref="userService" />
 </beans>

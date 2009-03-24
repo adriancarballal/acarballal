@@ -14,6 +14,7 @@ import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
@@ -21,6 +22,7 @@ import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.acarballal.elmas.web.pages.errors.AlreadyVotedVideo;
 import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
 import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
+import es.udc.acarballal.elmas.web.pages.errors.InvalidOperation;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
@@ -162,6 +164,8 @@ public class Vote {
 			return InsufficientPrivileges.class;
 		} catch (VideoAlreadyVotedException e) {
 			return AlreadyVotedVideo.class;
+		} catch (InvalidOperationException e) {
+			return InvalidOperation.class;
 		}
 		return Vote.class;
 	}

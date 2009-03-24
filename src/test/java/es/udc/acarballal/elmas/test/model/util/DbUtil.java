@@ -177,8 +177,8 @@ public class DbUtil {
 		try {
 
 			//videoDao.remove(testVideo.getVideoId());
-			//userProfileDao.remove(commentatorProfile.getUserProfileId());
-			//userProfileDao.remove(testUserProfile.getUserProfileId());
+			userProfileDao.remove(commentatorProfile.getUserProfileId());
+			userProfileDao.remove(testUserProfile.getUserProfileId());
 			testUserProfile = null;
 			commentatorProfile = null;
 			testVideo = null;

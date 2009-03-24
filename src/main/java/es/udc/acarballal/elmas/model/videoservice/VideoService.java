@@ -31,10 +31,12 @@ public interface VideoService {
 	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
+	//TODO
 	//Añadir un adminService para este servicio?
 	public void deleteVideo(long videoId, long userId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 
+	//TODO
 	//Añadir un adminService para este servicio?
 	public void deleteVideoComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
@@ -66,7 +68,7 @@ public interface VideoService {
 	
 	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException, 
-			VideoAlreadyVotedException;
+			VideoAlreadyVotedException, InvalidOperationException;
 	
 	public VideoBlock findFavourites(Long userId, int startIndex, int count) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;

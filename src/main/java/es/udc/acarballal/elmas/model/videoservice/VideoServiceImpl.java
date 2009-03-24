@@ -276,30 +276,15 @@ public class VideoServiceImpl implements VideoService{
 		this.favouriteDao = favouriteDao;
 	}
 	
-	public void voteVideo(Long userProfileId, Long videoId, VOTE_TYPES vote, 
-			Calendar date) throws InstanceNotFoundException, 
-			InsufficientPrivilegesException, InvalidOperationException{
+	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException, 
+				VideoAlreadyVotedException, InvalidOperationException{
 		
 		UserProfile userProfile = userProfileDao.find(userProfileId);
-		if(userProfile.getPrivileges()!=Privileges_TYPES.VOTER){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
-		}
 		Video video = videoDao.find(videoId);
 		if(video.getUserProfile().equals(userProfile)){
 			throw new InvalidOperationException("Cannot vote your own video");
 		}
-		Vote newVote = new Vote(video, userProfile, vote, date);
-		
-		voteDao.create(newVote);
-		
-	}
-	
-	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException, 
-				VideoAlreadyVotedException{
-		
-		UserProfile userProfile = userProfileDao.find(userProfileId);
-		Video video = videoDao.find(videoId);
 		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
 			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}

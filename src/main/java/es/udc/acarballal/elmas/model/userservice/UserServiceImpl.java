@@ -65,32 +65,13 @@ public class UserServiceImpl implements UserService {
 				userProfile.getPrivileges());
 	}
 	
-	//Añadir un adminService para este servicio?
-	public LoginResult changePrivilegesToAdmin(Long adminId, Long userProfileId) 
-		throws InstanceNotFoundException, InsufficientPrivilegesException {
-		
-		UserProfile admin = userProfileDao.find(adminId);
-		if(admin.getPrivileges()!=Privileges_TYPES.ADMIN){
-			throw new InsufficientPrivilegesException(admin.getLoginName());
-		}
-		UserProfile userProfile;
-		userProfile = userProfileDao.find(userProfileId);
-
-		userProfile.setPrivileges(Privileges_TYPES.ADMIN);
-		userProfileDao.update(userProfile);
-		return new LoginResult(userProfile.getUserProfileId(), userProfile
-				.getFirstName(), userProfile.getEncryptedPassword(), 
-				userProfile.getPrivileges());
-	}
-	
 	public Long commentUser(Long commentatorId, Long commentedId, 
 			String comment,	Calendar date) throws InstanceNotFoundException, 
 			InsufficientPrivilegesException, InvalidOperationException{
 		
 		UserProfile commentatorUser = userProfileDao.find(commentatorId);
 		UserProfile commentedUser = userProfileDao.find(commentedId);
-		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE ||
-				commentatorUser.getPrivileges()==Privileges_TYPES.ADMIN){
+		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE){
 			throw new InsufficientPrivilegesException(commentatorUser.getLoginName());
 		}
 		if(commentatorUser.getUserProfileId() == commentedUser.getUserProfileId()){
@@ -103,7 +84,7 @@ public class UserServiceImpl implements UserService {
 		return userComment.getCommentId();
 	}
 
-	public void complaintUserComment(Long userCommentId, Long userProfileId) 
+	public Long complaintUserComment(Long userCommentId, Long userProfileId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		
 		UserProfile userProfile = userProfileDao.find(userProfileId);
@@ -114,6 +95,7 @@ public class UserServiceImpl implements UserService {
 		UserCommentComplaint complaint = 
 			new UserCommentComplaint(comment, userProfile, Calendar.getInstance());
 		userCommentComplaintDao.create(complaint);
+		return complaint.getComplaintId();
 	}
 	
 	@Transactional(readOnly = true)
@@ -121,7 +103,6 @@ public class UserServiceImpl implements UserService {
 		return userCommentComplaintDao.hasComplaint(userId, userCommentId);
 	}
 
-	//Añadir un adminService para este servicio?
 	public void deleteUserComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		
@@ -134,36 +115,6 @@ public class UserServiceImpl implements UserService {
 		userCommentDao.remove(commentId);
 	}
 
-	//Añadir un adminService para este servicio?	
-	@Transactional(readOnly = true)
-	public UserProfileBlock findAllAdmin(int startIndex, int count){
-		
-		List<UserProfile> users = userProfileDao.findAllAdmin(startIndex, count+1);
-		
-		boolean existMoreUsers = users.size() == (count + 1);
-
-		if (existMoreUsers) {
-			users.remove(users.size() - 1);
-		}
-		
-		return new UserProfileBlock(users, existMoreUsers);
-	}
-
-	//Añadir un adminService para este servicio?
-	@Transactional(readOnly = true)
-	public UserProfileBlock findNonAdmin(int startIndex, int count){
-		
-		List<UserProfile> users = userProfileDao.findNonAdmin(startIndex, count+1);
-		
-		boolean existMoreUsers = users.size() == (count + 1);
-
-		if (existMoreUsers) {
-			users.remove(users.size() - 1);
-		}
-		
-		return new UserProfileBlock(users, existMoreUsers);
-	}
-	
 	@Transactional(readOnly = true)
 	public UserCommentBlock findUserCommentsByCommentator(Long userProfileId,
 			int startIndex, int count){
