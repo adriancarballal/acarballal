@@ -12,10 +12,20 @@ Shutdown database
 	--> USO DE BACHSIZE!!!!!!!!
 	- mirar votos de un video - preguntar	
 	
-	faltan los junit para los metodos:
+	Hecho:
+		JUnit UserService
+	
+	
+	JUnit:
+	VideoService:
+	
+	public Video findVideoById(long videoId) throws InstanceNotFoundException;
+	public VideoCommentBlock findVideoCommentsByUserId(Long userId, int startIndex, int count);
 	public VideoBlock findVideosByUser(Long userId, int startIndex, int count);
-	public List<VideoComment> findVideoCommentsByUser(Long userId);
-	Para los complaints
-	Para vote
-	para favoritos
-	para mensajes
+
+	public VideoBlock findFavourites(Long userId, int startIndex, int count) 
+	public void addToFavourites(Long userId, Long videoId)
+	public void removeFromFavourites(Long userId, Long videoId) 
+	public boolean isFavourite(Long userId, Long videoId);
+		
+		
