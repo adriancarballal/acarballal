@@ -18,7 +18,7 @@ public class MessageBlock {
 		return existMoreMessages;
 	}
 
-	public List<Message> getmessages() {
+	public List<Message> getMessages() {
 		return messages;
 	}
 }

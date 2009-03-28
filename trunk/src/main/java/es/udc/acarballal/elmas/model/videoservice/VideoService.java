@@ -8,6 +8,7 @@ import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
+import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public interface VideoService {
@@ -21,14 +22,14 @@ public interface VideoService {
 			String comment,	Calendar date) throws InstanceNotFoundException, 
 			InsufficientPrivilegesException, InvalidOperationException;
 	 
-	public void complaintOfVideo(Long videoId, Long userProfileId) 
+	public Long complaintOfVideo(Long videoId, Long userProfileId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
 	public boolean isComplaintedBy(Long userId, Long videoId);
 	
 	public boolean isVideoCommentComplaintedBy(Long userId, Long videoCommentId);
 	
-	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
+	public Long complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
 	//TODO
@@ -73,8 +74,9 @@ public interface VideoService {
 	public VideoBlock findFavourites(Long userId, int startIndex, int count) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
-	public void addToFavourites(Long userId, Long videoId)
-		throws InstanceNotFoundException, InsufficientPrivilegesException;
+	public Long addToFavourites(Long userId, Long videoId)
+		throws InstanceNotFoundException, InsufficientPrivilegesException, 
+		DuplicateInstanceException;
 	
 	public void removeFromFavourites(Long userId, Long videoId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;

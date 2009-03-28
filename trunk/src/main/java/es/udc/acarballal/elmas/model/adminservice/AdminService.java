@@ -15,14 +15,19 @@ public interface AdminService {
 	public void deleteVideoCommentComplaint(Long id, Long userProfileId) 
 		throws InsufficientPrivilegesException, InstanceNotFoundException;
 	
-	public void deleteVideoComplaints(Long id, Long userProfileId) 
+	public void deleteVideoComplaint(Long id, Long userProfileId) 
 		throws InsufficientPrivilegesException, InstanceNotFoundException;
 	
-	public VideoComplaint findFirstVideoComplaints();
+	public VideoComplaint findFirstVideoComplaints(Long userProfileId)
+		throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
-	public UserCommentComplaintBlock findUserCommentComplaints(int startIndex, int count);
+	public UserCommentComplaintBlock findUserCommentComplaints(
+			Long userProfileId, int startIndex, int count) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException;
 	
-	public VideoCommentComplaintBlock findVideoCommentComplaints(int startIndex, int count);
+	public VideoCommentComplaintBlock findVideoCommentComplaints(
+			Long userProfileId, int startIndex, int count) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException;
 	
 	public int getNumberOfUserCommentComplaints(Long userProfileId) 
 		throws InsufficientPrivilegesException, InstanceNotFoundException;

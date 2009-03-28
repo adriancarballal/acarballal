@@ -2,6 +2,7 @@ package es.udc.acarballal.elmas.model.encoderservice.util;
 
 import es.udc.acarballal.elmas.ffmpeg.process.IProcess;
 import es.udc.acarballal.elmas.model.encoderservice.EncoderService;
+import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class AdminMessage implements IProcess{
 	
@@ -16,7 +17,11 @@ public class AdminMessage implements IProcess{
 	}
 	
 	public boolean execute() {
-		encoderService.sendConfirmationMessage(to, text);
+		try {
+			encoderService.sendConfirmationMessage(to, text);
+		} catch (InstanceNotFoundException e) {
+			return false;
+		}
 		return true;
 	}
 	

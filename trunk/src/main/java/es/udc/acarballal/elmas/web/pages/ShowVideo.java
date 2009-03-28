@@ -17,7 +17,9 @@ import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
 import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
+import es.udc.acarballal.elmas.web.pages.errors.InvalidOperation;
 import es.udc.acarballal.elmas.web.util.UserSession;
+import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 public class ShowVideo {
@@ -78,6 +80,8 @@ public class ShowVideo {
 			return InstanceNotFound.class;
 		} catch (InsufficientPrivilegesException e) {
 			return InsufficientPrivileges.class;
+		} catch (DuplicateInstanceException e) {
+			return InvalidOperation.class;
 		}
 		return alreadyFavourite;
 	}

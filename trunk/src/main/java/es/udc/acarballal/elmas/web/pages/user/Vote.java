@@ -26,6 +26,7 @@ import es.udc.acarballal.elmas.web.pages.errors.InvalidOperation;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
+import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
@@ -99,6 +100,8 @@ public class Vote {
 			return InstanceNotFound.class;
 		} catch (InsufficientPrivilegesException e) {
 			return InsufficientPrivileges.class;
+		} catch (DuplicateInstanceException e) {
+			return InvalidOperation.class;
 		}
 		return alreadyFavourite;
 	}

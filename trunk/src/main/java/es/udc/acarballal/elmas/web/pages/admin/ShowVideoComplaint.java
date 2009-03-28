@@ -56,7 +56,7 @@ public class ShowVideoComplaint {
 	@OnEvent(component="deleteComplaint")
 	Object deleteComplaint(Long videoComplaintId){
 		try {
-			adminService.deleteVideoComplaints(
+			adminService.deleteVideoComplaint(
 					videoComplaintId, userSession.getUserProfileId());
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
@@ -98,7 +98,13 @@ public class ShowVideoComplaint {
 	private void fill(){
 		videoComplaint = null;
 		video=null;
-		videoComplaint = adminService.findFirstVideoComplaints();
+		try {
+			videoComplaint = adminService.findFirstVideoComplaints(userSession.getUserProfileId());
+		} catch (InstanceNotFoundException e) {
+			//TODO
+		} catch (InsufficientPrivilegesException e) {
+			// TODO
+		}
 		if(videoComplaint!=null) video = videoComplaint.getReference();
 		
 	}
