@@ -60,8 +60,14 @@ public class ShowVideoCommentComplaint {
 	private VideoService videoService;
 
 	private void fill(){
-		videoCommentComplaintBlock = adminService.findVideoCommentComplaints(
-				startIndex, COUNT);
+		try {
+			videoCommentComplaintBlock = adminService.findVideoCommentComplaints(
+					userSession.getUserProfileId(), startIndex, COUNT);
+		} catch (InstanceNotFoundException e) {
+			// TODO 
+		} catch (InsufficientPrivilegesException e) {
+			// TODO 
+		}
 	}
 	
 	public DateFormat getDateFormat() {

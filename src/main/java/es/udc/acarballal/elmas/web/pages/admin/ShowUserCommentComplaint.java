@@ -60,8 +60,15 @@ public class ShowUserCommentComplaint {
 	private boolean userSessionExists;
 	
 	private void fill(){
-		userCommentComplaintBlock = 
-			adminService.findUserCommentComplaints(startIndex, COUNT);
+		try {
+			userCommentComplaintBlock = 
+				adminService.findUserCommentComplaints(userSession.getUserProfileId(),
+						startIndex, COUNT);
+		} catch (InstanceNotFoundException e) {
+			// TODO
+		} catch (InsufficientPrivilegesException e) {
+			// TODO
+		}
 	}
 	
 	public DateFormat getDateFormat() {

@@ -79,7 +79,7 @@ public class AdminServiceImpl implements AdminService{
 		}
 	}
 
-	public void deleteVideoComplaints(Long id, Long userProfileId) 
+	public void deleteVideoComplaint(Long id, Long userProfileId) 
 			throws InsufficientPrivilegesException, InstanceNotFoundException{
 		
 		UserProfile userProfile;
@@ -97,19 +97,38 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Transactional(readOnly = true)
-	public VideoComplaint findFirstVideoComplaints(){
+	public VideoComplaint findFirstVideoComplaints(Long userProfileId) 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		
-		int startIndex = 0;
-		int count = 1;
-		List<VideoComplaint> complaints =
-			videoComplaintDao.findVideoComplaints(startIndex, count);
+		UserProfile userProfile;
+		List<VideoComplaint> complaints = null;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() == Privileges_TYPES.ADMIN){
+				int startIndex = 0;
+				int count = 1;
+				complaints =
+					videoComplaintDao.findVideoComplaints(startIndex, count);
+			} 
+			else{
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		}catch (InstanceNotFoundException e) {	throw e;	}
 		if(complaints.isEmpty()) return null;
 		return complaints.get(0);
-
 	}
 
-	public UserCommentComplaintBlock findUserCommentComplaints(int startIndex, int count){
+	public UserCommentComplaintBlock findUserCommentComplaints(
+			Long userProfileId, int startIndex, int count) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException{
 		
+		UserProfile userProfile;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() != Privileges_TYPES.ADMIN){
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		}catch (InstanceNotFoundException e) {	throw e;	}
 		List<UserCommentComplaint> comments = 
 			userCommentComplaintDao.findUserCommentComplaints(startIndex, count+1);
 
@@ -122,7 +141,17 @@ public class AdminServiceImpl implements AdminService{
 		return new UserCommentComplaintBlock(comments, existMoreUserCommentsComplaints);
 	}
 	
-	public VideoCommentComplaintBlock findVideoCommentComplaints(int startIndex, int count){
+	public VideoCommentComplaintBlock findVideoCommentComplaints(
+			Long userProfileId, int startIndex, int count) 
+			throws InsufficientPrivilegesException, InstanceNotFoundException{
+		
+		UserProfile userProfile;
+		try {
+			userProfile = userProfileDao.find(userProfileId); 
+			if (userProfile.getPrivileges() != Privileges_TYPES.ADMIN){
+				throw new InsufficientPrivilegesException(userProfile.getLoginName());
+			}
+		}catch (InstanceNotFoundException e) {	throw e;	}
 		
 		List<VideoCommentComplaint> comments = 
 			videoCommentComplaintDao.findVideoCommentComplaints(startIndex, count+1);

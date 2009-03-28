@@ -75,7 +75,7 @@ public class InBox {
 	}
 	
 	public List<Message> getMessages() {
-		return messageBlock.getmessages();
+		return messageBlock.getMessages();
 	}
 	
 	void onActivate() {

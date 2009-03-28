@@ -27,6 +27,7 @@ import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDao;
 import es.udc.acarballal.elmas.model.vote.Vote;
 import es.udc.acarballal.elmas.model.vote.VoteDao;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
+import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @Transactional
@@ -78,7 +79,7 @@ public class VideoServiceImpl implements VideoService{
 		return videoComment.getCommentId();
 	}
 	
-	public void complaintOfVideo(Long videoId, Long userProfileId) 
+	public Long complaintOfVideo(Long videoId, Long userProfileId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		
 		UserProfile userProfile = userProfileDao.find(userProfileId);
@@ -89,6 +90,7 @@ public class VideoServiceImpl implements VideoService{
 		VideoComplaint complaint = 
 			new VideoComplaint(video, userProfile, Calendar.getInstance());
 		videoComplaintDao.create(complaint);
+		return complaint.getComplaintId();
 	}
 	
 	@Transactional(readOnly = true)
@@ -101,7 +103,7 @@ public class VideoServiceImpl implements VideoService{
 		return videoCommentComplaintDao.hasComplaint(userId, videoCommentId);
 	}
 	
-	public void complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
+	public Long complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		
 		UserProfile userProfile = userProfileDao.find(userProfileId);
@@ -112,6 +114,7 @@ public class VideoServiceImpl implements VideoService{
 		VideoCommentComplaint complaint =
 			new VideoCommentComplaint(comment, userProfile, Calendar.getInstance());
 		videoCommentComplaintDao.create(complaint);
+		return complaint.getComplaintId();
 	}
 	
 	public void deleteVideo(long videoId, long userId) 
@@ -168,7 +171,9 @@ public class VideoServiceImpl implements VideoService{
 	}
 	
 	@Transactional(readOnly = true)
-	public Video findVideoById(long videoId) throws InstanceNotFoundException{
+	public Video findVideoById(long videoId) 
+			throws InstanceNotFoundException{
+		
 		return videoDao.find(videoId);
 	}
 	
@@ -318,17 +323,22 @@ public class VideoServiceImpl implements VideoService{
 		return favouriteDao.isFavourite(userId, videoId);
 	}
 
-	public void addToFavourites(Long userId, Long videoId)
-			throws InstanceNotFoundException, InsufficientPrivilegesException {
+	public Long addToFavourites(Long userId, Long videoId)
+			throws InstanceNotFoundException, InsufficientPrivilegesException,
+			DuplicateInstanceException {
 
 		UserProfile userProfile = userProfileDao.find(userId);
 		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
 			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}
+		if(favouriteDao.isFavourite(userProfile.getUserProfileId(), videoId))
+			throw new DuplicateInstanceException(userProfile.getLoginName(), 
+					Favourite.class.getName());
 		Video video = videoDao.find(videoId);
 		
 		Favourite newFav = new Favourite(userProfile, video);
 		favouriteDao.create(newFav);
+		return newFav.getId();
 	}
 	
 	public void removeFromFavourites(Long userId, Long videoId) 

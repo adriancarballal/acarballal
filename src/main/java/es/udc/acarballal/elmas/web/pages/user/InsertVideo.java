@@ -15,11 +15,16 @@ import org.apache.tapestry5.upload.services.UploadedFile;
 
 import es.udc.acarballal.elmas.ffmpeg.process.util.DirectoryGenerator;
 import es.udc.acarballal.elmas.model.encoderservice.EncoderService;
+import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
+import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.web.pages.Index;
+import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
+import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.acarballal.elmas.web.util.VideoMimeDetection;
+import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
 public class InsertVideo {
@@ -61,10 +66,16 @@ public class InsertVideo {
         File copied = new File(originalDir + "\\" + file.getFileName());
         file.write(copied); 
 
-        encoderService.encodeVideo(copied.getAbsolutePath(), 
-        		userSession.getUserProfileId(), title, comment);
-        
-        
+        try {
+			encoderService.encodeVideo(copied.getAbsolutePath(), 
+					userSession.getUserProfileId(), title, comment);
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (IncorrectPasswordException e) {
+			// NOT REACHED
+		} catch (InsufficientPrivilegesException e) {
+			return InsufficientPrivileges.class;
+		}        
         return Index.class;
     }
     
@@ -79,8 +90,12 @@ public class InsertVideo {
     
     @SuppressWarnings("deprecation")
 	void onUploadException(FileUploadException ex){
-    	encoderService.sendErrorMessage(userSession.getUserProfileId(), 
-				messages.get("uploadError") + " [" + Calendar.getInstance().getTime().toGMTString() + "]");
+    	try {
+			encoderService.sendErrorMessage(userSession.getUserProfileId(), 
+					messages.get("uploadError") + " [" + Calendar.getInstance().getTime().toGMTString() + "]");
+		} catch (InstanceNotFoundException e) {
+			// NOT REACHED
+		}
     }
 
 }

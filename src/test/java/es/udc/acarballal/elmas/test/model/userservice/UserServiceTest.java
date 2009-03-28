@@ -839,7 +839,7 @@ public class UserServiceTest {
 			userService.login(DbUtil.getCommentatorProfile().getLoginName(), 
 					DbUtil.getTestClearPassword(), false);
 		MessageBlock block = userService.findUserInBox(user.getUserProfileId(), 0, 10); 
-		assertEquals(block.getmessages().size(),0);
+		assertEquals(block.getMessages().size(),0);
 		
 	}
 	
@@ -858,7 +858,7 @@ public class UserServiceTest {
 				user.getUserProfileId(), "message");
 		
 		MessageBlock block = userService.findUserInBox(user.getUserProfileId(), 0, 10); 
-		assertEquals(block.getmessages().size(),1);
+		assertEquals(block.getMessages().size(),1);
 		
 	}
 	

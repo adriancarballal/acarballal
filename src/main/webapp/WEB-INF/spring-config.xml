@@ -108,6 +108,7 @@
     <bean id="encoderService"
     	class="es.udc.acarballal.elmas.model.encoderservice.EncoderServiceImpl"
     	p:videoService-ref="videoService"
+    	p:userProfileDao-ref="userProfileDao"
     	p:userService-ref="userService" />
 		    	
 </beans>
