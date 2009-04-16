@@ -42,8 +42,6 @@ public class Process implements IProcess{
 	
 	private boolean run() throws NoCommandAvailableException, ProcessErrorException{
 		
-		// TODO QUITAR PRITNLN
-		System.out.println(encoder.generateEncodingCommand());
 		String[] cmd = encoder.generateEncodingCommand().split(" ");
 		if(cmd==null) throw new NoCommandAvailableException();
         try{            
