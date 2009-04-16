@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import es.udc.acarballal.elmas.model.video.Video;
-import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.pojo.modelutil.dao.GenericDaoHibernate;
 
 @Repository
@@ -40,11 +39,6 @@ public class VoteDaoHibernate extends
 				"select v.video from Vote v " +
 				"group by v.video.videoId order by AVG(v.vote) DESC"). 
 				setFirstResult(0).setMaxResults(count).list();
-	}
-	
-	public VOTE_TYPES findVoteMeanByVideoId() {
-		//Necesitamos hacer un groupBy
-		return null;
 	}
 	
 	public int votesRemaining(Long userProfileId, Calendar today){

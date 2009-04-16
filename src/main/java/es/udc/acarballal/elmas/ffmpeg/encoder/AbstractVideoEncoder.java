@@ -5,22 +5,27 @@ import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.MissingConfiguration
 
 public abstract class AbstractVideoEncoder implements IVideoEncoder{
 	
-	protected VIDEO_CODEC videoCodec = VIDEO_CODEC.libx264;
-	protected VIDEO_SIZE videoSize = VIDEO_SIZE.vga;
-	protected int videoBitRate = 200;
-	protected String aspectRatio = "4:3";
-	protected int frameRate = 30;
+	public enum VIDEO_SIZE 		{sqcif, qcif, cif, qvga, vga, svga};
+	public enum VIDEO_CODEC 	{libx264};
+	public enum AUDIO_CODEC 	{libfaac};
 	
-	protected AUDIO_CODEC audioCodec = AUDIO_CODEC.libfaac;
-	protected int audioBitRate = 64;
-	protected int audioFrecuence = 44100;
-	protected int audioChannels = 1;
+	private VIDEO_CODEC videoCodec = VIDEO_CODEC.libx264;
+	private VIDEO_SIZE videoSize = VIDEO_SIZE.vga;
+	private int videoBitRate = 200;
+	private String aspectRatio = "4:3";
+	private int frameRate = 30;
+	
+	private AUDIO_CODEC audioCodec = AUDIO_CODEC.libfaac;
+	private int audioBitRate = 64;
+	private int audioFrecuence = 44100;
+	private int audioChannels = 1;
 	
 	private String inputFilePath;
 	private String outputFilePath;
 	
 	private static final String APPLICATION_PATH_PARAMETERS = "ffmpeg/application/path";
-	protected static String application_path;
+	private static String application_path;
+	
 	static {
 		try {
 			application_path = 
@@ -29,19 +34,6 @@ public abstract class AbstractVideoEncoder implements IVideoEncoder{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-	}
-	
-	
-	protected String getInputFilePath(){
-		return inputFilePath;
-	}
-	
-	protected String getOutputFilePath(){
-		return outputFilePath;
-	}
-	
-	protected String getApplicationPath(){
-		return application_path;
 	}
 	
 	public AbstractVideoEncoder(String inputFilePath, String outputFilePath){
@@ -54,41 +46,78 @@ public abstract class AbstractVideoEncoder implements IVideoEncoder{
 			generateEncodingOptions() +	" " + outputFilePath;
 	}
 	
-	protected abstract String generateEncodingOptions();
-
-	public void setAspectRatio(String ratio) {
-		this.aspectRatio = ratio;		
-	}
-
-	public void setAudioBitRate(int bitRate) {
-		this.audioBitRate = bitRate;
-	}
+	public abstract String generateEncodingOptions();
 	
-	public void setAudioFrecuence(int frecuence){
-		this.audioFrecuence = frecuence;
+	public VIDEO_CODEC getVideoCodec() {
+		return videoCodec;
+	}
+
+	public void setVideoCodec(VIDEO_CODEC videoCodec) {
+		this.videoCodec = videoCodec;
+	}
+
+	public VIDEO_SIZE getVideoSize() {
+		return videoSize;
+	}
+
+	public void setVideoSize(VIDEO_SIZE videoSize) {
+		this.videoSize = videoSize;
+	}
+
+	public int getVideoBitRate() {
+		return videoBitRate;
+	}
+
+	public void setVideoBitRate(int videoBitRate) {
+		this.videoBitRate = videoBitRate;
+	}
+
+	public String getAspectRatio() {
+		return aspectRatio;
+	}
+
+	public void setAspectRatio(String aspectRatio) {
+		this.aspectRatio = aspectRatio;
+	}
+
+	public int getFrameRate() {
+		return frameRate;
+	}
+
+	public void setFrameRate(int frameRate) {
+		this.frameRate = frameRate;
+	}
+
+	public AUDIO_CODEC getAudioCodec() {
+		return audioCodec;
 	}
 
 	public void setAudioCodec(AUDIO_CODEC audioCodec) {
 		this.audioCodec = audioCodec;
 	}
 
-	public void setVideoBitRate(int bitRate) {
-		this.videoBitRate = bitRate;
+	public int getAudioBitRate() {
+		return audioBitRate;
 	}
 
-	public void setVideoCodec(VIDEO_CODEC videoCodec) {
-		this.videoCodec = videoCodec;		
+	public void setAudioBitRate(int audioBitRate) {
+		this.audioBitRate = audioBitRate;
 	}
 
-	public void setVideoSize(VIDEO_SIZE size) {
-		this.videoSize = size;
+	public int getAudioFrecuence() {
+		return audioFrecuence;
 	}
-	
-	public void setFrameRate(int frameRate){
-		this.frameRate = frameRate;
+
+	public void setAudioFrecuence(int audioFrecuence) {
+		this.audioFrecuence = audioFrecuence;
 	}
-	
-	public void setAudioChannels(int channels){
+
+	public int getAudioChannels() {
+		return audioChannels;
 	}
+
+	public void setAudioChannels(int audioChannels) {
+		this.audioChannels = audioChannels;
+	}	
 
 }

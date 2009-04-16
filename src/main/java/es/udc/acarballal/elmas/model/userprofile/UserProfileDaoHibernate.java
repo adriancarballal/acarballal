@@ -1,10 +1,6 @@
 package es.udc.acarballal.elmas.model.userprofile;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
-
-import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
 import es.udc.pojo.modelutil.dao.GenericDaoHibernate;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -12,14 +8,6 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class UserProfileDaoHibernate extends
 		GenericDaoHibernate<UserProfile, Long> implements UserProfileDao {
 
-	//TODO lo estamos usando en algun lado?
-	public List<UserProfile> findAllAdmin(int startIndex, int count){
-		return getSession().createQuery("SELECT u FROM UserProfile u " +
-				"WHERE u.privileges=:privileges").
-				setParameter("privileges", Privileges_TYPES.ADMIN).		
-				setFirstResult(startIndex).setMaxResults(count).list();
-	}
-	
 	public UserProfile findByLoginName(String loginName) throws InstanceNotFoundException {
 		UserProfile userProfile = (UserProfile) getSession().createQuery(
 				"SELECT u FROM UserProfile u WHERE u.loginName = :loginName")
@@ -32,12 +20,4 @@ public class UserProfileDaoHibernate extends
 		}
 	}
 	
-	//TODO lo estamos usando en algun lado?
-	public List<UserProfile> findNonAdmin(int startIndex, int count){
-		return getSession().createQuery("SELECT u FROM UserProfile u " +
-				"WHERE u.privileges=:privileges").
-				setParameter("privileges", Privileges_TYPES.VOTER).		
-				setFirstResult(startIndex).setMaxResults(count).list();
-	}
-
 }
