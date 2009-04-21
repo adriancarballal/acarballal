@@ -176,7 +176,7 @@ CREATE TABLE Message (
 --------------------------
 insert into userprofile values(1, 'admin','UDn64bBABog2A', 'admin', 'none', 'admin@gmail.com', 0, 0);
 -- Password for admin = admin
---insert into userprofile values(2, 'adrian xxxxxxxx','YZsowua7bk/lU', 'adrian', 'carballal', 'adriancarballal@gmail.com', 1, 0);
+insert into userprofile values(2, 'adrian xxxxxxxx','YZsowua7bk/lU', 'adrian', 'carballal', 'adriancarballal@gmail.com', 1, 0);
 -- Password for user adrian = adrian
 --insert into userprofile values(3, 'voter','LMcPpWzd49C7g', 'voter', 'voter', 'voter@gmail.com', 2, 0);
 -- Password for user voter = voter
@@ -188,26 +188,26 @@ insert into userprofile values(1, 'admin','UDn64bBABog2A', 'admin', 'none', 'adm
 --------------------------
 --        Videos        --
 --------------------------
---insert into video values (1,2,"Episodio Chuck 01 xxxxxxxxxxxx", "Parte 1 x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x y z", "http://adriancarballal.dynalias.com/imagenes/small/1.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/1.flv", "", CURRENT_TIMESTAMP);
---insert into video values (2,2,"Episodio Chuck 01", "Parte 2", "http://adriancarballal.dynalias.com/imagenes/small/2.jpg", "", "http://192.168.0.11/videos_webService/2.flv", "", CURRENT_TIMESTAMP);
---insert into video values (3,2,"Episodio Chuck 01", "Parte 3", "http://adriancarballal.dynalias.com/imagenes/small/3.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/3.flv", "", CURRENT_TIMESTAMP);
---insert into video values (4,2,"Episodio Chuck 01", "Parte 4", "http://adriancarballal.dynalias.com/imagenes/small/4.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/4.flv", "", CURRENT_TIMESTAMP);
---insert into video values (5,2,"Episodio Chuck 01", "Parte 5", "http://adriancarballal.dynalias.com/imagenes/small/5.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/5.flv", "", CURRENT_TIMESTAMP);
---insert into video values (6,2,"Episodio Chuck 01", "Parte 6", "http://adriancarballal.dynalias.com/imagenes/small/6.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/6.flv", "", CURRENT_TIMESTAMP);
---insert into video values (7,2,"Episodio Chuck 01", "Parte 7", "http://adriancarballal.dynalias.com/imagenes/small/7.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/7.flv", "", CURRENT_TIMESTAMP);
---insert into video values (8,2,"Episodio Chuck 01", "Parte 8", "http://adriancarballal.dynalias.com/imagenes/small/8.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/8.flv", "", CURRENT_TIMESTAMP);
---insert into video values (9,2,"Episodio Chuck 01", "Parte 9", "http://adriancarballal.dynalias.com/imagenes/small/9.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/9.flv", "", CURRENT_TIMESTAMP);
---insert into video values (10,2,"Episodio Chuck 01", "Parte 10", "http://adriancarballal.dynalias.com/imagenes/small/10.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/10.flv", "", CURRENT_TIMESTAMP);
---insert into video values (11,2,"Episodio Chuck 01", "Parte 11", "http://adriancarballal.dynalias.com/imagenes/small/11.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/11.flv", "", CURRENT_TIMESTAMP);
---insert into video values (12,2,"Episodio Chuck 01", "Parte 12", "http://adriancarballal.dynalias.com/imagenes/small/12.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/12.flv", "", CURRENT_TIMESTAMP);
---insert into video values (13,2,"Episodio Chuck 01", "Parte 13", "http://adriancarballal.dynalias.com/imagenes/small/13.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/13.flv", "", CURRENT_TIMESTAMP);
---insert into video values (14,2,"Episodio Chuck 01", "Parte 14", "http://adriancarballal.dynalias.com/imagenes/small/14.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/14.flv", "", CURRENT_TIMESTAMP);
---insert into video values (15,2,"Episodio Chuck 01", "Parte 15", "http://adriancarballal.dynalias.com/imagenes/small/15.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/15.flv", "", CURRENT_TIMESTAMP);
---insert into video values (16,2,"Episodio Chuck 01", "Parte 16", "http://adriancarballal.dynalias.com/imagenes/small/16.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/16.flv", "", CURRENT_TIMESTAMP);
---insert into video values (17,2,"Episodio Chuck 01", "Parte 17", "http://adriancarballal.dynalias.com/imagenes/small/17.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/17.flv", "", CURRENT_TIMESTAMP);
---insert into video values (18,2,"Episodio Chuck 01", "Parte 18", "http://adriancarballal.dynalias.com/imagenes/small/18.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/18.flv", "", CURRENT_TIMESTAMP);
---insert into video values (19,2,"Episodio Chuck 01", "Parte 19", "http://adriancarballal.dynalias.com/imagenes/small/19.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/19.flv", "", CURRENT_TIMESTAMP);
---insert into video values (20,2,"Episodio Chuck 01", "Parte 20", "http://adriancarballal.dynalias.com/imagenes/small/20.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/20.flv", "", CURRENT_TIMESTAMP);
+insert into video values (1,2,"Episodio Chuck 01 xxxxxxxxxxxx", "Parte 1 x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x y z", "http://adriancarballal.dynalias.com/imagenes/small/1.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/1.flv", "", CURRENT_TIMESTAMP);
+insert into video values (2,2,"Episodio Chuck 01", "Parte 2", "http://adriancarballal.dynalias.com/imagenes/small/2.jpg", "", "http://192.168.0.11/videos_webService/2.flv", "", CURRENT_TIMESTAMP);
+insert into video values (3,2,"Episodio Chuck 01", "Parte 3", "http://adriancarballal.dynalias.com/imagenes/small/3.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/3.flv", "", CURRENT_TIMESTAMP);
+insert into video values (4,2,"Episodio Chuck 01", "Parte 4", "http://adriancarballal.dynalias.com/imagenes/small/4.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/4.flv", "", CURRENT_TIMESTAMP);
+insert into video values (5,2,"Episodio Chuck 01", "Parte 5", "http://adriancarballal.dynalias.com/imagenes/small/5.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/5.flv", "", CURRENT_TIMESTAMP);
+insert into video values (6,2,"Episodio Chuck 01", "Parte 6", "http://adriancarballal.dynalias.com/imagenes/small/6.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/6.flv", "", CURRENT_TIMESTAMP);
+insert into video values (7,2,"Episodio Chuck 01", "Parte 7", "http://adriancarballal.dynalias.com/imagenes/small/7.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/7.flv", "", CURRENT_TIMESTAMP);
+insert into video values (8,2,"Episodio Chuck 01", "Parte 8", "http://adriancarballal.dynalias.com/imagenes/small/8.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/8.flv", "", CURRENT_TIMESTAMP);
+insert into video values (9,2,"Episodio Chuck 01", "Parte 9", "http://adriancarballal.dynalias.com/imagenes/small/9.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/9.flv", "", CURRENT_TIMESTAMP);
+insert into video values (10,2,"Episodio Chuck 01", "Parte 10", "http://adriancarballal.dynalias.com/imagenes/small/10.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/10.flv", "", CURRENT_TIMESTAMP);
+insert into video values (11,2,"Episodio Chuck 01", "Parte 11", "http://adriancarballal.dynalias.com/imagenes/small/11.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/11.flv", "", CURRENT_TIMESTAMP);
+insert into video values (12,2,"Episodio Chuck 01", "Parte 12", "http://adriancarballal.dynalias.com/imagenes/small/12.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/12.flv", "", CURRENT_TIMESTAMP);
+insert into video values (13,2,"Episodio Chuck 01", "Parte 13", "http://adriancarballal.dynalias.com/imagenes/small/13.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/13.flv", "", CURRENT_TIMESTAMP);
+insert into video values (14,2,"Episodio Chuck 01", "Parte 14", "http://adriancarballal.dynalias.com/imagenes/small/14.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/14.flv", "", CURRENT_TIMESTAMP);
+insert into video values (15,2,"Episodio Chuck 01", "Parte 15", "http://adriancarballal.dynalias.com/imagenes/small/15.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/15.flv", "", CURRENT_TIMESTAMP);
+insert into video values (16,2,"Episodio Chuck 01", "Parte 16", "http://adriancarballal.dynalias.com/imagenes/small/16.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/16.flv", "", CURRENT_TIMESTAMP);
+insert into video values (17,2,"Episodio Chuck 01", "Parte 17", "http://adriancarballal.dynalias.com/imagenes/small/17.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/17.flv", "", CURRENT_TIMESTAMP);
+insert into video values (18,2,"Episodio Chuck 01", "Parte 18", "http://adriancarballal.dynalias.com/imagenes/small/18.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/18.flv", "", CURRENT_TIMESTAMP);
+insert into video values (19,2,"Episodio Chuck 01", "Parte 19", "http://adriancarballal.dynalias.com/imagenes/small/19.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/19.flv", "", CURRENT_TIMESTAMP);
+insert into video values (20,2,"Episodio Chuck 01", "Parte 20", "http://adriancarballal.dynalias.com/imagenes/small/20.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/20.flv", "", CURRENT_TIMESTAMP);
 
 --------------------------
 --     UserComments     --
