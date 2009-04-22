@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.acarballal.elmas.model.adminservice.util.EncodeProcess;
+import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.message.Message;
+import es.udc.acarballal.elmas.model.message.MessageDao;
 import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaint;
 import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaintDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
@@ -14,15 +18,37 @@ import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaint
 import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaintDao;
 import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaint;
 import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDao;
+import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @Transactional
 public class AdminServiceImpl implements AdminService{
-
+	
+	private static final Long AdminProfileId = new Long(1); 
+	
 	private UserCommentComplaintDao userCommentComplaintDao;
 	private UserProfileDao userProfileDao;
 	private VideoCommentComplaintDao videoCommentComplaintDao;
 	private VideoComplaintDao videoComplaintDao;
+	private MessageDao messageDao;
+	
+	public void encodeVideo(String fileAbsolutePath, Long userProfileId,
+			String title, String comment, VideoService videoService) 
+			throws InstanceNotFoundException, IncorrectPasswordException,
+			InsufficientPrivilegesException {
+		
+		UserProfile userProfile;
+		
+		userProfile = userProfileDao.find(userProfileId);
+		if(userProfile.getPrivileges() == Privileges_TYPES.NONE ||
+				userProfile.getPrivileges() == Privileges_TYPES.VOTER){
+			throw new InsufficientPrivilegesException(userProfile.getFirstName());
+		}
+		
+		EncodeProcess hilo = new EncodeProcess(fileAbsolutePath, userProfileId,
+				title, comment, this, videoService);
+		hilo.start();		
+	}
 	
 	public void deleteUserProfile(Long deleteUserId, Long userProfileId)
 		throws InsufficientPrivilegesException, InstanceNotFoundException{
@@ -216,6 +242,27 @@ public class AdminServiceImpl implements AdminService{
 		}
 	}
 	
+	public void sendErrorMessage(Long to, String message)
+			throws InstanceNotFoundException {
+		
+		UserProfile sender = userProfileDao.find(AdminProfileId);
+		UserProfile receiver = userProfileDao.find(to);
+	
+		Message m = new Message(sender, receiver, message);
+		messageDao.create(m);
+}
+
+	public void sendConfirmationMessage(Long to, String message) 
+			throws InstanceNotFoundException {
+	
+		UserProfile sender = userProfileDao.find(AdminProfileId);
+		UserProfile receiver = userProfileDao.find(to);
+	
+		Message m = new Message(sender, receiver, message);
+		messageDao.create(m);
+	}
+
+	
 	public void setUserCommentComplaintDao(
 			UserCommentComplaintDao userCommentComplaintDao){
 		this.userCommentComplaintDao = userCommentComplaintDao;
@@ -232,5 +279,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	public void setVideoComplaintDao(VideoComplaintDao videoComplaintDao) {
 		this.videoComplaintDao = videoComplaintDao;
+	}
+	
+	public void setMessageDao(MessageDao messageDao){
+		this.messageDao = messageDao;
 	}
 }
