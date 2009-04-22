@@ -22,6 +22,8 @@ import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
+import es.udc.acarballal.elmas.model.userservice.LoginResult;
+import es.udc.acarballal.elmas.model.userservice.MessageBlock;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
@@ -1012,4 +1014,98 @@ public class AdminServiceTest {
 		
 		assertTrue(adminService.getNumberOfVideoComplaints(admin)==1);		
 	}
+	
+	@Test
+	public void sendConfirmationMessage() 
+			throws InstanceNotFoundException, IncorrectPasswordException{
+		
+		LoginResult admin = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		
+		adminService.sendConfirmationMessage(admin.getUserProfileId(), 
+				"message");
+		
+		MessageBlock block = 
+			userService.findUserInBox(admin.getUserProfileId(), 0, 1);
+		
+		assertEquals(block.getMessages().size(), 1);
+		assertEquals(block.getMessages().get(0).getReceiver().getUserProfileId(),
+				admin.getUserProfileId());
+		assertEquals(block.getMessages().get(0).getText(), "message");
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void sendConfirmationMessageNoReceiver() 
+			throws InstanceNotFoundException, IncorrectPasswordException{
+		
+		adminService.sendConfirmationMessage(NON_EXISTENT_USER_PROFILE_ID, 
+				"message");
+	}	
+	
+	@Test
+	public void sendErrorMessage() 
+			throws InstanceNotFoundException, IncorrectPasswordException{
+		
+		LoginResult admin = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false);
+		
+		adminService.sendErrorMessage(admin.getUserProfileId(), 
+				"message");
+		
+		MessageBlock block = 
+			userService.findUserInBox(admin.getUserProfileId(), 0, 1);
+		
+		assertEquals(block.getMessages().size(), 1);
+		assertEquals(block.getMessages().get(0).getReceiver().getUserProfileId(),
+				admin.getUserProfileId());
+		assertEquals(block.getMessages().get(0).getText(), "message");
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void sendErrorMessageNoReceiver() 
+			throws InstanceNotFoundException, IncorrectPasswordException{
+		
+		adminService.sendErrorMessage(NON_EXISTENT_USER_PROFILE_ID, 
+				"message");
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void encodeVideoAsNone() 
+			throws InstanceNotFoundException, IncorrectPasswordException,
+			InsufficientPrivilegesException{
+		
+		Long admin = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false).getUserProfileId();
+		
+		admin = userService.changePrivileges(admin, 
+				Privileges_TYPES.NONE).getUserProfileId();
+		adminService.encodeVideo(null, admin, null, null, videoService);
+	}
+	
+	@Test(expected = InsufficientPrivilegesException.class)
+	public void encodeVideoAsVoter() 
+			throws InstanceNotFoundException, IncorrectPasswordException,
+			InsufficientPrivilegesException{
+		
+		Long admin = 
+			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
+					DbUtil.getTestClearPassword(), false).getUserProfileId();
+		
+		admin = userService.changePrivileges(admin, 
+				Privileges_TYPES.VOTER).getUserProfileId();
+		adminService.encodeVideo(null, admin, null, null, videoService);
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void encodeVideoNoneUser() 
+			throws InstanceNotFoundException, IncorrectPasswordException,
+			InsufficientPrivilegesException{
+		
+		adminService.encodeVideo(null, 
+				NON_EXISTENT_USER_PROFILE_ID, null, null, videoService);
+	}
+
 }
