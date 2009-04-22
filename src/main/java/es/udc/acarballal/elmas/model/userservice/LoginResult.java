@@ -17,6 +17,7 @@ public class LoginResult {
 		this.privileges = privileges;
 	}
 	
+	@Override
 	public boolean equals(Object obj) {
 		if ((obj == null) || !(obj instanceof LoginResult)) {
 			return false;

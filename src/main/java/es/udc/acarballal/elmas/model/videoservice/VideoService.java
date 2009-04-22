@@ -32,13 +32,9 @@ public interface VideoService {
 	public Long complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
 		throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
-	//TODO
-	//Añadir un adminService para este servicio?
 	public void deleteVideo(long videoId, long userId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 
-	//TODO
-	//Añadir un adminService para este servicio?
 	public void deleteVideoComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 	

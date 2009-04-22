@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.ConfigurationParametersManager;
 import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.MissingConfigurationParameterException;
-import es.udc.acarballal.elmas.model.encoderservice.util.DeleteTempFolder;
+import es.udc.acarballal.elmas.model.adminservice.util.DeleteTempFolder;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
@@ -42,6 +42,8 @@ public class VideoServiceImpl implements VideoService{
 	private FavouriteDao favouriteDao;
 	private VideoDao videoDao;
 	private VoteDao voteDao;
+	
+		
 
 	public Long addVideo(long userId, String title, String comment, 
 			String snapshot,String original, String flvVideo, 
@@ -140,7 +142,6 @@ public class VideoServiceImpl implements VideoService{
 		
 	}
 	
-	//Añadir un adminService para este servicio?
 	public void deleteVideoComment(Long commentId, Long userProfileId)
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		

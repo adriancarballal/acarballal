@@ -51,9 +51,6 @@ public interface UserService {
 			UserProfileDetails userProfileDetails)
 			throws InstanceNotFoundException;
 	
-	
-	/*MESSAGE SERVICE */
-	//TODO
 	public Long sendMessage(Long from, Long to, String text) 
 			throws InstanceNotFoundException;
 	

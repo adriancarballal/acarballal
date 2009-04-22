@@ -14,9 +14,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.upload.services.UploadedFile;
 
 import es.udc.acarballal.elmas.ffmpeg.process.util.DirectoryGenerator;
-import es.udc.acarballal.elmas.model.encoderservice.EncoderService;
+import es.udc.acarballal.elmas.model.adminservice.AdminService;
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.pages.Index;
 import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
 import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
@@ -57,8 +58,12 @@ public class InsertVideo {
 	 @ApplicationState
 	 private UserSession userSession;
 	 
-	 @Inject
-	 private EncoderService encoderService;
+	 @Inject 
+	 private AdminService adminService;
+	 
+	 @Inject 
+	 private VideoService videoService;
+	 
 	 
 	 Object onSuccess(){
 		 String originalDir = DirectoryGenerator.create().getAbsolutePath();
@@ -67,8 +72,8 @@ public class InsertVideo {
         file.write(copied); 
 
         try {
-			encoderService.encodeVideo(copied.getAbsolutePath(), 
-					userSession.getUserProfileId(), title, comment);
+        	adminService.encodeVideo(copied.getAbsolutePath(), 
+					userSession.getUserProfileId(), title, comment, videoService);
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
 		} catch (IncorrectPasswordException e) {
@@ -91,7 +96,7 @@ public class InsertVideo {
     @SuppressWarnings("deprecation")
 	void onUploadException(FileUploadException ex){
     	try {
-			encoderService.sendErrorMessage(userSession.getUserProfileId(), 
+			adminService.sendErrorMessage(userSession.getUserProfileId(), 
 					messages.get("uploadError") + " [" + Calendar.getInstance().getTime().toGMTString() + "]");
 		} catch (InstanceNotFoundException e) {
 			// NOT REACHED
