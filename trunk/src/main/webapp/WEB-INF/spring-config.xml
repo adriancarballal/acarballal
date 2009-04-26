@@ -103,12 +103,7 @@
         p:userProfileDao-ref="userProfileDao" 
         p:videoComplaintDao-ref="videoComplaintDao" 
         p:videoCommentComplaintDao-ref="videoCommentComplaintDao" 
-        p:userCommentComplaintDao-ref="userCommentComplaintDao" />
-        
-    <bean id="encoderService"
-    	class="es.udc.acarballal.elmas.model.encoderservice.EncoderServiceImpl"
-    	p:videoService-ref="videoService"
-    	p:userProfileDao-ref="userProfileDao"
-    	p:userService-ref="userService" />
+        p:userCommentComplaintDao-ref="userCommentComplaintDao"
+        p:messageDao-ref="messageDao" />
 		    	
 </beans>
