@@ -1,0 +1,320 @@
+\chapter{ANÁLISIS}
+Una vez que se han especificado los requerimientos para ambos sistemas, se realizará una descripción escrita del comportamiento mediante diagramas de casos de uso.
+
+%%
+\section{Casos de uso}
+Un caso de uso es una secuencia de interacciones que se desarrollarán entre un sistema y sus actores en respuesta a un evento que inicia un actor principal sobre el propio sistema. Los diagramas de casos de uso sirven para especificar la comunicación y el comportamiento de un sistema mediante su interacción con los usuarios y/u otros sistemas.
+Dentro de un diagrama de uso se tendrá que tener en cuenta las siguientes definiciones para una mejor comprensión del mismo:
+\begin{itemize}
+\item \textbf{Actores:}
+Se le llama Actor a toda entidad externa al sistema que guarda una relación con este y que le demanda una funcionalidad. Se representa mediante una figura esquemática humanoide.
+\item \textbf{Caso de uso:}
+Expresa una unidad coherente de funcionalidad del sistema. Se representa en el diagrama de casos de uso mediante una elipse con el nombre del caso de uso en su interior.
+\item \textbf{Relaciones:}
+Las tres relaciones principales entre los casos de uso son soportadas por el estándar UML, el cual describe notación gráfica para esas relaciones.
+	\begin{itemize}
+	\item \textbf{Inclusión:}
+	Es una forma de interacción, un caso de uso dado puede ``incluir'' otro. Esto es útil para extraer comportamientos verdaderamente comunes desde múltiples casos de uso a una descripción individual, desde el caso de uso que lo incluye hasta el caso de uso incluido. La notación es una flecha de punta abierta con línea discontinua, desde el caso de uso que lo incluye al caso de uso incluido, con la etiqueta «include».
+	\item \textbf{Extensión:}
+	Es otra forma de interacción, un caso de uso dado puede extender a otro. Esta relación indica que el comportamiento del caso de uso extensión puede ser insertado en el caso de uso extendido bajo ciertas condiciones. La notación es una flecha de punta abierta con línea discontinua, desde el caso de uso extensión al caso de uso extendido, con la etiqueta «extend».
+	\item \textbf{Herencia:}
+	En la tercera forma de relaciones entre casos de uso, existe una relación generalización/especialización. Un caso de uso dado puede estar en una forma especializada de un caso de uso existente. La notación es una línea solida terminada en un triángulo dibujado desde el caso de uso especializado al caso de uso general.	
+	\end{itemize}
+\end{itemize}
+
+%%
+\subsection{Actores}
+Dentro del sistema se distinguen cuatro perfiles concretos. Entre los cuales se encuentran los usuarios registrados, los participantes del concurso y los administradores, además de cualquier usuario no registrado que puede acceder al portal. En el caso del sistema para navegadores optimizados para moviles se omite el perfil de administrador, así como los casos de usos que no sean referentes a busqueda y visualización de videos propios o favoritos, asi como la realización de las votaciones semanales. 
+Veamos ahora los casos de uso referente a los diferente perfiles que se han mencionado:
+\begin{figure}[hb]
+\centering
+\includegraphics*[width=5cm]{imagenes/Actores.jpg}
+\caption{Actores del sistema}
+\label{Actores}
+\end{figure}
+
+%%
+\subsection{Casos de usos de usuario}
+En la siguiente figura se especifican los casos de usos referentes al perfil de un usuario no registrado.
+\begin{figure}[hb]
+\centering
+\includegraphics*[width=13cm]{imagenes/User.jpg}
+\caption{Perfil de usuario no registrado}
+\label{User}
+\end{figure}
+
+\subsection{Casos de usos de usuario registrado}
+A continuación se muestra el diagrama de casos de uso para un usuario que se corresponda con el perfil de un usuario registrado.
+\newpage%%añadimos un retorno de pagina para que encaje
+\begin{figure}[ht]
+\centering
+\includegraphics*[width=15cm]{imagenes/RegisteredUser.jpg}
+\caption{Perfil de usuario registrado}
+\label{User}
+\end{figure}
+
+\subsection{Casos de usos de participante}
+En la siguiente figura se especifican los casos de usos referentes al perfil de un usuario participante.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=13cm]{imagenes/Competitor.jpg}
+\caption{Perfil de usuario participante}
+\label{User}
+\end{figure}
+
+\subsection{Casos de usos de administrador}
+A continuación se muestra el diagrama de casos de uso para un usuario que se corresponda con el perfil de un usuario administrador.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=13cm]{imagenes/Admin.jpg}
+\caption{Perfil de usuario administrador}
+\label{User}
+\end{figure}
+
+
+\section{Explicación de los casos de uso}
+Ahora que se han especificado los casos de uso para cada uno de los perfiles necesarios se realizará la explicacion de aquellos que se consideran mas importantes dentro del sistema.
+\subsection{Casos de usos de usuario}
+Login\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Loguearse en el sistema. \\
+  \hline 
+  \textbf{Actores}  & Todos \\
+  \hline
+  \textbf{Precondiciones}  & Ningun usuario logueado en la sesion. El nombre de usuario y la contraseña tienen que coincidir con los datos almacenados en el sistema\\
+  \hline 
+  \textbf{Poscondiciones}  & El usuario queda logueado en el sistema y es redireccionado a la página inicial o la página de donde se venía si el login es producto de una redirección. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Registrar usuario\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Registrarse en el sistema. \\
+  \hline 
+  \textbf{Actores}  & Todos. \\
+  \hline
+  \textbf{Precondiciones}  & Ningun usuario logueado en la sesion. \\
+  \hline 
+  \textbf{Poscondiciones}  & El usuario se registra y queda logueado en el sistema. A su vez es redireccionado a la página inicial o la página de donde se venía si el login es producto de una redirección. \\
+  \hline 
+\end{tabular}
+\newline
+
+Visualizar los videos mas votados\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra los videos mas votados. \\
+  \hline 
+  \textbf{Actores}  & Todos. \\
+  \hline
+  \textbf{Precondiciones}  & Ninguna. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Mostrar video\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra la información referente a un determinado video. \\
+  \hline 
+  \textbf{Actores}  & Todos. \\
+  \hline
+  \textbf{Precondiciones}  & El video tiene que existir. \\
+  \hline 
+  \textbf{Poscondiciones}  & El video tiene que ser reproducible. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Mostrar comentarios de un video\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra los comentarios que se han realizado referente a un determinado video. \\
+  \hline 
+  \textbf{Actores}  & Todos. \\
+  \hline
+  \textbf{Precondiciones}  & El video tiene que existir. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Mostrar comentarios del propietario de un video\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra los comentarios que se han realizado referente al propietario de un determinado video. \\
+  \hline 
+  \textbf{Actores}  & Todos. \\
+  \hline
+  \textbf{Precondiciones}  & El video y el propietario tienen que existir. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Buscar video\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Realiza la busqueda de video en funcion de las palabras clave proporcionadas. \\
+  \hline 
+  \textbf{Actores}  & Todos. \\
+  \hline
+  \textbf{Precondiciones}  & Ninguna.\\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+%\begin{tabular*}{0.75\textwidth}{@{\extracolsep{\fill}} | l | l }
+%  \hline
+%  \textbf{Objetivo} & label \\
+%  \hline 
+%  \textbf{Actores}  & item 2 \\
+%  \hline
+%  \textbf{Precondiciones}  & item 2 \\
+%  \hline 
+%  \textbf{Poscondiciones}  & item 2 \\
+%  \hline 
+%\end{tabular*}
+
+
+\subsection{Casos de usos de usuario registrado}
+
+Logout\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Cerrar la sesion creada al realizar login. \\
+  \hline 
+  \textbf{Actores}  & Usuarios registrados. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ningun usuario logueado en la sesion. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Actualizar información\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Actualizar la información de un usuario, incluyen cambiar el password y cambiar el perfil de usuario registrado a usuario participante. \\
+  \hline 
+  \textbf{Actores}  & Usuarios registrados. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion. \\
+  \hline 
+  \textbf{Poscondiciones}  & La información se actualiza correctamente en el sistema. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+
+Mostrar mensajes\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra los mensajes enviados a un usuario. \\
+  \hline 
+  \textbf{Actores}  & Usuarios registrados. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Eliminar mensaje\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Eliminar un mensaje enviados a un usuario. \\
+  \hline 
+  \textbf{Actores}  & Usuarios registrados. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el mensaje debe existir. \\
+  \hline 
+  \textbf{Poscondiciones}  & Se elimina el mensaje del sistema. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Mostrar favoritos\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra los videos favoritos de un usuario. \\
+  \hline 
+  \textbf{Actores}  & Usuarios registrados. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Añadir comentario\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Añadir un comentario a un usuario o a un video del sistema. \\
+  \hline 
+  \textbf{Actores}  & Usuarios registrados. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el elemento al que se le referencia no debe de ser ni el propio usuario ni un video propiedad del usuario. \\
+  \hline 
+  \textbf{Poscondiciones}  & El comentario se almacena correctamente en el sistema. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Eliminar comentario\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Elimina un comentario a un usuario o a un video del sistema. \\
+  \hline 
+  \textbf{Actores}  & Usuarios registrados. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el elemento al que se le referencia debe de ser propiedad del propio usuario. \\
+  \hline 
+  \textbf{Poscondiciones}  & El comentario se eliminar correctamente en el sistema. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Votacion semanal\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Permite votar un video contabilizado para las votaciones semanales del sistema \\
+  \hline 
+  \textbf{Actores}  & Usuarios registrados. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el video al que se le referencia debe existir.\\
+  \hline 
+  \textbf{Poscondiciones}  & El voto se contabiliza para dicho video. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+Quejarse sobre el contenido\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Permite quejarse sobre el contenido del sistema. (Usuario, video o comentario). \\
+  \hline 
+  \textbf{Actores}  & Usuarios registrados. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el contenido no debe ser del propio usuario. \\
+  \hline 
+  \textbf{Poscondiciones}  & La queja se almacena en el sistema. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+
+\subsection{Casos de usos de participante}
+\subsection{Casos de usos de administrador}
