@@ -1,3 +1,102 @@
 \chapter{Diseño e implementación}
+Tras la definición que se ha dado de la funcionalidad real que debe de cumplir el sistema, se detallarán las decisiones tomadas para el diseño e implementación del sistema. 
 
-\section{Diseño}
+\section{Arquitectura}
+Una vez que se realizó el estudio de las diferentes tecnologías disponibles en la actualidad se ha optado por una implementación utilizando una arquitectura MVC (Modelo-Vista-Controlador) mediante la integración de Hibernate y Spring para la capa modelo y el uso de Tapestry 5 en el caso de las capas vista y controlador.
+\begin{figure}[h]
+\centering
+\includegraphics*[width=5cm]{imagenes/mvc.png}
+\caption{Arquitectura MVC}
+\label{MVC}
+\end{figure}
+\\
+Para entender mejor este modelo arquitectónico veamos cada una de las partes en las que se divide:
+\begin{itemize}
+\item \textbf{Modelo:} Esta es la representación específica de la información con la cual el sistema opera. La lógica de datos asegura la integridad de estos y permite todo derivar nuevos datos; por ejemplo, no permitiendo comprar un número de unidades negativo, calculando si hoy es el cumpleaños del usuario o los totales, impuestos o importes en un carrito de la compra.
+\item \textbf{Vista:} Este presenta el modelo en un formato adecuado para interactuar, usualmente la interfaz de usuario.
+\item \textbf{Controlador:} Este responde a eventos, usualmente acciones del usuario e invoca cambios en el modelo y probablemente en la vista.
+\end{itemize}
+
+El usuario interactúa con la interfaz de usuario de alguna forma. El controlador recibe la notificación de la acción solicitada por el usuario. El controlador gestiona el evento que llega y accede al modelo, posiblemente modificándolo de forma adecuada a la acción solicitada por el usuario. El controlador delega a los objetos de la vista la tarea de desplegar la interfaz de usuario. La vista obtiene sus datos del modelo para generar la interfaz apropiada para el usuario donde se refleja los cambios en el modelo.
+
+\section{Estructura de paquetes}
+\subsection{Paquete es.udc.acarballal.elmas.model}
+En este paquete se implementa toda la lógica de negocio, separándola de otros aspectos, como es el caso de la vista y el controlador (ver Figura \ref{model}). A su vez implementa tanto los diferentes casos de uso recogidos en las tres fachadas (userservice, videoservice y adminservice) como el tratamento de las diferentes entidades participantes con su correspondiente persistencia.
+
+\begin{figure}[htp]
+\centering
+\includegraphics{imagenes/model.jpg}
+\caption{Estructura de paquetes de la capa modelo}
+\label{model}
+\end{figure}
+
+Los paquetes en los que a su vez se subdivide son:
+\begin{itemize}
+	\item \textbf{es.udc.acarballal.elmas.model.userprofile:}	incluye las clases necesarios para mantener la persistencia de la entidad userprofile, donde se recogen los datos referentes a la información de usuarios.
+	\item \textbf{es.udc.acarballal.elmas.model.video:}	incluye las clases necesarios para mantener la persistencia de la entidad video, donde se recogen los datos referentes a la información de videos.
+	\item \textbf{es.udc.acarballal.elmas.model.vote:}	incluye las clases necesarios para mantener la persistencia de la entidad voto, donde se recogen los votos de los diferentes videos.
+	\item \textbf{es.udc.acarballal.elmas.model.message:}	incluye las clases necesarios para mantener la persistencia de la entidad mensaje, donde se recogen los mensajes enviados entre usuarios, en nuestro caso, mensajes de administradores a usuarios.
+	\item \textbf{es.udc.acarballal.elmas.model.favourite:}	incluye las clases necesarios para mantener la persistencia de la entidad favourite, donde se recogen las referencias a los videos favoritos de un determinado usuario.
+	\item \textbf{es.udc.acarballal.elmas.model.usercomment:}	incluye las clases necesarios para mantener la persistencia de la entidad usercomment, donde se recogen los comentario realizados sobre un determinado usuario.
+	\item \textbf{es.udc.acarballal.elmas.model.videocomment:}	incluye las clases necesarios para mantener la persistencia de la entidad videocomment, donde se recogen los comentarios realizados sobre un determinado video.
+	\item \textbf{es.udc.acarballal.elmas.model.videocomplaint:}	incluye las clases necesarios para mantener la persistencia de la entidad videocomplaint, donde se recogen las quejas realizadas sobre el contenido de un video.
+	\item \textbf{es.udc.acarballal.elmas.model.usercommentcomplaint:}	incluye las clases necesarios para mantener la persistencia de la entidad usercommentcomplaint, donde se recogen las quejas realizadas sobre el contenido de un comentario hacia un usuario.
+	\item \textbf{es.udc.acarballal.elmas.model.videocommentcomplaint:}	incluye las clases necesarios para mantener la persistencia de la entidad videocommentcomplaint, donde se recogen las quejas realizadas sobre el contenido de un comentario perteneciente a algun video.
+	\item \textbf{es.udc.acarballal.elmas.model.userservice:}	incluye las interfaces y clases que implementan los casos
+de uso relacionados con las entidades userprofile, message, usercomment y usercommentcomplaint.
+\item \textbf{es.udc.acarballal.elmas.model.video:}	incluye las interfaces y clases que implementan los casos
+de uso relacionados con las entidades video, vote, favourite, videocomment y videocommentcomplaint.
+\item \textbf{es.udc.acarballal.elmas.model.adminservice:}	incluye las interfaces y clases que implementan los casos
+de uso relacionados con la administracion, manejando entidades como userprofile, video, message, videocomplaint, usercommentcomplaint, videocommentcomplaint.
+\end{itemize}
+Mas adelante se profundizará en todos estos subpaquete en la sección \ref{capamodelo} denominada ``\titleref{capamodelo}'' (página \pageref{capamodelo}).
+\subsection{Paquete es.udc.acarballal.elmas.web}
+Este subpaquete implementa la lógica de la capa controlador, que se encargará de todos los aspectos de intercomunicación entre la vista (independientemente de que se trate de una aplicación web o aplicación cliente), y la lógica
+de negocio del modelo.
+
+\begin{figure}[htp]
+\centering
+\includegraphics{imagenes/web.jpg}
+\caption{Estructura de paquetes de las capas vista y controlador}
+\label{web}
+\end{figure}
+
+Los paquetes en los que a su vez se subdivide son:
+
+\begin{itemize}
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages} Contiene las clases asociadas con cada una de las paginas visibles para cualquier usuario. Las plantillas referentes a dichas paginas se encontrarán en el directorio resources siguiendo una estructura de paquetes análoga.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.user} Contiene las clases asociadas con cada una de las paginas visibles para un usuario registrado. Las plantillas referentes a dichas paginas se encontrarán en el directorio resources siguiendo una estructura de paquetes análoga.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.admin} Contiene las clases asociadas con cada una de las paginas visibles para un administrador. Las plantillas referentes a dichas paginas se encontrarán en el directorio resources siguiendo una estructura de paquetes análoga.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.errors} Contiene las clases asociadas con cada una de las paginas de error. Las plantillas referentes a dichas paginas se encontrarán en el directorio resources siguiendo una estructura de paquetes análoga.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.mobile}	Contiene las clases asociadas con cada una de las paginas visibles para cualquier usuario del servicio para dispositivos moviles. Las plantillas referentes a dichas paginas se encontrarán en el directorio resources siguiendo una estructura de paquetes análoga.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.mobile.user} Contiene las clases asociadas con cada una de las paginas visibles para un usuario registrado del servicio para dispositivos moviles. Las plantillas referentes a dichas paginas se encontrarán en el directorio resources siguiendo una estructura de paquetes análoga.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.mobile.error} Contiene las clases asociadas con cada una de las paginas de error del servicio para dispositivos moviles. Las plantillas referentes a dichas paginas se encontrarán en el directorio resources siguiendo una estructura de paquetes análoga.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.components} Contiene las clases que se utilizarán como plantillas para la representación de los diferentes tipos de pagina web en un navegador, recogiendo funcionalidad comun para todas ellas.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.util} Contiene las clases que representan los Application State Objects(ASOs), los cuales son objetos que son accesibles a todas las páginas.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.services} Contiene las clases referentes tanto al mantenimiento de la sesión y otros ASOs como al control de acceso a recursos.
+\end{itemize}
+
+\subsection{Paquete es.udc.acarballal.elmas.ffmpeg}
+
+
+\section{Capa modelo}
+\label{capamodelo}
+\subsection{Almacenamiento persistente}
+\subsubsection{Clases Persistentes}
+\subsubsection{Hibernate}
+\subsection{Fachadas y servicios}
+El origen de Spring framework se remonta al framework llamado Interface 21 el cual fue utilizado en el libro "Expert One to One J2EE Design and Development" escrito por Rod Johnson, después se le cambio el nombre a Spring Framework, desde la primera versión lanzada en Marzo del 2004 Spring framework es Open Source y el código fuente esta bajo la licencia Apache, algunas de las razones para utilizar Spring framework son las siguientes:
+
+    * Permite hacer un diseño por medio de interfaces de una manera sencilla.
+    * Implementa patrones de diseño.
+    * La documentación es extensa.
+    * Es un framework open source.
+    * Se comunica fácilmente con otros frameworks como lo son: Struts, Hibernate, iBatis, Tapestry, entre otros.
+
+\subsection{Integración con servicios externos}
+\subsection{Configuración}
+
+\section{Capa vista}
+\section{Capa controlador}
+
+

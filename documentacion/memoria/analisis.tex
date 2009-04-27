@@ -2,7 +2,9 @@
 Una vez que se han especificado los requerimientos para ambos sistemas, se realizará una descripción escrita del comportamiento mediante diagramas de casos de uso.
 
 %%
-\section{Casos de uso}
+%% Seccion 1
+%%
+\section{Modelo de análisis}
 Un caso de uso es una secuencia de interacciones que se desarrollarán entre un sistema y sus actores en respuesta a un evento que inicia un actor principal sobre el propio sistema. Los diagramas de casos de uso sirven para especificar la comunicación y el comportamiento de un sistema mediante su interacción con los usuarios y/u otros sistemas.
 Dentro de un diagrama de uso se tendrá que tener en cuenta las siguientes definiciones para una mejor comprensión del mismo:
 \begin{itemize}
@@ -23,9 +25,13 @@ Las tres relaciones principales entre los casos de uso son soportadas por el est
 \end{itemize}
 
 %%
+%% Seccion 2
+%%
+\section{Casos de uso del modelo web}
+
+%%
 \subsection{Actores}
-Dentro del sistema se distinguen cuatro perfiles concretos. Entre los cuales se encuentran los usuarios registrados, los participantes del concurso y los administradores, además de cualquier usuario no registrado que puede acceder al portal. En el caso del sistema para navegadores optimizados para moviles se omite el perfil de administrador, así como los casos de usos que no sean referentes a busqueda y visualización de videos propios o favoritos, asi como la realización de las votaciones semanales. 
-Veamos ahora los casos de uso referente a los diferente perfiles que se han mencionado:
+Dentro del sistema se distinguen cuatro perfiles concretos. Entre los cuales se encuentran los usuarios registrados, los participantes del concurso y los administradores, además de cualquier usuario no registrado que puede acceder al portal. Veamos ahora los casos de uso referente a los diferente perfiles que se han mencionado:
 \begin{figure}[hb]
 \centering
 \includegraphics*[width=5cm]{imagenes/Actores.jpg}
@@ -50,7 +56,7 @@ A continuación se muestra el diagrama de casos de uso para un usuario que se cor
 \centering
 \includegraphics*[width=15cm]{imagenes/RegisteredUser.jpg}
 \caption{Perfil de usuario registrado}
-\label{User}
+\label{RegisteredUser}
 \end{figure}
 
 \subsection{Casos de usos de participante}
@@ -59,7 +65,7 @@ En la siguiente figura se especifican los casos de usos referentes al perfil de 
 \centering
 \includegraphics*[width=13cm]{imagenes/Competitor.jpg}
 \caption{Perfil de usuario participante}
-\label{User}
+\label{Competitor}
 \end{figure}
 
 \subsection{Casos de usos de administrador}
@@ -68,10 +74,29 @@ A continuación se muestra el diagrama de casos de uso para un usuario que se cor
 \centering
 \includegraphics*[width=13cm]{imagenes/Admin.jpg}
 \caption{Perfil de usuario administrador}
-\label{User}
+\label{Admin}
 \end{figure}
 
 
+%%
+%% Seccion 3
+%%
+\section{Casos de uso del modelo para dispositivos moviles}
+\subsection{Actores}
+En el caso del modelo para dispositivos moviles el numero de actores no disminuye, pero se reduce considerablemente el numero de casos de usos que se utilizan. En concreto, en el caso del perfil de administrador desaparecen completamente los casos de uso, ya que este modelo esta orientado exclusivamente al uso de usuarios registrados y participantes del concurso.
+\subsection{Casos de usos de todos los perfiles}
+A continuación se muestra el diagrama de casos de uso para un usuario que se corresponda con cada uno de los distintos perfiles.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=12cm]{imagenes/UserMobile.jpg}
+\caption{Perfiles del modelo para dispositivos moviles}
+\label{UserMobile}
+\end{figure}
+
+%%
+%% Seccion 4
+%%
+\newpage
 \section{Explicación de los casos de uso}
 Ahora que se han especificado los casos de uso para cada uno de los perfiles necesarios se realizará la explicacion de aquellos que se consideran mas importantes dentro del sistema.
 \subsection{Casos de usos de usuario}
@@ -89,7 +114,7 @@ Login\\\\
 \end{tabular}
 \newline\newline
 
-Registrar usuario\\\\
+\textbf{Registrar usuario}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Registrarse en el sistema. \\
@@ -101,9 +126,9 @@ Registrar usuario\\\\
   \textbf{Poscondiciones}  & El usuario se registra y queda logueado en el sistema. A su vez es redireccionado a la página inicial o la página de donde se venía si el login es producto de una redirección. \\
   \hline 
 \end{tabular}
-\newline
+\newline\newline
 
-Visualizar los videos mas votados\\\\
+\textbf{Visualizar los videos mas votados}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Muestra los videos mas votados. \\
@@ -115,9 +140,9 @@ Visualizar los videos mas votados\\\\
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
 \end{tabular}
-\newline\newline
 
-Mostrar video\\\\
+\newpage
+\textbf{Mostrar video}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Muestra la información referente a un determinado video. \\
@@ -131,7 +156,7 @@ Mostrar video\\\\
 \end{tabular}
 \newline\newline
 
-Mostrar comentarios de un video\\\\
+\textbf{Mostrar comentarios de un video}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Muestra los comentarios que se han realizado referente a un determinado video. \\
@@ -145,7 +170,7 @@ Mostrar comentarios de un video\\\\
 \end{tabular}
 \newline\newline
 
-Mostrar comentarios del propietario de un video\\\\
+\textbf{Mostrar comentarios del propietario de un video}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Muestra los comentarios que se han realizado referente al propietario de un determinado video. \\
@@ -159,7 +184,7 @@ Mostrar comentarios del propietario de un video\\\\
 \end{tabular}
 \newline\newline
 
-Buscar video\\\\
+\textbf{Buscar video}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Realiza la busqueda de video en funcion de las palabras clave proporcionadas. \\
@@ -171,24 +196,11 @@ Buscar video\\\\
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
 \end{tabular}
-\newline\newline
 
-%\begin{tabular*}{0.75\textwidth}{@{\extracolsep{\fill}} | l | l }
-%  \hline
-%  \textbf{Objetivo} & label \\
-%  \hline 
-%  \textbf{Actores}  & item 2 \\
-%  \hline
-%  \textbf{Precondiciones}  & item 2 \\
-%  \hline 
-%  \textbf{Poscondiciones}  & item 2 \\
-%  \hline 
-%\end{tabular*}
-
-
+\newpage
 \subsection{Casos de usos de usuario registrado}
 
-Logout\\\\
+\textbf{Logout}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Cerrar la sesion creada al realizar login. \\
@@ -202,7 +214,7 @@ Logout\\\\
 \end{tabular}
 \newline\newline
 
-Actualizar información\\\\
+\textbf{Actualizar información}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Actualizar la información de un usuario, incluyen cambiar el password y cambiar el perfil de usuario registrado a usuario participante. \\
@@ -217,7 +229,7 @@ Actualizar información\\\\
 \newline\newline
 
 
-Mostrar mensajes\\\\
+\textbf{Mostrar mensajes}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Muestra los mensajes enviados a un usuario. \\
@@ -231,7 +243,7 @@ Mostrar mensajes\\\\
 \end{tabular}
 \newline\newline
 
-Eliminar mensaje\\\\
+\textbf{Eliminar mensaje}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Eliminar un mensaje enviados a un usuario. \\
@@ -245,7 +257,7 @@ Eliminar mensaje\\\\
 \end{tabular}
 \newline\newline
 
-Mostrar favoritos\\\\
+\textbf{Mostrar favoritos}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Muestra los videos favoritos de un usuario. \\
@@ -259,7 +271,7 @@ Mostrar favoritos\\\\
 \end{tabular}
 \newline\newline
 
-Añadir comentario\\\\
+\textbf{Añadir comentario}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Añadir un comentario a un usuario o a un video del sistema. \\
@@ -273,7 +285,7 @@ Añadir comentario\\\\
 \end{tabular}
 \newline\newline
 
-Eliminar comentario\\\\
+\textbf{Eliminar comentario}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Elimina un comentario a un usuario o a un video del sistema. \\
@@ -285,9 +297,9 @@ Eliminar comentario\\\\
   \textbf{Poscondiciones}  & El comentario se eliminar correctamente en el sistema. \\
   \hline 
 \end{tabular}
-\newline\newline
+\newline
 
-Votacion semanal\\\\
+\textbf{Votacion semanal}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Permite votar un video contabilizado para las votaciones semanales del sistema \\
@@ -301,7 +313,7 @@ Votacion semanal\\\\
 \end{tabular}
 \newline\newline
 
-Quejarse sobre el contenido\\\\
+\textbf{Quejarse sobre el contenido}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Permite quejarse sobre el contenido del sistema. (Usuario, video o comentario). \\
@@ -317,4 +329,172 @@ Quejarse sobre el contenido\\\\
 
 
 \subsection{Casos de usos de participante}
+
+\textbf{Ver mis videos}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra los videos pertenecientes a un participante. \\
+  \hline 
+  \textbf{Actores}  & Usuarios participantes. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+\textbf{Añadir video}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Permite añadir un video a la coleccion de un participante. \\
+  \hline 
+  \textbf{Actores}  & Usuarios participantes. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante. El video tiene que cumplir ciertas condiciones de formato. \\
+  \hline 
+  \textbf{Poscondiciones}  & El video se agrega al sistema. \\
+  \hline 
+\end{tabular}
+\newline
+
+\textbf{Eliminar video}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Permite eliminar un video de la coleccion de un participante. \\
+  \hline 
+  \textbf{Actores}  & Usuarios participantes. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante. El video tiene que que existir. \\
+  \hline 
+  \textbf{Poscondiciones}  & El video es eliminado del sistema. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+
+\textbf{Ver comentarios sobre mi}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Los comentarios realizados por otros usuarios sobre ti. \\
+  \hline 
+  \textbf{Actores}  & Usuarios participantes. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante y poseer videos propios. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+
+\newpage
+\textbf{Ver comentarios sobre mis videos}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Los comentarios realizados por otros usuarios sobre mis videos. \\
+  \hline 
+  \textbf{Actores}  & Usuarios participantes. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante y que el video que se referencia y el comentarista existan. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
 \subsection{Casos de usos de administrador}
+\textbf{Revisar quejas sobre usuarios}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra al administrador las quejas realizadas sobre usuarios. \\
+  \hline 
+  \textbf{Actores}  & Usuario administrador. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+\textbf{Revisar quejas sobre videos}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra al administrador las quejas realizadas sobre videos. \\
+  \hline 
+  \textbf{Actores}  & Usuario administrador. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+\textbf{Revisar quejas sobre comentarios}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Muestra al administrador las quejas realizadas sobre comentarios. \\
+  \hline 
+  \textbf{Actores}  & Usuario administrador. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+\textbf{Eliminar usuario}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Permite al administrador eliminar la cuenta de un usuario. \\
+  \hline 
+  \textbf{Actores}  & Usuario administrador. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador y que el usuario a eliminar exista y que no sea a su vez administrador. \\
+  \hline 
+  \textbf{Poscondiciones}  & El usuario se elimina del sistema. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+\textbf{Eliminar video}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Permite al administrador eliminar un video de un usuario. \\
+  \hline 
+  \textbf{Actores}  & Usuario administrador. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador y que el video a eliminar exista. \\
+  \hline 
+  \textbf{Poscondiciones}  & El video se elimina del sistema. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+\textbf{Eliminar comentario}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Permite al administrador eliminar un comentario de un video de un usuario. \\
+  \hline 
+  \textbf{Actores}  & Usuario administrador. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador y que el video y el comentarios a eliminar existan. \\
+  \hline 
+  \textbf{Poscondiciones}  & El comentario se elimina del sistema. \\
+  \hline 
+\end{tabular}
+\newline\newline
+
+\textbf{Obtener los mejores videos}\\\\
+\begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Objetivo} & Permite al administrador obtener una lista de los mejores videos segun criterio. \\
+  \hline 
+  \textbf{Actores}  & Usuario administrador. \\
+  \hline
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador. \\
+  \hline 
+  \textbf{Poscondiciones}  & Ninguna. \\
+  \hline 
+\end{tabular}
