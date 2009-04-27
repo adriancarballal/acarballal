@@ -106,7 +106,8 @@ public class Vote {
 	Object onSuccess(){
 		try {
 			videoService.voteVideo(vote, userSession.getUserProfileId(), video.getVideoId());
-		// TODO
+		// TODO hay que crear los errors
+			
 //		} catch (InstanceNotFoundException e) {
 //			return InstanceNotFound.class;
 //		} catch (InsufficientPrivilegesException e) {
