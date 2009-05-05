@@ -103,7 +103,6 @@
         p:userProfileDao-ref="userProfileDao" 
         p:videoComplaintDao-ref="videoComplaintDao" 
         p:videoCommentComplaintDao-ref="videoCommentComplaintDao" 
-        p:userCommentComplaintDao-ref="userCommentComplaintDao"
-        p:messageDao-ref="messageDao" />
+        p:userCommentComplaintDao-ref="userCommentComplaintDao"/>
 		    	
 </beans>

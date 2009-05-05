@@ -1,24 +1,26 @@
 package es.udc.acarballal.elmas.model.adminservice.util;
 
 import es.udc.acarballal.elmas.ffmpeg.process.IProcess;
-import es.udc.acarballal.elmas.model.adminservice.AdminService;
+import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
-public class AdminMessage implements IProcess{
+public class ConfirmationMessage implements IProcess{
 	
-	private AdminService adminService;
+	private final static Long ADMIN_PROFILE_ID_MESSAGING = new Long(1);
+	
+	private UserService userService;
 	private Long to;
 	private String text;
 	
-	public AdminMessage(AdminService adminService, Long to, String text){
-		this.adminService = adminService;
+	public ConfirmationMessage(UserService userService, Long to, String text){
+		this.userService = userService;
 		this.to = to;
 		this.text = text;
 	}
 	
 	public boolean execute() {
 		try {
-			adminService.sendConfirmationMessage(to, text);
+			userService.sendMessage(ADMIN_PROFILE_ID_MESSAGING, to, text);
 		} catch (InstanceNotFoundException e) {
 			return false;
 		}

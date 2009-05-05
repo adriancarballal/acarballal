@@ -54,6 +54,132 @@
   	</env-entry>
   	
   	<env-entry>
+    	<env-entry-name>ffmpeg/maxTime</env-entry-name>
+    	<env-entry-value>90</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+  	<env-entry>
+    	<env-entry-name>ffmpeg/flv/extension</env-entry-name>
+    	<env-entry-value>flv</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+  	<env-entry>
+    	<env-entry-name>ffmpeg/flv/videoformat</env-entry-name>
+    	<env-entry-value>flv</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+	<env-entry>
+    	<env-entry-name>ffmpeg/flv/videoframerate</env-entry-name>
+    	<env-entry-value>25</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/flv/videosize</env-entry-name>
+    	<env-entry-value>vga</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+<!--	<env-entry>													-->
+<!--    	<env-entry-name>ffmpeg/flv/audiocodec</env-entry-name>	-->
+<!--    	<env-entry-value>libfaac</env-entry-value>				-->
+<!--    	<env-entry-type>java.lang.String</env-entry-type>		-->
+<!--  	</env-entry>												-->
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/flv/audiobitrate</env-entry-name>
+    	<env-entry-value>64</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/flv/audiochannels</env-entry-name>
+    	<env-entry-value>1</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+	<env-entry>
+    	<env-entry-name>ffmpeg/flv/audiofrecuence</env-entry-name>
+    	<env-entry-value>44100</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+  	<env-entry>
+    	<env-entry-name>ffmpeg/rplayer/extension</env-entry-name>
+    	<env-entry-value>3gp</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+<!--  	<env-entry>															-->
+<!--    	<env-entry-name>ffmpeg/rplayer/videoformat</env-entry-name>		-->
+<!--    	<env-entry-value>3gp</env-entry-value>							-->
+<!--    	<env-entry-type>java.lang.String</env-entry-type>				-->
+<!--  	</env-entry>														-->
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/rplayer/videoframerate</env-entry-name>
+    	<env-entry-value>25</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/rplayer/videosize</env-entry-name>
+    	<env-entry-value>sqcif</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/rplayer/audiocodec</env-entry-name>
+    	<env-entry-value>libfaac</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/rplayer/audiobitrate</env-entry-name>
+    	<env-entry-value>64</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+  	<env-entry>
+    	<env-entry-name>ffmpeg/rplayer/audiochannels</env-entry-name>
+    	<env-entry-value>1</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/rplayer/audiofrecuence</env-entry-name>
+    	<env-entry-value>44100</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+  	<env-entry>
+    	<env-entry-name>ffmpeg/image/extension</env-entry-name>
+    	<env-entry-value>jpg</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+  	<env-entry>
+    	<env-entry-name>ffmpeg/image/time</env-entry-name>
+    	<env-entry-value>10</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/image/start</env-entry-name>
+    	<env-entry-value>10</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+
+	<env-entry>
+    	<env-entry-name>ffmpeg/image/frames</env-entry-name>
+    	<env-entry-value>1</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
+  	
+  	<env-entry>
     	<env-entry-name>portal/url</env-entry-name>
     	<env-entry-value>http://adriancarballal.dynalias.com/videos_webService/</env-entry-value>
     	<env-entry-type>java.lang.String</env-entry-type>

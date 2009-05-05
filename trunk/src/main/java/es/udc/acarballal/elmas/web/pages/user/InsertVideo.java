@@ -1,7 +1,6 @@
 package es.udc.acarballal.elmas.web.pages.user;
 
 import java.io.File;
-import java.util.Calendar;
 
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.tapestry5.annotations.ApplicationState;
@@ -15,8 +14,10 @@ import org.apache.tapestry5.upload.services.UploadedFile;
 
 import es.udc.acarballal.elmas.ffmpeg.process.util.DirectoryGenerator;
 import es.udc.acarballal.elmas.model.adminservice.AdminService;
+import es.udc.acarballal.elmas.model.adminservice.util.ConfirmationMessage;
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.pages.Index;
 import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
@@ -64,6 +65,9 @@ public class InsertVideo {
 	 @Inject 
 	 private VideoService videoService;
 	 
+	 @Inject
+	 private UserService userService;
+	 
 	 
 	 Object onSuccess(){
 		 String originalDir = DirectoryGenerator.create().getAbsolutePath();
@@ -73,14 +77,15 @@ public class InsertVideo {
 
         try {
         	adminService.encodeVideo(copied.getAbsolutePath(), 
-					userSession.getUserProfileId(), title, comment, videoService);
+					userSession.getUserProfileId(), title, comment, userService, videoService);
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
 		} catch (IncorrectPasswordException e) {
 			// NOT REACHED
 		} catch (InsufficientPrivilegesException e) {
 			return InsufficientPrivileges.class;
-		}        
+		}
+        
         return Index.class;
     }
     
@@ -95,12 +100,8 @@ public class InsertVideo {
     
     @SuppressWarnings("deprecation")
 	void onUploadException(FileUploadException ex){
-    	try {
-			adminService.sendErrorMessage(userSession.getUserProfileId(), 
-					messages.get("uploadError") + " [" + Calendar.getInstance().getTime().toGMTString() + "]");
-		} catch (InstanceNotFoundException e) {
-			// NOT REACHED
-		}
+    		new ConfirmationMessage(userService, userSession.getUserProfileId(), 
+    				messages.get("uploadError")).execute();
     }
 
 }
