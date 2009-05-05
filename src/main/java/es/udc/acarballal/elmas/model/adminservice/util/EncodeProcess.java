@@ -1,5 +1,7 @@
 package es.udc.acarballal.elmas.model.adminservice.util;
 
+import es.udc.acarballal.elmas.model.adminservice.thread.TaskThread;
+import es.udc.acarballal.elmas.model.adminservice.thread.ThreadCentral;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 
@@ -25,11 +27,9 @@ public class EncodeProcess extends Thread{
 	}
 
 	public void run(){
-		TaskCentral central = TaskCentral.instance();
-//		UploadTaskList taskList = UploadTaskList.instance();
 		UploadTask task = new UploadTask(userId, title, comment, file, 
 				userService, videoService);
-		central.addProcess(task);
-//		taskList.addProcess(task);		
+		ThreadCentral TC = ThreadCentral.instance();
+		TC.addThread(new TaskThread(task));
 	}
 }
