@@ -6,14 +6,14 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.udc.acarballal.elmas.ffmpeg.encoder.AbstractEncoder;
+import es.udc.acarballal.elmas.ffmpeg.encoder.AbstractEncoderFactory;
+import es.udc.acarballal.elmas.ffmpeg.encoder.EncoderFactory;
 import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.ConfigurationParametersManager;
 import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.MissingConfigurationParameterException;
 import es.udc.acarballal.elmas.ffmpeg.process.IProcess;
 import es.udc.acarballal.elmas.ffmpeg.process.Process;
 import es.udc.acarballal.elmas.ffmpeg.process.util.DirectoryGenerator;
-import es.udc.acarballal.elmas.ffmpegEncoder.AbstractEncoder;
-import es.udc.acarballal.elmas.ffmpegEncoder.AbstractEncoderFactory;
-import es.udc.acarballal.elmas.ffmpegEncoder.EncoderFactory;
 import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 
