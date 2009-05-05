@@ -12,22 +12,9 @@ Shutdown database
 	--> USO DE BACHSIZE!!!!!!!!
 	- mirar votos de un video - preguntar	
 	
-	Hecho:
-		JUnit UserService
-		JUnit VideoService
-		JUnit AdminService
-	
-	JUnit:
-	
-	public void sendConfirmationMessage(Long to, String message);
-	
-	public void sendErrorMessage(Long to, String message);
-	
-	public void encodeVideo(String fileAbsolutePath, 
-    		Long userProfileId,String title,String comment);
-	
-	
-	
+	Mirar:
+	problema, hacer busqueda en la pantalla de inserción de video.
+	pagina de error del mobil.
 	 
 
 		
