@@ -4,9 +4,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import es.udc.acarballal.elmas.ffmpeg.encoder.AbstractEncoder;
 import es.udc.acarballal.elmas.ffmpeg.process.exceptions.NoCommandAvailableException;
 import es.udc.acarballal.elmas.ffmpeg.process.exceptions.ProcessErrorException;
-import es.udc.acarballal.elmas.ffmpegEncoder.AbstractEncoder;
 
 public class Process implements IProcess{
 	
