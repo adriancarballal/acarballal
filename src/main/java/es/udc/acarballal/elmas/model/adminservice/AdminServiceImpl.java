@@ -1,4 +1,4 @@
-package es.udc.acarballal.elmas.model.adminservice;
+  package es.udc.acarballal.elmas.model.adminservice;
 
 import java.util.List;
 
@@ -7,13 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.acarballal.elmas.model.adminservice.util.EncodeProcess;
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
-import es.udc.acarballal.elmas.model.message.Message;
-import es.udc.acarballal.elmas.model.message.MessageDao;
 import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaint;
 import es.udc.acarballal.elmas.model.usercommentcomplaint.UserCommentComplaintDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
 import es.udc.acarballal.elmas.model.userprofile.UserProfileDao;
 import es.udc.acarballal.elmas.model.userprofile.UserProfile.Privileges_TYPES;
+import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaint;
 import es.udc.acarballal.elmas.model.videocommentcomplaint.VideoCommentComplaintDao;
 import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaint;
@@ -24,16 +23,14 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 @Transactional
 public class AdminServiceImpl implements AdminService{
 	
-	private static final Long AdminProfileId = new Long(1); 
-	
 	private UserCommentComplaintDao userCommentComplaintDao;
 	private UserProfileDao userProfileDao;
 	private VideoCommentComplaintDao videoCommentComplaintDao;
 	private VideoComplaintDao videoComplaintDao;
-	private MessageDao messageDao;
 	
 	public void encodeVideo(String fileAbsolutePath, Long userProfileId,
-			String title, String comment, VideoService videoService) 
+			String title, String comment, UserService userService, 
+			VideoService videoService) 
 			throws InstanceNotFoundException, IncorrectPasswordException,
 			InsufficientPrivilegesException {
 		
@@ -46,7 +43,7 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		EncodeProcess hilo = new EncodeProcess(fileAbsolutePath, userProfileId,
-				title, comment, this, videoService);
+				title, comment, userService, videoService);
 		hilo.start();		
 	}
 	
@@ -144,6 +141,7 @@ public class AdminServiceImpl implements AdminService{
 		return complaints.get(0);
 	}
 
+	@Transactional(readOnly = true)
 	public UserCommentComplaintBlock findUserCommentComplaints(
 			Long userProfileId, int startIndex, int count) 
 			throws InsufficientPrivilegesException, InstanceNotFoundException{
@@ -167,6 +165,7 @@ public class AdminServiceImpl implements AdminService{
 		return new UserCommentComplaintBlock(comments, existMoreUserCommentsComplaints);
 	}
 	
+	@Transactional(readOnly = true)
 	public VideoCommentComplaintBlock findVideoCommentComplaints(
 			Long userProfileId, int startIndex, int count) 
 			throws InsufficientPrivilegesException, InstanceNotFoundException{
@@ -191,6 +190,7 @@ public class AdminServiceImpl implements AdminService{
 		return new VideoCommentComplaintBlock(comments, existMoreVideoCommentsComplaints);
 	}
 	
+	@Transactional(readOnly = true)
 	public int getNumberOfUserCommentComplaints(Long userProfileId) 
 			throws InsufficientPrivilegesException, InstanceNotFoundException{
 
@@ -208,6 +208,7 @@ public class AdminServiceImpl implements AdminService{
 		}
 	}
 	
+	@Transactional(readOnly = true)
 	public int getNumberOfVideoCommentComplaints(Long userProfileId) 
 			throws InsufficientPrivilegesException, InstanceNotFoundException{
 
@@ -225,6 +226,7 @@ public class AdminServiceImpl implements AdminService{
 		}
 	}
 	
+	@Transactional(readOnly = true)
 	public int getNumberOfVideoComplaints(Long userProfileId) 
 			throws InsufficientPrivilegesException, InstanceNotFoundException{
 		
@@ -241,27 +243,6 @@ public class AdminServiceImpl implements AdminService{
 			throw e;
 		}
 	}
-	
-	public void sendErrorMessage(Long to, String message)
-			throws InstanceNotFoundException {
-		
-		UserProfile sender = userProfileDao.find(AdminProfileId);
-		UserProfile receiver = userProfileDao.find(to);
-	
-		Message m = new Message(sender, receiver, message);
-		messageDao.create(m);
-}
-
-	public void sendConfirmationMessage(Long to, String message) 
-			throws InstanceNotFoundException {
-	
-		UserProfile sender = userProfileDao.find(AdminProfileId);
-		UserProfile receiver = userProfileDao.find(to);
-	
-		Message m = new Message(sender, receiver, message);
-		messageDao.create(m);
-	}
-
 	
 	public void setUserCommentComplaintDao(
 			UserCommentComplaintDao userCommentComplaintDao){
@@ -281,7 +262,4 @@ public class AdminServiceImpl implements AdminService{
 		this.videoComplaintDao = videoComplaintDao;
 	}
 	
-	public void setMessageDao(MessageDao messageDao){
-		this.messageDao = messageDao;
-	}
 }

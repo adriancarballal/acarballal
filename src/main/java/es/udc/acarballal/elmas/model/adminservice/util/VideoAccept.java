@@ -1,7 +1,6 @@
 package es.udc.acarballal.elmas.model.adminservice.util;
 
 import java.util.Calendar;
-
 import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.ConfigurationParametersManager;
 import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.MissingConfigurationParameterException;
 import es.udc.acarballal.elmas.ffmpeg.process.IProcess;
@@ -33,7 +32,7 @@ public class VideoAccept implements IProcess{
 	
 	private VideoService videoService;
 	
-	public void setUserService(VideoService videoService) {
+	public void setVideoService(VideoService videoService){
 		this.videoService = videoService;
 	}
 	

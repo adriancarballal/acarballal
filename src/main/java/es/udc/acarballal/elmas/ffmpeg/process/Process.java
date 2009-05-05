@@ -4,18 +4,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import es.udc.acarballal.elmas.ffmpeg.encoder.IVideoEncoder;
 import es.udc.acarballal.elmas.ffmpeg.process.exceptions.NoCommandAvailableException;
 import es.udc.acarballal.elmas.ffmpeg.process.exceptions.ProcessErrorException;
+import es.udc.acarballal.elmas.ffmpegEncoder.AbstractEncoder;
 
 public class Process implements IProcess{
 	
 	private final String logFile;
-	private IVideoEncoder encoder;
+	private AbstractEncoder encoder;
 	private static final String FILE_FORMAT = "ISO8859-1";
 	protected OutputStreamWriter logWriter = null;
 	
-	public Process(String logFileName, IVideoEncoder encoder){
+	public Process(String logFileName, AbstractEncoder encoder){
 		this.logFile = logFileName;
 		this.encoder = encoder;
 		try {
@@ -42,7 +42,9 @@ public class Process implements IProcess{
 	
 	private boolean run() throws NoCommandAvailableException, ProcessErrorException{
 		
-		String[] cmd = encoder.generateEncodingCommand().split(" ");
+		String[] cmd = encoder.getEncodingCommand().split(" ");
+		//TODO
+		System.out.println(encoder.getEncodingCommand());
 		if(cmd==null) throw new NoCommandAvailableException();
         try{            
             Runtime rt = Runtime.getRuntime();
@@ -64,7 +66,7 @@ public class Process implements IProcess{
             }
         } 
         catch (Throwable t){
-        	t.printStackTrace();
+        	//t.printStackTrace();
         	throw new ProcessErrorException("Error during StreamGlobber.");
         }
         return true;

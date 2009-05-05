@@ -2,6 +2,7 @@ package es.udc.acarballal.elmas.model.adminservice;
 
 import es.udc.acarballal.elmas.model.exceptions.IncorrectPasswordException;
 import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
+import es.udc.acarballal.elmas.model.userservice.UserService;
 import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaint;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
@@ -9,7 +10,7 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public interface AdminService {
 	
 	public void encodeVideo(String fileAbsolutePath, Long userProfileId,
-		String title, String comment, VideoService videoService) 
+		String title, String comment, UserService userService, VideoService videoService) 
 		throws InstanceNotFoundException, IncorrectPasswordException,	
 		InsufficientPrivilegesException;
 			
@@ -45,10 +46,11 @@ public interface AdminService {
 	public int getNumberOfVideoComplaints(Long userProfileId) 
 		throws InsufficientPrivilegesException, InstanceNotFoundException;
 	
-	public void sendConfirmationMessage(Long to, String message) 
-		throws InstanceNotFoundException;
-
-	public void sendErrorMessage(Long to, String message) 
-		throws InstanceNotFoundException;
+	//TODO
+//	public void sendConfirmationMessage(Long to, String message) 
+//		throws InstanceNotFoundException;
+//
+//	public void sendErrorMessage(Long to, String message) 
+//		throws InstanceNotFoundException;
 
 }
