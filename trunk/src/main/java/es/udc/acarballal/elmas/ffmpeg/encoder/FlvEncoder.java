@@ -1,8 +1,8 @@
 package es.udc.acarballal.elmas.ffmpeg.encoder;
 
-import es.udc.acarballal.elmas.ffmpegEncoder.AbstractCodec;
-import es.udc.acarballal.elmas.ffmpegEncoder.AudioLayer;
-import es.udc.acarballal.elmas.ffmpegEncoder.VideoLayer;
+import es.udc.acarballal.elmas.ffmpeg.encoder.codecs.AbstractCodec;
+import es.udc.acarballal.elmas.ffmpeg.encoder.codecs.AudioLayer;
+import es.udc.acarballal.elmas.ffmpeg.encoder.codecs.VideoLayer;
 
 public class FlvEncoder extends AbstractEncoder{
 	

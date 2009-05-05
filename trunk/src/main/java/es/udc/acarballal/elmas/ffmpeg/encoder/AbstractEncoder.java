@@ -1,9 +1,9 @@
 package es.udc.acarballal.elmas.ffmpeg.encoder;
 
+import es.udc.acarballal.elmas.ffmpeg.encoder.codecs.AbstractCodec;
+import es.udc.acarballal.elmas.ffmpeg.encoder.codecs.Codec;
 import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.ConfigurationParametersManager;
 import es.udc.acarballal.elmas.ffmpeg.encoder.configuration.MissingConfigurationParameterException;
-import es.udc.acarballal.elmas.ffmpegEncoder.AbstractCodec;
-import es.udc.acarballal.elmas.ffmpegEncoder.Codec;
 
 public abstract class AbstractEncoder {
 	

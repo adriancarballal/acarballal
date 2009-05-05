@@ -1,7 +1,7 @@
 package es.udc.acarballal.elmas.ffmpeg.encoder;
 
-import es.udc.acarballal.elmas.ffmpegEncoder.AbstractCodec;
-import es.udc.acarballal.elmas.ffmpegEncoder.ImageLayer;
+import es.udc.acarballal.elmas.ffmpeg.encoder.codecs.AbstractCodec;
+import es.udc.acarballal.elmas.ffmpeg.encoder.codecs.ImageLayer;
 
 public class SnapShotEncoder extends AbstractEncoder{
 	

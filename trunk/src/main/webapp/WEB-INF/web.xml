@@ -196,5 +196,11 @@
     	<env-entry-value>http://adriancarballal.dynalias.com/container/</env-entry-value>
     	<env-entry-type>java.lang.String</env-entry-type>
   	</env-entry>  
+  	
+  	<env-entry>
+    	<env-entry-name>max/parallels/processes</env-entry-name>
+    	<env-entry-value>2</env-entry-value>
+    	<env-entry-type>java.lang.String</env-entry-type>
+  	</env-entry>
 
 </web-app>
