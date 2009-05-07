@@ -15,6 +15,7 @@ Shutdown database
 	Mirar:
 	problema, hacer busqueda en la pantalla de inserción de video.
 	pagina de error del mobil.
+	Rest.
 	 
 
 		

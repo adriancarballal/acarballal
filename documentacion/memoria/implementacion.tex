@@ -78,20 +78,199 @@ Los paquetes en los que a su vez se subdivide son:
 
 \subsection{Paquete es.udc.acarballal.elmas.ffmpeg}
 
+\begin{figure}[htp]
+\centering
+\includegraphics{imagenes/ffmpeg.jpg}
+\caption{Estructura de paquetes del sistema de integración}
+\label{model}
+\end{figure}
+
+\begin{itemize}
+\item \textbf{es.udc.acarballal.ffmpeg.encoder} Contiene las clases que representan los comando de codificación necesarios para la integración con la aplicación de compresion de video FFMpeg.
+\item \textbf{es.udc.acarballal.ffmpeg.encoder.codecs} Contiene las clases que representan las capas de compresión para crear un modelo de compresion de video e imagenes necesarios por los diferentes portales.
+\item \textbf{es.udc.acarballal.ffmpeg.encoder.configuration} Contiene las clases necesarias para la recuperación de variables mediante JNDI (Interfaz de Nombrado y Directorio Java).
+\item \textbf{es.udc.acarballal.ffmpeg.process} Contiene las clases que representan los procesos de compresión.
+\item \textbf{es.udc.acarballal.ffmpeg.process.exceptions} Contiene las clases que representan las excepcion que se pueden producir durante un proceso de compresión de video.
+\item \textbf{es.udc.acarballal.ffmpeg.encoder.util} Contiene las clases utilizadas para la creación de claves alfanuméricas y directorios aleatorios.
+
+\end{itemize}
 
 \section{Capa modelo}
 \label{capamodelo}
 \subsection{Almacenamiento persistente}
-\subsubsection{Clases Persistentes}
-\subsubsection{Hibernate}
-\subsection{Fachadas y servicios}
-El origen de Spring framework se remonta al framework llamado Interface 21 el cual fue utilizado en el libro "Expert One to One J2EE Design and Development" escrito por Rod Johnson, después se le cambio el nombre a Spring Framework, desde la primera versión lanzada en Marzo del 2004 Spring framework es Open Source y el código fuente esta bajo la licencia Apache, algunas de las razones para utilizar Spring framework son las siguientes:
+Para el almacenamiento persistente de datos se utilizará una base de datos relacional. El manejo de los datos se realizará mediante un mapeador objeto-relacional, Hibernate 3, de modo que se simplifica la programación de la capa de persistencia.
+De este modo, mediante la utilización de un ORM, no se oculta el tipo de base de datos pero no se especifica la bases de datos concreta que se utiliza.
+Esta elección nos aportará las siguientes ventajas:
+\begin{itemize}
+	\item Transparencia
+	\item Api dual
+	\item No requiere contenedor
+	\item Modelo e implementación independientes
+	\item Permite grandes consultas (HQL y/ó SQL)
+	\item Optimiza el acceso a los datos
+\end{itemize}
 
-    * Permite hacer un diseño por medio de interfaces de una manera sencilla.
-    * Implementa patrones de diseño.
-    * La documentación es extensa.
-    * Es un framework open source.
-    * Se comunica fácilmente con otros frameworks como lo son: Struts, Hibernate, iBatis, Tapestry, entre otros.
+Para cada clase persistente tendremos por un lado el objeto de transferencia, que sería la clase que contiene los datos que
+sería necesario almacenar de forma persistente, y por otro su interfaz de acceso a datos o DAO.
+
+Para realizar la correspondencia entre los objetos del dominio y las relaciones de la base de datos se realizarán mediante anotaciones java.
+
+\subsubsection{Modelo de dominio}
+En este apartado se definen los conceptos del dominio utilizados. Para cada uno de los mismos se definirán tanto los detalles propios de cada uno como las relaciones que existen entre ellos.
+
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=15cm]{imagenes/persistencia.jpg}
+\caption{Modelo de persistencia}
+\label{dominio}
+\end{figure}
+
+\begin{itemize}
+	\item \textbf{UserProfile (Perfil de usuario)} 
+	
+	Esta entidad representará la información referente a cada usuario registrado dentro del sistema. Entre la información que se guarda se encuentran el nombre y apellidos del usuario (\textit{firstName} y \textit{lastName} respectivamente), el nombre de acceso o login (\textit{loginName}), contraseña (\textit{encryptedPassword}) y su email. Del mismo modo también se recogen los privilegios que tiene el usuario dentro del sistema, entre los cuales se encuentran:
+		\subitem NONE: el usuario no está registrado, no tiene permisos.
+		\subitem VOTER: el usuario está registrado y puede realizar votaciones semanales sobre videos obtenidos de forma aleatoria.
+		\subitem COMPETITOR: el usuario es un participante del concurso y como tal puede añadir gestionar videos propios asociados a su cuenta.
+		\subitem ADMIN: el usuario es un administrador del sistema, tiene permisos para realizar operaciones de administración como resolución de quejas o obtención de informes de los videos más votados.
+		
+Para esta entidad se implementa un DAO específico que da soporte para las operaciones CRUD básicas, además se implementa una operación de busqueda mediante HQL (Hibernate Query Language). 
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=12cm]{imagenes/PersistenciaUserProfile.jpg}
+\caption{DAO de la entidad UserProfile}
+\label{UserProfilePersistance}
+\end{figure}
+En concreto la operación de busqueda \textit{findByLoginName} se basa en la recuperación de un objeto UserProfile a partir del identificador único que lo distingue.
+	\item \textbf{Video} 
+	
+	Esta entidad representará la información referente a cada uno de los videos que son subidos por los usuarios y que entran a formar parte del concurso. Para cada video se recoge información como titulo (\textit{title}), comentario del usuario (\textit{comment}), fecha de subida (\textit{date}) y las direcciones donde se guardan los diferentes formatos de video e imagenes asi como una pequeña captura. Los formatos que se guardan son FLV(alojado en \textit{flvVideo}), Real Player 3gp (\textit{rpVideo}), el archivo de video original subido por el propio usuario (\textit{original}) y la captura de pantalla en formato jpg (\textit{snapshot}).
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=12cm]{imagenes/PersistenciaVideo.jpg}
+\caption{DAO de la entidad Video}
+\label{VideoPersistance}
+\end{figure}
+	
+El DAO correspondiente a esta entidad sigue el mismo formato que el anterior, implementando varios metodos de busqueda necesarios para los diferentes casos de uso especificados con anterioridad. Se trata de busquedas por titulo del video (\textit{findByTitle}), por usuario propietario del video (\textit{findByUser}) y busqueda aleatoria de un video para realizar votacion (\textit{findRandomVotableVideo}). En el ultimo caso, la elección del video a votar se realiza con varias restricciones, entre las que se encuentran:
+\begin{enumerate}
+	\item Un usuario no puede votar un video subido por él mismo.
+	\item Cada semana sólo se pueden votar un total de 10 videos.
+	\item No se puede votar varias veces por el mismo video.
+	\item Los videos a votar son aleatorios.
+\end{enumerate}
+Para que todo esto se cumpla se utiliza el metodo \textit{findRandomVotableVideo}, en cuya implementación se ha optado por realizar busquedas semialeatorias, dando prioridad siempre a los videos más recientes. Se utiliza una ventana de videos configurable mediante JNDI (esta ventana sirve para no tener que manejar cantidades ingentes de videos cada vez que deseemos realizar una votación) desde la cual si que se realizará la obtención del video a votar de manera aleatoria.
+	\item \textbf{Vote} 
+	
+	En esta entidad se recogerán los votos semanales que irán realizando los usuarios sobre los videos aleatorios. Para cada voto se guardará una referencia tanto al video votado como al votante (\textit{video} y \textit{voter} respectivamente), la fecha de la votación y el voto concreto. 
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=15cm]{imagenes/PersistenciaVote.jpg}
+\caption{DAO de la entidad Vote}
+\label{VotePersistance}
+\end{figure}
+
+La votación (\textit{vote}) se realiza de manera cualitativa mediante rangos difusos, donde el usuario deberá elegir la calidad del video de entre las siguientes: muy malo, malo, normal, bueno y muy bueno. En cuanto a la persistencia de este dato en concreto dejamos que el propio mapeador lo almacene como un entero, el cual nos servirá posteriormente para realizar los rankings de los videos más votados.
+
+El DAO de esta entidad implementa dos metodos de busqueda, correspondientes con la busqueda de los videos más votados entre dos fecha proporcionadas y la busqueda de los videos más votados de los que devolverá un numero concreto de videos (\textit{findMostVoted}, ambos análogos). Del mismo modo también se implementa otros dos metodos, uno sirve para conocer si un usuario ha votado por un determinado video (\textit{alreadyVoted}) y el otro para conocer el numero de votaciones restantes que puede realizar un usuario para la semana actual (\textit{votesRemaining}).	
+\item \textbf{UserComment}
+	
+	La entidad UserComment almacenará los comentarios realizados hacia un determinado usuario, el cual, deberá ser un participante del concurso. Para cada comentario se recoge una relación al usuario que comenta (\textit{commentator}), una relación al usuario comentado (\textit{commented}), la fecha del comentario (\textit{date}) y el comentario propiamente dicho (\textit{comment}).
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=15cm]{imagenes/PersistenciaUserComment.jpg}
+\caption{DAO de la entidad UserComment}
+\label{UserCommentPersistance}
+\end{figure}
+
+Su DAO correspondiente implementa, además de las operaciones basica CRUD, dos métodos de busqueda de comentarios atendiendo a los usuarios relacionados con los mismos. De este modo, esas dos métodos son \textit{findCommentByCommentator} que realiza la busqueda de todos los comentarios que ha realizado un determinado usuario, y \textit{findCommentByCommented} que busca todos los comentarios de los que un usuario es objeto.
+	\item \textbf{VideoComment} 
+	
+	La entidad VideoComment almacerá los comentarios realizados hacia un determinado video, el cual, deberá existir en el sistema en todo momento. Para cada comentario se recoge una relación al usuario que comenta el video (\textit{commentator}), una referencia al video que se comenta (\textit{video}), el comentario propiamente dicho (\textit{comment}) y la fecha correspondiente a su publicación (\textit{date}).
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=15cm]{imagenes/PersistenciaVideoComment.jpg}
+\caption{DAO de la entidad VideoComment}
+\label{VideoCommentPersistance}
+\end{figure}
+
+El DAO correspondiente a esta entidad implementa a mayores dos métodos de busqueda de comentarios. La primera de ellas es \textit{findVideoCommentsByUserId}, en la que devolverá todos los comentarios que un usuario ha hecho a algun video en algun momento, y \textit{findVideoCommentsByVideoId}, en la que se devolverán todos los comentarios que se han realizado sobre un determinado video.
+	\item \textbf{UserCommentComplaint} 
+	
+	Esta entidad almacenará las quejas realizadas por cualquier usuario hacia un comentario hacia otro usuario, para que los administradores tengan constancia de ello. La información que se almacenará para cada queja consta de una referencia al usuario que se queja (\textit{complainer}), una referencia al comentario que es objeto de la queja (\textit{referenece}) y la fecha de la notificación de la misma (\textit{date}).
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=15cm]{imagenes/PersistenciaUserCommentComplaint.jpg}
+\caption{DAO de la entidad UserCommentComplaint}
+\label{UserCommentComplaintPersistance}
+\end{figure}
+
+El DAO correspondiente a esta entidad, además de las operaciones que comparte con el resto de DAOs comentados hasta el momento implementa tres nuevas operaciones. El método \textit{countUserCommentComplaints()} permite a los administradores obtener el numero total de quejas sobre comentarios de usuarios que no han sido atendidas, \textit{findUserCommentComplaints} permite obtener un subconjunto de quejas, y por último, \textit{hasComplaint} permite conocer si un usuario ya ha realido una queja al administrador sobre un determinado comentario de usuario.
+	\item \textbf{VideoComplaint} 
+	
+	Esta entidad almacenará las quejas realizadas hacia un video por parte de cualquier usuario que no sea el propio poseedor del video. A partir de esta quejas los administradores tendrán constancia para hacer lo que estimen oportuno. La información que compone dicha queja es un referencia al usuario que ha realizado la queja (\textit{complainer}), el video que es objeto de la queja (\textit{reference}) y la fecha de notificación de la misma (\textit{date}).
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=15cm]{imagenes/PersistenciaVideoComplaint.jpg}
+\caption{DAO de la entidad VideoComplaint}
+\label{VideoComplaintPersistance}
+\end{figure}
+
+Su DAO correspondiente implementa las operaciones básicas CRUD junto con tres nuevos métodos. El método \textit{countVideoComplaints} permite a los administradores obtener el numero total de quejas sobre videos que no han sido atendidas hasta el momento, \textit{findVideoComplaints} permite obtener un subconjunto de quejas sobre videos, y \textit{hasComplaint} permite conocer si un usuario ya ha realizado una queja al administrador sobre un determinado video.
+	\item \textbf{VideoCommentComplaint} 
+	
+	Esta entidad almacerá las quejas realizadas hacia un comentario de un video que ha realizado cualquier otro usuario del sistema. La información que compone dicha queja es una referencia al usuario que ha la realizado (\textit{complainer}), una referencia al comentario de video sobre la que se realiza la quejas (\textit{reference}) y la fecha de la notificación de la queja (\textit{date}).
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=15cm]{imagenes/PersistenciaVideoCommentComplaint.jpg}
+\caption{DAO de la entidad VideoCommentComplaint}
+\label{VideoCommentComplaintPersistance}
+\end{figure}
+
+Su DAO correspondiente implementa las operaciones básicas CRUD junto con tres nuevos métodos. El método \textit{countVideoCommentComplaints} permite a los administradores obtener el numero total de quejas sobre comentarios de videos que no han sido atendidas hasta el momento, \textit{findVideoCommentComplaints} permite obtener un subconjunto de quejas sobre comentarios de videos, y \textit{hasComplaint} permite conocer si un usuario ya ha realizado una queja al administrador sobre un determinado comentario perteneciente a un video.
+\item \textbf{Message}
+	
+	La entidad Message recogerá los mensajes enviados entre usuarios. Para cada mensaje se almacenarán el remitente del mensaje (\textit{sender}), el destinatario (\textit{receiver}) y en cuerpo de mensaje (\textit{text}).
+\begin{figure}[t]
+\centering
+\includegraphics*[width=13cm]{imagenes/PersistenciaMessage.jpg}
+\caption{DAO de la entidad Message}
+\label{MessagePersistance}
+\end{figure}
+
+El DAO de esta entidad implementa dos métodos a mayores de las basicas ya citadas. Estos métodos son \textit{getInBox} que permitirá obtener un conjunto de mensajes que se encuentren relacionados con un usuario (el usuario sea el destinatario de esos mensajes), y \textit{inBoxTotal} que proporciona el numero total de mensajes de los que un usuario es destinatario.
+
+	En cuanto a la implementación real de sistema, los mensajes que pueden aparecer son únicamente de administracion, mensajes enviados de un usuario administrador a cualquier otro usuario. Como existe la posibilidad de ampliar la funcionalidad del sistema para que los usuarios se puedan mandar mensajes privados en el futuro se optó por utilizar un sistema generalizado en lugar de uno específico sólo para mensajes administrativos.
+\item \textbf{Favourite}
+
+	La entidad Favourite almacerá la relación de los videos favoritos de un usuarios dentro de los existentes dentro del sistema. Para cada favorite se almacena una referencia al usuario que lo ha elegido como tal y otra referencia hacia el video en cuestion.
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=13cm]{imagenes/PersistenciaFavourite.jpg}
+\caption{DAO de la entidad Favourite}
+\label{FavouritePersistance}
+\end{figure}
+
+El DAO correspondiente a Favourite, además de implementar las operaciones básicas CRUD, recoge tres métodos a mayores, \textit{findFavourites} recuperará los videos favoritos de un determinado usuario, \textit{isFavourite} determinará si un determinado video se encuentra en la lista de favoritos de un usuario y \textit{removeFromFavourites} eliminará un video de la lista de favoritos de un usuario.
+\end{itemize}
+\newpage
+\subsection{Fachadas y servicios}
+La implementación de los casos de uso se ha realizado con Spring integrado con Hibernate 3. La combinación de Hibernate con Spring simplifica la implementación de los Objetos de Acceso a Datos (DAOs). Estas facilidades que proporciona Spring se deben a que utiliza el patrón DAO para encapsular los mecanismos de acceso a la base de datos de modo que se pueden implementar los DAOs basados en Hibernate sin tener en cuenta aspectos como las transacciones o la sesión.
+
+El origen de Spring framework se remonta al framework llamado Interface 21 el cual fue utilizado en el libro \textit{Expert One to One J2EE Design and Development} escrito por Rod Johnson. Después se le cambio el nombre a Spring Framework. Desde la primera versión lanzada en Marzo del 2004 Spring framework es Open Source y el código fuente esta bajo la licencia Apache. Algunas de las razones para utilizar Spring framework son las siguientes:
+\begin{itemize}
+	\item Permite hacer un diseño por medio de interfaces de una manera sencilla.
+	\item Implementa patrones de diseño.
+	\item La documentación es extensa.
+	\item Es un framework open source.
+	\item Se comunica fácilmente con otros frameworks como lo son: Struts, \emph{Hibernate}, iBatis, \emph{Tapestry}, entre otros.
+\end{itemize}
+
+Una vez dicho esto, veamos las diferentes fachadas en las que se divide el sistema. Se han creado tres fachadas concretas en las que se recogen todos los casos de uso comentados en el capítulo denominado ``\titleref{chapterAnalisis}'' (página \pageref{chapterAnalisis}). 
+
+\subsubsection{Fachada de usuarios (\textit{UserService})}
+\subsubsection{Fachada de videos (\textit{VideoService})}
+\subsubsection{Fachada de administración (\textit{AdminService})}
 
 \subsection{Integración con servicios externos}
 \subsection{Configuración}
