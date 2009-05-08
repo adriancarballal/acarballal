@@ -266,12 +266,94 @@ El origen de Spring framework se remonta al framework llamado Interface 21 el cu
 	\item Se comunica fácilmente con otros frameworks como lo son: Struts, \emph{Hibernate}, iBatis, \emph{Tapestry}, entre otros.
 \end{itemize}
 
-Una vez dicho esto, veamos las diferentes fachadas en las que se divide el sistema. Se han creado tres fachadas concretas en las que se recogen todos los casos de uso comentados en el capítulo denominado ``\titleref{chapterAnalisis}'' (página \pageref{chapterAnalisis}). 
+Con el objetivo de implementar las diferentes fachadas del sistema se optado por una implementación basada en la utilización de patrones muy usado para este fin, como son el caso del patrón \textit{Facade} y del patrón \textit{Business Delegate}. Mediante la combinación de estos dos patrones podemos crear una implementación sencilla en la que se oculte la implementación concreta de los métodos de negocio, teniendo en cuenta que el propio Spring implementa gran parte del codigo necesario gracias a su injección de dependencias.
+Una vez dicho esto, veamos las diferentes fachadas en las que se divide el sistema. Se han creado tres fachadas concretas en las que se recogen todos los casos de uso comentados en el capítulo denominado \textit{\titleref{chapterAnalisis}} (página \pageref{chapterAnalisis}). 
 
 \subsubsection{Fachada de usuarios (\textit{UserService})}
-\subsubsection{Fachada de videos (\textit{VideoService})}
-\subsubsection{Fachada de administración (\textit{AdminService})}
+En la fachada de usuarios se definen todos aquellos casos de uso referentes a la información del usuario, mensajería entre usuarios y gestion de comentarios de usuarios, entre los que se encuentran los realizados por el propio usuario o en los que es el usuario el objeto de dichos comentarios.
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=9cm]{imagenes/InterfaceUserService.jpg}
+\caption{Fachada de Usuarios}
+\label{UserService}
+\end{figure}
+Además, dentro de la fachada se definen los siguientes \textit{custom transfer objects}:
+\begin{itemize}
+	\item \textbf{LoginResult: } Este clase se devuelve como resultado de la acción de \textit{login} dentro del sistema. Contiene información referente a identificador de usuario (\textit{userProfileId}), nombre de usuario (\textit{firstName}), contraseña (\textit{encryptedPassword}) y privilegios en el sistema (\textit{privileges}).
+	\item \textbf{UserProfileDetails: } Esta clase contiene todas las propiedades espefícicas de usuario no necesarias para mantener la sesión. Es utilizada en la acción de registro de usuarios. Las propiedades que la componen son el nombre y apellidos reales del usuario (\textit{firstName} y \textit{lastName} respectivamente) y el email.
+	\item \textbf{UserCommentBlock: } Almacena bloques de contenido referente a comentarios de usuarios o \textit{UserComment}.
+	Cada uno de esos bloques se encapsula en un objeto de este tipo, el cual, además de contener un subconjunto de comentarios (\textit{userComments}), posee una propiedad para indicar si existen más bloques (\textit{existMoreUserComments}).
+	\item \textbf{MessageBlock: } Esta clase encapsula bloques de contenido referente a mensajes entre usuarios (\textit{messages}). Del mismo modo que el anterior, posee una propiedad para indicar si existen más mensajes (\textit{existMoreMessages}).
+\end{itemize}
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=13cm]{imagenes/UserServiceCTO.jpg}
+\caption{Custom Transfer Objects de UserService}
+\label{UserServiceCTO}
+\end{figure} 
 
+\subsubsection{Fachada de videos (\textit{VideoService})}
+En la fachada de videos se definen todos aquellos casos de uso referentes a la gestión de los videos, de las votaciones y los favoritos de cada usuario, asi como de las quejas que un usuario puede hacer en referencia tanto a videos como a comentarios de videos.
+Dentro de la fachada se definen los siguientes \textit{custom transfer objects}:
+\begin{figure}[htp]
+\centering
+\includegraphics[width=9cm]{imagenes/InterfaceVideoService.jpg}
+\caption{Fachada de videos}
+\label{VideoService}
+\end{figure} 
+\begin{itemize}
+	\item \textbf{VideoBlock} Almacena bloques de contenido referente a videos de usuarios.	Cada uno de esos bloques se encapsula en un objeto de este tipo, el cual, además de contener un subconjunto de videos, posee una propiedad para indicar si existen más bloques (\textit{existMoreVideos}).
+	\item \textbf{VideoCommentBlock} Esta clase encapsula bloques de contenido referente a comentarios de videos (\textit{VideoComments}). Del mismo modo que el anterior, posee una propiedad para indicar si existen más comentarios (\textit{existMoreVideoComments}).
+\end{itemize}
+
+\subsubsection{Fachada de administración (\textit{AdminService})}
+En esta fachada se agrupan todos los casos de uso de administración. Entre ellos se encuentran la administración de quejas (videos, usuarios y comentarios) y la compresión de videos.
+Dentro de la fachada se definen los siguientes \textit{custom transfer objects}:
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{imagenes/InterfaceAdminService.jpg}
+\caption{Fachada de administración}
+\label{AdminService}
+\end{figure} 
+\begin{itemize}
+	\item \textbf{UserCommentComplaintBlock} Almacena bloques de contenido referente a quejas sobre comentarios de usuarios.	Cada uno de esos bloques se encapsula en un objeto de este tipo, el cual, además de contener un subconjunto de quejas, posee una propiedad para indicar si existen más bloques (\textit{existMoreUserCommentComplaints}).
+	\item \textbf{VideoCommentComplaintBlock} Esta clase encapsula bloques de contenido referente a quejas sobre comentarios de videos (\textit{VideoCommentComplaint}). Del mismo modo que el anterior, posee una propiedad para indicar si existen más comentarios (\textit{existMoreVideoCommentComplaints}).
+\end{itemize}
+
+\subsubsection{Ejemplo de configuración}
+Veamos un ejemplo de configuración para la integración de Spring con Hibernate 3. En el fichero de configuración de Spring deberemos especificar varias cosas:
+\begin{itemize}
+	\item \textbf{DataSource} Se necesita configurar una referencia a un DataSource. Spring proporciona, entre otras, las varias opciones para configurar un bean de tipo DataSource, definidos directamente sobre un driver JDBC o localizados via JNDI (este último es nuestro caso). Dentro del fichero de configuración se especificaría de la siguiente manera:
+{\tt \scriptsize
+\begin{verbatim}
+	<bean id="dataSource" class=
+		"org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="com.mysql.jdbc.Driver"
+		p:url="jdbc:mysql://localhost/elmas" p:username="elmas"
+		p:password="elmas" />
+\end{verbatim}
+}
+	\item \textbf{Sesión actual} Los DAOs implementados con Hibernate necesitan un objeto de tipo \textit{org.hibernate.SesionFactory} del que obtener la sesión actual, el cual se indice de esta manera en el fichero de configuración:
+{\tt \scriptsize
+\begin{verbatim}
+	<bean id="sessionFactory“ class=
+		"org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+		p:dataSource-ref="dataSource"
+		p:configLocation="classpath:hibernate.cfg.xml"/>
+\end{verbatim}
+}
+ Debemos tener en cuenta que el fichero \textit{hibernate.cfg.xml} es el fichero de configuración de \textit{Hibernate} y especifica los beans pertenecientes a los diferentes \textit{Transfer Object} pertenecientes a nuestras entidades persistentes.
+ \item \textbf{Transacciones} Spring proporciona una serie de gestores de transacciones que delegan la responsabilidad de la gestión de las transacciones a implementaciones específicas de la plataforma utilizada, configurandose de la siguiente manera:
+{\tt \scriptsize
+\begin{verbatim}
+	<bean id="'transactionManager"
+		class="org.springframework.orm.hibernate3ibernateTransactionManager"
+  	p:sessionFactory-ref="sessionFactory" />
+\end{verbatim}
+}
+	\item \textbf{DAOs}
+	\item \textbf{Fachadas}
+\end{itemize}
 \subsection{Integración con servicios externos}
 \subsection{Configuración}
 
