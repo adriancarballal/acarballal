@@ -320,30 +320,32 @@ Dentro de la fachada se definen los siguientes \textit{custom transfer objects}:
 	\item \textbf{VideoCommentComplaintBlock} Esta clase encapsula bloques de contenido referente a quejas sobre comentarios de videos (\textit{VideoCommentComplaint}). Del mismo modo que el anterior, posee una propiedad para indicar si existen más comentarios (\textit{existMoreVideoCommentComplaints}).
 \end{itemize}
 
+Como se mostró en la figura \ref{model} en la página \pageref{model}, la fachada de servicio posee dos paquetes denominados \textit{Thread} y \textit{Util}, que contienen las clases necesarias para la integración del sistema de codificación proporcionado por el servicio externo y los casos de usos que las manejan. Todo este tema se explicará con mas detalle en la sección \textit{\titleref{ExternalServices}} en la página \pageref{ExternalServices}.
+
 \subsubsection{Ejemplo de configuración}
-Veamos un ejemplo de configuración para la integración de Spring con Hibernate 3. En el fichero de configuración de Spring deberemos especificar varias cosas:
+La configuración del sistema se basa en la declaración de \textit{beans}\footnote{Bean: componente software que tiene la particularidad de ser reutilizable}. Las posibles dependencias existentes entre los distintos beans se mantiene mediante la injección de dependencias basada en ``setters''. Veamos un ejemplo de configuración para la integración de Spring con Hibernate 3. En el fichero de configuración de Spring deberemos especificar varias cosas:
 \begin{itemize}
-	\item \textbf{DataSource} Se necesita configurar una referencia a un DataSource. Spring proporciona, entre otras, las varias opciones para configurar un bean de tipo DataSource, definidos directamente sobre un driver JDBC o localizados via JNDI (este último es nuestro caso). Dentro del fichero de configuración se especificaría de la siguiente manera:
+	\item \textbf{DataSource:} Se necesita configurar una referencia a un DataSource. Spring proporciona, entre otras, las varias opciones para configurar un bean de tipo DataSource, definidos directamente sobre un driver JDBC o localizados via JNDI (este último es nuestro caso). Dentro del fichero de configuración se especificaría de la siguiente manera:
 {\tt \scriptsize
 \begin{verbatim}
-	<bean id="dataSource" class=
-		"org.springframework.jdbc.datasource.DriverManagerDataSource"
+	<bean id="dataSource" 
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="com.mysql.jdbc.Driver"
 		p:url="jdbc:mysql://localhost/elmas" p:username="elmas"
 		p:password="elmas" />
 \end{verbatim}
 }
-	\item \textbf{Sesión actual} Los DAOs implementados con Hibernate necesitan un objeto de tipo \textit{org.hibernate.SesionFactory} del que obtener la sesión actual, el cual se indice de esta manera en el fichero de configuración:
+	\item \textbf{Sesión actual:} Los DAOs implementados con Hibernate necesitan un objeto de tipo \textit{org.hibernate.SesionFactory} del que obtener la sesión actual, el cual se indice de esta manera en el fichero de configuración:
 {\tt \scriptsize
 \begin{verbatim}
-	<bean id="sessionFactory“ class=
-		"org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+	<bean id="sessionFactory“ 
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
 		p:dataSource-ref="dataSource"
 		p:configLocation="classpath:hibernate.cfg.xml"/>
 \end{verbatim}
 }
  Debemos tener en cuenta que el fichero \textit{hibernate.cfg.xml} es el fichero de configuración de \textit{Hibernate} y especifica los beans pertenecientes a los diferentes \textit{Transfer Object} pertenecientes a nuestras entidades persistentes.
- \item \textbf{Transacciones} Spring proporciona una serie de gestores de transacciones que delegan la responsabilidad de la gestión de las transacciones a implementaciones específicas de la plataforma utilizada, configurandose de la siguiente manera:
+ \item \textbf{Transacciones:} Spring proporciona una serie de gestores de transacciones que delegan la responsabilidad de la gestión de las transacciones a implementaciones específicas de la plataforma utilizada, configurandose de la siguiente manera:
 {\tt \scriptsize
 \begin{verbatim}
 	<bean id="'transactionManager"
@@ -351,13 +353,394 @@ Veamos un ejemplo de configuración para la integración de Spring con Hibernate 3
   	p:sessionFactory-ref="sessionFactory" />
 \end{verbatim}
 }
-	\item \textbf{DAOs}
-	\item \textbf{Fachadas}
+	\item \textbf{DAOs:} Para cada uno de los DAOs implementados en el modelo se necesita declarar un bean que lo represente:
+{\tt \scriptsize
+\begin{verbatim}
+	<bean id="userProfileDao"
+  	class="es.udc.acarballal.elmas.model.userprofile.UserProfileDaoHibernate"
+    p:sessionFactory-ref="sessionFactory" />
+\end{verbatim}
+}	
+	\item \textbf{Fachadas:} Del mismo modo que ocurre con los DAOs, para cada fachada es necesario declarar su bean correspondente.
+	{\tt \scriptsize
+\begin{verbatim}
+	<bean id="userService"
+  	class="es.udc.acarballal.elmas.model.userservice.UserServiceImpl"
+    p:userProfileDao-ref="userProfileDao"
+    p:userCommentDao-ref="userCommentDao" 
+    p:userCommentComplaintDao-ref="userCommentComplaintDao" 
+    p:messageDao-ref="messageDao" />
+\end{verbatim}
+}	
 \end{itemize}
 \subsection{Integración con servicios externos}
-\subsection{Configuración}
+\label{ExternalServices}
 
-\section{Capa vista}
-\section{Capa controlador}
+A la hora de realizar la compresión de los videos se ha optado por la utilización de un programa open source como FFMpeg, muy conocido en el campo, que es utilizado como base de otros codificadores multiplataforma, como es el caso de Mencoder. Al no existir en la actualidad ningun API multiproceso para la codificación de videos basado en FFMpeg, se ha creado un sistema completo que interactue con este programa, el cual debe encontrarse instalado en la maquina servidor.
+El sistema se compone de 3 partes.
+\begin{itemize}
+	\item Codificadores o capas de codificación.
+	\item Factoria de codificadores
+	\item Sistema multiproceso
+\end{itemize}
+
+Veamos cada una de estas partes por separado:
+\subsubsection{Codificadores o capas de codificación.}
+
+Para realizar una compresión se necesitan especificar detalles en cuanto a calidad y tamaño de video, audio e imagenes (en el caso de que queramos obtener un \textit{snapshot}\footnote{Captura en formato de imagen a partir de un video multimedia} de un determinado video).
+En el paquete \textit{codecs} se representan cada una de estas capas o \textit{layers}. En concreto tendremos una capa que se encargará especificar el tipo de compresión que se realizará sobre el video (\textit{VideoLayer}), una capa que hará lo mismo con el audio (\textit{AudioLayer}) y otra para el caso de la capturas de pantalla (\textit{SnapShotLayer}).
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{imagenes/ffmpeg_codecs.jpg}
+\caption{Capa de codificación}
+\label{codecs}
+\end{figure} 
+En cuanto a la implementación concreta se ha optado por la utilización del patrón \textit{Decodador}. Para la compresión de un determinado video se crea una capa de compresión basica denominada \textit{Codec}, a la cual se le van añadiendo capas en función del resultado que esperamos obtener. La elección de este patrón se basó en:
+\begin{enumerate}
+	\item Más flexibilidad que la herencia estática.
+	\item Evita clases cargadas de funciones en la parte de arriba de la jerarquía.
+	\item Cambiar la piel de un objeto en vez de sus tripas.
+\end{enumerate}
+Dentro de la jeraquía, la clase abstracta \textit{AbstractCodec}, implementa el método concreto necesario para la obtención de los comandos para realizar la codificación. Este método llamado \textit{generateCommand()} implementa a su vez el patrón \textit{Plantilla}, dejando que sean el codificador base y sus capas las que determinen exactamente el comando final, mediante los métodos \textit{generateVideoOptions}, \textit{generateAudioOptions} y \textit{generateImageOptions}.
+La aplicación de este patrón se debe a que de esta manera somos capaces de controlar las extensiones de las subclases, para implementar las partes del algoritmo que son variables y ocultar de esta manera las partes del algoritmo que permaneces inalteradas.
+Del mismo modo, dicha clase abstracta obtiene mediante JNDI una referencia al path en el cual se encuentra nuestra aplicación en el servidor, con el fin de conformar el comando.
+
+\subsubsection{Factoria de codificadores}
+En nuestro sistemas buscamos realmente poder realizar 3 tipos de compresiones concretas:
+\begin{itemize}
+	\item Compresión de un video a formato FLV\footnote{formato de archivo propietario usado para transmitir video sobre internet usando \textit{Adobe Flash Player}}.
+	\item Compresión de un video a formato 3gp\footnote{formato de archivos usado por teléfonos móviles para almacenar información multimedia (audio y video)}.
+	\item Obtención de una captura de imagen en formato JPEG\footnote{formato de archivo para la compresión de imágenes fotográficas} a partir de un video.
+\end{itemize}
+\begin{figure}[htp]
+\centering
+\includegraphics*[angle=90,width=12cm]{imagenes/ffmpeg_encoderFactory.jpg}
+\caption{Factoría de codificación}
+\label{encodeFactory}
+\end{figure} 
+Una vez que tenemos claro lo que necesitamos, implementamos siguiendo el patrón \textit{Factoría Abstracta} un clase que nos permita obtener un codificador completo para cada una de estas compresiones que buscamos. Mediante esta clase abstracta proporcionamos una biblioteca de productos presentando su interfaz, pero no su implementación. Dicha clase abstracta \textit{AbstractEncoderFactory} declara la interfaz para las operaciones que crean codificadores abstractos (métodos de fabricación). Por otra parte, la clase \textit{EncoderFactory} implementa los métodos de fabricación de codificadores
+concretos, creando para cada método un codificador que satisfaga la creación de un video o imagen a partir del comando que proporciona.
+Para la creación de los diferentes codificadores concretos se necesitan obtener determinados valores en tiempo de ejecución. Estos valores serán variables de la compresión como tiempo máximo del video resultante, calidad del audio y del video, tamaño de salida del video, bit rate\footnote{Tasa de bits (en inglés bit rate) define el número de bits que se transmiten por unidad de tiempo} del audio y del video, etc. Todos estas variables se obtienen mediante JNDI, facilitando de este modo que el administrador sea capaz de cambiarlas sin necesidad se detener el sistema.
+
+\subsubsection{Sistema multiproceso}
+El objetivo final de todo lo explicado hasta el momento es poder realizar la compresión de videos de forma paralela mediante una aplicación exterior. Para ello se ha creado un sistema completo que se encargue de realizarlo, asi como de mantener la integridad de los datos y videos de nuestro sistema y de nuestro contenedor multimedia.
+Se han creado procesos concretos para cada video, que se encargan no solo de realizar la codificación, sino de eliminar los ficheros de log de dichas compresiones, de utilizar una captura de imagen por defecto si no se puede realizar correctamente la extracción de una perteneciente al video, de crear una referencia al video dentro del sistema, de mover los videos resultantes al contenedor multimedia, etc.
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=12cm]{imagenes/ffmpeg_process.jpg}
+\caption{Procesos de codificación}
+\label{process}
+\end{figure} 
+
+Antes de ver esos procesos, veamos como se realizan un proceso de compresión de manera individual: 
+Cada proceso del sistema seguirá la interfaz \textit{IProcess}, la cual, a su vez, implementa el patron \textit{Comando}. Se ha elegido esta implementación basandonos en tres aspectos:
+\begin{enumerate}
+	\item Especificar, encolar, y ejecutar peticiones en diferentes momentos
+	\item Soporte de Deshacer (\textit{Undo})
+	\item Soporte de Logging
+\end{enumerate}
+En la figura \ref{process} podemos ver el diagrama explicativo de un proceso concreto. Cada proceso implementa los comandos \textit{execute()} y \textit{undo()}. Dentro de los procesos concretos, destacamos la utilización de fichero de log mediante el uso de la clase \textit{StreamGobbler}, la cual extiende a la clase Thread del API de Java. Esta clase crea un proceso en segundo plano que recoge la salida del programa externo, avisando al proceso concreto cuando existe algún error durante la codificación. 
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{imagenes/threads.jpg}
+\caption{Threads de codificación}
+\label{Threads}
+\end{figure} 
+
+La salida que recoge la clase StreamGobbler se va guardando en ficheros en formato \textit{log}. Cada procesos elegirá el formato de codificación del fichero de log (se recomienda ISO8859-1) mediante una variable obtenida mediante JNDI. Cuando la clase StreamGobbler reconoce un error avisará al proceso para que este pueda realizar la operación de undo(), necesaria sobre todo para que los fichero de log no queden abiertos indefinidamente.
+El interfaz IProcess no lo utilizan únicamente los procesos de compresión, sino que todos los procesos que toman partido durante un proceso insercción de un video dentro del sistema y del contenedor implementan dicho interfaz.
+Cuando un usuario desea añadir un video se genera una sucesión de procesos relacionados entre si (\textit{UploadTask}), todos del tipo IProcess. Todos estos procesos seguirán el siguiente orden de ejecución:
+\begin{enumerate}
+	\item Codificación del video en formato FLV. La clase FlvEncoder (ver figura \ref{encodeFactory} pág. \pageref{encodeFactory}) se encargá de realizar dicha codificación.
+	\item Codificación del video en formato 3gp. La clase RPEncoder (ver figura \ref{encodeFactory} pág. \pageref{encodeFactory}) se encargá de realizar dicha codificación.
+	\item Mover la captura de pantalla por defecto a la carpeta de trabajo actual, realizado por la clase \textit{FileCopy}.
+	\item Obtención de una captura del imagen del video en formato JPEG. La clase SnapShotEncoder (ver figura \ref{encodeFactory} pág. \pageref{encodeFactory}) se encargá de realizar dicha codificación.
+	\item Eliminar los ficheros de log producidos durante los procesos de codificación. Realizado por la clase \textit{LogDelete}.
+	\item Transferencia de los archivos creados (videos e imagen) junto con el archivo original a su correspondiente emplazamiento dentro del contenedor multimedia, realizado por la clase \textit{MoveTempFolder}.
+	\item Inserción de una referencia del video dentro del sistema, realizado por la clase \textit{AcceptVideo}.
+	\item Confirmar al usuario que su video se ha subido correctamente, o en caso contrario, comunicarle el porqué. Realizado por la clase \textit{ConfirmationMessage}.
+\end{enumerate}
+
+Cada una de estas tareas o \textit{UploadTask} generadas por cada usuario son administradas mediante una centralita de tareas denominada \textit{TaskCentral}. Será esta centralita la cual gestione la ejecución de cada una de las tareas (y subprocesos que la componen). Dentro del diseño de TaskCentral se ha utilizado el patrón Singleton por dos razones concretas:
+\begin{enumerate}
+  \item Para garantizar que existe unicamente una instancia en el servidor.
+	\item Para tener acceso controlado a la única instancia.
+\end{enumerate}
+Internamente TaskCentral se compone de un numero dinamico de hilos de flujo o \textit{TaskList} (vease figura \ref{procesos} en página \pageref{procesos}), que encapsulan un conjunto de procesos de ejecución en orden de entrada, es decir, sin prioridad. Este conjunto de hilos sigue el principio de procesamiento paralelo que vamos buscando, ya que cada hilo de flujo es controlado únicamente por TaskCentral, la cual va insertando procesos (UploadTask) para que sea el propio hilo el que los ejecute en orden de llegada. Se utiliza una variable obtenida mediante JNDI para determinar el número de procesos paralelos máximos que puede realizar la máquina, lo cual nos indicará el número de hilos de procesamiento que podemos tener. Se recomienda que se utilice la siguiente regla a la hora de especificar el numero de procesamiento paralelos en caso de que no se tengan conocimientos espefíficos del sistema.
+\begin{displaymath}
+\mathbf{N} = n - 1 \left\{ \begin{array}{ll}
+\mathbf{N} & \textrm{número de procesamientos paralelos máximo}\\
+n & \textrm{número de procesadores del servidor}
+\end{array} \right.
+\end{displaymath}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{imagenes/Procesos.jpg}
+\caption{Ejemplo de procesamiento}
+\label{procesos}
+\end{figure} 
+
+La razón se basa principalmente en mantener el servidor con el menor estrés posible. Utilizando n-1 procesadores de la máquina nos aseguramos que al menos un procesador en todo momento pueda atender a las peticiones que reciba (en este caso nos referimos a peticiones de ambos portales), de modo que cuando sea necesario tener varios hilos de procesamiento en ejecución al mismo tiempo se pueda seguir dando soporte a la aplicación web.
+
+\subsection{Configuración}
+Repetidas veces a lo largo de este capítulo se ha comentado que el sistema obtiene el valor de algunas variables en tiempo de ejecución mediante JNDI, de modo que se pueda cambiar la configuración del sistema sin tener que detener la aplicación web. Dentro del fichero de configuración de Tapestry se tendrán que especificar los valores que se desean para dichas variables. A continuación se muestra un ejemplo de como quedaría configurada nuestra aplicación con los valores que se proporcionan por defecto:
+{\tt \scriptsize
+\begin{verbatim}
+<env-entry>
+	<env-entry-name>unavailable/snapshot</env-entry-name>
+ 	<env-entry-value>C:\carpeta_apache\container\unavailable.jpg</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+    
+<env-entry>
+ 	<env-entry-name>temporal/directory</env-entry-name>
+ 	<env-entry-value>C:\\carpeta_apache\\temporal\\</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>ffmpeg/application/path</env-entry-name>
+ 	<env-entry-value>ffmpeg.exe</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>ffmpeg/maxTime</env-entry-name>
+ 	<env-entry-value>90</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>ffmpeg/flv/extension</env-entry-name>
+ 	<env-entry-value>flv</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>ffmpeg/flv/videoformat</env-entry-name>
+ 	<env-entry-value>flv</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>ffmpeg/flv/videoframerate</env-entry-name>
+ 	<env-entry-value>25</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+	<env-entry-name>ffmpeg/flv/videosize</env-entry-name>
+ 	<env-entry-value>vga</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<!--
+<env-entry>																							
+	<env-entry-name>ffmpeg/flv/audiocodec</env-entry-name>
+	<env-entry-value>libfaac</env-entry-value>						
+	<env-entry-type>java.lang.String</env-entry-type>			
+</env-entry>																							
+-->
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/flv/audiobitrate</env-entry-name>
+ 	<env-entry-value>64</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/flv/audiochannels</env-entry-name>
+ 	<env-entry-value>1</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>ffmpeg/flv/audiofrecuence</env-entry-name>
+ 	<env-entry-value>44100</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/rplayer/extension</env-entry-name>
+ 	<env-entry-value>3gp</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<!--
+<env-entry>																										
+<env-entry-name>ffmpeg/rplayer/videoformat</env-entry-name>		
+<env-entry-value>3gp</env-entry-value>												
+<env-entry-type>java.lang.String</env-entry-type>						
+</env-entry>
+-->
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/rplayer/videoframerate</env-entry-name>
+ 	<env-entry-value>25</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/rplayer/videosize</env-entry-name>
+ 	<env-entry-value>sqcif</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/rplayer/audiocodec</env-entry-name>
+ 	<env-entry-value>libfaac</env-entry-value>
+	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/rplayer/audiobitrate</env-entry-name>
+ 	<env-entry-value>64</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>ffmpeg/rplayer/audiochannels</env-entry-name>
+ 	<env-entry-value>1</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/rplayer/audiofrecuence</env-entry-name>
+ 	<env-entry-value>44100</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/image/extension</env-entry-name>
+ 	<env-entry-value>jpg</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>ffmpeg/image/time</env-entry-name>
+ 	<env-entry-value>10</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/image/start</env-entry-name>
+ 	<env-entry-value>10</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+ 	<env-entry-name>ffmpeg/image/frames</env-entry-name>
+ 	<env-entry-value>1</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>portal/url</env-entry-name>
+ 	<env-entry-value>http://adriancarballal.dynalias.com/videos_webService/</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>container/directory</env-entry-name>
+ 	<env-entry-value>C:\\carpeta_apache\\container</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+  	
+<env-entry>
+ 	<env-entry-name>container/url</env-entry-name>
+ 	<env-entry-value>http://adriancarballal.dynalias.com/container/</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>  
+  	
+<env-entry>
+ 	<env-entry-name>max/parallels/processes</env-entry-name>
+ 	<env-entry-value>1</env-entry-value>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+\end{verbatim}
+}
+\section{Capa presentación}
+Como se comentó con anterioridad la aplicación sigue el patrón arquitectónico \textit{Modelo Vista Controlador} (MVC). 
+\begin{figure}[htp]
+\centering
+\includegraphics[width=9cm]{imagenes/mvc.jpg}
+\caption{Modelo - Vista - Controlador}
+\label{MVCFlow}
+\end{figure} 
+En nuestro caso, las clases inferiores componen el modelo (explicado en la sección anterior), mientras que esta capa representa a la vista y al controlador.
+Se eligió el framework web \textit{Tapestry 5}, en su versión 5.0.18 Stable (Junio 2008). Este framework es totalmente orientado a objetos, donde cada pantalla de la aplicación se compondrá por un lado del aspecto visual, en HTML plano (ficheros \textit{tml}), y por otro por los componentes que implementan las acciones asociadas a dicha pantalla o controladores.
+
+En Tapestry 5 una aplicación web se compone de páginas. El controlador de cada página está compuesto por diferentes componentes, los cuales a su vez pueden estár compuestos por otros subcomponentes (véase figura \ref{componentes} en página \pageref{componentes}).
+\begin{figure}[htp]
+\centering
+\includegraphics[width=9cm]{imagenes/componentes.jpg}
+\caption{Modelo de aplicación web en Tapestry }
+\label{componentes}
+\end{figure} 
+
+Es por esto que Tapestry es un framework orientado a componentes, ya que todo se ve como tal. Cada componente en concreto puede estar asociado a diferentes cosas: plantillas, mensajes internacionalizados, etc... (véase figura \ref{ElementosComponentes} en página \pageref{ElementosComponentes}).
+\begin{figure}[htp]
+\centering
+\includegraphics[width=9cm]{imagenes/componenteElementos.jpg}
+\caption{Elementos asociados con componentes en Tapestry }
+\label{ElementosComponentes}
+\end{figure} 
+
+\subsection{Capa controlador}
+El controlador será el encargado de transmitir los eventos que se producen en la vista a la capa modelo y al mismo tiempo recuperar los datos del modelo para mostrarlos en la vista, manteniendo por otra parte ambas capas desacopladas.
+En el caso de Tapestry, es el propio framework el que se encarga de gestionar las peticiones, estando esta implementación oculta para el desarrollador. En cambio, si que se tendrá que definir lo siguiente:
+\begin{enumerate}
+	\item Los componentes comunes para todas las páginas. En nuestro caso, todas las paginas de la aplicación derivan de un modelo o plantilla, dependiendo de si se tratan de páginas optimizadas para dispositivos móviles o para páginas visualizables con cualquier navegador convencional.
+	\item Los controladores para cada una de las distintas páginas que componen la aplicación. Cada pagina poseerá un controlador propio que interacturá directamente con el modelo y será capaz de posibilitar la navegación hacia otras páginas de la aplicación.
+	\item Los ASO's o \textit{Application State Objects}, objetos que estén accesibles a todas las páginas. Estos objetos contendrá información que necesario dentro de la sesión de un usuario. En nuestra aplicación existen dos, uno guarda la información referente al usuario registrado que maneja la sesión, y en la otra se guarda información referente a la navegación entre páginas.
+	\item Servicios de gestión de peticiones y mantenimiento de la sesión. Tapestry posee su propio gestor de peticiones que implementa el patrón \textit{Cadena de Responsabilidad} con comandos para analizar peticiones y procesarlas de forma adecuada.
+Se nos permite establecer filtros dentro de la cadena de modo que podamos establecer un control sobre el acceso a las diferentes páginas.
+\end{enumerate}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=9cm]{imagenes/IoC.jpg}
+\caption{Tapestry IoC}
+\label{IoC}
+\end{figure} 
+El funcionamiento normal del sistema se basa en que sean las propias páginas las que establezcan el flujo de redireccionamiento. En nuestro caso, mediante la creación de un filtro de control, somos capaces de establecer controles de acceso a determinadas páginas en función de los privilegios que un usuario tiene. El sistema seguiría el siguiente flujo:
+\begin{enumerate}
+	\item Una página se dispone a realizar el cambio a otra página por medio de una petición al servidor.
+	\item Dentro del servidor el filtro de control determina si el usuario asociado a la sesión posee privilegios suficientes para que la petición se lleve a cabo con exito.
+	\item Si el usuario posee privilegios suficientes se le redirige a la página que se solicitaba.
+	\item Si el usuario no posee los privilegios necesarios, se le redirige a otra página.
+\end{enumerate}
+La implementación de los comentado hasta este punto se compone de:
+\begin{itemize}
+	\item \textbf{AppModule:} Inyecta los dos servicios como argumentos del método, para poder añadirlos a la cadena de comandos que utilizará Tapestry. Estos servicios son para mantener la información de sesión y el filtro de redireccionamiento comentado anteriormente.
+	
+	\item \textbf{SessionDispatcher} Servicio \textit{Dispacher} que permite mantener la información de usuario dentro de la sesion. Está directamente relacionado con el ASO \textit{UserSession}.
+
+	\item \textbf{AuthenticationDispatcher} Servicio \textit{Dispacher} que permite establecer un filtro para controlar si el usuario de la sesión tiene permisos suficientes para acceder a determinados recursos.
+	
+	\item \textbf{AuthenticationPolicy} Anotación para especificar el nivel de acceso sobre cada página de la aplicación sobre la que se desee establecer restricciones. Valor por defecto \textit{ALL\_USERS}.
+	
+	\item \textbf{AuthenticationPolicyType} Tipo enumerado que especifica las diferentes políticas de redireccionamiento dentro del sistema. Valores posibles: 
+\begin{itemize}
+	\item ALL\_USERS
+	\item AUTHENTICATED\_USERS
+	\item NON\_AUTHENTICATED\_USERS
+	\item ADMINISTRATORS
+	\item PARTICIPANTS
+\end{itemize}
+\end{itemize}
+
+Para que Tapestry utilice el filtro debemos de especificarselo en su fichero de configuración de la siguiente manera:
+{\tt \scriptsize
+\begin{verbatim}
+<filter>
+ 	<filter-name>app</filter-name>
+ 	<filter-class>org.apache.tapestry5.spring.TapestrySpringFilter</filter-class>
+</filter>
+\end{verbatim}
+}	
+\subsection{Capa vista}
+
 
 
