@@ -17,11 +17,11 @@ Expresa una unidad coherente de funcionalidad del sistema. Se representa en el d
 Las tres relaciones principales entre los casos de uso son soportadas por el estándar UML, el cual describe notación gráfica para esas relaciones.
 	\begin{itemize}
 	\item \textbf{Inclusión:}
-	Es una forma de interacción, un caso de uso dado puede ``incluir'' otro. Esto es útil para extraer comportamientos verdaderamente comunes desde múltiples casos de uso a una descripción individual, desde el caso de uso que lo incluye hasta el caso de uso incluido. La notación es una flecha de punta abierta con línea discontinua, desde el caso de uso que lo incluye al caso de uso incluido, con la etiqueta «include».
+	Es una forma de interacción, un caso de uso dado puede ``incluir'' otro. Esto es útil para extraer comportamientos verdaderamente comunes desde múltiples casos de uso a una des\-crip\-ción individual, desde el caso de uso que lo incluye hasta el caso de uso incluido. La notación es una flecha de punta abierta con línea discontinua, desde el caso de uso que lo incluye al caso de uso incluido, con la etiqueta «include».
 	\item \textbf{Extensión:}
 	Es otra forma de interacción, un caso de uso dado puede extender a otro. Esta relación indica que el comportamiento del caso de uso extensión puede ser insertado en el caso de uso extendido bajo ciertas condiciones. La notación es una flecha de punta abierta con línea discontinua, desde el caso de uso extensión al caso de uso extendido, con la etiqueta «extend».
 	\item \textbf{Herencia:}
-	En la tercera forma de relaciones entre casos de uso, existe una relación generalización/especialización. Un caso de uso dado puede estar en una forma especializada de un caso de uso existente. La notación es una línea solida terminada en un triángulo dibujado desde el caso de uso especializado al caso de uso general.	
+	En la tercera forma de relaciones entre casos de uso, existe una relación generalización/especialización. Un caso de uso dado puede estar en una forma especializada de un caso de uso exis\-ten\-te. La notación es una línea solida terminada en un triángulo dibujado desde el caso de uso especializado al caso de uso ge\-ne\-ral.	
 	\end{itemize}
 \end{itemize}
 
@@ -84,7 +84,7 @@ A continuación se muestra el diagrama de casos de uso para un usuario que se cor
 %%
 \section{Casos de uso del modelo para dispositivos moviles}
 \subsection{Actores}
-En el caso del modelo para dispositivos moviles el numero de actores no disminuye, pero se reduce considerablemente el numero de casos de usos que se utilizan. En concreto, en el caso del perfil de administrador desaparecen completamente los casos de uso, ya que este modelo esta orientado exclusivamente al uso de usuarios registrados y participantes del concurso.
+En el caso del modelo para dispositivos moviles el número de actores no disminuye, pero se reduce considerablemente el número de casos de usos que se utilizan. En concreto, en el caso del perfil de administrador desaparecen completamente los casos de uso, ya que este modelo esta orientado exclusivamente al uso de usuarios registrados y participantes del concurso.
 \subsection{Casos de usos de todos los perfiles}
 A continuación se muestra el diagrama de casos de uso para un usuario que se corresponda con cada uno de los distintos perfiles.
 \begin{figure}[htb]
@@ -99,7 +99,7 @@ A continuación se muestra el diagrama de casos de uso para un usuario que se cor
 %%
 \newpage
 \section{Explicación de los casos de uso}
-Ahora que se han especificado los casos de uso para cada uno de los perfiles necesarios se realizará la explicacion de aquellos que se consideran mas importantes dentro del sistema.
+Ahora que se han especificado los casos de uso para cada uno de los perfiles necesarios se realizará la explicacion de aquellos que se consideran más importantes dentro del sistema.
 \subsection{Casos de usos de usuario}
 Login\\\\
 \begin{tabular}{|l|p{10cm}|}
@@ -108,7 +108,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Todos \\
   \hline
-  \textbf{Precondiciones}  & Ningun usuario logueado en la sesion. El nombre de usuario y la contraseña tienen que coincidir con los datos almacenados en el sistema\\
+  \textbf{Precondiciones}  & Ningun usuario logueado en la sesión. El nombre de usuario y la contraseña tienen que coincidir con los datos almacenados en el sistema\\
   \hline 
   \textbf{Poscondiciones}  & El usuario queda logueado en el sistema y es redireccionado a la página inicial o la página de donde se venía si el login es producto de una redirección. \\
   \hline 
@@ -122,14 +122,14 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Todos. \\
   \hline
-  \textbf{Precondiciones}  & Ningun usuario logueado en la sesion. \\
+  \textbf{Precondiciones}  & Ningun usuario logueado en la sesión. \\
   \hline 
   \textbf{Poscondiciones}  & El usuario se registra y queda logueado en el sistema. A su vez es redireccionado a la página inicial o la página de donde se venía si el login es producto de una redirección. \\
   \hline 
 \end{tabular}
 \newline\newline
 
-\textbf{Visualizar los videos mas votados}\\\\
+\textbf{Visualizar los videos más votados}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
   \textbf{Objetivo} & Muestra los videos mas votados. \\
@@ -188,7 +188,7 @@ Login\\\\
 \textbf{Buscar video}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
-  \textbf{Objetivo} & Realiza la busqueda de video en funcion de las palabras clave proporcionadas. \\
+  \textbf{Objetivo} & Realiza la búsqueda de videos en función de las palabras clave proporcionadas. \\
   \hline 
   \textbf{Actores}  & Todos. \\
   \hline
@@ -204,13 +204,13 @@ Login\\\\
 \textbf{Logout}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
-  \textbf{Objetivo} & Cerrar la sesion creada al realizar login. \\
+  \textbf{Objetivo} & Cerrar la sesión creada al realizar login. \\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión. \\
   \hline 
-  \textbf{Poscondiciones}  & Ningun usuario logueado en la sesion. \\
+  \textbf{Poscondiciones}  & Ningun usuario logueado en la sesión. \\
   \hline 
 \end{tabular}
 \newline\newline
@@ -222,7 +222,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión. \\
   \hline 
   \textbf{Poscondiciones}  & La información se actualiza correctamente en el sistema. \\
   \hline 
@@ -247,11 +247,11 @@ Login\\\\
 \textbf{Eliminar mensaje}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
-  \textbf{Objetivo} & Eliminar un mensaje enviados a un usuario. \\
+  \textbf{Objetivo} & Eliminar un mensaje enviado a un usuario. \\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el mensaje debe existir. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión y el mensaje debe existir. \\
   \hline 
   \textbf{Poscondiciones}  & Se elimina el mensaje del sistema. \\
   \hline 
@@ -265,7 +265,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión. \\
   \hline 
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
@@ -279,7 +279,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el elemento al que se le referencia no debe de ser ni el propio usuario ni un video propiedad del usuario. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión y el elemento al que se le referencia no debe de ser ni el propio usuario ni un video propiedad del usuario. \\
   \hline 
   \textbf{Poscondiciones}  & El comentario se almacena correctamente en el sistema. \\
   \hline 
@@ -293,21 +293,21 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el elemento al que se le referencia debe de ser propiedad del propio usuario. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión y el elemento al que se le referencia debe de ser propiedad del propio usuario. \\
   \hline 
   \textbf{Poscondiciones}  & El comentario se eliminar correctamente en el sistema. \\
   \hline 
 \end{tabular}
 \newline
 
-\textbf{Votacion semanal}\\\\
+\textbf{Votación semanal}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
-  \textbf{Objetivo} & Permite votar un video contabilizado para las votaciones semanales del sistema \\
+  \textbf{Objetivo} & Permite votar un video, cuyo voto será contabilizado para las votaciones semanales del sistema \\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el video al que se le referencia debe existir.\\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión y el video al que se le referencia debe existir.\\
   \hline 
   \textbf{Poscondiciones}  & El voto se contabiliza para dicho video. \\
   \hline 
@@ -321,7 +321,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion y el contenido no debe ser del propio usuario. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión y el contenido no debe ser del propio usuario. \\
   \hline 
   \textbf{Poscondiciones}  & La queja se almacena en el sistema. \\
   \hline 
@@ -338,7 +338,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuarios participantes. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de participante. \\
   \hline 
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
@@ -348,11 +348,11 @@ Login\\\\
 \textbf{Añadir video}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
-  \textbf{Objetivo} & Permite añadir un video a la coleccion de un participante. \\
+  \textbf{Objetivo} & Permite añadir un video a la colección de un participante. \\
   \hline 
   \textbf{Actores}  & Usuarios participantes. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante. El video tiene que cumplir ciertas condiciones de formato. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de participante. El video tiene que cumplir ciertas condiciones de formato. \\
   \hline 
   \textbf{Poscondiciones}  & El video se agrega al sistema. \\
   \hline 
@@ -362,11 +362,11 @@ Login\\\\
 \textbf{Eliminar video}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
-  \textbf{Objetivo} & Permite eliminar un video de la coleccion de un participante. \\
+  \textbf{Objetivo} & Permite eliminar un video de la colección de un participante. \\
   \hline 
   \textbf{Actores}  & Usuarios participantes. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante. El video tiene que que existir. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de participante. El video tiene que que existir. \\
   \hline 
   \textbf{Poscondiciones}  & El video es eliminado del sistema. \\
   \hline 
@@ -381,7 +381,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuarios participantes. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante y poseer videos propios. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de participante y poseer videos propios. \\
   \hline 
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
@@ -395,7 +395,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuarios participantes. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de participante y que el video que se referencia y el comentarista existan. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de participante y que el video que se referencia y el comentarista existan. \\
   \hline 
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
@@ -410,7 +410,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuario administrador. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de administrador. \\
   \hline 
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
@@ -424,7 +424,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuario administrador. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de administrador. \\
   \hline 
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
@@ -438,7 +438,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuario administrador. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de administrador. \\
   \hline 
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
@@ -452,7 +452,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuario administrador. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador y que el usuario a eliminar exista y que no sea a su vez administrador. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de administrador y que el usuario a eliminar exista y que no sea a su vez administrador. \\
   \hline 
   \textbf{Poscondiciones}  & El usuario se elimina del sistema. \\
   \hline 
@@ -466,7 +466,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuario administrador. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador y que el video a eliminar exista. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de administrador y que el video a eliminar exista. \\
   \hline 
   \textbf{Poscondiciones}  & El video se elimina del sistema. \\
   \hline 
@@ -480,7 +480,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuario administrador. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador y que el video y el comentarios a eliminar existan. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de administrador y que el video y el comentarios a eliminar existan. \\
   \hline 
   \textbf{Poscondiciones}  & El comentario se elimina del sistema. \\
   \hline 
@@ -490,11 +490,11 @@ Login\\\\
 \textbf{Obtener los mejores videos}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
-  \textbf{Objetivo} & Permite al administrador obtener una lista de los mejores videos segun criterio. \\
+  \textbf{Objetivo} & Permite al administrador obtener una lista de los mejores videos según criterio. \\
   \hline 
   \textbf{Actores}  & Usuario administrador. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion con el perfil de administrador. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión con el perfil de administrador. \\
   \hline 
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
