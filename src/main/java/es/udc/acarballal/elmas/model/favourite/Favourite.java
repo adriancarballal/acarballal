@@ -2,7 +2,6 @@ package es.udc.acarballal.elmas.model.favourite;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +42,7 @@ public class Favourite {
 		this.id = id;
 	}
 
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@ManyToOne(optional=false)
 	@JoinColumn(name="user")
 	public UserProfile getUser() {
 		return user;
@@ -53,7 +52,7 @@ public class Favourite {
 		this.user = user;
 	}
 
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@ManyToOne(optional=false)
 	@JoinColumn(name="favourite")
 	public Video getFavourite() {
 		return favourite;

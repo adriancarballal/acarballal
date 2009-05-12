@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +33,7 @@ public class VideoCommentComplaint {
 		this.date = date;
 	}
 
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@ManyToOne(optional=false)
 	@JoinColumn(name="complainer")
 	public UserProfile getComplainer() {
 		return complainer;
@@ -55,7 +54,7 @@ public class VideoCommentComplaint {
 		return date;
 	}
 	
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@ManyToOne(optional=false)
 	@JoinColumn(name="reference")
 	public VideoComment getReference() {
 		return reference;

@@ -2,12 +2,12 @@ package es.udc.acarballal.elmas.model.message;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import es.udc.acarballal.elmas.model.userprofile.UserProfile;
@@ -44,7 +44,7 @@ public class Message {
 		this.id = id;
 	}
 	
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@OneToOne
 	@JoinColumn(name="receiver")
 	public UserProfile getReceiver() {
 		return receiver;
@@ -53,7 +53,7 @@ public class Message {
 		this.receiver = receiver;
 	}
 	
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@ManyToOne(optional=false)
 	@JoinColumn(name="sender")
 	public UserProfile getSender() {
 		return sender;
