@@ -3,7 +3,6 @@ package es.udc.acarballal.elmas.model.vote;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +41,7 @@ public class Vote {
 		return date;
 	}
 
-	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+	@ManyToOne(optional=false)
     @JoinColumn(name="vidId")
 	public Video getVideo() {
 		return video;
@@ -62,7 +61,7 @@ public class Vote {
 		return voteId;
 	}
 
-	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+	@ManyToOne(optional=false)
     @JoinColumn(name="voter")
 	public UserProfile getVoter() {
 		return voter;
