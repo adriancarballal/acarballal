@@ -1,27 +1,304 @@
 \chapter{Tecnologías actuales}
+Una vez determinados los objetivos buscados es necesario realizar un estudio de las tecnologías actuales para determinar aquellas que mejor se adapten nuestro propósito. Antes de nada, necesitamos un framework web que sea capaz de manejar componentes asincronos (AJAX) en primer lugar, ya que el gran problema que se nos presenta son el manejo de elementos multimedia, como es el caso de snapshot de videos y componentes de reproducción de video embebido. Veamos las características fundamentales de los framework actuales.
 
-J2ME???
+\section{Frameworks Web}
+\subsection{Struts}
 
-Frameworks Web
-	JSP
-	Struts 2
-	JSF
-	Tapestry 5
-	
-Spring Framework
-	AOP
-	
-ORM
-	Hibernate
-	
-Bases de datos
-	MySql
-	Oracle
-	PostGres
-	
-JavaScript
+Struts es por el momento el más difundido de los frameworks opensource en el ámbito java. Está basado en el modelo 2 y consta, por lo tanto, de un servlet que actúa de controlador central que recibe todas las peticiones de los clientes. Las facilidades de desarrollo que ofrece son:
+\begin{itemize}
+	\item Lógica de navegación entre páginas
+	\item Binding entre java y el html
+	\item Validación de entradas
+	\item Internacionalización
+	\item Independencia del motor de visualización
+	\item Maquetación
+\end{itemize}
+\subsubsection{Ventajas}
+\begin{itemize}
+	\item Más de 6 años demostrando que funciona. Gran cantidad de desarrollos de gran envergadura concretados exitosamente.
+	\item Es el framework más popular de la comunidad java por lo que existen infinidad de material disponible en la web. Buenas prácticas conocidas.
+	\item Documentación muy buena.
+	\item Permite crear sitios internacionales de manera rápida y efectiva.
+	\item Curva de aprendizaje mediana.
+	\item Open Source (Licencia Apache).
+\end{itemize}
+\subsubsection{Desventajas}
+\begin{itemize}
+	\item No abstrae completamente al desarrollador del funcionamiento del protocolo http.
+Aunque se adapta a las incorporaciones de diferentes bibliotecas de tags no está diseñado para facilitar la creación de componentes propios.
+	\item No es natural el mapeo de los datos ingresados a los objetos del negocio.
+	\item Las vistas quedan atadas al dispositivo en el cual se renderizan. No facilita el armado de vistas independientes del dispositivo.
+	\item No es una especificación.
+\end{itemize}
+\subsection{Tapestry}
+Tapestry es otro framework open-source modelo 2 mantenido por la comunidad Apache y una de sus principales características es que está basado en un modelo de componentes. Esto provee una estructura consistente, permitiendo al framework asumir responsabilidades sobre conceptos como la construcción de URL, el despacho, el almacenamiento del estado en el cliente o en el servidor, la validación del usuario, la localización/internacionalización, el manejo de reportes, etc. Un componente es un objeto que tiene sus responsabilidades definidas por el diseño y la estructura del framework en el cual se encuentra. Es decir, sigue una serie de convenciones (nomenclatura, implementación de ciertas interfaces, etc) que le exige el framework. Tapestry, al igual que todos los frameworks de modelo 2, tiene un servlet que centraliza toda la lógica de comunicación. 
 
-AJAX
-	DWR
-	
-CSS
+Desarrollar con Tapestry permite:
+\begin{itemize}
+	\item Transparencia en la construcción de las vistas
+	\item Binding entre java y html
+	\item Manejo de eventos
+	\item Construcción de componentes
+	\item Validación de entradas
+	\item Internacionalización
+\end{itemize}
+\subsubsection{Ventajas}
+\begin{itemize}
+	\item Open Source (Licencia Apache)
+	\item Curva de aprendizaje baja
+	\item Permite el desarrollo de componentes propios
+	\item Los diseñadores web no necesitan aprenderse tags nuevos ni diferentes lenguajes ya que los templates se codifican en html estándar.
+	\item La creación de componentes es relativamente sencilla.
+	\item Componentes asíncronos nativos.
+	\item Separación completa entre la lógica y la presentación (html de java) 
+\end{itemize}
+\subsubsection{Desventajas}
+	\item Comunidad de desarrolladores pequeña-mediana.
+	\item Escasa documentación. Pocos libros editados. Poca información en la web.
+	\item Se requiere configurar 3 archivos para cada página a crear.
+\subsection{JSF}
+ Lo primero que se puede decir sobre Java Server Faces es que no es una implementación sino una especificación (JSR 127) aprobada por el Java Community Process (JCP) para construir interfaces de usuario para las aplicaciones que corren en un servidor. Esto quiere decir que es un estándar y pueden existir varias implementaciones mientras que cumplan con lo que exija la especificación.
+
+JSF es otro framework modelo 2 que posee un controlador central (FrontControler) que se encarga de manejar todas las peticiones del cliente y gestionar su ciclo de vida. Está basado en un modelo de componentes para la interfaz de usuario. Un componente JSF es un elemento reusable y configurable que se puede utilizar en la interfaz de usuario. Los componentes se pueden anidar. Por ejemplo, una página contiene un componente mapa que a su vez contiene un componente botón. El diseño del framework permite navegar a través del árbol de componentes para acceder a sus propiedades. Además, los componentes pueden reaccionar a diferentes eventos y son capaces de almacenar su estado interno. 
+
+Desarrollar con JSF permite:
+\begin{itemize}
+	\item Lógica de navegación entre páginas
+	\item Binding entre la vista y los beans de negocio
+	\item Manejo de eventos
+	\item Internacionalización
+	\item Validación de entradas
+	\item Independencia del dispositivo de presentación
+	\item Construcción de componentes
+\end{itemize}
+\subsubsection{Ventajas}
+\begin{itemize}
+	\item Permite separar claramente el contenido de la presentación y de la lógica.
+	\item Es una especificación, lo que permite tener varias implementaciones (tanto de código cerrado como de código abierto).
+	\item Permite modificar el comportamiento de la aplicación sin conocer el lenguaje en el que está implementado.
+	\item No es necesario conocer el framework en detalle para poder comenzar a utilizarlo.
+	\item Comunidad y herramientas de soporte en aumento.
+\end{itemize}
+\subsubsection{Desventajas}
+\begin{itemize}
+	\item La creación de componentes propios es compleja.
+	\item Requiere javascript.
+	\end{itemize}
+\subsection{Ruby On Rails}
+ Ruby on Rails (ROR) es un framework para desarrollar aplicaciones webs basado en el lenguaje Ruby. En realidad no sólo aplica para la capa de presentación sino que es posible definir desde la lógica de navegación hasta el acceso a datos. ROR busca simplificar el desarrollo de aplicaciones promoviendo las convenciones sobre la configuración. De hecho, el framework no posee archivos de configuración (en realidad posee uno pero es para temas generales como dirección de la base de datos, etc).
+
+Para crear una aplicación con ROR se utiliza un script que genera toda la estructura base con los directorios donde se deben situar los diferentes archivos de código. Por ejemplo, hay directorios para el modelo, la vista y el controlador ya que ROR también está basado en el patrón MVC.
+
+En las vistas, el código ruby es embebido en el código html de manera similar a jsp/php/asp de manera que no se logra una separación total entre el html y el código de implementación. Sin embargo, la lógica de la aplicación, las reglas del negocio, se ejecutan en código ruby puro accedidas a través de los controladores.
+
+Desarrollar aplicaciones con ROR permite
+\begin{itemize}
+	\item Mapeo transparente de URLs a métodos
+	\item Mapeo transparente objeto-relacional
+	\item Desarrollo rápido de aplicaciones CRUD 
+\end{itemize}
+\subsubsection{Ventajas}
+\begin{itemize}
+	\item Alta productividad para desarrollar aplicaciones de tipo CRUD.
+	\item Solución TODO en 1. Desde la presentación hasta la persistencia.
+	\item Es posible mantener ambientes separados de prueba y producción
+	\item No necesita configuración (al menos no mucha).
+	\item Gran aceptación en la comunidad de desarrolladores.
+\end{itemize}
+\subsubsection{Desventajas}
+\begin{itemize}
+	\item Aún no existe constancia de aplicaciones de gran envergadura desarrolladas con este framework más allá de varias aplicaciones web masivas.
+	\item Utiliza lenguaje interpretado y débilmente tipado, difícil de depurar.
+\end{itemize}
+
+\subsection{ASP.NET}
+ ASP.NET es un conjunto de tecnologías definidas por Microsoft para la capa de presentación WEB que forma parte del .NET Framework. En pocas palabras, una página ASP.NET es un archivo de texto con extensión aspx que el servidor sabe que debe procesar de una manera especial. El texto de las páginas puede ser html junto con código scripting que se compila dinámicamente y se ejecuta en el servidor. La página aspx se compila (sólo la primera vez) a código ejecutable .net cuando algún cliente la solicita al servidor. Para incluir código embebido en la página se utilizan separadores. En este sentido es similar al funcionamiento de las páginas JSP de java. Sin embargo la potencia de este framework no reside en estas características sino en las que se describen a continuación.
+
+Las páginas ASP.NET pueden tener controles que se ejecutan del lado del servidor (server controls) que son objetos que representan elementos de la interfaz de usuario que se ejecutan en el servidor y generan código html como resultado de su ejecución. Los controles tienen propiedades, métodos y eventos a los que pueden responder y mediante los que se puede modificar su estado y comportamiento. Este comportamiento se puede declarar en los atributos de su declaración html o de manera programática. 
+
+Trabajar con ASP.NET permite
+\begin{itemize}
+	\item Separación del html y el código .NET.
+	\item Binding entre los elementos de la vista y el código .net
+	\item Validación de entradas
+	\item Manejo de eventos
+	\item Creación de componentes propios
+	\item Internacionalización
+	\item Maquetación
+\end{itemize}
+\subsubsection{Ventajas}
+\begin{itemize}
+	\item Curva de aprendizaje baja
+	\item Permite el desarrollo de controles propios y utilizar controles de terceros
+	\item Gran comunidad de desarrolladores
+	\item Soporte oficial y amplia documentación.
+	\item Permite binding directo entre los componentes y los orígenes de datos.
+	\item Permite desarrollo con herramientas RAD.
+\end{itemize}
+\subsubsection{Desventajas}
+\begin{itemize}
+	\item Propietario de Microsoft. Sólo funciona con Information Server.
+	\item Requiere un IDE como Visual Studio para un desarrollo productivo. Lo que deviene en un costo por desarrollador por el licenciamiento del IDE.
+	\item El control de navegación no está centralizado.
+	\item Código cerrado. Ante la aparición de bugs dentro del framework se depende de Microsoft para solucionarlo.
+	\item Varias de las funcionalidades importantes (maquetación, internacionalización) sólo están disponibles a partir de la versión 2.0.
+	\item Requiere javascript y cookies para funcionar correctamente.
+	\item El estado interno de la vista (viewstate) viaja codificado dentro de un campo hidden. Esto trae problemas de performance y si se utiliza mal, problemas de seguridad.
+\end{itemize}
+
+\subsection{Conclusión}
+Conociendo las excelencias e inconvenientes de cada uno de los framework comentados, vemos claramente que dos framework destacan para el propósito que se nos ha encomentado, como son Struts y Tapestry. En concreto Tapestry nos presenta la posibilidad de utilizar componente asíncronos en el diseño de páginas web \footnote{Tapestry utiliza componentes llamados \textit{Zone} que permiten la creación de espacio asíncronos dentro del diseño de una página, muy útil a la hora de minimizar el número de refrescos innecesarios durante la comunicación con el servidor}. Del mismo modo, la curva de aprendizaje se ha reducido enórmemente entre las versiones 4 y 5, como se muestra en la siguiente figura.
+
+Es por estas razones que se ha escogido este framework. Veamos que otras tecnologías podemos utilizar con Tapestry para mantener la persistencia y gestionar las transacciones con las posible bases de datos que se nos presentan en el mercado.
+
+\section{Contenedores de componentes de negocio}
+Usualmente la arquitectura de una aplicación J2EE contiene varias capas separadas como se puede apreciar en la figura. 
+\begin{figure}[hb]
+\centering
+\includegraphics*[width=15cm]{imagenes/ejb3vsSpring.png}
+\caption{Arquitectura de 3 capas}
+\label{tresCapas}
+\end{figure}
+
+La capa de servidor típicamente contiene componentes de servidor con lógica de negocio, estos son manejados por un contenedor. El contenedor es parte del servidor de aplicaciones. El servidor de aplicaciones provee el ciclo de vida de los componentes, así como servicios de seguridad y manejo de transacciones.
+\subsection{EJB3}
+Una de las metas de la arquitectura EJB es la de poder escribir de manera fácil aplicaciones de negocio orientadas a objetos y distribuidas, basadas en el lenguaje de programación JAVA. Desafortunadamente, las versiones 1.0 a 2.1 de EJB fueron demasiado complejas y no alcanzaron esta meta. El propósito de EJB 3 es el de proveer el soporte de la arquitectura de EJB y al mismo tiempo reducir la complejidad para el desarrollo de aplicaciones empresariales. Para simplificar la arquitectura EJB se realizaron los siguientes cambios:
+\begin{itemize}
+	\item Se introduce las anotaciones de metadatos (metadata annotations) las mismas que pueden ser usadas en combinación con el descriptor de despliegue (deployment descriptor) ó separadas del mismo, para anotar aplicaciones EJB (especificar tipos de componentes, comportamiento, etc.), como una manera de encapsular dependencias del ambiente de trabajo y recursos.
+	\item Se elimina el requerimiento de especificar una interfaz \textit{home}.
+	\item En los entreprise beans se elimina la necesidad de implementar una interfaz específica (javax.ejb.EnterpriseBean).
+	\item Se simplifican los tipos de entreprise beans (Los entity beans fueron removidos).
+	\item La existencia de interceptores reemplaza la necesidad de implementar interfaces tipo callback1.
+	\item Los valores por defecto se emplean lo menos posible (se usa la aproximación de configuración por excepción).
+	\item Se reducen los requerimientos para el manejo de excepciones.
+\end{itemize}
+
+Como contrapunto se introducen en EJB 3 las anotaciones de metadatos y de interceptores como las siguientes:
+\begin{itemize}
+	\item La persistencia de entidades (Entity Persistence) fue simplificada y soportada para modelar dominios de negocio medianos a grandes, además ahora es posible proveer contenedores EJB 3 livianos que pueden ser usados en una capa cliente fuera de la caja del servidor de aplicaciones.
+	\item Se mejora en EJB QL el soporte para consultas y sentencias SQL nativas
+	\item Se provee de un servicio de temporizador (Timer Service) manejado por el contenedor EJB el mismo que permite ejecutar Enterprise Beans en eventos de tiempo específicos.
+	\item En EJB3 se puede usar AOP a través de interceptores.
+\end{itemize}
+
+\subsection{Spring Framework}
+El principal objetivo de Spring Framework es el constituirse en una alternativa sencilla y fácil ante EJB. La simplificación del desarrollo de aplicaciones y de sus respectivas pruebas (testing) es una de las claves del éxito de Spring. Este Framework se sustenta en dos características básicas en su núcleo: Inversion de Control (Inversion of Control IoC) y la Programación Orientada a Aspectos (Aspect-orient programming).
+
+
+Usualmente, los objetos obtienen las referencias de otros objetos requeridos por si mismos (tal como en EJB 2.0 los beans obtienen los recursos necesarios usando JNDI). La inversión de control permite inyectar las dependencias en un bean al momento de su creación usando un manejador externo. El bean sólo necesita definir la propiedad requerida en su código así como el método de establecimiento (set() method). La fuente primaria de la inyección de dependencias es un archivo de configuración en formato XML. Se muestra la estructura de este framework en la siguiente figura:
+
+\begin{figure}[h]
+\centering
+\includegraphics*[width=12cm]{imagenes/spring.png}
+\caption{Estructura Spring Framework}
+\label{spring}
+\end{figure}
+
+
+La Programación Orientada a Aspectos (Aspect-Orient Programming AOP) permite implementar la mayoría de los servicios comunes (como manejo de transacciones, seguridad, logging, etc.) que pueden ser aplicados en múltiples componentes. En el caso del uso de AOP no se requiere ningún conocimiento acerca de cómo han sido enmascarados (wrapped \footernote{Término en inglés que significa envoltura y que en el contexto del texto denota la acción de enmascarar u ocultar una implementación.}) los servicios. AOP es usada en Spring para:
+\begin{itemize}
+	\item Proveer servicios de aplicación (enterprise services) declarativos. Ejemplo declarar el manejo de transacciones.
+	\item Permitir a los usuarios la facilidad de implementar sus propios aspectos personalizados.
+\end{itemize}
+
+Spring provee un número de servicios adicionales que son basados en IoC y AOP. Estos servicios deben ser comparados con sus equivalentes en EJB para poder tener un buen criterio de evaluación.
+
+Entre sus principales características destacar:
+\begin{itemize}
+	\item \textbf{Un completo contenedor ligero:} provee un manejo automatizado y centralizado de todos los objetos de la aplicación. Destacar que este es \textit{no invasivo} y permite montar grandes y complejos sistemas a partir de un conjunto
+de componentes no acoplados de forma coherente y transparente. Además añade agilidad en el desarrollo y pruebas al permitir probar cada componente por separado antes de añadirlo al sistema.
+	\item \textbf{Capa común para la gestión de transacciones:} Esta permite distintos gestores de transacciones y hace muy sencillo separarlas sin atender a detalles de bajo nivel.
+	\item \textbf{Integración:} Incluye integración con Hibernate así como con la mayoría de frameworks web, incluido Tapestry.
+\end{itemize}
+\subsection{Conclusión}
+Spring Framework es especialmente preferible para usarse en compañías pequeñas, en conjunto con otros productos Open-Source. Es un framework muy simple, conveniente y flexible, pero la mismo tiempo muy poderoso. Se recomienda el uso de Spring en los casos donde un contenedor de aplicaciones pesado no es necesario.
+
+\section{Persistencia}
+
+\subsection{iBatis}
+iBATIS es un framework de código abierto basado en capas desarrollado por \textit{Apache Software Foundation} (2001), que se ocupa de la capa de Persistencia (se sitúa entre la lógica de Negocio y la capa de la Base de Datos). Puede ser implementado en Java y .NET (también existe un port para Ruby on Rails llamado RBatis).
+
+iBATIS asocia objetos de modelo (JavaBeans) con sentencias SQL o procedimientos almacenados mediante ficheros descriptores XML, simplificando la utilización de bases de datos. No se trata de un ORM \footernote{definir ORM!!!} puro ya que aún tenemos que escribir los SQL y el mapping se realiza a partir de los resultados del SQL.
+
+Compuesto de dos partes:
+\begin{itemize}
+	\item Capa DAO
+	\begin{itemize}
+		\item Capa general que abstrae el acceso a datos
+	\end{itemize}
+	\item SQLMaps
+	\begin{itemize}
+		\item Envuelve las llamadas a JDBC, definidas en un XML
+		\item Mapeo entre objetos (JavaBeans) y SQL (Statements o StoredProcedures)
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Ventajas}
+\begin{itemize}
+	\item Simplicidad (Fácil de usar, si sabemos SQL)
+	\item Curva de aprendizaje (muy intuitivo al empezar a usar)
+	\item Abstrae (en cierto modo) JDBC
+	\item Control completo sobre los SQL
+	\item Rendimiento: cache fácilmente configurable (LRU, FIFO, Memory, OSCache)
+	\item Flexibilidad (statements dinámicos)
+	\item Permite mapeo directo a XML
+	\item Batches, Lazy Loading, Transacciones, Paginación
+\end{itemize}
+
+\subsubsection{Desventajas}
+\begin{itemize}
+	\item No es un ORM
+	\item El desarrollador debe tener altos conocimientos de SQL
+	\item Transacciones restringidas a un DataSource
+	\item No es independiente del proveedor de BD (e.g. secuencias): baja portabilidad
+\end{itemize}
+
+\subsection{Hibernate}
+Hibernate fue una iniciativa de un grupo de desarrolladores dispersos alrededor del mundo conducidos por Gavin King. Es una herramienta de Mapeo objeto-relacional para la plataforma Java (y disponible también para .Net con el nombre de NHibernate) que facilita el mapeo de atributos entre una base de datos relacional tradicional y el modelo de objetos de una aplicación, mediante archivos declarativos (XML) que permiten establecer estas relaciones. Veamos la estructura de este framework:
+
+La rama actual de desarrollo de Hibernate es la 3.x, la cual incorpora nuevas características, como una nueva arquitectura Interceptor/Callback, filtros definidos por el usuario, y —opcionalmente— el uso de anotaciones para definir la correspondencia en lugar (o conjuntamente con) los archivos XML. 
+
+\begin{figure}[h]
+\centering
+\includegraphics*[width=5cm]{imagenes/hibernate.png}
+\caption{Estructura de Hibernate}
+\label{hibernate}
+\end{figure}
+
+\subsubsection{Ventajas}
+\begin{itemize}
+	\item Pretende ser la solucion completa para el problema de persistencia en Java.
+	\item No intrusivo (estilo POJO).
+	\item Muy buena documentacion (forums para ayuda, libro).
+	\item Comunidad activa con muchos usuarios.
+	\item Transacciones, cache, asociaciones, poliformismo, herencia, lazy loading, persistencia transitiva, estrategias de fetching..
+	\item Potente lenguaje de Consulta (HQL)
+	\item Facil testeo
+\end{itemize}
+
+\subsubsection{Desventajas}
+\begin{itemize}
+	\item No es estandard
+\end{itemize}
+
+\subsection{Conclusión}
+Hibernate es probablemente el ORM más utilizado. Aunque no es un standard ofrece más ventajas que iBatis en cuanto al lenguaje de consulta. Se permite su integración con Spring, como se ha dicho antes, no ofrece ningún problema ya que tanto Hibernate como iBatis son compatibles con dicho framework.
+
+\section{Bases de datos}
+En la actualidad existen diferentes sistemas de gestión de base de datos relacional orientada a objetos, entre los más conocidos están PostgreSQL, MySQL y Oracle. De estos Oracle es el único que es estrictamente comercial, por lo cuál no entrará dentro de nuestra selección previa.
+
+\subsection{PostgreSQL}
+\subsection{MySQL}
+\subsection{Conclusión}
+
+\section{Otras tecnología utilizadas}
+\subsection{JavaScript}
+\subsection{AJAX}
+\subsection{CSS}
+\subsection{JUnit}
+\subsection{CubicTest}
+\subsection{Tsung}
+\subsection{JW FLV Media Player}
+\subsection{JUnit}
+\subsection{CubicTest}
+\subsection{Tsung}
