@@ -98,6 +98,7 @@ Los paquetes en los que a su vez se subdivide son:
 \section{Capa modelo}
 \label{capamodelo}
 \subsection{Almacenamiento persistente}
+\label{persist}
 Para el almacenamiento persistente de datos se utilizará una base de datos relacional. El manejo de los datos se realizará mediante un mapeador objeto-relacional, Hibernate 3, de modo que se simplifica la programación de la capa de persistencia.
 De este modo, mediante la utilización de un ORM, no se oculta el tipo de base de datos pero no se especifica la bases de datos concreta que se utiliza.
 Esta elección nos aportará las siguientes ventajas:
@@ -217,6 +218,7 @@ El DAO correspondiente a esta entidad, además de las operaciones que comparte co
 \end{figure}
 
 Su DAO correspondiente implementa las operaciones básicas CRUD junto con tres nuevos métodos. El método \textit{countVideoComplaints} permite a los administradores obtener el numero total de quejas sobre videos que no han sido atendidas hasta el momento, \textit{findVideoComplaints} permite obtener un subconjunto de quejas sobre videos, y \textit{hasComplaint} permite conocer si un usuario ya ha realizado una queja al administrador sobre un determinado video.
+\newpage
 	\item \textbf{VideoCommentComplaint} 
 	
 	Esta entidad almacerá las quejas realizadas hacia un comentario de un video que ha realizado cualquier otro usuario del sistema. La información que compone dicha queja es una referencia al usuario que ha la realizado (\textit{complainer}), una referencia al comentario de video sobre la que se realiza la quejas (\textit{reference}) y la fecha de la notificación de la queja (\textit{date}).
@@ -425,12 +427,6 @@ Para la creación de los diferentes codificadores concretos se necesitan obtener 
 \subsubsection{Sistema multiproceso}
 El objetivo final de todo lo explicado hasta el momento es poder realizar la compresión de videos de forma paralela mediante una aplicación exterior. Para ello se ha creado un sistema completo que se encargue de realizarlo, asi como de mantener la integridad de los datos y videos de nuestro sistema y de nuestro contenedor multimedia.
 Se han creado procesos concretos para cada video, que se encargan no solo de realizar la codificación, sino de eliminar los ficheros de log de dichas compresiones, de utilizar una captura de imagen por defecto si no se puede realizar correctamente la extracción de una perteneciente al video, de crear una referencia al video dentro del sistema, de mover los videos resultantes al contenedor multimedia, etc.
-\begin{figure}[htp]
-\centering
-\includegraphics*[width=12cm]{imagenes/ffmpeg_process.jpg}
-\caption{Procesos de codificación}
-\label{process}
-\end{figure} 
 
 Antes de ver esos procesos, veamos como se realizan un proceso de compresión de manera individual: 
 Cada proceso del sistema seguirá la interfaz \textit{IProcess}, la cual, a su vez, implementa el patron \textit{Comando}. Se ha elegido esta implementación basandonos en tres aspectos:
@@ -439,7 +435,14 @@ Cada proceso del sistema seguirá la interfaz \textit{IProcess}, la cual, a su ve
 	\item Soporte de Deshacer (\textit{Undo})
 	\item Soporte de Logging
 \end{enumerate}
-En la figura \ref{process} podemos ver el diagrama explicativo de un proceso concreto. Cada proceso implementa los comandos \textit{execute()} y \textit{undo()}. Dentro de los procesos concretos, destacamos la utilización de fichero de log mediante el uso de la clase \textit{StreamGobbler}, la cual extiende a la clase Thread del API de Java. Esta clase crea un proceso en segundo plano que recoge la salida del programa externo, avisando al proceso concreto cuando existe algún error durante la codificación. 
+En la figura \ref{process} podemos ver el diagrama explicativo de un proceso concreto. 
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=12cm]{imagenes/ffmpeg_process.jpg}
+\caption{Procesos de codificación}
+\label{process}
+\end{figure} 
+Cada proceso implementa los comandos \textit{execute()} y \textit{undo()}. Dentro de los procesos concretos, destacamos la utilización de fichero de log mediante el uso de la clase \textit{StreamGobbler}, la cual extiende a la clase Thread del API de Java. Esta clase crea un proceso en segundo plano que recoge la salida del programa externo, avisando al proceso concreto cuando existe algún error durante la codificación. 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=12cm]{imagenes/threads.jpg}
@@ -483,8 +486,18 @@ n & \textrm{número de procesadores del servidor}
 
 La razón se basa principalmente en mantener el servidor con el menor estrés posible. Utilizando n-1 procesadores de la máquina nos aseguramos que al menos un procesador en todo momento pueda atender a las peticiones que reciba (en este caso nos referimos a peticiones de ambos portales), de modo que cuando sea necesario tener varios hilos de procesamiento en ejecución al mismo tiempo se pueda seguir dando soporte a la aplicación web.
 
+\subsection{Almacenamiento multimedia}
+En la sección \titleref{persist} en la página \ref{persist} se especifica como se almacena la información referente a los usuarios, videos y demás referentes a nuestra aplicación, pero no toda la información se guarda en base de datos, como es el caso de los videos. Una opción era la de almacenamiento persistente dentro de la base de datos al igual que el resto de los datos, pero eso conllevaría una gran carga a la hora de suministrar los videos por lo que se optó por un concepto muy extendido hoy en dia, la utilización de contenedores multimedia.
+
+Estos contenedores no serán más que carpetas de acceso público en modo de \textit{sólo lectura}, los cuales se configurarán mediante la utilización de un servidor web HTTP de código abierto (\textit{Apache}). Gracias a esta implementación la única restricción que sufrirá la reproducción de los videos será debida al ancho de banda que se le proporcione a nuestro servidor o servidores web, que serán los encargados de suministrar los videos para su posterior reproducción.
+
 \subsection{Configuración}
-Repetidas veces a lo largo de este capítulo se ha comentado que el sistema obtiene el valor de algunas variables en tiempo de ejecución mediante JNDI, de modo que se pueda cambiar la configuración del sistema sin tener que detener la aplicación web. Dentro del fichero de configuración de Tapestry se tendrán que especificar los valores que se desean para dichas variables. A continuación se muestra un ejemplo de como quedaría configurada nuestra aplicación con los valores que se proporcionan por defecto:
+Repetidas veces a lo largo de este capítulo se ha comentado que el sistema obtiene el valor de algunas variables en tiempo de ejecución mediante JNDI, de modo que se pueda cambiar la configuración del sistema sin tener que detener la aplicación web. 
+
+Dentro del fichero de configuración de Tapestry se tendrán que especificar los valores que se desean para dichas variables.
+
+A continuación se muestra un ejemplo de como quedaría configurada nuestra aplicación con los valores que se proporcionan por defecto:
+
 {\tt \scriptsize
 \begin{verbatim}
 <env-entry>
@@ -672,7 +685,7 @@ Como se comentó con anterioridad la aplicación sigue el patrón arquitectónico \t
 En nuestro caso, las clases inferiores componen el modelo (explicado en la sección anterior), mientras que esta capa representa a la vista y al controlador.
 Se eligió el framework web \textit{Tapestry 5}, en su versión 5.0.18 Stable (Junio 2008). Este framework es totalmente orientado a objetos, donde cada pantalla de la aplicación se compondrá por un lado del aspecto visual, en HTML plano (ficheros \textit{tml}), y por otro por los componentes que implementan las acciones asociadas a dicha pantalla o controladores.
 
-En Tapestry 5 una aplicación web se compone de páginas. El controlador de cada página está compuesto por diferentes componentes, los cuales a su vez pueden estár compuestos por otros subcomponentes (véase figura \ref{componentes} en página \pageref{componentes}).
+En Tapestry 5 una aplicación web se compone de páginas. El controlador de cada página está compuesto por diferentes componentes, los cuales a su vez pueden estár compuestos por otros subcomponentes (véase figura \ref{componentes}).
 \begin{figure}[htp]
 \centering
 \includegraphics[width=9cm]{imagenes/componentes.jpg}
@@ -680,7 +693,7 @@ En Tapestry 5 una aplicación web se compone de páginas. El controlador de cada p
 \label{componentes}
 \end{figure} 
 
-Es por esto que Tapestry es un framework orientado a componentes, ya que todo se ve como tal. Cada componente en concreto puede estar asociado a diferentes cosas: plantillas, mensajes internacionalizados, etc... (véase figura \ref{ElementosComponentes} en página \pageref{ElementosComponentes}).
+Es por esto que Tapestry es un framework orientado a componentes, ya que todo se ve como tal. Cada componente en concreto puede estar asociado a diferentes cosas: plantillas, mensajes internacionalizados, etc... (véase figura \ref{ElementosComponentes}).
 \begin{figure}[htp]
 \centering
 \includegraphics[width=9cm]{imagenes/componenteElementos.jpg}
