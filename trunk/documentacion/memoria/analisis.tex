@@ -32,28 +32,29 @@ Las tres relaciones principales entre los casos de uso son soportadas por el est
 
 %%
 \subsection{Actores}
-Dentro del sistema se distinguen cuatro perfiles concretos. Entre los cuales se encuentran los usuarios registrados, los participantes del concurso y los administradores, además de cualquier usuario no registrado que puede acceder al portal. Veamos ahora los casos de uso referente a los diferente perfiles que se han mencionado:
+Dentro del sistema se distinguen cuatro perfiles concretos. 
 \begin{figure}[hb]
 \centering
-\includegraphics*[width=5cm]{imagenes/Actores.jpg}
+\includegraphics*[width=4.7cm]{imagenes/Actores.jpg}
 \caption{Actores del sistema}
 \label{Actores}
 \end{figure}
 
+Podemos distinguir entre los usuarios registrados, los participantes del concurso y los administradores, además de cualquier usuario no registrado que puede acceder al portal. Veamos ahora los casos de uso referente a los diferente perfiles que se han mencionado:
+
 %%
 \subsection{Casos de usos de usuario}
 En la siguiente figura se especifican los casos de usos referentes al perfil de un usuario no registrado.
-\begin{figure}[hb]
+\begin{figure}[h]
 \centering
-\includegraphics*[width=13cm]{imagenes/User.jpg}
+\includegraphics*[width=15cm]{imagenes/User.jpg}
 \caption{Perfil de usuario no registrado}
 \label{User}
 \end{figure}
 
 \subsection{Casos de usos de usuario registrado}
-A continuación se muestra el diagrama de casos de uso para un usuario que se corresponda con el perfil de un usuario registrado.
-\newpage%%añadimos un retorno de pagina para que encaje
-\begin{figure}[ht]
+En la figura \ref{RegisteredUser} se muestra el diagrama de casos de uso para un usuario que se corresponda con el perfil de un usuario registrado.
+\begin{figure}[h]
 \centering
 \includegraphics*[width=15cm]{imagenes/RegisteredUser.jpg}
 \caption{Perfil de usuario registrado}
@@ -61,10 +62,10 @@ A continuación se muestra el diagrama de casos de uso para un usuario que se cor
 \end{figure}
 
 \subsection{Casos de usos de participante}
-En la siguiente figura se especifican los casos de usos referentes al perfil de un usuario participante.
-\begin{figure}[htb]
+En la figura \ref{Competitor} se especifican los casos de usos referentes al perfil de un usuario participante.
+\begin{figure}[h]
 \centering
-\includegraphics*[width=13cm]{imagenes/Competitor.jpg}
+\includegraphics*[width=15cm]{imagenes/Competitor.jpg}
 \caption{Perfil de usuario participante}
 \label{Competitor}
 \end{figure}
@@ -73,7 +74,7 @@ En la siguiente figura se especifican los casos de usos referentes al perfil de 
 A continuación se muestra el diagrama de casos de uso para un usuario que se corresponda con el perfil de un usuario administrador.
 \begin{figure}[htb]
 \centering
-\includegraphics*[width=13cm]{imagenes/Admin.jpg}
+\includegraphics*[angle=90,width=7cm]{imagenes/Admin.jpg}
 \caption{Perfil de usuario administrador}
 \label{Admin}
 \end{figure}
@@ -82,6 +83,7 @@ A continuación se muestra el diagrama de casos de uso para un usuario que se cor
 %%
 %% Seccion 3
 %%
+\clearpage
 \section{Casos de uso del modelo para dispositivos moviles}
 \subsection{Actores}
 En el caso del modelo para dispositivos moviles el número de actores no disminuye, pero se reduce considerablemente el número de casos de usos que se utilizan. En concreto, en el caso del perfil de administrador desaparecen completamente los casos de uso, ya que este modelo esta orientado exclusivamente al uso de usuarios registrados y participantes del concurso.
@@ -141,8 +143,8 @@ Login\\\\
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
 \end{tabular}
+\newline\newline
 
-\newpage
 \textbf{Mostrar video}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
@@ -256,8 +258,8 @@ Login\\\\
   \textbf{Poscondiciones}  & Se elimina el mensaje del sistema. \\
   \hline 
 \end{tabular}
-\newline\newline
 
+\newpage
 \textbf{Mostrar favoritos}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
@@ -289,7 +291,7 @@ Login\\\\
 \textbf{Eliminar comentario}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
-  \textbf{Objetivo} & Elimina un comentario a un usuario o a un video del sistema. \\
+  \textbf{Objetivo} & Elimina un comentario a un usuario o a un video. \\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
@@ -298,7 +300,7 @@ Login\\\\
   \textbf{Poscondiciones}  & El comentario se eliminar correctamente en el sistema. \\
   \hline 
 \end{tabular}
-\newline
+\newline\newline
 
 \textbf{Votación semanal}\\\\
 \begin{tabular}{|l|p{10cm}|}
@@ -312,7 +314,6 @@ Login\\\\
   \textbf{Poscondiciones}  & El voto se contabiliza para dicho video. \\
   \hline 
 \end{tabular}
-\newline\newline
 
 \textbf{Quejarse sobre el contenido}\\\\
 \begin{tabular}{|l|p{10cm}|}
@@ -357,8 +358,8 @@ Login\\\\
   \textbf{Poscondiciones}  & El video se agrega al sistema. \\
   \hline 
 \end{tabular}
-\newline
 
+\newpage
 \textbf{Eliminar video}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
@@ -386,8 +387,8 @@ Login\\\\
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
 \end{tabular}
+\newline\newline
 
-\newpage
 \textbf{Ver comentarios sobre mis videos}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
@@ -400,8 +401,8 @@ Login\\\\
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
 \end{tabular}
-\newline\newline
 
+\newpage
 \subsection{Casos de usos de administrador}
 \textbf{Revisar quejas sobre usuarios}\\\\
 \begin{tabular}{|l|p{10cm}|}
@@ -443,8 +444,8 @@ Login\\\\
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
 \end{tabular}
-\newline\newline
 
+\newpage
 \textbf{Eliminar usuario}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
@@ -485,8 +486,8 @@ Login\\\\
   \textbf{Poscondiciones}  & El comentario se elimina del sistema. \\
   \hline 
 \end{tabular}
-\newline\newline
 
+\newpage
 \textbf{Obtener los mejores videos}\\\\
 \begin{tabular}{|l|p{10cm}|}
   \hline
