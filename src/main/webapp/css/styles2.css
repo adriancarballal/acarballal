@@ -21,6 +21,16 @@ body {
 	/*border: 2px solid red;*/
 }
 
+.slogan{
+	padding-top: 80px;
+}
+
+.menu-welcome{
+	font-family: Pussycat;
+	font-stretch: normal;
+	font-size: xx-large;
+}
+
 /* Page title. */
 #pageTitle {
 	-moz-border-radius: 7px;
@@ -34,7 +44,7 @@ body {
 	line-height: 24px;
 	width: 97% center;
 	text-align: center;
-	color: #CD1821;
+	color: #f78441;
 }
 
 /* Logo. */
@@ -138,18 +148,18 @@ input.search {
 }
 
 p.section {
-	color: #CD1821;
+	color: #f78441;
 	font-size: large;
 }
 
 p.welcome {
-	color: #CD1821;
+	color: #f78441;
 	font-size: xx-large;
 	margin-top: -10px;
 }
 
 p.welcome2 {
-	color: #2B5497;
+	color: #626669;
 	margin-top: -40px;
 }
 
@@ -188,7 +198,7 @@ div.previousNextLinks span.nextLink {
 	clear: both;
 	font-size: 10px;
 	text-align: center;
-	color: #a1a1a1;
+	color: #626669;
 }
 
 /* LINKS MENU PRINCIPAL */
@@ -227,7 +237,7 @@ td.comments {
 td.top {
 	padding-top: 7px;
 	font-size: 14px;
-	color: #CD1821;
+	color: #f78441;
 	text-align: center;
 }
 
@@ -235,7 +245,7 @@ td.top-title {
 	line-height: 1;
 	padding-top: 3px;
 	font-size: 10px;
-	color: #2B5497;
+	color: #626669;
 	text-align: center;
 }
 
@@ -267,16 +277,19 @@ a.mainlevel:link,a.mainlevel:visited {
 	display: block;
 	margin-left: 4px;
 	padding: 0px 0px 2px 0px;
-	color: #2B5497;
-	width: 180px;
+	color: #626669;
+	width: 150px;
 	text-align: left;
 	background-color: #FBFBFB;
+	background-image: url(images/micro.jpg);
+	background-repeat: no-repeat;
+	padding-left: 30px;
 }
 
 a.mainlevel:hover {
 	-moz-border-radius: 7px;
 	background-color: #f0f0f0;
-	color: #CD1821;
+	color: #f78441;
 }
 
 /* BUSQUEDA DE VIDEOS */
@@ -336,7 +349,7 @@ a:link,a:visited {
 
 a:hover {
 	background-color: #f0f0f0;
-	color: #CD1821;
+	color: #f78441;
 }
 
 /*****************************************************/
@@ -354,7 +367,7 @@ td.user-comment {
 	border: 1px solid #a1a1a1;
 	font-size: 11px;
 	text-align: left;
-	color: #2B5497;
+	color: #626669;
 	text-align: left;
 }
 
@@ -369,15 +382,15 @@ td.commentator-info {
 }
 
 .important {
-	color: #CD1821;
+	color: #f78441;
 }
 
 .important2 {
-	color: #2B5497;
+	color: #626669;
 }
 
 .username {
-	color: #2B5497;
+	color: #626669;
 }
 
 table {
@@ -429,21 +442,21 @@ div.button {
 .today {
 	display: block;
 	font-size: 10px;
-	color: #2B5497;
+	color: #626669;
 	text-align: right;
 }
 
 /* ERRORES */
 div.t-error div {
-	background-color: #2B5497;
+	background-color: #626669;
 }
 
 div.t-error {
-	border: 1px solid #2B5497;
+	border: 1px solid #626669;
 }
 
 div.t-error ul {
-	color: #2B5497;
+	color: #626669;
 }
 
 a.trash {
@@ -463,7 +476,7 @@ div.complaint {
 }
 
 div.complaint:hover {
-	color: #CD1821;
+	color: #f78441;
 	background-color: white;
 }
 
@@ -475,7 +488,7 @@ div.number {
 }
 
 div.number:hover {
-	color: #CD1821;
+	color: #f78441;
 	background-color: white;
 }
 
@@ -484,7 +497,7 @@ a.complaintrow {
 }
 
 a.complaintrow:link,a.complaintrow:visited {
-	color: #2B5497;
+	color: #626669;
 }
 
 a.complaintrow:hover {
@@ -598,7 +611,7 @@ td.message {
 	border: 1px solid #a1a1a1;
 	font-size: 11px;
 	text-align: left;
-	color: #2B5497;
+	color: #626669;
 	text-align: left;
 }
 
