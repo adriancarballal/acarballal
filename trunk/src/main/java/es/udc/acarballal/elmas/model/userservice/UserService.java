@@ -20,10 +20,10 @@ public interface UserService {
 
 	public Long commentUser(Long commentatorId, Long commentedId, 
 			String comment,	Calendar date) throws InstanceNotFoundException, 
-			InsufficientPrivilegesException, InvalidOperationException;
+			InvalidOperationException;
 
 	public Long complaintUserComment(Long userCommentId, Long userProfileId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException;
+			throws InstanceNotFoundException;
 	
 	public boolean isUserCommentComplaintedBy(Long userId, Long userCommentId);
 	

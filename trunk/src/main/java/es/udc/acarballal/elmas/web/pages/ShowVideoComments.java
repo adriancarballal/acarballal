@@ -177,8 +177,6 @@ public class ShowVideoComments {
 					videoId, comment, Calendar.getInstance());
 		} catch (InstanceNotFoundException e) {
 			commentForm.recordError(messages.get("error-instancenotfound"));
-		} catch (InsufficientPrivilegesException e) {
-			commentForm.recordError(messages.get("error-insufficientPrivileges"));
 		} catch (InvalidOperationException e) {
 			commentForm.recordError(messages.get("error-invalidOperation"));
 		} catch (Exception e){
@@ -209,8 +207,6 @@ public class ShowVideoComments {
 			videoService.complaintOfVideoComment(videoCommentId, userSession.getUserProfileId());
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
-		} catch (InsufficientPrivilegesException e) {
-			return InsufficientPrivileges.class;
 		}
 		fill();
 		return alreadyComplaint;

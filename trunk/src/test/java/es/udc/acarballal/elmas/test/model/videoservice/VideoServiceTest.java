@@ -148,26 +148,6 @@ public class VideoServiceTest {
 		
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void addVideoTestPrivilegesAsNone() 
-			throws InstanceNotFoundException, InsufficientPrivilegesException {
-		
-		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
-		LoginResult result = userService.changePrivileges(userProfileId, Privileges_TYPES.NONE);
-
-		String title = "VideoExample";
-		String comment = "CommentExample";
-		String snapshot = "-home-data-snapshots-001.jpg";
-		String original = "video.vob";
-		String flvVideo = "video.flv";
-		String rtVideo = "video.mp4";
-		Calendar date = Calendar.getInstance();
-		
-		videoService.addVideo(result.getUserProfileId(), title, comment, 
-				snapshot, original, flvVideo, rtVideo, date);
-		
-	}
-	
 	@Test(expected = InstanceNotFoundException.class)
 	public void addVideoTestWithNonExistentUser() 
 			throws InstanceNotFoundException, InsufficientPrivilegesException {
@@ -186,54 +166,9 @@ public class VideoServiceTest {
 		
 	}
 	
-//	@Test(expected = InstanceNotFoundException.class)
-//	public void deleteVideoPrivilegesAsAdmin()
-//			throws InstanceNotFoundException, InsufficientPrivilegesException {
-//
-//		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
-//		long videoId = DbUtil.getTestVideo().getVideoId();
-//				
-//		videoService.deleteVideo(videoId, userProfileId);
-//		videoService.findVideoById(videoId);
-//	}
-	
-//	@Test(expected = InsufficientPrivilegesException.class)
-//	public void deleteVideoPrivilegesAsCompetitor()
-//			throws InstanceNotFoundException, InsufficientPrivilegesException {
-//
-//		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
-//		long videoId = DbUtil.getTestVideo().getVideoId();
-//		userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);
-//				
-//		videoService.deleteVideo(videoId, userProfileId);
-//	}
-
-//	@Test(expected = InsufficientPrivilegesException.class)
-//	public void deleteVideoPrivilegesAsVoter()
-//			throws InstanceNotFoundException, InsufficientPrivilegesException {
-//
-//		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
-//		long videoId = DbUtil.getTestVideo().getVideoId();
-//		userService.changePrivileges(userProfileId, Privileges_TYPES.VOTER);
-//				
-//		videoService.deleteVideo(videoId, userProfileId);
-//	}
-	
-//	@Test(expected = InsufficientPrivilegesException.class)
-//	public void deleteVideoPrivilegesAsNone()
-//			throws InstanceNotFoundException, InsufficientPrivilegesException {
-//
-//		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
-//		long videoId = DbUtil.getTestVideo().getVideoId();
-//		userService.changePrivileges(userProfileId, Privileges_TYPES.NONE);
-//		
-//		videoService.deleteVideo(videoId, userProfileId);
-//	}
-
-	@Test(expected = InvalidOperationException.class)
 	public void addVideoCommentAsAdmin() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, InvalidOperationException{
+			InvalidOperationException{
 		
 		LoginResult loginResult = 
 			userService.login(DbUtil.getTestUserProfile()
@@ -242,20 +177,6 @@ public class VideoServiceTest {
 		videoService.commentVideo(userId, userId, "", null);
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void addVideoCommentAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, InvalidOperationException{
-		
-		LoginResult loginResult = 
-			userService.login(DbUtil.getTestUserProfile()
-			.getLoginName(), DbUtil.getTestClearPassword(), false);
-		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
-				Privileges_TYPES.NONE);
-		Long userId = loginResult.getUserProfileId();
-		videoService.commentVideo(userId, userId, "", null);
-	}
-
 	@Test(expected = InvalidOperationException.class)
 	public void addVideoCommentToOwnVideoAsCompetitor() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -379,27 +300,6 @@ public class VideoServiceTest {
 	}
 	
 	@Test
-	public void removeVideoCommentAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, InvalidOperationException{
-		
-		LoginResult user = 
-			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		LoginResult commentator = 
-			userService.login(DbUtil.getCommentatorProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		userService.changePrivileges(commentator.getUserProfileId(), 
-				Privileges_TYPES.VOTER);		
-		Long commentId = videoService.commentVideo(commentator.getUserProfileId(), 
-				user.getUserProfileId(), "GOOD Video", Calendar.getInstance());
-		userService.changePrivileges(commentator.getUserProfileId(), 
-				Privileges_TYPES.NONE);
-		videoService.deleteVideoComment(commentId, user.getUserProfileId());
-				
-	}
-	
-	@Test
 	public void removeVideoCommentAsAdmin() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
 			InsufficientPrivilegesException, InvalidOperationException{
@@ -480,20 +380,6 @@ public class VideoServiceTest {
 				Privileges_TYPES.VOTER);
 		videoService.voteVideo(VOTE_TYPES.GOOD, result.getUserProfileId(), 
 				DbUtil.getTestVideo().getVideoId());
-		videoService.voteVideo(VOTE_TYPES.GOOD, result.getUserProfileId(), 
-				DbUtil.getTestVideo().getVideoId());
-	}
-	
-	@Test(expected = InvalidOperationException.class)
-	public void voteVideoAsNone() 
-			throws InstanceNotFoundException, InsufficientPrivilegesException, 
-			IncorrectPasswordException, InvalidOperationException, VideoAlreadyVotedException{
-		
-		LoginResult user = 
-			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		LoginResult result = userService.changePrivileges(user.getUserProfileId(), 
-				Privileges_TYPES.NONE);
 		videoService.voteVideo(VOTE_TYPES.GOOD, result.getUserProfileId(), 
 				DbUtil.getTestVideo().getVideoId());
 	}
@@ -715,20 +601,6 @@ public class VideoServiceTest {
 				result.getUserProfileId());
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void complaintVideoAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
-		LoginResult user = 
-			userService.login(DbUtil.getCommentatorProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		Video video = DbUtil.getTestVideo();
-		LoginResult result = userService.changePrivileges(
-				user.getUserProfileId(), Privileges_TYPES.NONE);
-		videoService.complaintOfVideo(video.getVideoId(), 
-				result.getUserProfileId());
-	}
-	
 	@Test
 	public void isVideoComplaintedTrue() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -757,28 +629,6 @@ public class VideoServiceTest {
 		
 		assertTrue(!videoService.isComplaintedBy(
 				user.getUserProfileId(), video.getVideoId()));
-	}
-	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void addComplaintVideoCommentAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, InvalidOperationException{
-		
-		LoginResult user = 
-			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		LoginResult commentator = 
-			userService.login(DbUtil.getCommentatorProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		userService.changePrivileges(commentator.getUserProfileId(), 
-				Privileges_TYPES.VOTER);		
-		Long commentId = videoService.commentVideo(commentator.getUserProfileId(), 
-				user.getUserProfileId(), "GOOD Video", Calendar.getInstance());
-
-		user = userService.changePrivileges(user.getUserProfileId(), 
-				Privileges_TYPES.NONE);
-		
-		videoService.complaintOfVideoComment(commentId, user.getUserProfileId());
 	}
 	
 	@Test
@@ -951,8 +801,7 @@ public class VideoServiceTest {
 		String keys = "";
 		int startIndex = 0;
 		int count = 10;
-		VideoBlock block = videoService.findVideosByTitle(keys, startIndex, count);
-		assertTrue(block.getVideos().size()==3);
+		videoService.findVideosByTitle(keys, startIndex, count);
 	}
 	
 	@Test(expected = InstanceNotFoundException.class)
@@ -1126,22 +975,6 @@ public class VideoServiceTest {
 		assertTrue(block.getExistMoreUserComments());
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void addToFavouritesAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, DuplicateInstanceException{
-		
-		LoginResult user = 
-			userService.login(
-					DbUtil.getCommentatorProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		userService.changePrivileges(user.getUserProfileId(), 
-				Privileges_TYPES.NONE);
-		Long videoId = DbUtil.getTestVideo().getVideoId();
-		
-		videoService.addToFavourites(user.getUserProfileId(), videoId);
-	}
-	
 	@Test
 	public void addToFavouritesAsVoter() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -1285,26 +1118,6 @@ public class VideoServiceTest {
 		videoService.removeFromFavourites(user.getUserProfileId(), fav);
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void removeFromFavouritesAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, DuplicateInstanceException{
-		LoginResult user = 
-			userService.login(
-					DbUtil.getCommentatorProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		userService.changePrivileges(user.getUserProfileId(), 
-				Privileges_TYPES.COMPETITOR);
-		Long videoId = DbUtil.getTestVideo().getVideoId();
-		
-		Long fav = 
-			videoService.addToFavourites(
-					user.getUserProfileId(), videoId);
-		userService.changePrivileges(user.getUserProfileId(), 
-				Privileges_TYPES.NONE);
-		videoService.removeFromFavourites(user.getUserProfileId(), fav);
-	}
-	
 	@Test
 	public void isFavouriteTrue()	
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -1381,21 +1194,6 @@ public class VideoServiceTest {
 		
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void findFavouritesAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
-		
-		Long userId = 
-			userService.login(
-					DbUtil.getTestUserProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false).
-					getUserProfileId();
-		userService.changePrivileges(userId, Privileges_TYPES.NONE);		
-		videoService.findFavourites(userId, 0, 10);
-		
-	}
-		
 	@Test
 	public void findFavouritesZero() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 

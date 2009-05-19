@@ -177,20 +177,6 @@ public class UserServiceTest {
 				newClearPassword, newClearPassword);
 	}
 	
-	
-
-	@Test
-	public void testChangePrivilegesToNoneAsAdmin() throws InstanceNotFoundException, 
-			IncorrectPasswordException, InsufficientPrivilegesException{
-		LoginResult loginResult = 
-				userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false);
-		LoginResult newResult = 
-			userService.changePrivileges(loginResult.getUserProfileId(),	
-					Privileges_TYPES.NONE);
-		assertEquals(newResult.getPrivileges(),Privileges_TYPES.NONE);
-	}
-	
 	@Test
 	public void testChangePrivilegesToVoterAsAdmin() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
@@ -214,13 +200,6 @@ public class UserServiceTest {
 					Privileges_TYPES.COMPETITOR);
 		assertEquals(newResult.getPrivileges(),Privileges_TYPES.COMPETITOR);
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	@Test(expected = InsufficientPrivilegesException.class)
 	public void testChangePrivilegesToAdminAsAdmin() throws InstanceNotFoundException, 
@@ -256,18 +235,6 @@ public class UserServiceTest {
 				Privileges_TYPES.ADMIN);
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void testChangePrivilegesToAdminAsNone() throws InstanceNotFoundException, 
-			IncorrectPasswordException, InsufficientPrivilegesException{
-		LoginResult loginResult = 
-				userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false);
-		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
-				Privileges_TYPES.NONE);
-		userService.changePrivileges(loginResult.getUserProfileId(),	
-				Privileges_TYPES.ADMIN);
-	}
-	
 	@Test(expected = InstanceNotFoundException.class)
 	public void testChangePrivilegesWithNonExistentUser() throws InstanceNotFoundException, 
 			IncorrectPasswordException, InsufficientPrivilegesException{
@@ -285,19 +252,6 @@ public class UserServiceTest {
 		userService.commentUser(userId, userId, "", null);
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void addUserCommentAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, InvalidOperationException{
-		LoginResult loginResult = 
-			userService.login(DbUtil.getTestUserProfile()
-			.getLoginName(), DbUtil.getTestClearPassword(), false);
-		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
-				Privileges_TYPES.NONE);
-		Long userId = loginResult.getUserProfileId();
-		userService.commentUser(userId, userId, "", null);
-	}
-
 	@Test(expected = InvalidOperationException.class)
 	public void addUserCommentToYourselfAsCompetitor() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -335,19 +289,6 @@ public class UserServiceTest {
 				Privileges_TYPES.VOTER);
 		Long userId = loginResult.getUserProfileId();
 		userService.commentUser(this.NON_EXISTENT_USER_PROFILE_ID, userId, "", null);
-	}
-	
-	@Test(expected = InstanceNotFoundException.class)
-	public void addUserCommentNoCommentatedFoundAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, InvalidOperationException{
-		LoginResult loginResult = 
-			userService.login(DbUtil.getTestUserProfile()
-			.getLoginName(), DbUtil.getTestClearPassword(), false);
-		loginResult = userService.changePrivileges(loginResult.getUserProfileId(), 
-				Privileges_TYPES.NONE);
-		Long userId = loginResult.getUserProfileId();
-		userService.commentUser(userId,this.NON_EXISTENT_USER_PROFILE_ID, "", null);
 	}
 	
 	@Test(expected = InstanceNotFoundException.class)
@@ -461,26 +402,6 @@ public class UserServiceTest {
 		userService.deleteUserComment(commentId, deleter.getUserProfileId());
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void deleteUserCommentAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, InvalidOperationException{
-		
-		LoginResult user = 
-			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		LoginResult commentator = 
-			userService.login(DbUtil.getCommentatorProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		
-		Long commentId = userService.commentUser(user.getUserProfileId(), 
-				commentator.getUserProfileId(), "GOOD USER", Calendar.getInstance());
-		
-		LoginResult deleter = userService.changePrivileges(user.getUserProfileId(), 
-				Privileges_TYPES.NONE);		
-		userService.deleteUserComment(commentId, deleter.getUserProfileId());
-	}
-	
 	@Test
 	public void deleteUserCommentAsAdmin() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -495,30 +416,6 @@ public class UserServiceTest {
 		
 		Long commentId = userService.commentUser(commentator.getUserProfileId(), 
 				user.getUserProfileId(), "GOOD USER", Calendar.getInstance());
-		
-		userService.deleteUserComment(commentId, user.getUserProfileId());
-	}
-	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void addComplaintUserCommentAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException, InvalidOperationException{
-		
-		LoginResult user = 
-			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		LoginResult commentator = 
-			userService.login(DbUtil.getCommentatorProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false);
-		userService.changePrivileges(commentator.getUserProfileId(), 
-				Privileges_TYPES.VOTER);		
-		Long commentId = userService.commentUser(commentator.getUserProfileId(), 
-				user.getUserProfileId(), "GOOD USER", Calendar.getInstance());
-		
-		LoginResult complainer = userService.changePrivileges(user.getUserProfileId(), 
-				Privileges_TYPES.NONE);
-		
-		userService.complaintUserComment(commentId, complainer.getUserProfileId());
 		
 		userService.deleteUserComment(commentId, user.getUserProfileId());
 	}

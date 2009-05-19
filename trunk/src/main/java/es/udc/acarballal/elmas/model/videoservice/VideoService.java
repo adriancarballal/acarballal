@@ -20,17 +20,17 @@ public interface VideoService {
 	
 	public Long commentVideo(Long commentatorId, Long videoId, 
 			String comment,	Calendar date) throws InstanceNotFoundException, 
-			InsufficientPrivilegesException, InvalidOperationException;
+			InvalidOperationException;
 	 
 	public Long complaintOfVideo(Long videoId, Long userProfileId) 
-		throws InstanceNotFoundException, InsufficientPrivilegesException;
+		throws InstanceNotFoundException;
 	
 	public boolean isComplaintedBy(Long userId, Long videoId);
 	
 	public boolean isVideoCommentComplaintedBy(Long userId, Long videoCommentId);
 	
 	public Long complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
-		throws InstanceNotFoundException, InsufficientPrivilegesException;
+		throws InstanceNotFoundException;
 	
 	public void deleteVideo(long videoId, long userId) 
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
@@ -64,18 +64,17 @@ public interface VideoService {
 		throws InstanceNotFoundException;
 	
 	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException, 
-			VideoAlreadyVotedException, InvalidOperationException;
+			throws InstanceNotFoundException, VideoAlreadyVotedException, 
+			InvalidOperationException;
 	
 	public VideoBlock findFavourites(Long userId, int startIndex, int count) 
-		throws InstanceNotFoundException, InsufficientPrivilegesException;
+		throws InstanceNotFoundException;
 	
 	public Long addToFavourites(Long userId, Long videoId)
-		throws InstanceNotFoundException, InsufficientPrivilegesException, 
-		DuplicateInstanceException;
+		throws InstanceNotFoundException, DuplicateInstanceException;
 	
 	public void removeFromFavourites(Long userId, Long videoId) 
-		throws InstanceNotFoundException, InsufficientPrivilegesException;
+		throws InstanceNotFoundException;
 	
 	public boolean isFavourite(Long userId, Long videoId);
 }

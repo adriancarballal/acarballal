@@ -67,13 +67,10 @@ public class UserServiceImpl implements UserService {
 	
 	public Long commentUser(Long commentatorId, Long commentedId, 
 			String comment,	Calendar date) throws InstanceNotFoundException, 
-			InsufficientPrivilegesException, InvalidOperationException{
+			InvalidOperationException{
 		
 		UserProfile commentatorUser = userProfileDao.find(commentatorId);
 		UserProfile commentedUser = userProfileDao.find(commentedId);
-		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(commentatorUser.getLoginName());
-		}
 		if(commentatorUser.getUserProfileId() == commentedUser.getUserProfileId()){
 			throw new InvalidOperationException("Cannot comment yourself " + 
 					commentatorUser.getLoginName());
@@ -85,13 +82,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public Long complaintUserComment(Long userCommentId, Long userProfileId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
+			throws InstanceNotFoundException{
 		
 		UserProfile userProfile = userProfileDao.find(userProfileId);
 		UserComment comment = userCommentDao.find(userCommentId);
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
-		}
 		UserCommentComplaint complaint = 
 			new UserCommentComplaint(comment, userProfile, Calendar.getInstance());
 		userCommentComplaintDao.create(complaint);

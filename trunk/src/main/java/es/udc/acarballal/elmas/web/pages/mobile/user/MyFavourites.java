@@ -10,7 +10,6 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
@@ -23,9 +22,7 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class MyFavourites {
 	
 private static final int COUNT = 5;
-	
-//	@Inject
-//	private Locale locale;
+
 	
 	@Persist
 	private int startIndex;
@@ -50,12 +47,6 @@ private static final int COUNT = 5;
 			videoBlock = videoService.findFavourites(userSession.getUserProfileId(), startIndex, COUNT);
 		} catch (InstanceNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("ERROR1");
-			e.printStackTrace();
-		} catch (InsufficientPrivilegesException e) {
-			// TODO Auto-generated catch block
-			System.out.println("ERROR2");
-			e.printStackTrace();
 		}		
 	}
 
