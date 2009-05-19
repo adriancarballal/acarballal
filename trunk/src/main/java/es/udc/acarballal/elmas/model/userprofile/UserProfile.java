@@ -38,7 +38,7 @@ public class UserProfile {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.privileges = Privileges_TYPES.NONE;
+		this.privileges = Privileges_TYPES.VOTER;
 	}
 
 	public boolean equals(Object obj) {

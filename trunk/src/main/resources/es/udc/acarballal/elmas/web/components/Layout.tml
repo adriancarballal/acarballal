@@ -21,20 +21,25 @@
 </div>
 
 <!-- Logo. -->
-<div id="logo"><a href="#" t:type="PageLink" t:page="Index">Logo
-JPG</a></div>
+<div id="logo">
+	<a href="#" t:type="PageLink" t:page="Index">
+		<img src="http://adriancarballal.dynalias.com/container/logo.png" /> 
+	</a>
+</div>
 
 <!-- Menu. -->
 
 <div id="sidebar">
 <br/>
 <div id="sidebarmenu">
+	<span class="menu-welcome"><span class="important">
 	<t:if t:test="userSessionExists">
  			${message:menu-hello} <span class="username">${userSession.firstName}</span>
             <t:parameter name="else">
-            	<span class="important">${message:menu-welcome}</span>
+            	${message:menu-welcome}
             </t:parameter>
 	</t:if>
+	</span></span>
 </div>
 <br/>
 <table class="menutable">

@@ -65,7 +65,7 @@
 					src="${asset:context:/player/swfobject.js}"></script> <embed
 					src="${asset:context:/player/player.swf}" width="320" height="280"
 					allowfullscreen="true" 
-					flashvars="skin=${asset:context:/player/stijl.swf}${message:amp}file=${video.flvVideo}"/></td>
+					flashvars="skin=${asset:context:/player/stijl.swf}${message:amp}file=${video.flvVideo}${message:amp}image=${video.snapshot}"/></td>
 			</tr>
 		</table>
 	</t:parameter>
