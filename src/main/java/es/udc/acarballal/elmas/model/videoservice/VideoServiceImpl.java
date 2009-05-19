@@ -64,13 +64,10 @@ public class VideoServiceImpl implements VideoService{
 	
 	public Long commentVideo(Long commentatorId, Long videoId, 
 			String comment,	Calendar date) throws InstanceNotFoundException, 
-			InsufficientPrivilegesException, InvalidOperationException{
+			InvalidOperationException{
 
 		UserProfile commentatorUser = userProfileDao.find(commentatorId);
 		Video video = videoDao.find(videoId);
-		if(commentatorUser.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(commentatorUser.getLoginName());
-		}
 		if(commentatorUser.getUserProfileId() == video.getUserProfile().getUserProfileId()){
 			throw new InvalidOperationException("Cannot comment your own video " + 
 					commentatorUser.getLoginName());
@@ -82,13 +79,10 @@ public class VideoServiceImpl implements VideoService{
 	}
 	
 	public Long complaintOfVideo(Long videoId, Long userProfileId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
+			throws InstanceNotFoundException{
 		
 		UserProfile userProfile = userProfileDao.find(userProfileId);
 		Video video = videoDao.find(videoId);
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
-		}
 		VideoComplaint complaint = 
 			new VideoComplaint(video, userProfile, Calendar.getInstance());
 		videoComplaintDao.create(complaint);
@@ -106,13 +100,11 @@ public class VideoServiceImpl implements VideoService{
 	}
 	
 	public Long complaintOfVideoComment(Long videoCommentId, Long userProfileId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
+			throws InstanceNotFoundException{
 		
 		UserProfile userProfile = userProfileDao.find(userProfileId);
 		VideoComment comment = videoCommentDao.find(videoCommentId);
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
-		}
+		
 		VideoCommentComplaint complaint =
 			new VideoCommentComplaint(comment, userProfile, Calendar.getInstance());
 		videoCommentComplaintDao.create(complaint);
@@ -283,16 +275,13 @@ public class VideoServiceImpl implements VideoService{
 	}
 	
 	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException, 
-				VideoAlreadyVotedException, InvalidOperationException{
+			throws InstanceNotFoundException, VideoAlreadyVotedException, 
+			InvalidOperationException{
 		
 		UserProfile userProfile = userProfileDao.find(userProfileId);
 		Video video = videoDao.find(videoId);
 		if(video.getUserProfile().equals(userProfile)){
 			throw new InvalidOperationException("Cannot vote your own video");
-		}
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
 		}
 		if(voteDao.alreadyVoted(video.getVideoId(), userProfileId)){
 			throw new VideoAlreadyVotedException(userProfile.getLoginName(), video.getTitle());
@@ -303,13 +292,9 @@ public class VideoServiceImpl implements VideoService{
 	
 	@Transactional(readOnly = true)
 	public VideoBlock findFavourites(Long userId, int startIndex, int count) 
-		throws InstanceNotFoundException, InsufficientPrivilegesException{
+		throws InstanceNotFoundException{
 		
-		UserProfile userProfile = userProfileDao.find(userId);
-		
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
-		}
+		userProfileDao.find(userId);
 		
 		List<Video> videos = favouriteDao.findFavourites(userId, startIndex, count+1);
 		boolean existMoreVideos = videos.size() == (count + 1);
@@ -325,13 +310,9 @@ public class VideoServiceImpl implements VideoService{
 	}
 
 	public Long addToFavourites(Long userId, Long videoId)
-			throws InstanceNotFoundException, InsufficientPrivilegesException,
-			DuplicateInstanceException {
+			throws InstanceNotFoundException, DuplicateInstanceException {
 
 		UserProfile userProfile = userProfileDao.find(userId);
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
-		}
 		if(favouriteDao.isFavourite(userProfile.getUserProfileId(), videoId))
 			throw new DuplicateInstanceException(userProfile.getLoginName(), 
 					Favourite.class.getName());
@@ -343,12 +324,9 @@ public class VideoServiceImpl implements VideoService{
 	}
 	
 	public void removeFromFavourites(Long userId, Long videoId) 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
+			throws InstanceNotFoundException{
 		
-		UserProfile userProfile = userProfileDao.find(userId);
-		if(userProfile.getPrivileges()==Privileges_TYPES.NONE){
-			throw new InsufficientPrivilegesException(userProfile.getLoginName());
-		}
+		userProfileDao.find(userId);
 		favouriteDao.removeFromFavourites(userId, videoId);
 		
 	}

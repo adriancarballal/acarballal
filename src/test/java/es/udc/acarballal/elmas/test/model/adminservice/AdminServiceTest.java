@@ -133,21 +133,6 @@ public class AdminServiceTest {
 	}
 	
 	@Test(expected = InsufficientPrivilegesException.class)
-	public void deleteUserAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException,
-			InsufficientPrivilegesException{
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		Long user = userService.login(DbUtil.getCommentatorProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		admin = userService.changePrivileges(user, Privileges_TYPES.NONE)
-					.getUserProfileId();
-		adminService.deleteUserProfile(user, admin);
-	}
-	
-	@Test(expected = InsufficientPrivilegesException.class)
 	public void deleteUserDeleteAdmin() 
 			throws InstanceNotFoundException, IncorrectPasswordException,
 			InsufficientPrivilegesException{
@@ -195,21 +180,6 @@ public class AdminServiceTest {
 				.getUserProfileId();
 		
 		admin = userService.changePrivileges(admin, Privileges_TYPES.VOTER)
-		.getUserProfileId();
-		
-		adminService.deleteUserCommentComplaint(NON_EXISTENT_COMMENT_ID, admin);
-	}
-	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void deleteUserCommentComplaintAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
-		
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		
-		admin = userService.changePrivileges(admin, Privileges_TYPES.NONE)
 		.getUserProfileId();
 		
 		adminService.deleteUserCommentComplaint(NON_EXISTENT_COMMENT_ID, admin);
@@ -304,24 +274,7 @@ public class AdminServiceTest {
 				NON_VIDEO_COMMENT_COMPLAINT_ID, admin);
 		
 	}
-	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void deleteVideoCommentComplaintAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
 		
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		
-		admin = userService.changePrivileges(admin, Privileges_TYPES.NONE)
-					.getUserProfileId();
-		
-		adminService.deleteUserCommentComplaint(
-				NON_VIDEO_COMMENT_COMPLAINT_ID, admin);
-		
-	}
-	
 	@Test
 	public void deleteVideoCommentComplaint() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -396,23 +349,6 @@ public class AdminServiceTest {
 		
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void deleteVideoComplaintAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
-		
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		
-		admin = userService.changePrivileges(admin, Privileges_TYPES.NONE)
-					.getUserProfileId();
-		
-		adminService.deleteVideoComplaint(
-				NON_VIDEO_COMMENT_COMPLAINT_ID, admin);
-		
-	}
-	
 	@Test
 	public void deleteVideoComplaint() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -461,22 +397,6 @@ public class AdminServiceTest {
 				.getUserProfileId();
 		
 		admin = userService.changePrivileges(admin, Privileges_TYPES.VOTER)
-					.getUserProfileId();
-		
-		adminService.findFirstVideoComplaints(admin);
-
-	}
-	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void findFirstVideoComplaintsAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException,
-			InsufficientPrivilegesException{
-		
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		
-		admin = userService.changePrivileges(admin, Privileges_TYPES.NONE)
 					.getUserProfileId();
 		
 		adminService.findFirstVideoComplaints(admin);
@@ -546,22 +466,6 @@ public class AdminServiceTest {
 				.getUserProfileId();
 		
 		admin = userService.changePrivileges(admin, Privileges_TYPES.VOTER)
-					.getUserProfileId();
-		
-		adminService.findUserCommentComplaints(admin, 0, 1);
-		
-	}
-	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void findUserCommentComplaintsAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
-		
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		
-		admin = userService.changePrivileges(admin, Privileges_TYPES.NONE)
 					.getUserProfileId();
 		
 		adminService.findUserCommentComplaints(admin, 0, 1);
@@ -678,22 +582,6 @@ public class AdminServiceTest {
 		
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void findVideoCommentComplaintsAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
-		
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		
-		admin = userService.changePrivileges(admin, Privileges_TYPES.NONE)
-					.getUserProfileId();
-		
-		adminService.findVideoCommentComplaints(admin, 0, 1);
-		
-	}
-	
 	@Test
 	public void findVideoCommentComplaintsZero() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -800,20 +688,6 @@ public class AdminServiceTest {
 		adminService.getNumberOfUserCommentComplaints(admin);		
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void getNumberOfUserCommentComplaintsAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
-		
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		
-		userService.changePrivileges(admin, Privileges_TYPES.NONE);
-		
-		adminService.getNumberOfUserCommentComplaints(admin);		
-	}
-	
 	@Test(expected = InstanceNotFoundException.class)
 	public void getNumberOfUserCommentComplaintsNoneUser() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -867,20 +741,6 @@ public class AdminServiceTest {
 				.getUserProfileId();
 		
 		userService.changePrivileges(admin, Privileges_TYPES.VOTER);
-		
-		adminService.getNumberOfVideoCommentComplaints(admin);		
-	}
-	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void getNumberOfVideoCommentComplaintsAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
-		
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		
-		userService.changePrivileges(admin, Privileges_TYPES.NONE);
 		
 		adminService.getNumberOfVideoCommentComplaints(admin);		
 	}
@@ -957,20 +817,6 @@ public class AdminServiceTest {
 		adminService.getNumberOfVideoComplaints(admin);		
 	}
 	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void getNumberOfVideoComplaintsAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException, 
-			InsufficientPrivilegesException{
-		
-		Long admin = userService.login(DbUtil.getTestUserProfile()
-				.getLoginName(), DbUtil.getTestClearPassword(), false)
-				.getUserProfileId();
-		
-		userService.changePrivileges(admin, Privileges_TYPES.NONE);
-		
-		adminService.getNumberOfVideoComplaints(admin);		
-	}
-	
 	@Test(expected = InstanceNotFoundException.class)
 	public void getNumberOfVideoComplaintsNoneUser() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
@@ -1012,77 +858,7 @@ public class AdminServiceTest {
 		
 		assertTrue(adminService.getNumberOfVideoComplaints(admin)==1);		
 	}
-	
-//	@Test
-//	public void sendConfirmationMessage() 
-//			throws InstanceNotFoundException, IncorrectPasswordException{
-//		
-//		LoginResult admin = 
-//			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
-//					DbUtil.getTestClearPassword(), false);
-//		
-//		adminService.sendConfirmationMessage(admin.getUserProfileId(), 
-//				"message");
-//		
-//		MessageBlock block = 
-//			userService.findUserInBox(admin.getUserProfileId(), 0, 1);
-//		
-//		assertEquals(block.getMessages().size(), 1);
-//		assertEquals(block.getMessages().get(0).getReceiver().getUserProfileId(),
-//				admin.getUserProfileId());
-//		assertEquals(block.getMessages().get(0).getText(), "message");
-//	}
-//	
-//	@Test(expected = InstanceNotFoundException.class)
-//	public void sendConfirmationMessageNoReceiver() 
-//			throws InstanceNotFoundException, IncorrectPasswordException{
-//		
-//		adminService.sendConfirmationMessage(NON_EXISTENT_USER_PROFILE_ID, 
-//				"message");
-//	}	
-//	
-//	@Test
-//	public void sendErrorMessage() 
-//			throws InstanceNotFoundException, IncorrectPasswordException{
-//		
-//		LoginResult admin = 
-//			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
-//					DbUtil.getTestClearPassword(), false);
-//		
-//		adminService.sendErrorMessage(admin.getUserProfileId(), 
-//				"message");
-//		
-//		MessageBlock block = 
-//			userService.findUserInBox(admin.getUserProfileId(), 0, 1);
-//		
-//		assertEquals(block.getMessages().size(), 1);
-//		assertEquals(block.getMessages().get(0).getReceiver().getUserProfileId(),
-//				admin.getUserProfileId());
-//		assertEquals(block.getMessages().get(0).getText(), "message");
-//	}
-//	
-//	@Test(expected = InstanceNotFoundException.class)
-//	public void sendErrorMessageNoReceiver() 
-//			throws InstanceNotFoundException, IncorrectPasswordException{
-//		
-//		adminService.sendErrorMessage(NON_EXISTENT_USER_PROFILE_ID, 
-//				"message");
-//	}
-	
-	@Test(expected = InsufficientPrivilegesException.class)
-	public void encodeVideoAsNone() 
-			throws InstanceNotFoundException, IncorrectPasswordException,
-			InsufficientPrivilegesException{
-		
-		Long admin = 
-			userService.login(DbUtil.getTestUserProfile().getLoginName(), 
-					DbUtil.getTestClearPassword(), false).getUserProfileId();
-		
-		admin = userService.changePrivileges(admin, 
-				Privileges_TYPES.NONE).getUserProfileId();
-		adminService.encodeVideo(null, admin, null, null, null,videoService);
-	}
-	
+
 	@Test(expected = InsufficientPrivilegesException.class)
 	public void encodeVideoAsVoter() 
 			throws InstanceNotFoundException, IncorrectPasswordException,

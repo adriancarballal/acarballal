@@ -13,7 +13,6 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
 import es.udc.acarballal.elmas.model.video.Video;
@@ -21,7 +20,6 @@ import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.acarballal.elmas.web.pages.errors.AlreadyVotedVideo;
 import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
-import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.pages.errors.InvalidOperation;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
@@ -86,8 +84,6 @@ public class Vote {
 			videoService.complaintOfVideo(complaintedVideo, userSession.getUserProfileId());
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
-		} catch (InsufficientPrivilegesException e) {
-			return InsufficientPrivileges.class;
 		}
 		return alreadyComplaint;
 	}
@@ -98,8 +94,6 @@ public class Vote {
 			videoService.addToFavourites(userSession.getUserProfileId(), videoId);
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
-		} catch (InsufficientPrivilegesException e) {
-			return InsufficientPrivileges.class;
 		} catch (DuplicateInstanceException e) {
 			return InvalidOperation.class;
 		}
@@ -163,8 +157,6 @@ public class Vote {
 			videoService.voteVideo(vote, userSession.getUserProfileId(), video.getVideoId());
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
-		} catch (InsufficientPrivilegesException e) {
-			return InsufficientPrivileges.class;
 		} catch (VideoAlreadyVotedException e) {
 			return AlreadyVotedVideo.class;
 		} catch (InvalidOperationException e) {

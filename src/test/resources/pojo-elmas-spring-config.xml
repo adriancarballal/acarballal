@@ -37,7 +37,7 @@
          annotations. -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
-<!--  ======================== Business Objects ======================== -->
+	<!--  ======================== Business Objects ======================== -->
 
     <!--  DAOs. -->
     <bean id="userProfileDao"
@@ -104,7 +104,6 @@
         p:userProfileDao-ref="userProfileDao" 
         p:videoComplaintDao-ref="videoComplaintDao" 
         p:videoCommentComplaintDao-ref="videoCommentComplaintDao" 
-        p:userCommentComplaintDao-ref="userCommentComplaintDao"
-        p:messageDao-ref="messageDao" />
-        
+        p:userCommentComplaintDao-ref="userCommentComplaintDao"/>
+
 </beans>

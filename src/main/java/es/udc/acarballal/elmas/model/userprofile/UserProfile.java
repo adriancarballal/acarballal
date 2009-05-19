@@ -11,7 +11,7 @@ import javax.persistence.Version;
 @Entity
 public class UserProfile {
 	
-	public enum Privileges_TYPES {ADMIN, COMPETITOR, NONE, VOTER}
+	public enum Privileges_TYPES {ADMIN, COMPETITOR, VOTER}
 
 	private String email;
 	private String encryptedPassword;

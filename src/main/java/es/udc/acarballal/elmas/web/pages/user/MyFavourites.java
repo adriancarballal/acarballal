@@ -12,12 +12,10 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoBlock;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
-import es.udc.acarballal.elmas.web.pages.errors.InsufficientPrivileges;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
@@ -54,12 +52,6 @@ private static final int COUNT = 5;
 			videoBlock = videoService.findFavourites(userSession.getUserProfileId(), startIndex, COUNT);
 		} catch (InstanceNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("ERROR1");
-			e.printStackTrace();
-		} catch (InsufficientPrivilegesException e) {
-			// TODO Auto-generated catch block
-			System.out.println("ERROR2");
-			e.printStackTrace();
 		}		
 	}
 
@@ -111,8 +103,6 @@ private static final int COUNT = 5;
 			videoService.removeFromFavourites(userSession.getUserProfileId(), videoId);
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
-		} catch (InsufficientPrivilegesException e) {
-			return InsufficientPrivileges.class;
 		}
 		if(videoBlock.getVideos().size()==1 && (startIndex-COUNT >= 0)){
 			startIndex = startIndex - COUNT;

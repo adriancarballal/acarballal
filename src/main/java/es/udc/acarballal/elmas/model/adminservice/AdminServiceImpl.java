@@ -37,8 +37,7 @@ public class AdminServiceImpl implements AdminService{
 		UserProfile userProfile;
 		
 		userProfile = userProfileDao.find(userProfileId);
-		if(userProfile.getPrivileges() == Privileges_TYPES.NONE ||
-				userProfile.getPrivileges() == Privileges_TYPES.VOTER){
+		if(userProfile.getPrivileges() == Privileges_TYPES.VOTER){
 			throw new InsufficientPrivilegesException(userProfile.getFirstName());
 		}
 		
