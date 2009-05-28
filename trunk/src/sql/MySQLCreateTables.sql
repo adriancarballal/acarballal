@@ -176,7 +176,7 @@ CREATE TABLE Message (
 --------------------------
 insert into userprofile values(1, 'admin','UDn64bBABog2A', 'admin', 'none', 'admin@gmail.com', 'ADMIN', 0);
 -- Password for admin = admin
-insert into userprofile values(2, 'adrian xxxxxxxx','YZsowua7bk/lU', 'adrian', 'carballal', 'adriancarballal@gmail.com', 'COMPETITOR', 0);
+insert into userprofile values(2, 'adrian','YZsowua7bk/lU', 'adrian', 'carballal', 'adriancarballal@gmail.com', 'COMPETITOR', 0);
 -- Password for user adrian = adrian
 insert into userprofile values(3, 'voter','LMcPpWzd49C7g', 'voter', 'voter', 'voter@gmail.com', 'VOTER', 0);
 -- Password for user voter = voter
@@ -224,3 +224,26 @@ insert into vote values(5,11,3,3,CURRENT_TIMESTAMP);
 insert into vote values(6,11,1,2,CURRENT_TIMESTAMP);
 insert into vote values(7,1,3,2,CURRENT_TIMESTAMP);
 insert into vote values(8,1,2,1,CURRENT_TIMESTAMP);
+--------------------------
+--         vote         --
+--------------------------
+insert into usercomment values (1,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
+insert into usercomment values (2,2,1,"comment 2", CURRENT_TIMESTAMP);
+insert into usercomment values (3,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
+insert into usercomment values (4,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
+insert into usercomment values (5,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
+insert into usercomment values (6,2,1,"comment 6", CURRENT_TIMESTAMP);
+insert into usercomment values (7,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
+insert into usercomment values (8,2,1,"comment 8", CURRENT_TIMESTAMP);
+insert into usercomment values (9,2,1,"comment 9", CURRENT_TIMESTAMP);
+insert into usercomment values (10,2,1,"comment 10", CURRENT_TIMESTAMP);
+insert into usercomment values (11,2,1,"comment 11", CURRENT_TIMESTAMP);
+insert into usercomment values (12,2,1,"comment 12", CURRENT_TIMESTAMP);
+insert into usercomment values (13,2,1,"comment 13", CURRENT_TIMESTAMP);
+insert into usercomment values (14,2,1,"comment 14", CURRENT_TIMESTAMP);
+insert into usercomment values (15,2,1,"comment 15", CURRENT_TIMESTAMP);
+insert into usercomment values (16,1,2,"comment 16", CURRENT_TIMESTAMP);
+insert into usercomment values (17,1,2,"comment 17", CURRENT_TIMESTAMP);
+insert into usercomment values (18,1,2,"comment 18", CURRENT_TIMESTAMP);
+insert into usercomment values (19,1,2,"comment 19", CURRENT_TIMESTAMP);
+insert into usercomment values (20,2,2,"comment 20", CURRENT_TIMESTAMP);
