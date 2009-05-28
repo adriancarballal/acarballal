@@ -1,9 +1,126 @@
 \chapter{Planificación}
 
+Para el desarrollo de este proyecto se ha optado por una metodología común de desarrollo iterativo incremental, por ser la más natural en relación al desarrollo de una aplicación de software común.
+
+En nuestro caso ha habido una serie de iteraciones, dónde en cada una de ellas se han implementado ciertas características determinadas de la aplicación y se han producido cambios tanto en las herramientas usadas en el desarrollo de la misma como el aumento de los casos de usos que se habían obtenido en una primera aproximación.
+
 \section{Personal}
+
+Para este proyecto se estima necesaria la inclusión tanto de los dos jefes de proyecto como la de un diseñador y un programador para la creación de los portales multimedia. A continuación se describen de manera breve las tareas asignadas a cada uno:
+\begin{itemize}
+	\item Jefes de proyecto: Este papel es asumido, en nuestro caso, por ambos tutores. Controlarán el
+desarrollo general del proyecto.
+	\item Diseñador: Se encarga del análisis y diseño, en cada una de las diferentes fases, de la aplicación Web.
+	\item Programador: Realiza la implementación de la aplicación.
+\end{itemize}
+En este caso, las dos últimas tareas correrán a cargo del alumno, que realizará labores tanto de diseño como de implementación de la aplicación, asi que a partir de ahora se conocerá este perfil como \textit{empleado de proyecto}.
+\begin{figure}[hb]
+\centering
+\includegraphics*[width=15cm]{imagenes/recursos.png}
+\caption{Personal del proyecto}
+\label{personal}
+\end{figure}
+
 \section{Actividades}
+
+En primer lugar se lleva a cabo una estructuración del proyecto en tareas. Realizamos una estimacion de la duración de las mismas y asignamos los recursos a las tareas implicadas.
+
+La primera reunión con el tutor marca la fecha de comienzo del proyecto. En esa reunión se determinan los primeros pasos a seguir. Como parte de la descripción que se le proporciona al empleado se destacan:
+\begin{itemize}
+	\item Objetivos perseguidos
+	\item Casos de uso iniciales
+	\item Interfaz	
+\end{itemize}
+
+Tal y como se comenta anteriormente en esta memoria, se seguirá un ciclo de vida iterativo incremental, el cual se inicia con un estudio de tecnologías como base del posterior desarrollo. A continuación se muestra un desglose cada una de la diferentes iteraciones, asi como los objetivos que persiguen:
+
+\begin{itemize}
+\item \textbf{1ª Iteración:}
+\begin{itemize}
+	\item Diseño e implementación del modelo de usuarios.
+	\item Diseño e implementación del modelo de videos.
+	\item Diseño e implementación del modelo de votos.
+	\item Diseño e implementación del sistema de compresión.
+\end{itemize}
+
+
+\item \textbf{2ª Iteración:}
+\begin{itemize}
+	\item Diseño e implementación del modelo de comentarios para videos.
+	\item Diseño e implementación del modelo de comentarios para usuarios.
+	\item Diseño e implementación del modelo de quejas.
+	\item Optimización del sistema de compresión.
+\end{itemize}
+
+\item \textbf{3ª Iteración:}
+\begin{itemize}
+	\item Diseño e implementación del modelo de favoritos.
+	\item Diseño e implementación del modelo de mensajes administrativos.
+\end{itemize}
+
+\item \textbf{4ª Iteración: \textit{Portal WEB}}
+\begin{itemize}
+	\item Diseño e implementación del modelo de usuarios.
+	\item Diseño e implementación del modelo de videos.
+	\item Diseño e implementación del modelo de favoritos.
+\end{itemize}
+\end{itemize}
+
 \section{Duración del proyecto}
-\section{Planificación de las actividades}
+
+La duración del proyecto será de 118 días, con un trabajo real de 960 horas repartidas entre el personal del proyecto. La fecha de inicio del proyecto corresponderá con el día 21 de Noviembre de 2008, y la fecha de fin de proyecto corresponderá con el día 29 de mayo de 2009.
+
+En cuanto al trabajo, el empleado del proyecto trabajará con una dedicación del 100\% durante 8 horas al día cinco días a la semana, siendo un horario real de 40 horas de trabajo semanal. Dentro de la planificación se establecen como días no laborables:
+\begin{itemize}
+	\item Fines de semana
+	\item 1 de Diciembre de 2008
+	\item Vacaciones de Navidad (22 de Diciembre al 6 de Enero, ambos inclusives)
+	\item Semana Santa (6 de Abril al 10 de Abril, ambos inclusives)
+\end{itemize}
+
+\section{Planificación}
+
+En la figura \ref{tareas} se muestra la duración de cada una de las actividades o iteraciones de las que consta el proyecta, para cada una de las cuales se especifica sus diferentes pasos y la duración de cada una de ellas.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=15cm]{imagenes/tareas.png}
+\caption{Tareas del proyecto}
+\label{tareas}
+\end{figure}
+
 \section{Diagrama de Gantt}
+Después de identificar las iteraciones y las tareas que las componen, así como la duración de las mismas, se especifican las relaciones existentes entre ellas. Entre las relaciones existentes, en esta planificación nos encontraremos únicamente con relaciones del tipo \textit{Fin a Comienzo} que indican que el comienzo de una tarea no se puede llevar a cabo hasta la finalización de la anterior. Esto se debe a que dentro de nuestro personal solo tenemos un perfil encargado del diseño e implementación, por los que no se pueden llevar a cabo tareas paralelamente.
+
+En la figura \ref{gantt} se muestran las relaciones existentes entre las tareas de nuestro proyecto mediante un diagrama de Gantt.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=15cm]{imagenes/gantt.png}
+\caption{Diagrama de Gantt}
+\label{gantt}
+\end{figure}
+
 \section{Estudio del camino crítico}
+En este proyecto, el camino crítico queda marcado por la redacción de la memoria. Cómo cada actividad tiene que terminar para poder empezar la siguiente, y redactar la memoria es la última tarea a realizar, no es posible hacer variaciones sin retrasar la fecha de finalización del proyecto o sobrecargar al trabajador, por lo que se utilizará la planificación inicial cómo final.
+En la figura \ref{critico} se muestra el camino crítico correspondiente a nuestro proyecto.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=15cm]{imagenes/CaminoCritico.png}
+\caption{Camino Crítico}
+\label{critico}
+\end{figure}
+
+\newpage
 \section{Estudio de costes}
+
+Una vez que conocemos los recursos necesarios para cada tarea, la duración de cada una de ellas y la tasa o costo por hora gracias a la información proporcionada por las figuras \ref{tareas} y \ref{personal} podremos obtener el coste real del desarrollo e implentación del sistema. 
+
+Ya que la realización del proyecto se utilizan en todo momento programas de libre distribución no se aumentará el valor o coste total del proyecto debido a este concepto, quedando el total del mismo en 19.360 \euro, tal y como se aprecia en la siguiente figura.
+
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/costo.png}
+\caption{Costo del proyecto}
+\label{costo}
+\end{figure}
+
+No se tienen en cuenta gastos propios del proyecto como equipos informáticos, consumibles, etc..., gastos que si se tendrían en cuenta dentro del presupuesto pero que dependen directamente de la empresa que realiza el desarrollo. Como estos gastos son variables no se tiene en cuenta en ningún momento.

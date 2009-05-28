@@ -19,17 +19,17 @@ import es.udc.acarballal.elmas.model.video.Video;
 @org.hibernate.annotations.Entity(mutable=false)
 public class Vote {
 
-	public enum VOTE_TYPES {BAD, GOOD, NORMAL, VERY_BAD, VERY_GOOD}
+	//public enum VOTE_TYPES {BAD, GOOD, NORMAL, VERY_BAD, VERY_GOOD}
 	
 	private Calendar date;
 	private Video video;
-	private VOTE_TYPES vote;
+	private short vote;
 	private Long voteId;
 	private UserProfile voter;
 	
 	public Vote(){ }
 	
-	public Vote(Video video, UserProfile voter, VOTE_TYPES vote, Calendar date){
+	public Vote(Video video, UserProfile voter, short vote, Calendar date){
 		this.video = video;
 		this.voter = voter;
 		this.vote = vote;
@@ -47,7 +47,7 @@ public class Vote {
 		return video;
 	}
 
-	public VOTE_TYPES getVote() {
+	public short getVote() {
 		return vote;
 	}
 
@@ -75,7 +75,7 @@ public class Vote {
 		this.video = video;
 	}
 
-	public void setVote(VOTE_TYPES vote) {
+	public void setVote(short vote) {
 		this.vote = vote;
 	}
 

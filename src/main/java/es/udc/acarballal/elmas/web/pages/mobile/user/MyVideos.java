@@ -83,22 +83,5 @@ public class MyVideos {
 		return videoZone.getBody();
 	}
 	
-	//TODO REMOVE
-//	@OnEvent(component="removeVideo")
-//	Object onRemoveVideo(Long videoId){
-//		try {
-//			videoService.deleteVideo(videoId, userSession.getUserProfileId());
-//		} catch (InstanceNotFoundException e) {
-//			return InstanceNotFound.class;
-//		} catch (InsufficientPrivilegesException e) {
-//			return InsufficientPrivileges.class;
-//		}
-//		if(videoBlock.getVideos().size()==1 && (startIndex-COUNT >= 0)){
-//			startIndex = startIndex - COUNT;
-//		}
-//		fill();
-//		return videoZone.getBody();
-//	}
-	
 }
 

@@ -25,7 +25,7 @@ CREATE TABLE UserProfile (
     enPassword VARCHAR(13) NOT NULL, 
     firstName VARCHAR(30) NOT NULL,
     lastName VARCHAR(40) NOT NULL, email VARCHAR(60) NOT NULL,
-	privileges TINYINT NOT NULL,
+	privileges VARCHAR(40) NOT NULL,
     version BIGINT,
     CONSTRAINT UserProfile_PK PRIMARY KEY (usrId),
 	CONSTRAINT LoginNameUniqueKey UNIQUE (loginName)) 
@@ -41,10 +41,10 @@ CREATE TABLE Video (
 	usrId BIGINT NOT NULL,
 	title VARCHAR(30) NOT NULL,
 	cmmnt VARCHAR(200) NOT NULL,
-	urlshot VARCHAR(100) NOT NULL,
-	original VARCHAR(100) NOT NULL,
-	urlflv VARCHAR(100) NOT NULL,
-	url3gp VARCHAR(100) NOT NULL,
+	urlshot VARCHAR(200) NOT NULL,
+	original VARCHAR(200) NOT NULL,
+	urlflv VARCHAR(200) NOT NULL,
+	url3gp VARCHAR(200) NOT NULL,
 	date TIMESTAMP NOT NULL,
 	CONSTRAINT Video_PK PRIMARY KEY (vidId),
 	CONSTRAINT Video_FK FOREIGN KEY (usrId)
@@ -174,62 +174,53 @@ CREATE TABLE Message (
 --------------------------
 --         Users        --
 --------------------------
-insert into userprofile values(1, 'admin','UDn64bBABog2A', 'admin', 'none', 'admin@gmail.com', 0, 0);
+insert into userprofile values(1, 'admin','UDn64bBABog2A', 'admin', 'none', 'admin@gmail.com', 'ADMIN', 0);
 -- Password for admin = admin
-insert into userprofile values(2, 'adrian xxxxxxxx','YZsowua7bk/lU', 'adrian', 'carballal', 'adriancarballal@gmail.com', 1, 0);
+insert into userprofile values(2, 'adrian xxxxxxxx','YZsowua7bk/lU', 'adrian', 'carballal', 'adriancarballal@gmail.com', 'COMPETITOR', 0);
 -- Password for user adrian = adrian
-insert into userprofile values(3, 'voter','LMcPpWzd49C7g', 'voter', 'voter', 'voter@gmail.com', 2, 0);
+insert into userprofile values(3, 'voter','LMcPpWzd49C7g', 'voter', 'voter', 'voter@gmail.com', 'VOTER', 0);
 -- Password for user voter = voter
-
---	admin=0
---	competitor=1
---	none=2
---	voter=3
 --------------------------
 --        Videos        --
 --------------------------
-insert into video values (1,2,"Episodio Chuck 01 xxxxxxxxxxxx", "Parte 1 x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x y z", "http://adriancarballal.dynalias.com/imagenes/small/1.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/1.flv", "", CURRENT_TIMESTAMP);
-insert into video values (2,2,"Episodio Chuck 01", "Parte 2", "http://adriancarballal.dynalias.com/imagenes/small/2.jpg", "", "http://192.168.0.11/videos_webService/2.flv", "", CURRENT_TIMESTAMP);
-insert into video values (3,2,"Episodio Chuck 01", "Parte 3", "http://adriancarballal.dynalias.com/imagenes/small/3.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/3.flv", "", CURRENT_TIMESTAMP);
-insert into video values (4,2,"Episodio Chuck 01", "Parte 4", "http://adriancarballal.dynalias.com/imagenes/small/4.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/4.flv", "", CURRENT_TIMESTAMP);
-insert into video values (5,2,"Episodio Chuck 01", "Parte 5", "http://adriancarballal.dynalias.com/imagenes/small/5.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/5.flv", "", CURRENT_TIMESTAMP);
-insert into video values (6,2,"Episodio Chuck 01", "Parte 6", "http://adriancarballal.dynalias.com/imagenes/small/6.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/6.flv", "", CURRENT_TIMESTAMP);
-insert into video values (7,2,"Episodio Chuck 01", "Parte 7", "http://adriancarballal.dynalias.com/imagenes/small/7.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/7.flv", "", CURRENT_TIMESTAMP);
-insert into video values (8,2,"Episodio Chuck 01", "Parte 8", "http://adriancarballal.dynalias.com/imagenes/small/8.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/8.flv", "", CURRENT_TIMESTAMP);
-insert into video values (9,2,"Episodio Chuck 01", "Parte 9", "http://adriancarballal.dynalias.com/imagenes/small/9.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/9.flv", "", CURRENT_TIMESTAMP);
-insert into video values (10,2,"Episodio Chuck 01", "Parte 10", "http://adriancarballal.dynalias.com/imagenes/small/10.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/10.flv", "", CURRENT_TIMESTAMP);
-insert into video values (11,2,"Episodio Chuck 01", "Parte 11", "http://adriancarballal.dynalias.com/imagenes/small/11.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/11.flv", "", CURRENT_TIMESTAMP);
-insert into video values (12,2,"Episodio Chuck 01", "Parte 12", "http://adriancarballal.dynalias.com/imagenes/small/12.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/12.flv", "", CURRENT_TIMESTAMP);
-insert into video values (13,2,"Episodio Chuck 01", "Parte 13", "http://adriancarballal.dynalias.com/imagenes/small/13.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/13.flv", "", CURRENT_TIMESTAMP);
-insert into video values (14,2,"Episodio Chuck 01", "Parte 14", "http://adriancarballal.dynalias.com/imagenes/small/14.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/14.flv", "", CURRENT_TIMESTAMP);
-insert into video values (15,2,"Episodio Chuck 01", "Parte 15", "http://adriancarballal.dynalias.com/imagenes/small/15.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/15.flv", "", CURRENT_TIMESTAMP);
-insert into video values (16,2,"Episodio Chuck 01", "Parte 16", "http://adriancarballal.dynalias.com/imagenes/small/16.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/16.flv", "", CURRENT_TIMESTAMP);
-insert into video values (17,2,"Episodio Chuck 01", "Parte 17", "http://adriancarballal.dynalias.com/imagenes/small/17.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/17.flv", "", CURRENT_TIMESTAMP);
-insert into video values (18,2,"Episodio Chuck 01", "Parte 18", "http://adriancarballal.dynalias.com/imagenes/small/18.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/18.flv", "", CURRENT_TIMESTAMP);
-insert into video values (19,2,"Episodio Chuck 01", "Parte 19", "http://adriancarballal.dynalias.com/imagenes/small/19.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/19.flv", "", CURRENT_TIMESTAMP);
-insert into video values (20,2,"Episodio Chuck 01", "Parte 20", "http://adriancarballal.dynalias.com/imagenes/small/20.jpg", "", "http://adriancarballal.dynalias.com/videos_webService/20.flv", "", CURRENT_TIMESTAMP);
-
+insert into video values (1,1,"Trailer Agora", "Pelicula dirigida por Alejandro Amenabar y protagonizada por Rachel Weisz. Proximamente en cines.","http://adriancarballal.dynalias.com/container/hSGzJYRq/hSGzJYRq.jpg", "http://adriancarballal.dynalias.com/container/hSGzJYRq/Agora-Trailer.flv", "http://adriancarballal.dynalias.com/container/hSGzJYRq/hSGzJYRq.flv","http://adriancarballal.dynalias.com/container/hSGzJYRq/hSGzJYRq.3gp",CURRENT_TIMESTAMP);
+insert into video values (2,1,"Niño Loco Aleman","Jugar a juegos de guerra a cierta edad provoca transtornos, este es un claro ejemplo","http://adriancarballal.dynalias.com/container/LiZgQwLa/LiZgQwLa.jpg","http://adriancarballal.dynalias.com/container/LiZgQwLa/Aleman_Zumbao.flv","http://adriancarballal.dynalias.com/container/LiZgQwLa/LiZgQwLa.flv","http://adriancarballal.dynalias.com/container/LiZgQwLa/LiZgQwLa.3gp",CURRENT_TIMESTAMP);
+insert into video values (3,1,"Contigo no, bicho 2º parte","Carlos se tuerce un tobillo intentando imprecionar a una señorita. Este chico nunca aprende.","http://adriancarballal.dynalias.com/container/FjlYFVOH/FjlYFVOH.jpg","http://adriancarballal.dynalias.com/container/FjlYFVOH/Contigo_no__bicho_II_parte.flv","http://adriancarballal.dynalias.com/container/FjlYFVOH/FjlYFVOH.flv","http://adriancarballal.dynalias.com/container/FjlYFVOH/FjlYFVOH.3gp",CURRENT_TIMESTAMP);
+insert into video values (4,1,"Contigo no, bicho","A todos alguna vez nos han dado calabazas, pero hay formas y formas de hacerlo. El pobre me da pena, la verdad","http://adriancarballal.dynalias.com/container/rvdprHNo/rvdprHNo.jpg","http://adriancarballal.dynalias.com/container/rvdprHNo/CONTIGO_NO_BICHO.flv","http://adriancarballal.dynalias.com/container/rvdprHNo/rvdprHNo.flv","http://adriancarballal.dynalias.com/container/rvdprHNo/rvdprHNo.3gp",CURRENT_TIMESTAMP);
+insert into video values (5,1,"Etoo y Keita","Dos de los jugadores del Barcelona nos demuestran sus habilidades con el balon.", "http://adriancarballal.dynalias.com/container/iRjdKBtl/iRjdKBtl.jpg","http://adriancarballal.dynalias.com/container/iRjdKBtl/Etoo-Keita-Practice.flv","http://adriancarballal.dynalias.com/container/iRjdKBtl/iRjdKBtl.flv","http://adriancarballal.dynalias.com/container/iRjdKBtl/iRjdKBtl.3gp",CURRENT_TIMESTAMP);
+insert into video values (6,1,"Gears of War 2 Trailer 1","El juego insignia de XBOX 360 llega con un nuevo titulo. No te pierdas estas imagenes","http://adriancarballal.dynalias.com/container/tXpZEaGk/tXpZEaGk.jpg","http://adriancarballal.dynalias.com/container/tXpZEaGk/Gears_Of_War_2.flv","http://adriancarballal.dynalias.com/container/tXpZEaGk/tXpZEaGk.flv","http://adriancarballal.dynalias.com/container/tXpZEaGk/tXpZEaGk.3gp",CURRENT_TIMESTAMP);
+insert into video values (7,1,"Gears of War 2 Parte 2","El juego insignia de XBOX 360 llega con un nuevo titulo. No te pierdas estas imagenes. 2º parte","http://adriancarballal.dynalias.com/container/ZDEdDESo/ZDEdDESo.jpg","http://adriancarballal.dynalias.com/container/ZDEdDESo/Gears_of_War_2_Trailer.flv","http://adriancarballal.dynalias.com/container/ZDEdDESo/ZDEdDESo.flv","http://adriancarballal.dynalias.com/container/ZDEdDESo/ZDEdDESo.3gp",CURRENT_TIMESTAMP);
+insert into video values (8,1,"Bebe sonriendo","Que monos son los crios cuando quieren, este no hace mas que reirse.","http://adriancarballal.dynalias.com/container/xyJPsyfi/xyJPsyfi.jpg","http://adriancarballal.dynalias.com/container/xyJPsyfi/Hahaha.flv","http://adriancarballal.dynalias.com/container/xyJPsyfi/xyJPsyfi.flv","http://adriancarballal.dynalias.com/container/xyJPsyfi/xyJPsyfi.3gp",CURRENT_TIMESTAMP);
+insert into video values (9,1,"Push Tailer","Trailer de esta pelicula de accion que se estrena en Junio de 2009.", "http://adriancarballal.dynalias.com/container/ItrEYxjy/ItrEYxjy.jpg","http://adriancarballal.dynalias.com/container/ItrEYxjy/Push-TRAILER.flv","http://adriancarballal.dynalias.com/container/ItrEYxjy/ItrEYxjy.flv","http://adriancarballal.dynalias.com/container/ItrEYxjy/ItrEYxjy.3gp",CURRENT_TIMESTAMP);
+insert into video values (10,1,"Terminator 4 Trailer","Terminator: Salvation, la nueva entrega de la saga Terminator vuelve, esta vez sin Arnold Swa..., bueno, el CHUACHE", "http://adriancarballal.dynalias.com/container/snhQUDHX/snhQUDHX.jpg","http://adriancarballal.dynalias.com/container/snhQUDHX/TERMINATOR-4-trailer.flv","http://adriancarballal.dynalias.com/container/snhQUDHX/snhQUDHX.flv","http://adriancarballal.dynalias.com/container/snhQUDHX/snhQUDHX.3gp",CURRENT_TIMESTAMP);
+insert into video values (11,1,"Transformers 2 Trailer","LaBeuf y Fox regresan con los Transformers para intertan detener a los Decepticons. Proximamente en cines.","http://adriancarballal.dynalias.com/container/EsUsfPZn/EsUsfPZn.jpg","http://adriancarballal.dynalias.com/container/EsUsfPZn/Transformers2-trailer.flv","http://adriancarballal.dynalias.com/container/EsUsfPZn/EsUsfPZn.flv","http://adriancarballal.dynalias.com/container/EsUsfPZn/EsUsfPZn.3gp",CURRENT_TIMESTAMP);
+insert into video values (12,2,"650 millones en 1 min","Mira como llegamos a la actualidad mirando la historia de nuestro planeta.","http://adriancarballal.dynalias.com/container/bgGwxKKy/bgGwxKKy.jpg","http://adriancarballal.dynalias.com/container/bgGwxKKy/650_millones_de_a_os_en_1_min.flv","http://adriancarballal.dynalias.com/container/bgGwxKKy/bgGwxKKy.flv","http://adriancarballal.dynalias.com/container/bgGwxKKy/bgGwxKKy.3gp",CURRENT_TIMESTAMP);
+insert into video values (13,2,"Homer Evolution","Todo el mundo le conoce, le adora, pero nadie sabe como llego a ser lo que es,nosotros te lo enseñamos","http://adriancarballal.dynalias.com/container/nXUveLKL/nXUveLKL.jpg","http://adriancarballal.dynalias.com/container/nXUveLKL/Homer-Evolution.flv","http://adriancarballal.dynalias.com/container/nXUveLKL/nXUveLKL.flv","http://adriancarballal.dynalias.com/container/nXUveLKL/nXUveLKL.3gp",CURRENT_TIMESTAMP);
+insert into video values (14,2,"Messi y Zidane","Los dos mejores jugadores de esta decada nos enseñan sus mejores toques.","http://adriancarballal.dynalias.com/container/lmBtogQy/lmBtogQy.jpg","http://adriancarballal.dynalias.com/container/lmBtogQy/Messi_y_Zidane_-_ADIDAS.flv","http://adriancarballal.dynalias.com/container/lmBtogQy/lmBtogQy.flv","http://adriancarballal.dynalias.com/container/lmBtogQy/lmBtogQy.3gp",CURRENT_TIMESTAMP);
 --------------------------
---     UserComments     --
+--       Message        --
 --------------------------
- 
-insert into usercomment values (1,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
-insert into usercomment values (2,2,1,"comment 2", CURRENT_TIMESTAMP);
-insert into usercomment values (3,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
-insert into usercomment values (4,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
-insert into usercomment values (5,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
-insert into usercomment values (6,2,1,"comment 6", CURRENT_TIMESTAMP);
-insert into usercomment values (7,2,1,"x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ", CURRENT_TIMESTAMP);
-insert into usercomment values (8,2,1,"comment 8", CURRENT_TIMESTAMP);
-insert into usercomment values (9,2,1,"comment 9", CURRENT_TIMESTAMP);
-insert into usercomment values (10,2,1,"comment 10", CURRENT_TIMESTAMP);
-insert into usercomment values (11,2,1,"comment 11", CURRENT_TIMESTAMP);
-insert into usercomment values (12,2,1,"comment 12", CURRENT_TIMESTAMP);
-insert into usercomment values (13,2,1,"comment 13", CURRENT_TIMESTAMP);
-insert into usercomment values (14,2,1,"comment 14", CURRENT_TIMESTAMP);
-insert into usercomment values (15,2,1,"comment 15", CURRENT_TIMESTAMP);
-insert into usercomment values (16,1,2,"comment 16", CURRENT_TIMESTAMP);
-insert into usercomment values (17,1,2,"comment 17", CURRENT_TIMESTAMP);
-insert into usercomment values (18,1,2,"comment 18", CURRENT_TIMESTAMP);
-insert into usercomment values (19,1,2,"comment 19", CURRENT_TIMESTAMP);
-insert into usercomment values (20,2,2,"comment 20", CURRENT_TIMESTAMP);
+insert into message values (1,1,1,"Trailer Agora: Video subido con exito");
+insert into message values (2,1,1,"Niño Loco Aleman: Video subido con exito");
+insert into message values (3,1,1,"Contigo no, bicho 2º parte: Video subido con exito");
+insert into message values (4,1,1,"Contigo no, bicho: Video subido con exito");
+insert into message values (5,1,1,"Etoo y Keita: Video subido con exito");
+insert into message values (6,1,1,"Gears of War 2 Trailer 1: Video subido con exito");
+insert into message values (7,1,1,"Bebe sonriendo: Video subido con exito");
+insert into message values (8,1,1,"Push Tailer: Video subido con exito");
+insert into message values (9,1,1,"Terminator 4 Trailer: Video subido con exito");
+insert into message values (10,1,1,"Transformers 2 Trailer: Video subido con exito");
+insert into message values (11,2,1,"650 millones en 1 min: Video subido con exito");
+insert into message values (12,2,1,"Homer Evolution: Video subido con exito");
+insert into message values (13,2,1,"Messi y Zidane: Video subido con exito");
+--------------------------
+--         vote         --
+--------------------------
+insert into vote values(1,12,3,5,CURRENT_TIMESTAMP);
+insert into vote values(2,12,1,4,CURRENT_TIMESTAMP);
+insert into vote values(3,6,3,4,CURRENT_TIMESTAMP);
+insert into vote values(4,6,2,3,CURRENT_TIMESTAMP);
+insert into vote values(5,11,3,3,CURRENT_TIMESTAMP);
+insert into vote values(6,11,1,2,CURRENT_TIMESTAMP);
+insert into vote values(7,1,3,2,CURRENT_TIMESTAMP);
+insert into vote values(8,1,2,1,CURRENT_TIMESTAMP);

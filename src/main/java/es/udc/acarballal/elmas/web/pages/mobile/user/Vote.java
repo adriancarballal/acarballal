@@ -11,9 +11,13 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
+import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
-import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
+import es.udc.acarballal.elmas.web.pages.mobile.errors.AlreadyVotedVideo;
+import es.udc.acarballal.elmas.web.pages.mobile.errors.InstanceNotFound;
+import es.udc.acarballal.elmas.web.pages.mobile.errors.InvalidOperation;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -21,7 +25,8 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class Vote {
 		
 	private static final int PRESELECTED_VIDEO_WINDOW = 100;
-		
+	public enum VOTE_TYPES {BAD, GOOD, NORMAL, VERY_BAD, VERY_GOOD}
+	
 	@Property
 	private Calendar endDate;
 		
@@ -105,21 +110,24 @@ public class Vote {
 		
 	Object onSuccess(){
 		try {
-			videoService.voteVideo(vote, userSession.getUserProfileId(), video.getVideoId());
-		// TODO hay que crear los errors
-			
-//		} catch (InstanceNotFoundException e) {
-//			return InstanceNotFound.class;
-//		} catch (InsufficientPrivilegesException e) {
-//			return InsufficientPrivileges.class;
-//		} catch (VideoAlreadyVotedException e) {
-//			return AlreadyVotedVideo.class;
-//		}
-		} catch (Exception e) {
-			// TODO: handle exception
+			videoService.voteVideo(getVote(), userSession.getUserProfileId(), video.getVideoId());
+		} catch (InstanceNotFoundException e) {
+			return InstanceNotFound.class;
+		} catch (VideoAlreadyVotedException e) {
+			return AlreadyVotedVideo.class;
+		} catch (InvalidOperationException e) {
+			return InvalidOperation.class;
 		}
         return Vote.class;
-	    }
+	}
+	
+	private short getVote(){
+		if(vote==VOTE_TYPES.VERY_GOOD) return 5;
+		if(vote==VOTE_TYPES.GOOD) return 4;
+		if(vote==VOTE_TYPES.NORMAL) return 3;
+		if(vote==VOTE_TYPES.BAD) return 2;
+		return 1;
+	}
 			
 	void setupRender(){
 		startDate = Calendar.getInstance();

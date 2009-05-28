@@ -8,14 +8,12 @@ Try to access to "elmas" database as "elmas" user with password "elmas".
 	- mysql -u elmas --password=elmas elmas
 Shutdown database
 	- mysqladmin -u root shutdown
-	
-	--> USO DE BACHSIZE!!!!!!!!
-	- mirar votos de un video - preguntar	
-	
+
 	Mirar:
-	problema, hacer busqueda en la pantalla de inserción de video.
-	pagina de error del mobil.
-	Rest.
+	mirar votos de un video - preguntar
+	
+	cambiar lo del valor en bd de las votaciones, porq el avg no funciona bien.
+	cuando crea un dir lo tiene q mirar tambien en container
 	 
 
 		

@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextArea;
@@ -89,7 +90,8 @@ public class InsertVideo {
         return Index.class;
     }
     
-    void onValidateForm() {
+	//@OnEvent(value="validate", component="videoForm")
+    void onValidateForm(){
 			if (!videoForm.isValid()) {
 				return;
 			}

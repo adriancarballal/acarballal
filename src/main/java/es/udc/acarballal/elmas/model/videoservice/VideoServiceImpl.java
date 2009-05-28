@@ -26,7 +26,6 @@ import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaint;
 import es.udc.acarballal.elmas.model.videocomplaint.VideoComplaintDao;
 import es.udc.acarballal.elmas.model.vote.Vote;
 import es.udc.acarballal.elmas.model.vote.VoteDao;
-import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -274,7 +273,7 @@ public class VideoServiceImpl implements VideoService{
 		this.favouriteDao = favouriteDao;
 	}
 	
-	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
+	public void voteVideo(short vote, Long userProfileId, Long videoId) 
 			throws InstanceNotFoundException, VideoAlreadyVotedException, 
 			InvalidOperationException{
 		
