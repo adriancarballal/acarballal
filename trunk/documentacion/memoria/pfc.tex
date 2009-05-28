@@ -3,11 +3,13 @@
 
 \usepackage[spanish]{babel}   % para usar español
 \usepackage[latin1]{inputenc} % para usar acentos
-\usepackage[pdflatex]{graphicx}  % para incluir gráficos
+\usepackage{graphicx}  % para incluir gráficos
+\usepackage{babel}
 
 \usepackage{longtable}  % Tablas con multirow
 \usepackage{titleref}
 \usepackage{latexsym}
+\usepackage{eurosym}
 
 \usepackage{setspace}
 \onehalfspacing
@@ -38,10 +40,11 @@
 \maketitle
 \tableofcontents
 
+\listoffigures
 
 \input{intro}
 \input{tecnologias}
-\input{pojo}
+%\input{pojo}
 \input{herramientas}
 \input{analisis}
 \input{implementacion}

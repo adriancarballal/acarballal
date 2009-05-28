@@ -17,7 +17,6 @@ import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
 import es.udc.acarballal.elmas.model.video.Video;
 import es.udc.acarballal.elmas.model.videoservice.VideoService;
-import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.acarballal.elmas.web.pages.errors.AlreadyVotedVideo;
 import es.udc.acarballal.elmas.web.pages.errors.InstanceNotFound;
 import es.udc.acarballal.elmas.web.pages.errors.InvalidOperation;
@@ -31,6 +30,7 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class Vote {
 	
 	private static final int PRESELECTED_VIDEO_WINDOW = 100;
+	public enum VOTE_TYPES {BAD, GOOD, NORMAL, VERY_BAD, VERY_GOOD}
 	
 	@Inject
 	private Block alreadyComplaint;
@@ -154,7 +154,7 @@ public class Vote {
 	
 	private Object voteVideo(VOTE_TYPES vote){
 		try {
-			videoService.voteVideo(vote, userSession.getUserProfileId(), video.getVideoId());
+			videoService.voteVideo(getVote(vote), userSession.getUserProfileId(), video.getVideoId());
 		} catch (InstanceNotFoundException e) {
 			return InstanceNotFound.class;
 		} catch (VideoAlreadyVotedException e) {
@@ -163,6 +163,14 @@ public class Vote {
 			return InvalidOperation.class;
 		}
 		return Vote.class;
+	}
+	
+	private short getVote(VOTE_TYPES vote){
+		if(vote==VOTE_TYPES.VERY_GOOD) return 5;
+		if(vote==VOTE_TYPES.GOOD) return 4;
+		if(vote==VOTE_TYPES.NORMAL) return 3;
+		if(vote==VOTE_TYPES.BAD) return 2;
+		return 1;
 	}
 	
 	@OnEvent(component="voteVeryBad")

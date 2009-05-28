@@ -7,7 +7,6 @@ import es.udc.acarballal.elmas.model.exceptions.InsufficientPrivilegesException;
 import es.udc.acarballal.elmas.model.exceptions.InvalidOperationException;
 import es.udc.acarballal.elmas.model.exceptions.VideoAlreadyVotedException;
 import es.udc.acarballal.elmas.model.video.Video;
-import es.udc.acarballal.elmas.model.vote.Vote.VOTE_TYPES;
 import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -63,7 +62,7 @@ public interface VideoService {
 	public boolean isVideoVotable(Long videoId, Long userProfileId) 
 		throws InstanceNotFoundException;
 	
-	public void voteVideo(VOTE_TYPES vote, Long userProfileId, Long videoId) 
+	public void voteVideo(short vote, Long userProfileId, Long videoId) 
 			throws InstanceNotFoundException, VideoAlreadyVotedException, 
 			InvalidOperationException;
 	

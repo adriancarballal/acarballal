@@ -53,9 +53,11 @@ Desarrollar con Tapestry permite:
 	\item Separación completa entre la lógica y la presentación (html de java) 
 \end{itemize}
 \subsubsection{Desventajas}
+\begin{itemize}
 	\item Comunidad de desarrolladores pequeña-mediana.
 	\item Escasa documentación. Pocos libros editados. Poca información en la web.
 	\item Se requiere configurar 3 archivos para cada página a crear.
+\end{itemize}
 \subsection{JSF}
  Lo primero que se puede decir sobre Java Server Faces es que no es una implementación sino una especificación (JSR 127) aprobada por el Java Community Process (JCP) para construir interfaces de usuario para las aplicaciones que corren en un servidor. Esto quiere decir que es un estándar y pueden existir varias implementaciones mientras que cumplan con lo que exija la especificación.
 
@@ -195,7 +197,8 @@ Usualmente, los objetos obtienen las referencias de otros objetos requeridos por
 \end{figure}
 
 
-La Programación Orientada a Aspectos (Aspect-Orient Programming AOP) permite implementar la mayoría de los servicios comunes (como manejo de transacciones, seguridad, logging, etc.) que pueden ser aplicados en múltiples componentes. En el caso del uso de AOP no se requiere ningún conocimiento acerca de cómo han sido enmascarados (wrapped \footernote{Término en inglés que significa envoltura y que en el contexto del texto denota la acción de enmascarar u ocultar una implementación.}) los servicios. AOP es usada en Spring para:
+La Programación Orientada a Aspectos (Aspect-Orient Programming AOP) permite implementar la mayoría de los servicios comunes (como manejo de transacciones, seguridad, logging, etc.) que pueden ser aplicados en múltiples componentes. En el caso del uso de AOP no se requiere ningún conocimiento acerca de cómo han sido enmascarados (wrapped \footnote{Término en inglés que significa envoltura y que en el contexto del texto denota la acción de enmascarar u ocultar una implementación.}) los servicios. AOP es usada en Spring para:
+
 \begin{itemize}
 	\item Proveer servicios de aplicación (enterprise services) declarativos. Ejemplo declarar el manejo de transacciones.
 	\item Permitir a los usuarios la facilidad de implementar sus propios aspectos personalizados.
@@ -218,7 +221,7 @@ Spring Framework es especialmente preferible para usarse en compañías pequeñas, 
 \subsection{iBatis}
 iBATIS es un framework de código abierto basado en capas desarrollado por \textit{Apache Software Foundation} (2001), que se ocupa de la capa de Persistencia (se sitúa entre la lógica de Negocio y la capa de la Base de Datos). Puede ser implementado en Java y .NET (también existe un port para Ruby on Rails llamado RBatis).
 
-iBATIS asocia objetos de modelo (JavaBeans) con sentencias SQL o procedimientos almacenados mediante ficheros descriptores XML, simplificando la utilización de bases de datos. No se trata de un ORM \footernote{definir ORM!!!} puro ya que aún tenemos que escribir los SQL y el mapping se realiza a partir de los resultados del SQL.
+iBATIS asocia objetos de modelo (JavaBeans) con sentencias SQL o procedimientos almacenados mediante ficheros descriptores XML, simplificando la utilización de bases de datos. No se trata de un ORM \footnote{definir ORM!!!} puro ya que aún tenemos que escribir los SQL y el mapping se realiza a partir de los resultados del SQL.
 
 Compuesto de dos partes:
 \begin{itemize}
@@ -256,7 +259,7 @@ Compuesto de dos partes:
 \subsection{Hibernate}
 Hibernate fue una iniciativa de un grupo de desarrolladores dispersos alrededor del mundo conducidos por Gavin King. Es una herramienta de Mapeo objeto-relacional para la plataforma Java (y disponible también para .Net con el nombre de NHibernate) que facilita el mapeo de atributos entre una base de datos relacional tradicional y el modelo de objetos de una aplicación, mediante archivos declarativos (XML) que permiten establecer estas relaciones. Veamos la estructura de este framework:
 
-La rama actual de desarrollo de Hibernate es la 3.x, la cual incorpora nuevas características, como una nueva arquitectura Interceptor/Callback, filtros definidos por el usuario, y —opcionalmente— el uso de anotaciones para definir la correspondencia en lugar (o conjuntamente con) los archivos XML. 
+La rama actual de desarrollo de Hibernate es la 3.x, la cual incorpora nuevas características, como una nueva arquitectura Interceptor/Callback, filtros definidos por el usuario, y opcionalmente el uso de anotaciones para definir la correspondencia en lugar (o conjuntamente con) los archivos XML. 
 
 \begin{figure}[htb]
 \centering
@@ -305,7 +308,7 @@ Como muchos otros proyectos \textit{open source}, el desarrollo de PostgreSQL no
 \end{itemize}
 
 \subsection{MySQL}
-MySQL es un sistema de gestión de base de datos relacional, multihilo y multiusuario con más de seis millones de instalaciones. MySQL AB — desde enero de 2008 una subsidiaria de Sun Microsystems y ésta a su vez de Oracle Corporation desde abril de 2009 — desarrolla MySQL como software libre en un esquema de licenciamiento dual.
+MySQL es un sistema de gestión de base de datos relacional, multihilo y multiusuario con más de seis millones de instalaciones. MySQL AB, desde enero de 2008 una subsidiaria de Sun Microsystems y ésta a su vez de Oracle Corporation desde abril de 2009, desarrolla MySQL como software libre en un esquema de licenciamiento dual.
 
 MySQL es muy utilizado en aplicaciones web, como Drupal o phpBB, en plataformas (Linux/Windows-Apache-MySQL-PHP/Perl/Python), y por herramientas de seguimiento de errores como Bugzilla.
 \subsubsection{Características}
@@ -322,6 +325,8 @@ MySQL es muy utilizado en aplicaciones web, como Drupal o phpBB, en plataformas 
 
 \subsection{Conclusión}
 MySQL es más rápida que PostgreSQL a la hora de resolver consultas, tiene mejor documentación y se ha orientado más a facilitarle la vida al desarrollador proporcionando mejores herramientas de administración. Para el desarrollo Web y otro tipo de aplicaciones en las que la rapidez de respuesta y el bajo consumo de recursos es indispensable es recomendable el uso de MySQL, por lo cual será nuestra elección.
+
+\input{pojo}
 
 \section{Otras tecnologías utilizadas}
 \subsection{JavaScript}

@@ -44,7 +44,9 @@ public class VideoDaoHibernate extends
 			(List<Video>)getSession().createQuery(
 					"select v from Video v where v " +
 					"not in (select distinct(e.video) from Vote e where " +
-					"e.voter.userProfileId = :userId) ORDER BY v.date DESC"). 
+					"e.voter.userProfileId = :userId) " +
+					"and v.userProfile.userProfileId <> :userId " +
+					"ORDER BY v.date DESC"). 
 					setParameter("userId", userProfileId).		
 					setFirstResult(0).setMaxResults(preSelected).list();
 		if(result.size()==0){

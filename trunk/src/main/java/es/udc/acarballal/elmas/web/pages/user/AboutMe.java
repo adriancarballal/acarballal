@@ -19,7 +19,7 @@ import es.udc.acarballal.elmas.web.services.AuthenticationPolicy;
 import es.udc.acarballal.elmas.web.services.AuthenticationPolicyType;
 import es.udc.acarballal.elmas.web.util.UserSession;
 
-@AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
+@AuthenticationPolicy(AuthenticationPolicyType.PARTICIPANTS)
 public class AboutMe {
 	
 	private static final int COUNT = 7;

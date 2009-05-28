@@ -110,13 +110,13 @@
 	</tr>
 	<tr><td><br /></td></tr>
 	<tr>
-		<th>${message:bases}</th>
+		<th><span class="important">${message:bases}</span></th>
 	</tr>
 	<tr>
-		<td>${message:participa}.</td>
+		<td><span class="important">${message:participa}</span></td>
 	</tr>
 	<tr>
-		<td><a class="mainlevel" href="#" t:type="PageLink" t:page="user/ReadMore">${message:menu-readmore}</a>
+		<td><a class="mainlevel" href="#" t:type="PageLink" t:page="ReadMore">${message:menu-readmore}</a>
 		</td>
 	</tr>
 

@@ -4,8 +4,8 @@
 <br/>
 <p class="section">${message:insertVideo}.</p>
 
-<form t:type="Form" t:id="videoForm"><t:errors />
-
+<form t:type="Form" t:id="videoForm">
+<t:errors />
 <br/>
 <table class="videoUpload">
 	<tr>
@@ -36,6 +36,9 @@
 		<td><input type="submit" value="Upload" /></td>
 	</tr>
 	
+	<tr>
+		<td><span class="important2">${message:format}</span></td>
+	</tr>
 </table>
 </form>
 

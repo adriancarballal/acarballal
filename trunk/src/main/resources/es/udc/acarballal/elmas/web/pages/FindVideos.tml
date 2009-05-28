@@ -19,11 +19,12 @@
 							<table>
 								<tr>
 									<td class="video-title">${message:video-title}:
-									<span class="important2">${video.title}</span></td>
+									<span class="important">${video.title}</span></td>
 								</tr>
 								<tr>
 									<td class="video-user">${message:video-user}:
-									${video.userProfile.loginName} - ${message:date}: 
+									<span class="important2">${video.userProfile.loginName}</span>
+									 - ${message:date}: 
 										<span class="important2"><t:output
 										value="video.date.time" format="dateFormat" /></span>
 									</td>

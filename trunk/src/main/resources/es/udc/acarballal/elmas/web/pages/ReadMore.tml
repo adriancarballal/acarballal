@@ -1,0 +1,19 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	t:type="Layout" t:pageTitle="${message:title}">
+
+<p><span class="important">${message:readMore}</span></p>
+
+<p>
+	<span class="important2">
+	<span class="important">${message:channel}</span> ${message:paragraph1}.
+	</span>
+</p>
+
+<p><span class="important2">${message:paragraph2}.</span></p>
+
+<p><span class="important2">${message:paragraph3}.</span></p>
+
+<p><span class="important2">${message:paragraph4} <span class="important">${message:channel}</span>
+</span></p>
+
+</html>
