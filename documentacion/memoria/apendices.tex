@@ -115,4 +115,55 @@ En esta figura se muestran tres tipos de código representados en colores diferen
 	\item En rojo se distingue el código perteneciente a componentes embebidos.
 	\item En azul están los mensajes internacionalizados y los objetos inyectados dentro de la página.
 \end{itemize}
+
+Dentro de nuestro ejemplo podemos distinguir:
+\begin{itemize}
+	\item \textbf{Declaración de un espacio de nombres}
+	{\tt \scriptsize
+\begin{verbatim}
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+\end{verbatim}
+}
+	\begin{itemize}
+		\item Cualquier elemento o atributo que tenga prefijo t pertenece al
+espacio de nombres de Tapestry
+		\item En el markup generado, no se incluye la importacion del
+espacio de nombres de Tapestry
+	\end{itemize}
+	\item \textbf{Componentes}
+	
+	Es posible incluir componentes dentro de una plantilla utilizando el elemento correspondiente (dentro del espacio de nombres de Tapestry).
+{\tt \scriptsize
+\begin{verbatim}
+<t:if t:test="userSessionExists">
+</t:if>
+\end{verbatim}
+}
+	\item \textbf{Mensajes internacionalizados}
+{\tt \scriptsize
+\begin{verbatim}
+<spam class="favourite" title="${message:markAsFavourite}" />
+\end{verbatim}
+}
+
+	\textit{Message}: indica que valor es la clave de un mensaje del catálogo de mensajes. Dicho catálogo forma parte del soporte de internacionalizacion que proporciona Tapestry:
+\begin{itemize}
+	\item Permiten que los textos fijos de las plantillas, en lugar de escribirlos directamente en ellas, se escriban
+en un fichero de mensajes
+	\item Ficheros .properties
+	\item Existe un catalogo de mensajes general para toda la aplicacion
+	\item Es posible definir un fichero de mensajes específicos para una página
+\end{itemize}
+	\item \textbf{Objetos inyectados o propiedades}
+	
+	En el caso de acceso a propiedades es posible:	
+\begin{itemize}
+	\item Referirse a subpropiedades
+	\item Invocar a un metodo del objeto que no sea un getter (utilizando parentesis a continuacion del
+nombre del metodo)
+\end{itemize}
+\end{itemize}
+
+Gracias a todo esto que se acaba de explicar, un diseñador podría modificar la estructura y la apariencia de la vista teniendo en cuenta que partes del código deben permanecer inalteradas y cuales son modificables, en este caso, el html puro dentro del \textit{tml}.
 \chapter{Contenido del CD-ROM}
