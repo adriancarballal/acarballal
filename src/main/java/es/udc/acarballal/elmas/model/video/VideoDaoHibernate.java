@@ -1,5 +1,6 @@
 package es.udc.acarballal.elmas.model.video;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -56,6 +57,32 @@ public class VideoDaoHibernate extends
 		Random rand = new Random();
 		int index = 0 + rand.nextInt(range);
 		return result.get(index);
+	}
+
+	public boolean addedVideo(Long userProfileId, Calendar today) {
+		Calendar startDate = (Calendar)today.clone();
+		startDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		startDate.set(Calendar.HOUR, 0);
+		startDate.set(Calendar.MINUTE, 0);
+		startDate.set(Calendar.SECOND, 0);
+		startDate.set(Calendar.AM_PM, Calendar.AM);
+		startDate.set(Calendar.MILLISECOND, 0);
+		Calendar endDate = (Calendar)today.clone();
+		endDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		endDate.set(Calendar.HOUR, 23);
+		endDate.set(Calendar.MINUTE, 59);
+		endDate.set(Calendar.SECOND, 59);
+		endDate.set(Calendar.AM_PM, Calendar.PM);
+		endDate.set(Calendar.MILLISECOND, 999);
+		long count = 
+			(Long) getSession().createQuery("SELECT count(c) FROM Video c " +
+					"WHERE c.userProfile.userProfileId=:userProfileId AND " +
+                	"c.date >= :startDate AND c.date <= :endDate").
+					setParameter("userProfileId", userProfileId).
+					setCalendar("startDate", startDate).
+	                setCalendar("endDate", endDate).
+			uniqueResult();
+		return count!=0;
 	}
 		
 }

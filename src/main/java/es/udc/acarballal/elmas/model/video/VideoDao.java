@@ -1,5 +1,6 @@
 package es.udc.acarballal.elmas.model.video;
 
+import java.util.Calendar;
 import java.util.List;
 
 import es.udc.pojo.modelutil.dao.GenericDao;
@@ -13,4 +14,6 @@ public interface VideoDao extends GenericDao<Video, Long>{
 	
 	public Video findRandomVotableVideo(Long userProfileId, int preSelected) 
 		throws InstanceNotFoundException;
+	
+	public boolean addedVideo(Long userProfileId, Calendar today);
 }

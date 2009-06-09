@@ -1,3 +1,157 @@
 \chapter{Sistema resultante}
-\section{Aplicación Web}
-\section{Aplicación optimizada para dispositivos móviles}
+
+Durante este capítulo se mostrará el sistema final que se ha obtenido después de la implementación de ambos portales.
+
+\section{Portal Web}
+Veamos las diferentes páginas que componen nuestro sistema.
+\begin{itemize}
+	\item \textbf{Página de inicio: }
+\begin{figure}[hb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-inicio.png}
+\caption{Página principal}
+\label{inicio}
+\end{figure}
+Esta pagina, al igual que el resto, sigue la estructura básica con la barra de busqueda, la barra lateral de links y la barra lateral de videos mas votados. En el caso de la barra de links, todos son visibles al usuario, aunque para poder acceder a su contenido necesitan determinados privilegios. En caso de que estos privilegios no sean correctos el usuario será redirigido. Existe un link oculto, el de informes para administradores, ya que se considera que sólo usuarios con privilegios de administración podrán acceder a él.
+	\item \textbf{Página de login: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-login.png}
+\caption{Página de login}
+\label{inicio}
+\end{figure}
+En esta página un usuario registrado deberá introducir su identificador y password para poder iniciar una sesión en la aplicación, tras lo que será redirigido a la página principal o, si se introduce algún dato erróneo, se mostrará un
+mensaje de error indicando el problema.
+	\item \textbf{Página de registro: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-register.png}
+\caption{Página de registro}
+\label{register}
+\end{figure}	
+En esta página un usuario se podrá registrar en el sistema introduciendo los datos que se le piden, nombre, apellidos, correo, identificador y contraseña. Si se introduce un dato erróneo o el identificador ya está usado por otro usuario se mostrará un mensaje de error. En caso de que el registro se realiza satisfactoriamente el usuario será redirigido a la página principal.
+	\item \textbf{Página de mensajes: }Se muestran los mensajes administrativos que le han sido enviado a un usuario registrado. En todo momento se pueden eliminar los mensajes sin realizar una redirección desde esta página mediante AJAX. En caso de no existir mensajes disponibles se le avisará al usuario.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-mensajes.png}
+\caption{Página de mensajes}
+\label{mensajes}
+\end{figure}	
+\item \textbf{Página de Mis Videos: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-misvideos.png}
+\caption{Página de Mis Videos}
+\label{misvideos}
+\end{figure}	
+Para un usuario participante se muestran los videos que este ha subido hasta la fecha, permitiendole también eliminarlos. Se puede acceder a un video utilizando la imagen preliminar del mismo como link. Gracias a los links referentes a \textit{Anterior} y \textit{Siguiente} se puede navegar entre los diferentes videos.
+\item \textbf{Página de Mis favoritos: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-misfavoritos.png}
+\caption{Página de Mis Favoritos}
+\label{favoritos}
+\end{figure}	
+En esta página se muestran los videos favoritos de un usuario registrado, permitiendole eliminarlos de sus favoritos en cualquier momento. Se puede acceder a cualquier videos utilizando la imagen preliminar como link. Al igual que es resto de búsquedas, posee links de \textit{Anterior} y \textit{Siguiente} para navegar.
+	\item \textbf{Página de Agregación de videos: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-agregar.png}
+\caption{Página de Agregación de videos}
+\label{agregar}
+\end{figure}
+En esta página se permite a un usuario concursante subir un video nuevo cada semana. En caso de que el video subido no cumple las condiciones de calidad o el nombre y comentario no sean válidos, se muestra en la pantalla un mensaje de error. En caso de que el video sea válido y una vez que ha sido subido al servidos, el usuario es redirigido a la página principal.
+\item \textbf{Página de Votación semanal: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-votacion.png}
+\caption{Página de Votación semanal}
+\label{agregar}
+\end{figure}
+En esta página se permiten votar 10 videos semanales. La votación se realizará mediante las estrellas colocadas en la parte inferior del reproductor de video. Dicho reproductor permite al usuario visualizar el video antes de votarlo. En caso de que ya se hayan realizado el máximo número de votaciones en una semana se le avisará al usuario.
+\item \textbf{Página de comentarios sobre mi: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-queopinandemi.png}
+\caption{Página de comentarios sobre mi}
+\label{aboutme}
+\end{figure}
+Esta página muestra los comentarios que otros usuario han escrito sobre ti. Para cada comentario muestra el texto del comentario, el usuario que lo ha escrito y la fecha de edición.
+\item \textbf{Páginas de comentarios: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-comentarios.png}
+\caption{Página de comentarios sobre mi}
+\label{comentarios}
+\end{figure}
+En el caso de las página de \textit{Comentarios sobre usuarios} y \textit{Comentarios sobre videos}, a partir de ahora las veremos como una sóla, permiten ver los comentarios realizados por el usuario. Para cada comentario se muestra tanto como el comentario como la fecha, y se permite eliminarlos en cualquier momento.
+\item \textbf{Bases de concurso: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-bases.png}
+\caption{Página de bases del concurso}
+\label{bases}
+\end{figure}
+En esta página se le notifican al usuario la Bases de participación en el concurso.
+\item \textbf{Página de búsqueda: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-busqueda.png}
+\caption{Página de bases del concurso}
+\label{busqueda}
+\end{figure}
+En esta página se muestran los resultados obtenidos tras realizar una busqueda a partir de una determinada clave. Se muestran los videos que satisfagan los criterios de búsqueda. Se permite navegar entre los resultados mediante los links de \textit{Anterior} y \textit{Siguiente}. Se puede acceder a cada uno de los videos para su reproducción mediante la imagen.
+\item \textbf{Página de visualización de un video: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/cap-video.png}
+\caption{Página de visualización de un video}
+\label{video}
+\end{figure}
+En esta página se permite visualizar un video. Además, se permiten realizar cuatro acciones sobre el mismo en función de los privilegios y la relación del usuario con el video en cuestión, las cuale son respectivamente:
+\begin{itemize}
+	\item Visualizar comentarios sobre dicho video
+	\item Visualizar comentarios sobre el propietario del video
+	\item Notificar a los administradores sobre contenido impropio
+	\item Añadir el video a los favoritos
+\end{itemize}
+\end{itemize}
+
+\section{Portal optimizado para dispositivos móviles}
+\begin{itemize}
+	\item \textbf{Página de inicio: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=5cm]{imagenes/cap-m-inicial.png}
+\caption{Página de inicio o acceso}
+\label{acceso}
+\end{figure}
+En la figura \ref{acceso} se muestra la página inicial del sistema, que requiere que un usuario se identifique para poder acceder al sistema. Si los datos de identificación no son correctos se avisará al usuario mediante un mensaje de error.
+\item \textbf{Página del Menú inicial: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=5cm]{imagenes/cap-m-menu.png}
+\caption{Página de menú}
+\label{menu}
+\end{figure}
+En la figura \ref{menu} se muestra el menú de las acciones que cada usuario puede realizar, al igual que un link junto con el mensaje de bienvenida que permite cerrar la sesión.
+\item \textbf{Página de Mis videos: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=5cm]{imagenes/cap-m-misvideos.png}
+\caption{Página de Mis videos}
+\label{misvideosmobile}
+\end{figure}
+En la figura \ref{misvideosmobile} se muestran los videos de un usuario y la fecha en la que fueron subidos al sistema. Se proporciona un link \textit{Ver video} que permite visualizar o descargar el video en función del terminal utilizado. Del mismo modo se proporciona un link \textit{Volver} para poder regresar a la página con el menú.
+
+La página de \textit{Mis favoritos} sigue el mismo diseño, con la única diferencia de que los videos son los favoritos de un usuario.
+\item \textbf{Página de votación: }
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=5cm]{imagenes/cap-m-votacion.png}
+\caption{Página de votación}
+\label{votacionmobile}
+\end{figure}
+En la figura \ref{votacionmobile} se muestra la página de votación. En esta página se permiten votar 10 videos semanales. La votación se realizará mediante los link que muestran los tipos de votos. Se permite al usuario visualizar el video antes de votarlo. En caso de que ya se hayan realizado el máximo número de votaciones en una semana se le avisará al usuario.
+\end{itemize}
+
