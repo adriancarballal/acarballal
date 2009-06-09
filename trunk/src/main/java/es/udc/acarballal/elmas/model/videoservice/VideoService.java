@@ -17,6 +17,8 @@ public interface VideoService {
 			String rtVideo, Calendar date)
 			throws InstanceNotFoundException, InsufficientPrivilegesException;
 	
+	public boolean addedVideo(Long userId, Calendar today) throws InstanceNotFoundException;
+	
 	public Long commentVideo(Long commentatorId, Long videoId, 
 			String comment,	Calendar date) throws InstanceNotFoundException, 
 			InvalidOperationException;

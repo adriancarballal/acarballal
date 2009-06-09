@@ -61,6 +61,14 @@ public class VideoServiceImpl implements VideoService{
 		return video.getVideoId();
 	}
 	
+	@Transactional(readOnly = true)
+	public boolean addedVideo(Long userId, Calendar today) 
+			throws InstanceNotFoundException{
+		
+		userProfileDao.find(userId);
+		return videoDao.addedVideo(userId, today);
+	}
+	
 	public Long commentVideo(Long commentatorId, Long videoId, 
 			String comment,	Calendar date) throws InstanceNotFoundException, 
 			InvalidOperationException{

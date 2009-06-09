@@ -170,18 +170,19 @@ Para que todo esto se cumpla se utiliza el metodo \textit{findRandomVotableVideo
 \label{VotePersistance}
 \end{figure}
 
-La votación (\textit{vote}) se realiza de manera cualitativa mediante rangos difusos, donde el usuario deberá elegir la calidad del video de entre las siguientes: muy malo, malo, normal, bueno y muy bueno. En cuanto a la persistencia de este dato en concreto dejamos que el propio mapeador lo almacene como un entero, el cual nos servirá posteriormente para realizar los rankings de los videos más votados.
+La votación (\textit{vote}) se realiza de manera cuantitativa, donde el usuario deberá elegir la calidad del video de entre las siguientes: muy malo, malo, normal, bueno y muy bueno, representado mediante números comprendidos entre el 1 y el 5 respectivamente. En cuanto a la persistencia de este dato en concreto dejamos que el propio mapeador lo almacene como un entero, el cual nos servirá posteriormente para realizar los rankings de los videos más votados.
 
 El DAO de esta entidad implementa dos metodos de busqueda, correspondientes con la busqueda de los videos más votados entre dos fecha proporcionadas y la busqueda de los videos más votados de los que devolverá un numero concreto de videos (\textit{findMostVoted}, ambos análogos). Del mismo modo también se implementa otros dos metodos, uno sirve para conocer si un usuario ha votado por un determinado video (\textit{alreadyVoted}) y el otro para conocer el numero de votaciones restantes que puede realizar un usuario para la semana actual (\textit{votesRemaining}).	
 \item \textbf{UserComment}
 	
-	La entidad UserComment almacenará los comentarios realizados hacia un determinado usuario, el cual, deberá ser un participante del concurso. Para cada comentario se recoge una relación al usuario que comenta (\textit{commentator}), una relación al usuario comentado (\textit{commen\-ted}), la fecha del comentario (\textit{date}) y el comentario propiamente dicho (\textit{comment}).
+	La entidad UserComment almacenará los comentarios realizados hacia un determinado usuario, el cual, deberá ser un participante del concurso. 
 \begin{figure}[htp]
 \centering
 \includegraphics*[width=15cm]{imagenes/PersistenciaUserComment.jpg}
 \caption{DAO de la entidad UserComment}
 \label{UserCommentPersistance}
 \end{figure}
+Para cada comentario se recoge una relación al usuario que comenta (\textit{commentator}), una relación al usuario comentado (\textit{commen\-ted}), la fecha del comentario (\textit{date}) y el comentario propiamente dicho (\textit{comment}).
 
 Su DAO correspondiente implementa, además de las operaciones básicas CRUD, dos métodos de búsqueda de comentarios atendiendo a los usuarios relacionados con los mismos. De este modo, esos dos métodos son \textit{findCommentByCommentator} que realiza la búsqueda de todos los comentarios que ha realizado un determinado usuario, y \textit{findCommentByCommented} que busca todos los comentarios de los que un usuario es objeto.
 	\item \textbf{VideoComment} 
@@ -755,7 +756,7 @@ Para que Tapestry utilice el filtro debemos de especificarselo en su fichero de 
 \subsection{Capa vista}
 Cada página tiene asociada una plantilla y una clase Java. La clase Java será el controlador de dicha página (como se ha visto en el apartado anterior) y la plantilla será la vista que se le proporciona.
 
-A parte de los diferentes controladores que existen para cada página, en realidad se necesita el diseño concreto de la misma o plantilla (Tapestry las llama \textit{markups}). Gracias a Tapestry tanto controlador como diseño de página están totalmente desacoplados, lo cual conlleva una ventaja a la hora del desarrollo, permitiendo que un diseñador y un programador trabajen de forma paralela sin que el diseñador tenga conocimiento específico sobre el código del controlador asociado.
+Junto con de los diferentes controladores que existen para cada página, en realidad se necesita el diseño concreto de la misma o plantilla (Tapestry las llama \textit{markups}). Gracias a Tapestry tanto controlador como diseño de página están totalmente desacoplados, lo cual conlleva una ventaja a la hora del desarrollo, permitiendo que un diseñador y un programador trabajen de forma paralela sin que el diseñador tenga conocimiento específico sobre el código del controlador asociado.
 
 Una plantilla es un documento XML que permite generar un markup. En el caso de una aplicacion Web, el markup es normalmente
 HTML o XHTML, pero tambien podria ser, por ejemplo, XML. Tiene extensión .tml (\textit{Tapestry Markup Language}). Tanto el controlador como la plantilla deben tener el mismo nombre.

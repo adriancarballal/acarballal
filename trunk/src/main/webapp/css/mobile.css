@@ -6,16 +6,12 @@ body{
 #pageTitle {
 	width: 240px;
 	margin-top: 5px;
-	background-image: url(images/cell_top.jpg);
-	background-repeat: repeat-x;
 	background-color: #FFFFFF;
-	border-left: 1px solid #a1a1a1;
-	border-right: 1px solid #a1a1a1;
-	border-bottom: 1px solid #a1a1a1;
+	border: 1px solid #a1a1a1;
 	line-height: 24px;
 	width: 97% center;
 	text-align: center;
-	color: #CD1821;
+	color: #f78441;
 }
 
 /* Sidebar. */
@@ -28,6 +24,7 @@ body{
 	border-right: 1px solid #a1a1a1;
 	border-bottom: 1px solid #a1a1a1;
 }
+
 
 input {
 	border: 1px solid #CCCCCC;
@@ -47,14 +44,9 @@ textarea {
 
 /* Content. */
 #content {
-	
 	margin-right: 7px;
-	background-image: url(images/cell_top.jpg);
-	background-repeat: repeat-x;
 	background-color: #FFFFFF;
-	border-left: 1px solid #a1a1a1;
-	border-right: 1px solid #a1a1a1;
-	border-bottom: 1px solid #a1a1a1;
+	border: 1px solid #a1a1a1;
 	width: 240px;
 	text-align: center;
 	padding-bottom: 10px;
@@ -62,7 +54,7 @@ textarea {
 }
 
 p.section {
-	color: #CD1821;
+	color: #f78441;
 	font-size: large;
 }
 
@@ -106,7 +98,7 @@ a.mainlevel:link,a.mainlevel:visited {
 	display: block;
 	margin-left: 4px;
 	padding: 0px 0px 2px 0px;
-	color: #2B5497;
+	color: #626669;
 	width: 230px;
 	text-align: left;
 	background-color: #FBFBFB;
@@ -114,7 +106,7 @@ a.mainlevel:link,a.mainlevel:visited {
 
 a.mainlevel:hover {
 	background-color: #f0f0f0;
-	color: #CD1821;
+	color: #f78441;
 }
 
 td{
@@ -155,22 +147,22 @@ a:link,a:visited {
 
 a:hover {
 	background-color: #f0f0f0;
-	color: #CD1821;
+	color: #f78441;
 }
 .nonImportant{
 	color: #666666;
 }
 
 .important {
-	color: #CD1821;
+	color: #f78441;
 }
 
 .important2 {
-	color: #2B5497;
+	color: #626669;
 }
 
 .username {
-	color: #2B5497;
+	color: #626669;
 }
 
 table {

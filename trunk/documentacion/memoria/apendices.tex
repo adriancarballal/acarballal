@@ -91,6 +91,28 @@ La aplicabilidad de este patrón es:
 	\item Para controlar la extensiones de las subclases. 
 \end{itemize}
 
-\chapter{Manual de instalación}
+\chapter{Manuales}
+\section{Manual de instalación}
+\section{Manual de modificación de interfaces}
+Una de las grandes ventajas que presenta Tapestry 5 radica en la posibilidad de realizar diseño de la interfaz sin necesidad de tener conocimiento de como se implementa un markup. Esto permite que un diseñador gráfico con conocimientos de html puro sea capaz de realizar cambios a su gusto. En este apéndice se mostrará la forma de realizar estos cambios de manera sencilla, de modo que sirva a modo de manual para su modificación.
+Antes de nada, cabe destacar que la modificaciones que se pueden realizar sobre la vista se pueden realizar de dos forma específicas:
+\begin{itemize}
+	\item Modificando el CSS asociado a las diferentes páginas, pero que obliga a que la estructura de la vista no sea modificable.
+	\item Modificando las plantillas o tml asociados a cada página dentro de la implementación, lo cuál si permite modificar la estructura de la vista.
+\end{itemize}
+Como el primer punto no supone ningun problema, ya que sólo se necesita modificar el fichero css determinado, no vamos a centra en como se puede modificar un tml.
 
+\begin{figure}[htp]
+\centering
+\includegraphics*[width=15cm]{imagenes/votetml.png}
+\caption{Ejemplo página tml}
+\label{tml}
+\end{figure}
+
+En esta figura se muestran tres tipos de código representados en colores diferentes:
+\begin{itemize}
+	\item En negro se recoge el código html puro.
+	\item En rojo se distingue el código perteneciente a componentes embebidos.
+	\item En azul están los mensajes internacionalizados y los objetos inyectados dentro de la página.
+\end{itemize}
 \chapter{Contenido del CD-ROM}

@@ -4,6 +4,13 @@
 <br/>
 <p class="section">${message:insertVideo}.</p>
 
+<t:if t:test="addedVideo">
+
+	<p>${message:nomorevideos}.</p>
+	<p>${message:nomorevideos2}.</p>
+
+<t:parameter name="else">
+
 <form t:type="Form" t:id="videoForm">
 <t:errors />
 <br/>
@@ -41,5 +48,8 @@
 	</tr>
 </table>
 </form>
+</t:parameter>
+</t:if>
+
 
 </html>

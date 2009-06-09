@@ -1,6 +1,7 @@
 package es.udc.acarballal.elmas.web.pages.user;
 
 import java.io.File;
+import java.util.Calendar;
 
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.tapestry5.annotations.ApplicationState;
@@ -69,6 +70,13 @@ public class InsertVideo {
 	 @Inject
 	 private UserService userService;
 	 
+	 public boolean getAddedVideo(){
+		 try {
+			return videoService.addedVideo(userSession.getUserProfileId(), Calendar.getInstance());
+		} catch (InstanceNotFoundException e) {
+			return true;
+		}
+	 }
 	 
 	 Object onSuccess(){
 		 String originalDir = DirectoryGenerator.create().getAbsolutePath();
@@ -90,7 +98,7 @@ public class InsertVideo {
         return Index.class;
     }
     
-	//@OnEvent(value="validate", component="videoForm")
+	@OnEvent(value="validate", component="videoForm")
     void onValidateForm(){
 			if (!videoForm.isValid()) {
 				return;

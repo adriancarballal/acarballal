@@ -165,6 +165,68 @@ public class VideoServiceTest {
 		
 	}
 	
+	@Test(expected = InstanceNotFoundException.class)
+	public void addedVideoNoneUser() throws InstanceNotFoundException{
+		long userId = NON_EXISTENT_USER_PROFILE_ID;
+		Calendar date = Calendar.getInstance();
+		videoService.addedVideo(userId, date);
+	}
+	
+	@Test
+	public void addedVideoAsAdmin() throws InstanceNotFoundException{
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
+		Calendar date = Calendar.getInstance();
+		videoService.addedVideo(userProfileId, date);
+	}
+	
+	@Test
+	public void addedVideoAsCompetitor() 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
+		LoginResult result = userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);
+		Calendar date = Calendar.getInstance();
+		videoService.addedVideo(result.getUserProfileId(), date);
+	}
+	
+	@Test
+	public void addedVideoAsVoter() 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
+		LoginResult result = userService.changePrivileges(userProfileId, Privileges_TYPES.VOTER);
+		Calendar date = Calendar.getInstance();
+		videoService.addedVideo(result.getUserProfileId(), date);
+	}
+	
+	@Test
+	public void addedVideoFalse() 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
+		LoginResult result = userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);
+		Calendar date = Calendar.getInstance();
+		assertTrue(!videoService.addedVideo(result.getUserProfileId(), date));
+	}
+
+	@Test
+	public void addedVideoTrue() 
+			throws InstanceNotFoundException, InsufficientPrivilegesException{
+		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
+		LoginResult result = userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);
+		Calendar date = Calendar.getInstance();
+		
+		String title = "VideoExample";
+		String comment = "CommentExample";
+		String snapshot = "-home-data-snapshots-001.jpg";
+		String original = "video.vob";
+		String flvVideo = "video.flv";
+		String rtVideo = "video.mp4";
+		
+		videoService.addVideo(result.getUserProfileId(), title, comment, snapshot, 
+				original, flvVideo, rtVideo, date);		
+		
+		assertTrue(videoService.addedVideo(result.getUserProfileId(), date));
+	}
+
+	
 	public void addVideoCommentAsAdmin() 
 			throws InstanceNotFoundException, IncorrectPasswordException, 
 			InvalidOperationException{
