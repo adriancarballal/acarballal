@@ -93,6 +93,120 @@ La aplicabilidad de este patrón es:
 
 \chapter{Manuales}
 \section{Manual de instalación}
+
+Mediante este apéndice se explicará las diferentes partes en las que se dividen la instalación del sistema dentro de un servidor, tal y como se encuentra en la actualidad. Todas las pruebas que se han realizado en el capítulo \titleref{pruebas} se han realizado contra dicho servidor cuando se han creido oportunas, como son el caso de la pruebas de integración (ver página \pageref{integracion}) y las pruebas de estrés (ver página \pageref{estres}).
+
+La instalación se centra en la plataforma Windows, tal y como se encuentra configurado en el sistema online, aunque, como ya se especificó, el sistema final es multiplataforma.
+
+\subsection{Base de datos}
+Para la instalación de MySql 5.0.45 (podemos encontrarlo en la carpeta \textit{INSTALACIÓN} dentro del CD-ROM no se modificarán las opciones proporcionadas por el instalador por defecto. Una vez finalizada se ejecutará el \textit{MySQL Server Instance Configuration Wizard}, donde tendremos que realizar los siguiente cambios:
+\begin{itemize}
+	\item Marcar la casilla referente a \textit{Best Support For Multilingualism (UTF-8)}.
+	\item Desmarcar la casilla \textit{Install As Windows Service}.
+	\item Marcar la casilla \textit{Install Bin Directory In Windows PATH}.
+\end{itemize}
+
+Una vez terminada la instalación debemos configurar nuestra propia base de datos siguiendo estos pasos:
+\begin{itemize}
+	\item 
+\begin{itemize}
+	\item Iniciamos el servidor de base de datos mediante el comando \textit{mysqld-nt}.
+	\item Creamos una base de datos de nombre \textit{elmas} mediante el comando \textit{mysqladmin -u root create elmas}.
+	\item Creamos un usuario de nombre \textit{elmas} para acceder de forma local.
+	\begin{itemize}
+		\item \textit{mysql -u root}
+		\item \textit{GRANT ALL PRIVILEGES ON elmas.* to elmas@localhost IDENTIFIED BY 'elmas', elmas@localhost.localdomain IDENTIFIED BY 'elmas';}
+	\end{itemize}	
+\end{itemize}
+	\item Podremos acceder a la base de datos que hemos creado mediante el comando \textit{mysql -u elmas --password=elmas elmas}.
+	\item Podremos apagar el servidor de bases de datos con \textit{mysqladmin -u root shutdown}.
+\end{itemize}
+\subsection{Apache}
+Para la configuración del contenedor web mencionado durante todo esta memoria se utilizará Apache 2. Podremos obtener el instalador de este servidor http tanto en la carpeta \textit{INSTALACIÓN} en el CD-ROM proporcionado como en \URL{http://archive.apache.org/dist/httpd/}. El archivo de instalación para la plataforma Windows será \textit{apache\_2.2.11-win32-x86-openssl-0.9.8i.msi}.
+
+Una vez que lo hemos instalado siguiendo el instalador tendremos que configurar nuestro contenedor añadiendo el siguiente texto al archivo \textit{httpd.conf} que se encuentra en la carpeta \textit{conf}:
+
+{\tt \scriptsize
+\begin{verbatim}
+<VirtualHost 127.0.0.1:80>
+  DocumentRoot CARPETA_CONTENEDOR
+  ServerName URL_IP
+</VirtualHost> 
+
+<Directory "CAPPETA_CONTENEDOR">
+    AllowOverride FileInfo AuthConfig Limit
+    Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+    <Limit GET POST OPTIONS PROPFIND>
+        Order allow,deny
+        Allow from all
+    </Limit>
+    <LimitExcept GET POST OPTIONS PROPFIND>
+        Order deny,allow
+        Deny from all
+    </LimitExcept>
+</Directory>
+\end{verbatim}
+}
+
+Tanto \textit{CARPETA\_CONTENEDOR} y \textit{URL\_IP} son variables que deberá ser configuradas por el administrador. En el caso de la versión online son \textit{C:$\backslash$elmas\_container} y \textit{www.elmas.dynalias.com} respectivamente.
+
+\subsection{Apache Tomcat}
+Se utiliza Apache Tomcat 6 como servidor web de nuestra aplicación. Se puede instalar descomprimiendo el archivo \textit{apache-tomcat-6.0.14.tar.gz}, el cual se puede obtener tanto de la carpeta \textit{INSTALACIÓN} del CD-ROM o desde \URL{http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.14/bin/}. 
+\\ \\
+Una vez hecho esto, crearemos un usuario con el rol de manager añadiendo al archivo \textit{conf/tomcat-users.xml}:
+{\tt \scriptsize
+\begin{verbatim}
+  <user name="tomcat" password="tomcat" roles="tomcat,manager"/>
+\end{verbatim}
+}
+Se necesita añadir un driver JDBC en la carpeta \textit{lib} para la comunicación con la base de datos, el archivo \textit{mysql-connector-java-5.0.5.jar} en \textit{INSTALACIÓN}.
+
+Se añadirá un DataSource global mediante:
+
+\begin{itemize}
+	\item Insertando el siguiente código en el tag \textit{GlobalNamingResources} dentro del fichero \textit{conf/server.xml}:
+{\tt \scriptsize
+\begin{verbatim}
+<Resource name="jdbc/pojo-examples-ds"
+	auth="Container"
+  type="javax.sql.DataSource"
+  driverClassName="com.mysql.jdbc.Driver"
+  url="jdbc:mysql://localhost/elmas"
+  username="elmas"
+  password="elmas"
+  maxActive="4"
+  maxIdle="2"
+  maxWait="10000"
+  removeAbandoned="true"
+  removeAbandonedTimeout="60"
+  logAbandoned="true"
+  validationQuery="SELECT COUNT(*) FROM PingTable"/>
+\end{verbatim}
+}
+	\item Añadiendo el siguiente código en el tag \textit{Context} dentro del fichero \textit{conf/context.xml}:
+{\tt \scriptsize
+\begin{verbatim}
+<ResourceLink name="jdbc/pojo-examples-ds" global="jdbc/pojo-examples-ds"
+	type="javax.sql.DataSource"/>
+\end{verbatim}
+}
+\end{itemize}
+
+\subsection{FFMpeg}
+Para la compresión de los videos se utiliza un programa en segundo plano, en concreto FFMpeg, el cual lo podemos encontrar en el CD-ROM. En nuestro caso, ya se proporcionan todos los codecs, tanto de audio como de video, para todos los formatos disponibles hasta la fecha. Para su instalación en el servidor sólo tendremos que copiar la carpeta \textit{FFMpeg} del directorio \textit{INSTALACIÓN} donde deseemos.
+
+\subsection{Configuración}
+Sólo resta añadir la aplicación al servidor moviendo el archivo \textit{elmas.war} localizado en la carpeta de instalación del CD-ROM en la carpeta \textit{webapp} del servidor Tomcat.
+Se deben configurar una serie de variables dentro del servidor web, tal y como se indica en el apartado \titleref{config} en la página \pageref{config}. Para ello se modificará el archivo web.xml una vez que el archivo \textit{elmas.war} se deploye. En el caso de la instalación inicial del sistema se tendrá que modificar las siguientes variables:
+\begin{itemize}
+	\item \textit{unavailable/snapshot}, que debe de corresponderse con la imagen por defecto si ésta no se puede obtener del video añadido.
+	\item \textit{temporal/directory}, que especifica la carpeta temporal donde se realizarán las codificaciones de los videos.
+	\item \textit{ffmpeg/application/path}, ruta a la aplicación de compresión.
+	\item \textit{container/directory}, especifica la carpeta donde se desean guardar los videos originales y las compresiones de los mismos.
+	\item \textit{container/url}, determina la url pública al contenedor multimedia.
+	\item \textit{max/parallels/processes}, donde se elegirá el número máximo de compresiones paralelas que podrá realizar el sistema.
+\end{itemize}
+
 \section{Manual de modificación de interfaces}
 Una de las grandes ventajas que presenta Tapestry 5 radica en la posibilidad de realizar diseño de la interfaz sin necesidad de tener conocimiento de como se implementa un markup. Esto permite que un diseñador gráfico con conocimientos de html puro sea capaz de realizar cambios a su gusto. En este apéndice se mostrará la forma de realizar estos cambios de manera sencilla, de modo que sirva a modo de manual para su modificación.
 Antes de nada, cabe destacar que la modificaciones que se pueden realizar sobre la vista se pueden realizar de dos forma específicas:
@@ -167,3 +281,33 @@ nombre del metodo)
 
 Gracias a todo esto que se acaba de explicar, un diseñador podría modificar la estructura y la apariencia de la vista teniendo en cuenta que partes del código deben permanecer inalteradas y cuales son modificables, en este caso, el html puro dentro del \textit{tml}.
 \chapter{Contenido del CD-ROM}
+Se adjunta junto con la memoria de este proyecto un CD-ROM con todo el material necesario para poner en funcionamiento el sistema que se ha abordado a lo largo de esta memoria. Dicho CD-ROM sigue la siguiente estructura:
+\begin{itemize}
+	\item FFMepg$\backslash$
+	
+	Contiene los archivos del programa de compresión homónimo.
+	\item SRC$\backslash$
+	
+	Contiene el código fuente de la aplicación.
+	\item INSTALACIÓN$\backslash$
+	
+	Contiene los archivos y programas necesarios para instalar la aplicación en un servidor http.
+	\begin{itemize}
+		\item mysql-essential-5.0.45-win32.msi
+		\item apache\_2.2.11-win32-x86-openssl-0.98i.msi
+		\item apache-tomcat-6.0.14.tar.gz
+		\item mysql-connector-java-5.0.5.jar
+		\item MySqlCreateTables.sql
+		\item elmas.war
+	\end{itemize}
+	\item DOCUMENTACIÓN$\backslash$
+	
+	Contiene la memoria del proyecto en formato pdf.
+	\item SCREENCAST$\backslash$
+	
+	Contiene dos videos de presentación de ambos portales, tanto el web como el optimizado para dispositivos móviles.
+	\begin{itemize}
+		\item web\_screencast.flv
+		\item mobile\_screencast.flv
+	\end{itemize}
+\end{itemize}
