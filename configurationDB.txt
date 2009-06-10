@@ -9,10 +9,6 @@ Try to access to "elmas" database as "elmas" user with password "elmas".
 Shutdown database
 	- mysqladmin -u root shutdown
 
-	Mirar:
-	mirar votos de un video - preguntar
-	
-	cambiar lo del valor en bd de las votaciones, porq el avg no funciona bien.
 	cuando crea un dir lo tiene q mirar tambien en container
 	 
 
