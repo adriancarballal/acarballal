@@ -198,16 +198,7 @@ public class VideoServiceTest {
 	}
 	
 	@Test
-	public void addedVideoFalse() 
-			throws InstanceNotFoundException, InsufficientPrivilegesException{
-		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
-		LoginResult result = userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);
-		Calendar date = Calendar.getInstance();
-		assertTrue(!videoService.addedVideo(result.getUserProfileId(), date));
-	}
-
-	@Test
-	public void addedVideoTrue() 
+	public void addedVideo() 
 			throws InstanceNotFoundException, InsufficientPrivilegesException{
 		long userProfileId = DbUtil.getTestUserProfile().getUserProfileId();
 		LoginResult result = userService.changePrivileges(userProfileId, Privileges_TYPES.COMPETITOR);

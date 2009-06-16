@@ -122,11 +122,10 @@ public class DbUtil {
 				.crypt(testClearPassword), "name1", "lastName1", "user1@udc.es");
 		testUserProfile.setPrivileges(Privileges_TYPES.ADMIN);
 		
-		commentatorProfile = new UserProfile("adrian", PasswordEncrypter
+		commentatorProfile = new UserProfile("adrian_voter", PasswordEncrypter
 				.crypt(testClearPassword), "commentator", "commentator", 
 				"commentator@udc.es");
 		commentatorProfile.setPrivileges(Privileges_TYPES.VOTER);
-		
 		
 		try {
 			userProfileDao.create(testUserProfile);
@@ -160,9 +159,7 @@ public class DbUtil {
 		} catch (Throwable e) {
 			transactionManager.rollback(transactionStatus);
 		}
-
 		transactionManager.commit(transactionStatus);
-
 	}
 
 	public static void cleanDb() throws Exception {
