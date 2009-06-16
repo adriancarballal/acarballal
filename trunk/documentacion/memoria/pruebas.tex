@@ -1,6 +1,40 @@
 \chapter{Pruebas}
 \label{pruebas}
+
+Toda aplicación con un tamaño razonable necesita la realización de pruebas paulatinas a largo de toda su implementación y antes de su implantación. De esta manera, se intentará en todo momento minimizar el número de errores lo más tempranamente posible, para que estos no aparezcan en fases avanzadas del proyecto.
+En contreto, durante la realización de esta aplicación se han utilizado tres tipos de test:
+\begin{itemize}
+	\item Test de unidad
+	\item Test de integración
+	\item Test de estrés
+\end{itemize}
+
+A lo largo de este capítulo se intentarán explicar tanto el contenido de cada uno de ellos, como los resultados que se obtenieron en los mismos.
 \section{Tests de unidad}
+El primer tipo de test que vamos a detallar son los test de unidad. Este tipo de test se utilizan para comprobar y depurar los posibles errores que pudiesen aparecer en la capa modelo. Esta depuración previa permitirá al programador realizar las capas superiores al modelo de una manera mucho más fiable.
+
+Para la implementación de este tipo de test se ha aprovechado la automatización de test que nos proporciona Maven, el cuál tiene una buena integración con Spring. Maven nos permite realizar estas pruebas mediante el framework JUnit, de modo que Spring pueda inyectar las dependencias de las clases JUnit mediante anotaciones, tal y como se observa a continuación.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=13cm]{imagenes/junit_test.png}
+\caption{Inyección de dependencia en JUnit}
+\label{junittest}
+\end{figure}
+
+Los test de unidad se han realizado enfocados a cada uno de las fachadas del sistema, cada una de la cuales se corresponde con:
+\begin{itemize}
+	\item Fachada de usuarios
+	\item Fachada de videos
+	\item Fachada de administración
+\end{itemize}
+
+En la siguiente figura se muestra los resultados de ejecución de los test de unidad obtenidos mediante Maven:
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=13cm]{imagenes/unitTest.png}
+\caption{Resultados de los test de unidad}
+\label{testunit}
+\end{figure}
 
 \section{Tests de integración}
 \label{integracion}

@@ -36,7 +36,7 @@
     <!-- Enable the configuration of transactional behavior based on
          annotations. -->
     <tx:annotation-driven transaction-manager="transactionManager" />
-
+    
 	<!--  ======================== Business Objects ======================== -->
 
     <!--  DAOs. -->
@@ -105,5 +105,5 @@
         p:videoComplaintDao-ref="videoComplaintDao" 
         p:videoCommentComplaintDao-ref="videoCommentComplaintDao" 
         p:userCommentComplaintDao-ref="userCommentComplaintDao"/>
-
+		    	
 </beans>
