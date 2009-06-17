@@ -122,19 +122,27 @@ Una vez terminada la instalación debemos configurar nuestra propia base de datos
 	\item Podremos apagar el servidor de bases de datos con \textit{mysqladmin -u root shutdown}.
 \end{itemize}
 \subsection{Apache}
-Para la configuración del contenedor web mencionado durante todo esta memoria se utilizará Apache 2. Podremos obtener el instalador de este servidor http tanto en la carpeta \textit{INSTALACIÓN} en el CD-ROM proporcionado como en \URL{http://archive.apache.org/dist/httpd/}. El archivo de instalación para la plataforma Windows será \textit{apache\_2.2.11-win32-x86-openssl-0.9.8i.msi}.
+Para la configuración del contenedor web mencionado durante todo esta memoria se utilizará Apache 2. Podremos obtener el instalador de este servidor http tanto en la carpeta \textit{INSTALACIÓN} en el CD-ROM proporcionado como en \URL{http://archive.apache.org/dist/httpd/}. El archivo de instalación para la plataforma Windows será \textit{apache\_2.2.4-win32-x86-no\_ssl.msi}.
 
 Una vez que lo hemos instalado siguiendo el instalador tendremos que configurar nuestro contenedor añadiendo el siguiente texto al archivo \textit{httpd.conf} que se encuentra en la carpeta \textit{conf}:
 
 {\tt \scriptsize
 \begin{verbatim}
-<VirtualHost 127.0.0.1:80>
-  DocumentRoot CARPETA_CONTENEDOR
-  ServerName URL_IP
-</VirtualHost> 
+DocumentRoot "C:\elmas_container"
 
-<Directory "CAPPETA_CONTENEDOR">
-    AllowOverride FileInfo AuthConfig Limit
+<VirtualHost *:80>
+  ServerName elmas.udc.es
+  ProxyPass / http://localhost/
+  ProxyPassReverse / http://localhost/
+</VirtualHost>
+
+listen 8081
+<VirtualHost *:8081>
+   ServerName elmas.udc.es
+</VirtualHost>
+
+<Directory "C:/elmas_container">
+    AllowOverride FileInfo AuthCOnfig Limit
     Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
     <Limit GET POST OPTIONS PROPFIND>
         Order allow,deny
@@ -148,10 +156,16 @@ Una vez que lo hemos instalado siguiendo el instalador tendremos que configurar 
 \end{verbatim}
 }
 
-Tanto \textit{CARPETA\_CONTENEDOR} y \textit{URL\_IP} son variables que deberá ser configuradas por el administrador. En el caso de la versión online son \textit{C:$\backslash$elmas\_container} y \textit{www.elmas.dynalias.com} respectivamente.
+Se deberá comprobar si las siguientes líneas dentro del mismo fichero están descomentadas:
+\begin{itemize}
+ \item LoadModule proxy\_module modules/mod\_proxy.so
+ \item LoadModule proxy\_connect\_module modules/mod\_proxy\_connect.so
+ \item LoadModule proxy\_http\_module modules/mod\_proxy\_http.so
+ \item LoadModule proxy\_ftp\_module modules/mod\_proxy\_ftp.so
+\end{itemize}
 
 \subsection{Apache Tomcat}
-Se utiliza Apache Tomcat 6 como servidor web de nuestra aplicación. Se puede instalar descomprimiendo el archivo \textit{apache-tomcat-6.0.14.tar.gz}, el cual se puede obtener tanto de la carpeta \textit{INSTALACIÓN} del CD-ROM o desde \URL{http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.14/bin/}. 
+Se utiliza Apache Tomcat 6 como servidor web de nuestra aplicación. Se puede instalar descomprimiendo el archivo \textit{apache-tomcat-6.0.10.exe}, el cual se puede obtener tanto de \URL{http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.10/bin/} como de la carpeta \textit{INSTALACIÓN} del CD-ROM o desde. 
 \\ \\
 Una vez hecho esto, crearemos un usuario con el rol de manager añadiendo al archivo \textit{conf/tomcat-users.xml}:
 {\tt \scriptsize
@@ -183,7 +197,7 @@ Se añadirá un DataSource global mediante:
   validationQuery="SELECT COUNT(*) FROM PingTable"/>
 \end{verbatim}
 }
-	\item Añadiendo el siguiente código en el tag \textit{Context} dentro del fichero \textit{conf/context.xml}:
+	\item Añadiendo el siguiente código en el tag \textit{Context} en \textit{conf/context.xml}:
 {\tt \scriptsize
 \begin{verbatim}
 <ResourceLink name="jdbc/pojo-examples-ds" global="jdbc/pojo-examples-ds"
@@ -192,6 +206,54 @@ Se añadirá un DataSource global mediante:
 }
 \end{itemize}
 
+\subsection{Integración entre Apache 2 y Apache Tomcat 6}
+Debido a fuerte integración que nos proporcionan Apache 2 y Tomcat 6, se pueden configurar de modo que ocultemos los puertos que se manejan por debajo, de modo que el usuario final no conozca la estructuración de las aplicaciones instaladas. Mediante la instalación de un único plugin se puede conseguir redireccionar la entrada del puerto 80 directamente al puerto por defecto que utiliza Tomcat. Se trata en este caso del módulo \textit{mod\_jk-1.2.27-httpd-2.2.10.so}.
+Se especificará con detalle como se instala:
+\begin{itemize}
+	\item Obtendremos el módulo, el cual se puede obtener en \URL{http://archive.apache.org/dist/} \URL{tomcat/tomcat-connectors/jk/binaries/win32/jk-1.2.27/} o en el CD-ROM. Lo renombraremos a \textit{mod\_jk.so} y lo copiaremos en la carpeta \textit{modules} de Apache 2.
+	\item Crearemos un fichero de nombre \textit{workers.properties} en la carpeta conf de Tomcat 6 con el siguiente contenido:
+	{\tt \scriptsize
+\begin{verbatim}
+# Define 1 real worker using ajp13
+worker.list=ajp13
+# Set properties for worker1 (ajp13)
+worker.worker1.type=ajp13
+worker.worker1.host=localhost
+worker.worker1.port=8009
+\end{verbatim}
+}
+	\item Añadimos la siguientes líneas en el fichero de configuración de Apache 2 (\textit{conf/httpd.conf}).
+	{\tt \scriptsize
+\begin{verbatim}
+LoadModule jk_module modules/mod_jk.so
+Include "C:/Archivos de programa/Apache Software Foundation/Tomcat 6.0/conf/auto/mod_jk.conf"
+\end{verbatim}
+}
+	\item Dentro del fichero de configuración de Tomcat 6 se realizarán los siguientes cambios:
+		\begin{itemize}
+			\item Dentro del tag \textit{Server} añadiremos:
+{\tt \scriptsize
+\begin{verbatim}
+<Listener className = "org.apache.jk.config.ApacheConfig" 
+    workersConfig="conf/workers.properties" 
+    mod_Jk="C:/Archivos de Programa/Apache Software Foundation/
+        Apache Group/Apache2/modules/mod_jk.so" 
+    jkLog="logs/mod_jk.log" jkDebug="info" noRoot="false"/>
+\end{verbatim}
+}
+			\item Dentro del tag \textit{Engine} añadiremos:
+{\tt \scriptsize
+\begin{verbatim}
+<Listener className = "org.apache.jk.config.ApacheConfig" 
+    workersConfig="conf/workers.properties" 
+    mod_Jk="C:/Archivos de Programa/Apache Software Foundation/
+        Apache Group/Apache2/modules/mod_jk.so" 
+    jkLog="logs/mod_jk.log" jkDebug="info" noRoot="false"/>
+\end{verbatim}
+}
+
+		\end{itemize}
+\end{itemize}
 \subsection{FFMpeg}
 Para la compresión de los videos se utiliza un programa en segundo plano, en concreto FFMpeg, el cual lo podemos encontrar en el CD-ROM. En nuestro caso, ya se proporcionan todos los codecs, tanto de audio como de video, para todos los formatos disponibles hasta la fecha. Para su instalación en el servidor sólo tendremos que copiar la carpeta \textit{FFMpeg} del directorio \textit{INSTALACIÓN} donde deseemos.
 
@@ -206,6 +268,48 @@ Se deben configurar una serie de variables dentro del servidor web, tal y como s
 	\item \textit{container/url}, determina la url pública al contenedor multimedia.
 	\item \textit{max/parallels/processes}, donde se elegirá el número máximo de compresiones paralelas que podrá realizar el sistema.
 \end{itemize}
+
+En la configuración final del sistema dichas variables adoptan los siguientes valores:
+{\tt \scriptsize
+\begin{verbatim}
+<env-entry>
+	<env-entry-name>unavailable/snapshot</env-entry-name>
+	<env-entry-value>C:\elmas_container\unavailable.jpg</env-entry-value>
+	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+   
+<env-entry>
+	<env-entry-name>temporal/directory</env-entry-name>
+	<env-entry-value>C:\\elmas_temporal\\</env-entry-value>
+	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+    
+<env-entry>
+	<env-entry-name>ffmpeg/application/path</env-entry-name>
+	<env-entry-value>C:\\ffmpeg\\ffmpeg.exe</env-entry-value>
+	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+
+<env-entry>
+	<env-entry-name>portal/url</env-entry-name>
+	<env-entry-value>http://elmas.udc.es:8081/</env-entry-value>
+	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+    
+<env-entry>
+	<env-entry-name>container/directory</env-entry-name>
+	<env-entry-value>C:\\elmas_container</env-entry-value>
+	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>
+     
+<env-entry>
+	<env-entry-name>container/url</env-entry-name>
+	<env-entry-value>http://elmas.udc.es:8081/</env-entry-value>
+	<env-entry-type>java.lang.String</env-entry-type>
+</env-entry>  
+\end{verbatim}
+}
+
 
 \section{Manual de modificación de interfaces}
 Una de las grandes ventajas que presenta Tapestry 5 radica en la posibilidad de realizar diseño de la interfaz sin necesidad de tener conocimiento de como se implementa un markup. Esto permite que un diseñador gráfico con conocimientos de html puro sea capaz de realizar cambios a su gusto. En este apéndice se mostrará la forma de realizar estos cambios de manera sencilla, de modo que sirva a modo de manual para su modificación.
