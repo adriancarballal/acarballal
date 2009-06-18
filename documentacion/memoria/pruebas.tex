@@ -21,6 +21,15 @@ Para la implementación de este tipo de test se ha aprovechado la automatización 
 \label{junittest}
 \end{figure}
 
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=13cm]{imagenes/unitTest.png}
+\caption{Resultados de los test de unidad}
+\label{testunit}
+\end{figure}
+\newpage
+En la figura anterior se muestra los resultados de ejecución de los test de unidad obtenidos mediante Maven:
+
 Los test de unidad se han realizado enfocados a cada uno de las fachadas del sistema, cada una de la cuales se corresponde con:
 \begin{itemize}
 	\item Fachada de usuarios
@@ -28,32 +37,191 @@ Los test de unidad se han realizado enfocados a cada uno de las fachadas del sis
 	\item Fachada de administración
 \end{itemize}
 
-En la siguiente figura se muestra los resultados de ejecución de los test de unidad obtenidos mediante Maven:
-\begin{figure}[htb]
-\centering
-\includegraphics*[width=13cm]{imagenes/unitTest.png}
-\caption{Resultados de los test de unidad}
-\label{testunit}
-\end{figure}
 
+\newpage
+\newpage
 \section{Tests de integración}
 \label{integracion}
-\subsection{Portal Web}
-\subsection{Portal optimizado para dispositivos móviles}
+Como se ha explicado anteriormente, Selenium es un software multiplataforma de pruebas para aplicaciones web. Lo utilizaremos para realizar los test de integración del sistema de una manera automatizada.
 
+Para poder integrar Selenium en el presente proyecto se ha tenido que hacer uso de un plugin para Eclipse del que se ha hablado en el capítulo \textit{\titleref{otras}}, en las sección \textit{\titleref{selenium}} en la página \pageref{selenium}.
+
+Gracias a la integración del plugin con Eclipse, se nos proporciona una interfaz WYSIWYG \footnote{Es el acrónimo de What You See Is What You Get (en inglés, \textit{lo que ves es lo que obtienes})}. Del mismo modo ofrece un grabador de sesiones de navegación compatibles con todos los navegadores actuales referenciados en esta memoria. Con este grabador, el programador es capaz de crear una sesión de ejecución que sea capaz de usarse como batería de pruebas a lo largo de la implementación (ver figura \ref{cubic}.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[width=7cm]{imagenes/cubictest.png}
+\caption{Instantánea del grabador de sesión}
+\label{cubic}
+\end{figure}
+
+Este avance otorgará al programador un gran ahorro de tiempo en la generación de los test necesarios para comprobar la correcta integración de los elementos constituyentes del sistema final.
+
+Se ha decidido optar por una visión basada en perfiles. De esta manera se han realizado baterias de pruebas sobre la aplicación agrupadas según los perfiles de usuarios:
+\begin{itemize}
+	\item Portal Web, usuario no registrado
+	\item Portal Web, usuario registrado
+	\item Portal Web, usuario concursante
+	\item Portal Web, usuario administrador
+	\item Portal móvil, usuario registrado
+	\item Portal móvil, usuario administrador
+\end{itemize}
+\subsection{Portal Web}
+Para este caso se han creado 4 baterías de pruebas, una por cada uno de los posibles perfiles que pueden interactuar en el sistema.
+Dichas baterías se han generado de forma incremental según funcionalidad, de modo que todo aquello que es capaz de realizar un un perfil de menor privilegio no se recomprueba en los siguientes. Se ha optado por realizarlo de esta manera ya que gracias a los test de unidad utilizados se comprueba en todo momento la correcta ejecución de los perfiles, y comprobando los más restrictivos será más que suficiente.
+Para esta baterías se han generado un total de 224 comprobaciones de navegación repartidas de la siguiente forma:
+\begin{itemize}
+	\item 52 comprobaciones para usuarios no registrados
+	\item 42 comprobaciones para usuarios registrados
+	\item 54 comprobaciones para usuarios participantes
+	\item 76 comprobaciones para usuarios administradores
+\end{itemize}
+\subsection{Portal optimizado para dispositivos móviles}
+En cambio, en el caso del portal optimizado para móviles se han generado 2 baterias de pruebas, una por cada perfil funcional. Como la funcionalidad es la misma, las pruebas son idénticas, pero se ha seguido la visión adoptada en un principio para su creación.
+Para esta baterías se han generado un total de 48 comprobaciones de navegación repartidas equitativamentes por ambos perfiles.
+\newpage
 \section{Tests de estrés}
 \label{estres}
 
 Se ha creado un escenario de pruebas genérico para ambos portales, en el cual se realizan peticiones http sobre los mismo. Estas peticiones en concreto se harán sobre el portal web serán:
 \begin{itemize}
 	\item Pagina inicial del portal
-	\item Busqueda de videos
-	\item Bases del concurso 
-	\item Mostrar un video concreto
-	\item Mostrar comentarios de un video
+	\item Login del usuario \textit{voter}
+	\item Listado de videos del usuario \textit{voter}
+	\item Búsqueda de videos con clave \textit{e}
+	\item Logout de la sesión
+	\item Visualización de un video de la barra de más votados
+	\item Visualización de comentarios del video seleccionado
 \end{itemize}
-\subsection{Portal Web}
-\subsection{Portal optimizado para dispositivos móviles}
-\subsubsection{10 usuarios}
 
+Dicho escenario se configurará en JMeter quedando de la siguiente manera:
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=9cm]{imagenes/jmeter.png}
+\caption{Configuración JMeter}
+\label{jmeter}
+\end{figure}
 
+Para la realización de los test de estrés se realizarán una serie de baterías de pruebas automatizadas, cuyas variables serán:
+\begin{itemize}
+	\item Número de usuarios simultáneos a simular
+	\item Período de subida \footnote{Tiempo que debiera llevarle a JMeter lanzar todos los hilos o usuarios}
+\end{itemize}
+
+\subsection{Test 1.- Usuarios: 10, Período de subida: 30 seg}
+Para el primer test de estrés se considerarán 10 hilos (simulación de 10 usuarios) y un periodo de subida de 30 segundos (3 segundos entre el lanzamiento de cada hilo). De esta simulación obtendremos los resultados necesarios para su interpretación de dos elementos de diagnóstico llamados \textit{Gráfico de Resultados} y \textit{Summary Report}. 
+Para poder interpretar los datos obtenidos realizaremos una breve descripción de los elementos que aparecen en las figuras que será mostradas a lo largo de este capítulo:
+En la parte superior de la imagen aparece la información obtenida mediante el Gráfico de Resultados:
+\begin{itemize}
+	\item \textbf{Datos:} muestra los valores actuales de los datos.
+\item \textbf{Media:} representa la Media.
+\item \textbf{Mediana:} dibuja la Mediana.
+\item \textbf{Desviación:} muestra la Desviación Estándar (una medida de la Variación).
+\item \textbf{Rendimiento:} representa el número de muestras por unidad de tiempo.
+\end{itemize}
+
+En la parte se representa la información obtenida mediante el Summary Report:
+\begin{itemize}
+	\item \textbf{Label:} El nombre de la muestra (conjunto de muestras).
+	\item \textbf{Muestras:} El número de muestras para cada URL.
+	\item \textbf{Media:} El tiempo medio transcurrido para un conjunto de resultados.
+	\item \textbf{Mín:} El mínimo tiempo transcurrido para las muestras de la URL dada.
+	\item \textbf{Máx:} El máximo tiempo transcurrido para las muestras de la URL dada.
+	\item \textbf{Error:} Porcentaje de las peticiones con errores.
+	\item \textbf{Rendimiento:} Rendimiento medido en base a peticiones por seg/min/hora.
+	\item \textbf{Kb/sec:} Rendimiento medido en Kilobytes por segundo.
+	\item \textbf{Avg. Bytes:} Tamaño medio de la respuesta de la muestra medido en bytes.
+\end{itemize}
+
+Para el caso del test 1 con 10 hilos o usuarios durante 30 segundos se han obtenido los siguientes resultados:
+\begin{figure}[h]
+\centering
+\includegraphics*[width=15cm]{imagenes/10u_30sec.PNG}
+\caption{10 usuarios en 30 segundos}
+\label{test1}
+\end{figure}
+
+Podemos observar que las pruebas se han realizado sin errores. Esto se deduce de la columna representativa del tanto por ciento de errores para cada una de las peticiones asociadas a cada conjunto de muestras. El rendimiento nos muestra que para una simulación de 10 usuarios junto a un periodo de subida de 30 segundos el servidor es capaz de aceptar una media de 3,6 peticiones por segundo. La latencia (entendida como el tiempo de espera para la renderización de la página, el tiempo en obtener respuesta del servidor) para cada conjunto de pruebas no supera el valor de 95 milisegundos (representado por el eje "y" de la gráfica).
+
+\subsection{Test 2.- Usuarios: 60, Período de subida: 180 seg}
+Si ahora realizamos la simulación con 60 usuarios considerando un periodo de subida de 180 segundos (de nuevo 3 segundos entre el lanzamiento de cada hilo) los resultados serán los siguientes, teniendo en cuenta que dichos resultando se irán solapando a los ya obtenidos en la simulación anterior.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=15cm]{imagenes/60u_180sec.PNG}
+\caption{60 usuarios en 180 segundos}
+\label{test2}
+\end{figure}
+
+En este caso volvemos a observar que las pruebas se han realizado sin errores. El rendimiento nos muestra que para una simulación de 60 usuarios junto a un periodo de subida de 180 segundos el servidor es capaz de aceptar una media de 2,2 peticiones por segundo. La latencia no se ve aumentada.
+
+\subsection{Test 3.- Usuarios: 120, Período de subida: 360 seg}
+Una vez obtenidos e interpretados estos resultados lanzaremos de nuevo simulando 120 usuarios:
+
+Se cambia el número de hilos a 120 con un periodo de subida de 360 segundos (por tanto se sigue manteniendo el tiempo entre hilos) y se estudian los resultados acumulados.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=15cm]{imagenes/120u_360sec.PNG}
+\caption{120 usuarios en 360 segundos}
+\label{test3}
+\end{figure}
+
+De nuevo, no hemos obtenido errores y puesto que se ha mantenido constante el tiempo transcurrido entre el lanzamiento de hilos el rendimineto apenas se ha visto afectado. La latencia se mantiene en el valor anterior de 95 ms.
+
+\subsection{Test 4.- Usuarios: 120, Período de subida: 120 seg}
+En este momento se cambia el periodo de subida a 120 segundos manteniendo el número de hilos (1 segundo entre hilos).
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=15cm]{imagenes/120u_120sec.PNG}
+\caption{120 usuarios en 120 segundos}
+\label{test4}
+\end{figure}
+
+De nuevo, no hemos obtenido errores pero la latencia. En cambio ll rendimiento nos muestra que para una simulación de 120 usuarios junto a un periodo de subida de 120 segundos el servidor es capaz de aceptar una media de 3,2 peticiones por segundo, por que se ve ligeramente rebajada.
+
+\subsection{Test 5.- Usuarios: 120, Período de subida: 30 seg}
+Por tanto se ejecuta un hilo cada medio segundo.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=15cm]{imagenes/120u_30sec.PNG}
+\caption{120 usuarios en 30 segundos}
+\label{test5}
+\end{figure}
+
+Observamos que comienzan a aparecer los primeros errores en un tanto por ciento considerable (1,23\%) sobre el total de las peticiones realizadas por el global de las muestras. La latencia se ve aumentada hasta un valor de 1678 ms, lo cual aún no se puede considerar como inaceptable.
+
+\subsection{Test 6.- Usuarios: 100, Período de subida: 10 seg}
+Una vez obtenidos e interpretados estos resultados lanzaremos de nuevo simulando 100 usuarios con un periodo de subida. En la simulación anterior la latencia aumentó considerablemente, acercandose a unos valores cuasi-inaceptables. Intentaremos mediante este test comprobar la capacidad máxima de la aplicación. Para este test no se han tenido en cuenta los resultados acumulados.
+\begin{figure}[htb]
+\centering
+\includegraphics*[width=15cm]{imagenes/100u_10sec.PNG}
+\caption{100 usuarios en 10 segundos}
+\label{test6}
+\end{figure}
+
+Observamos cómo se producen demasiados errores y cómo disminuye el rendimiento. La latencia aumenta de nuevo hasta un valor de  6753 ms, considerada como inaceptable.
+
+\subsection{Consideraciones}
+Se ha ajustado apropiadamente el volumen de estas pruebas puesto que tanto los resultados obtenidos como las conclusiones derivadas podrían estar condicionados por, por ejemplo, carencias de nuestra máquina en términos de memoria, o de la máquina servidora. Algunas de los posibles condicionantes pudieran ser:
+\begin{itemize}
+	\item El servidor no puede trabajar con tantas peticiones.
+	\item La máquina local no soporta la creación de todas instancias.
+\end{itemize}
+
+En nuestro caso, las pruebas han sido realizadas bajo el siguiente hardware:
+
+\begin{itemize}
+	\item \textbf{Servidor:}
+		\begin{enumerate}
+			\item \textbf{Procesador:} Pentium IV 3.2 Ghz
+			\item \textbf{Memoria:} 1Gb RAM 400 Mhz (2 módulos 512Mb)
+			\item \textbf{HD:} 120 Gb
+			\item \textbf{Tarjeta Gráfica:} ATI RADEON 9200 Pro
+		\end{enumerate}
+	\item \textbf{Máquina de pruebas:}
+		\begin{enumerate}
+			\item \textbf{Procesador:} Intel T2400 1.83 Ghz
+			\item \textbf{Memoria:} 1Gb RAM 667 Mhz (2 módulos 512Mb)
+			\item \textbf{HD:} 100 Gb
+			\item \textbf{Tarjeta Gráfica:} NVidia GeForce 7400
+		\end{enumerate}		
+\end{itemize}
