@@ -56,7 +56,7 @@ La aplicabilidad de este patrón radica en:
 \section{Singleton}
 El patrón singleton (o instancia única) se utiliza cuando es necesario asegurarse de que una clase tiene sólo una instancia y se quiere proporcionar un punto global de acceso a ella.
 
-Este patrón está compuesto por una clase que define como privado su constructor, con el fin de evitar la creación de nuevos objetos, e incluye un atributo de clase privado que se usa para alojar la instancia única y un método que permite el acceso a dicha instancia.
+Este patrón está compuesto por una clase que define como privado su cons\-tructor, con el fin de evitar la creación de nuevos objetos, e incluye un atributo de clase privado que se usa para alojar la instancia única y un método que permite el acceso a dicha instancia.
 
 \section{Command}
 El patrón Command (Comando) encapsula una petición como un objeto, de modo que permite la parametrización de clientes con diferentes peticiones, crear colas de peticiones y soporte de operaciones cancelables (undo).
@@ -99,7 +99,7 @@ Mediante este apéndice se explicará las diferentes partes en las que se dividen 
 La instalación se centra en la plataforma Windows, tal y como se encuentra configurado en el sistema online, aunque, como ya se especificó, el sistema final es multiplataforma.
 
 \subsection{Base de datos}
-Para la instalación de MySql 5.0.45 (podemos encontrarlo en la carpeta \textit{INSTALACIÓN} dentro del CD-ROM no se modificarán las opciones proporcionadas por el instalador por defecto. Una vez finalizada se ejecutará el \textit{MySQL Server Instance Configuration Wizard}, donde tendremos que realizar los siguientes cambios:
+Para la instalación de MySql 5.0.45 (podemos encontrarlo en la carpeta \textit{INS\-TALACIÓN} dentro del CD-ROM no se modificarán las opciones proporcionadas por el instalador por defecto. Una vez finalizada se ejecutará el \textit{MySQL Ser\-ver Instance Configuration Wizard}, donde tendremos que realizar los siguientes cambios:
 \begin{itemize}
 	\item Marcar la casilla referente a \textit{Best Support For Multilingualism (UTF-8)}.
 	\item Desmarcar la casilla \textit{Install As Windows Service}.
@@ -124,7 +124,7 @@ Una vez terminada la instalación debemos configurar nuestra propia base de datos
 \subsection{Apache}
 Para la configuración del contenedor web mencionado durante toda esta memoria se utilizará Apache 2. Podremos obtener el instalador de este servidor http tanto en la carpeta \textit{INSTALACIÓN} en el CD-ROM proporcionado como en \URL{http://archive.apache.org/dist/httpd/}. El archivo de instalación para la plataforma Windows será \textit{apache\_2.2.4-win32-x86-no\_ssl.msi}.
 
-Una vez que lo hemos instalado siguiendo el instalador tendremos que configurar nuestro contenedor añadiendo el siguiente texto al archivo \textit{httpd.conf} que se encuentra en la carpeta \textit{conf}:
+Una vez que lo hemos instalado siguiendo el instalador tendremos que confi\-gurar nuestro contenedor añadiendo el siguiente texto al archivo \textit{httpd.conf} que se encuentra en la carpeta \textit{conf}:
 
 {\tt \scriptsize
 \begin{verbatim}
@@ -210,7 +210,7 @@ Se añadirá un DataSource global mediante:
 Debido a fuerte integración que nos proporcionan Apache 2 y Tomcat 6, se pueden configurar de modo que ocultemos los puertos que se manejan por debajo, de modo que el usuario final no conozca la estructuración de las aplicaciones instaladas. Mediante la instalación de un único plugin se puede conseguir redireccionar la entrada del puerto 80 directamente al puerto por defecto que utiliza Tomcat. Se trata en este caso del módulo \textit{mod\_jk-1.2.27-httpd-2.2.10.so}.
 Se especificará con detalle como se instala:
 \begin{itemize}
-	\item Obtendremos el módulo, el cual se puede obtener en \URL{http://archive.apache.org/dist/} \URL{tomcat/tomcat-connectors/jk/binaries/win32/jk-1.2.27/} o en el CD-ROM. Lo renombraremos a \textit{mod\_jk.so} y lo copiaremos en la carpeta \textit{modules} de Apache 2.
+	\item Obtendremos el módulo, el cual se puede obtener en \URL{http://archive.apa\-che.org/dist/} \URL{tomcat/tomcat-connectors/jk/binaries/win32/jk-1.2.27/} o en el CD-ROM. Lo renombraremos a \textit{mod\_jk.so} y lo copiaremos en la carpeta \textit{modules} de Apache 2.
 	\item Crearemos un fichero de nombre \textit{workers.properties} en la carpeta conf de Tomcat 6 con el siguiente contenido:
 	{\tt \scriptsize
 \begin{verbatim}
@@ -258,7 +258,7 @@ Include "C:/Archivos de programa/Apache Software Foundation/Tomcat 6.0/conf/auto
 Para la compresión de los videos se utiliza un programa en segundo plano, en concreto FFMpeg, el cual lo podemos encontrar en el CD-ROM. En nuestro caso, ya se proporcionan todos los codecs, tanto de audio como de video, para todos los formatos disponibles hasta la fecha. Para su instalación en el servidor sólo tendremos que copiar la carpeta \textit{FFMpeg} del directorio \textit{INSTALACIÓN} donde deseemos.
 
 \subsection{Configuración}
-Sólo resta añadir la aplicación al servidor moviendo el archivo \textit{elmas.war} localizado en la carpeta de instalación del CD-ROM en la carpeta \textit{webapp} del servidor Tomcat.
+Sólo resta añadir la aplicación al servidor moviendo el archivo \textit{elmas.war} loca\-lizado en la carpeta de instalación del CD-ROM en la carpeta \textit{webapp} del servidor Tomcat.
 Se deben configurar una serie de variables dentro del servidor web, tal y como se indica en el apartado \titleref{config} en la página \pageref{config}. Para ello se modificará el archivo web.xml una vez que el archivo \textit{elmas.war} se deploye. En el caso de la instalación inicial del sistema se tendrá que modificar las siguientes variables:
 \begin{itemize}
 	\item \textit{unavailable/snapshot}, que debe de corresponderse con la imagen por defecto si ésta no se puede obtener del video añadido.
@@ -318,7 +318,7 @@ Antes de nada, cabe destacar que la modificaciones que se pueden realizar sobre 
 	\item Modificando el CSS asociado a las diferentes páginas, pero que obliga a que la estructura de la vista no sea modificable.
 	\item Modificando las plantillas o tml asociados a cada página dentro de la implementación, lo cuál si permite modificar la estructura de la vista.
 \end{itemize}
-Como el primer punto no supone ningún problema, ya que sólo se necesita modificar el fichero css determinado, no vamos a centra en como se puede modificar un tml.
+Como el primer punto no supone ningún problema, ya que sólo se necesita mo\-dificar el fichero css determinado, no vamos a centra en como se puede modificar un tml.
 
 \begin{figure}[htp]
 \centering
@@ -327,7 +327,7 @@ Como el primer punto no supone ningún problema, ya que sólo se necesita modifica
 \label{tml}
 \end{figure}
 
-En esta figura se muestran tres tipos de código representados en colores diferentes:
+En esta figura se muestran tres tipos de código representados en colores dife\-rentes:
 \begin{itemize}
 	\item En negro se recoge el código html puro.
 	\item En rojo se distingue el código perteneciente a componentes embebidos.
@@ -344,10 +344,8 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 \end{verbatim}
 }
 	\begin{itemize}
-		\item Cualquier elemento o atributo que tenga prefijo t pertenece al
-espacio de nombres de Tapestry
-		\item En el markup generado, no se incluye la importación del
-espacio de nombres de Tapestry
+		\item Cualquier elemento o atributo que tenga prefijo t pertenece al espacio de nombres de Tapestry
+		\item En el markup generado, no se incluye la importación del espacio de nombres de Tapestry
 	\end{itemize}
 	\item \textbf{Componentes}
 	
@@ -378,7 +376,7 @@ en un fichero de mensajes
 	En el caso de acceso a propiedades es posible:	
 \begin{itemize}
 	\item Referirse a subpropiedades
-	\item Invocar a un método del objeto que no sea un getter (utilizando parentesis a continuacion del
+	\item Invocar a un método del objeto que no sea un getter (utilizando pa\-rentesis a continuacion del
 nombre del metodo)
 \end{itemize}
 \end{itemize}

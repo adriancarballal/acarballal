@@ -109,7 +109,7 @@ Para la realización de los test de estrés se realizarán una serie de baterías de
 \end{itemize}
 
 \subsection{Test 1.- Usuarios: 10, Período de subida: 30 seg}
-Para el primer test de estrés se considerarán 10 hilos (simulación de 10 usuarios) y un periodo de subida de 30 segundos (3 segundos entre el lanzamiento de cada hilo). De esta simulación obtendremos los resultados necesarios para su interpretación de dos elementos de diagnóstico llamados \textit{Gráfico de Resultados} y \textit{Summary Report}. 
+Para el primer test de estrés se considerarán 10 hilos (simulación de 10 usua\-rios) y un periodo de subida de 30 segundos (3 segundos entre el lanzamiento de cada hilo). De esta simulación obtendremos los resultados necesarios para su interpretación de dos elementos de diagnóstico llamados \textit{Gráfico de Resultados} y \textit{Summary Report}. 
 Para poder interpretar los datos obtenidos realizaremos una breve descripción de los elementos que aparecen en las figuras que serán mostradas a lo largo de este capítulo:
 En la parte superior de la imagen aparece la información obtenida mediante el Gráfico de Resultados:
 \begin{itemize}
@@ -155,7 +155,7 @@ Si ahora realizamos la simulación con 60 usuarios considerando un periodo de sub
 En este caso volvemos a observar que las pruebas se han realizado sin errores. El rendimiento nos muestra que para una simulación de 60 usuarios junto a un periodo de subida de 180 segundos el servidor es capaz de aceptar una media de 2,2 peticiones por segundo. La latencia no se ve aumentada.
 
 \subsection{Test 3.- Usuarios: 120, Período de subida: 360 seg}
-Una vez obtenidos e interpretados estos resultados lanzaremos de nuevo simulando 120 usuarios:
+Una vez obtenidos e interpretados estos resultados lanzaremos de nuevo si\-mulando 120 usuarios:
 
 Se cambia el número de hilos a 120 con un periodo de subida de 360 segundos (por tanto se sigue manteniendo el tiempo entre hilos) y se estudian los resultados acumulados.
 \begin{figure}[htb]
@@ -198,7 +198,7 @@ Una vez obtenidos e interpretados estos resultados lanzaremos de nuevo simulando
 \label{test6}
 \end{figure}
 
-Observamos cómo se producen demasiados errores y cómo disminuye el rendimiento. La latencia aumenta de nuevo hasta un valor de  6753 ms, considerada como inaceptable.
+Observamos cómo se producen demasiados errores y cómo disminuye el rendi\-miento. La latencia aumenta de nuevo hasta un valor de  6753 ms, considerada como inaceptable.
 
 \subsection{Consideraciones}
 Se ha ajustado apropiadamente el volumen de estas pruebas puesto que tanto los resultados obtenidos como las conclusiones derivadas podrían estar condicionados por, por ejemplo, carencias de nuestra máquina en términos de memoria, o de la máquina servidora. Algunas de los posibles condicionantes pudieran ser:

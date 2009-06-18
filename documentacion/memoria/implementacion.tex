@@ -40,7 +40,7 @@ Los paquetes en los que a su vez se subdivide son:
 	\item \textbf{es.udc.acarballal.elmas.model.usercomment:}	incluye las clases necesarias para mantener la persistencia de la entidad \textit{usercomment}, donde se recogen los comentario realizados sobre un determinado usuario.
 	\item \textbf{es.udc.acarballal.elmas.model.videocomment:}	incluye las clases necesarias para mantener la persistencia de la entidad \textit{videocomment}, donde se recogen los comentarios realizados sobre un determinado video.
 	\item \textbf{es.udc.acarballal.elmas.model.videocomplaint:}	incluye las clases necesarias para mantener la persistencia de la entidad \textit{videocomplaint}, donde se recogen las quejas realizadas sobre el contenido de un video.
-	\item \textbf{es.udc.acarballal.elmas.model.usercommentcomplaint:}	incluye las clases necesarias para mantener la persistencia de la entidad \textit{usercommentcomplaint}, donde se recogen las quejas realizadas sobre el contenido de un comentario hacia un usuario.
+	\item \textbf{es.udc.acarballal.elmas.model.usercommentcomplaint:}	incluye las cla\-ses necesarias para mantener la persistencia de la entidad \textit{usercommentcomplaint}, donde se recogen las quejas realizadas sobre el contenido de un comentario hacia un usuario.
 	\item \textbf{es.udc.acarballal.elmas.model.videocommentcomplaint:}	incluye las clases necesarias para mantener la persistencia de la entidad \textit{videocommentcomplaint}, donde se recogen las quejas realizadas sobre el contenido de un comentario perteneciente a algún video.
 	\item \textbf{es.udc.acarballal.elmas.model.userservice:}	incluye las interfaces y clases que implementan los casos
 de uso relacionados con las entidades userprofile, message, usercomment y usercommentcomplaint.
@@ -49,7 +49,7 @@ de uso relacionados con las entidades video, vote, favourite, videocomment y vid
 \item \textbf{es.udc.acarballal.elmas.model.adminservice:}	incluye las interfaces y clases que implementan los casos
 de uso relacionados con la administración, manejando entidades como userprofile, video, message, videocomplaint, usercommentcomplaint, videocommentcomplaint.
 \end{itemize}
-Más adelante se profundizará en todos estos subpaquete en la sección \ref{capamodelo} denominada ``\titleref{capamodelo}'' (página \pageref{capamodelo}).
+Más adelante se profundizará en todos estos subpaquete en la sección \ref{capamodelo} deno\-minada ``\titleref{capamodelo}'' (página \pageref{capamodelo}).
 \subsection{Paquete es.udc.acarballal.elmas.web}
 Este subpaquete implementa la lógica de la capa controlador, que se encargará de todos los aspectos de intercomunicación entre la vista (independientemente de que se trate de una aplicación web o aplicación cliente), y la lógica
 de negocio del modelo.
@@ -69,9 +69,9 @@ Los paquetes en los que a su vez se subdivide son:
 	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.admin:} Contiene las clases asociadas con cada una de las paginas visibles para un administrador. Las plantillas referentes a dichas páginas se encontrarán en el directorio \textit{resources} siguiendo una estructura de paquetes análoga.
 	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.errors:} Contiene las clases asociadas con cada una de las paginas de error. Las plantillas referentes a dichas páginas se encontrarán en el directorio \textit{resources} siguiendo una estructura de paquetes análoga.
 	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.mobile:}	Contiene las clases asociadas con cada una de las páginas visibles para cualquier usuario del servicio para dispositivos móviles. Las plantillas referentes a dichas páginas se encontrarán en el directorio \textit{resources} siguiendo una estructura de paquetes análoga.
-	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.mobile.user:} Contiene las clases asociadas con cada una de las páginas visibles para un usuario registrado del servicio para dispositivos móviles. Las plantillas re\-fe\-ren\-tes a dichas páginas se encontrarán en el directorio \textit{resources} siguiendo una estructura de paquetes análoga.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.mobile.user:} Contiene las clases asociadas con cada una de las páginas visibles para un usuario re\-gistrado del servicio para dispositivos móviles. Las plantillas re\-fe\-ren\-tes a dichas páginas se encontrarán en el directorio \textit{resources} siguiendo una estructura de paquetes análoga.
 	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.mobile.error:} Contiene las clases asociadas con cada una de las páginas de error del servicio para dispositivos móviles. Las plantillas referentes a dichas páginas se encontrarán en el directorio \textit{resources} siguiendo una estructura de paquetes análoga.
-	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.components:} Contiene las clases que se utilizarán como plantillas para la representación de los diferentes tipos de página web en un navegador, recogiendo fun\-cio\-na\-li\-dad común para todas ellas.
+	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.components:} Contiene las clases que se utilizarán como plantillas para la representación de los dife\-rentes tipos de página web en un navegador, recogiendo fun\-cio\-na\-li\-dad común para todas ellas.
 	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.util:} Contiene las clases que representan los \textit{Application State Objects}(ASOs), los cuales son objetos que son accesibles a todas las páginas.
 	\item \textbf{Paquete es.udc.acarballal.elmas.web.pages.services:} Contiene las clases referentes tanto al mantenimiento de la sesión y otros ASOs como al control de acceso a recursos.
 \end{itemize}
@@ -86,9 +86,9 @@ Los paquetes en los que a su vez se subdivide son:
 \end{figure}
 
 \begin{itemize}
-\item \textbf{es.udc.acarballal.ffmpeg.encoder:} Contiene las clases que representan los comandos de codificación necesarios para la integración con la aplicación de compresión de video FFMpeg.
-\item \textbf{es.udc.acarballal.ffmpeg.encoder.codecs:} Contiene las clases que representan las capas de compresión para crear un modelo de compresión de video e imágenes necesarios por los diferentes portales.
-\item \textbf{es.udc.acarballal.ffmpeg.encoder.configuration:} Contiene las clases necesarias para la recuperación de variables mediante \textit{JNDI} (Interfaz de Nombrado y Directorio Java).
+\item \textbf{es.udc.acarballal.ffmpeg.encoder:} Contiene las clases que re\-presentan los comandos de codificación necesarios para la integración con la aplicación de compresión de video FFMpeg.
+\item \textbf{es.udc.acarballal.ffmpeg.encoder.codecs:} Contiene las clases que re\-presentan las capas de compresión para crear un modelo de compresión de video e imágenes necesarios por los diferentes portales.
+\item \textbf{es.udc.acarballal.ffmpeg.encoder.configuration:} Contiene las clases ne\-cesarias para la recuperación de variables mediante \textit{JNDI} (Interfaz de Nombrado y Directorio Java).
 \item \textbf{es.udc.acarballal.ffmpeg.process:} Contiene las clases que representan los procesos de compresión.
 \item \textbf{es.udc.acarballal.ffmpeg.process.exceptions:} Contiene las clases que representan las excepciones que se pueden producir durante un proceso de compresión de video.
 \item \textbf{es.udc.acarballal.ffmpeg.encoder.util:} Contiene las clases utilizadas para la creación de claves alfanuméricas y directorios aleatorios.
@@ -129,7 +129,7 @@ En este apartado se definen los conceptos del dominio utilizados. Para cada uno 
 	\item \textbf{UserProfile (Perfil de usuario)} 
 	
 	Esta entidad representará la información referente a cada usuario re\-gis\-tra\-do dentro del sistema. Entre la información que se guarda se encuentran el nombre y apellidos del usuario (\textit{firstName} y \textit{lastName} respectivamente), el nombre de acceso o login (\textit{loginName}), contraseña (\textit{encryptedPassword}) y su email. Del mismo modo también se recogen los privilegios que tiene el usuario dentro del sistema, entre los cuales se encuentran:
-		\subitem \textit{VOTER}: el usuario está registrado y puede realizar votaciones semanales sobre videos obtenidos de forma aleatoria.
+		\subitem \textit{VOTER}: el usuario está registrado y puede realizar votaciones sema\-nales sobre videos obtenidos de forma aleatoria.
 		\subitem \textit{COMPETITOR}: el usuario es un participante del concurso y como tal puede añadir gestionar videos propios asociados a su cuenta.
 		\subitem \textit{ADMIN}: el usuario es un administrador del sistema, tiene permisos para realizar operaciones de administración como resolución de quejas o obtención de informes de los videos más votados.
 		
@@ -140,11 +140,11 @@ Para esta entidad se implementa un DAO específico que da soporte para las operac
 \caption{DAO de la entidad UserProfile}
 \label{UserProfilePersistance}
 \end{figure}
-En concreto la operación de busqueda \textit{findByLoginName} se basa en la recuperación de un objeto UserProfile a partir del identificador único que lo distingue.
+En concreto la ope\-ración de busqueda \textit{findByLoginName} se basa en la recuperación de un objeto UserProfile a partir del identificador único que lo distingue.
 \newpage
 	\item \textbf{Video} 
 	
-	Esta entidad representará la información referente a cada uno de los videos que son subidos por los usuarios y que entran a formar parte del concurso. Para cada video se recoge información como titulo (\textit{title}), comentario del usuario (\textit{comment}), fecha de subida (\textit{date}) y las direcciones donde se guardan los diferentes formatos de video e i\-ma\-ge\-nes asi como una pequeña captura. Los formatos que se guardan son FLV(alojado en \textit{flvVideo}), Real Player 3gp (\textit{rpVideo}), el archivo de video original subido por el propio usuario (\textit{original}) y la captura de pantalla en formato jpg (\textit{snapshot}).
+	Esta entidad representará la información referente a cada uno de los videos que son subidos por los usuarios y que entran a formar parte del concurso. Para cada video se recoge información como titulo (\textit{title}), comentario del usuario (\textit{comment}), fecha de subida (\textit{date}) y las direcciones donde se guardan los diferentes formatos de video e i\-ma\-ge\-nes asi como una pequeña captura. Los formatos que se guardan son tanto FLV(alojado en \textit{flvVideo}), Real Player 3gp (\textit{rpVideo}), el archivo de video original subido por el propio usuario (\textit{original}) y la captura de pantalla en formato jpg (\textit{snapshot}).
 \begin{figure}[htp]
 \centering
 \includegraphics*[width=12cm]{imagenes/PersistenciaVideo.jpg}
@@ -152,7 +152,7 @@ En concreto la operación de busqueda \textit{findByLoginName} se basa en la recu
 \label{VideoPersistance}
 \end{figure}
 	
-El DAO correspondiente a esta entidad sigue el mismo formato que el anterior, implementando varios métodos de búsqueda necesarios para los diferentes casos de uso especificados con anterioridad. Se trata de búsquedas por titulo del video (\textit{findByTitle}), por usuario propietario del video (\textit{findByUser}) y búsqueda aleatoria de un video para realizar una votación (\textit{findRandomVotableVideo}). En el último caso, la elección del video a votar se realiza con varias restricciones, entre las que se encuentran:
+El DAO correspondiente a esta entidad sigue el mismo formato que el anterior, implementando varios métodos de búsqueda necesarios para los dife\-rentes casos de uso especificados con anterioridad. Se trata de búsquedas por titulo del video (\textit{findByTitle}), por usuario propietario del video (\textit{findBy\-User}) y búsqueda aleatoria de un video para realizar una votación (\textit{findRandomVotableVideo}). En el último caso, la elección del video a votar se realiza con varias restricciones, entre las que se encuentran:
 \begin{enumerate}
 	\item Un usuario no puede votar un video subido por él mismo.
 	\item Cada semana sólo se pueden votar un total de 10 videos.
@@ -162,7 +162,7 @@ El DAO correspondiente a esta entidad sigue el mismo formato que el anterior, im
 Para que todo esto se cumpla se utiliza el metodo \textit{findRandomVotableVideo}, en cuya implementación se ha optado por realizar búsquedas semialeatorias, dando prioridad siempre a los videos más recientes. Se utiliza una ventana de videos configurable mediante JNDI (esta ventana sirve para no tener que manejar cantidades ingentes de videos cada vez que deseemos realizar una votación) desde la cual si que se realizará la obtención del video a votar de manera aleatoria.
 	\item \textbf{Vote} 
 	
-	En esta entidad se recogerán los votos semanales que irán realizando los usuarios sobre los videos aleatorios. Para cada voto se guardará una referencia tanto al video votado como al votante (\textit{video} y \textit{voter} respectivamente), la fecha de la votación y el voto concreto. 
+	En esta entidad se recogerán los votos semanales que irán realizando los usuarios sobre los videos aleatorios. Para cada voto se guardará una refe\-rencia tanto al video votado como al votante (\textit{video} y \textit{voter} respectivamente), la fecha de la votación y el voto concreto. 
 \begin{figure}[htp]
 \centering
 \includegraphics*[width=15cm]{imagenes/PersistenciaVote.jpg}
@@ -198,7 +198,7 @@ Su DAO correspondiente implementa, además de las operaciones básicas CRUD, dos m
 El DAO correspondiente a esta entidad implementa a mayores dos métodos de búsqueda de comentarios. La primera de ellas es \textit{findVideoCommentsByUserId}, en la que devolverá todos los comentarios que un usuario ha hecho a algún video en algún momento, y \textit{findVideoCommentsByVideoId}, en la que se devolverán todos los comentarios que se han realizado sobre un determinado video.
 	\item \textbf{UserCommentComplaint} 
 	
-	Esta entidad almacenará las quejas realizadas por cualquier usuario hacia un comentario hacia otro usuario, para que los administradores tengan constancia de ello. La información que se almacenará para cada queja consta de una referencia al usuario que se queja (\textit{complainer}), una referencia al comentario que es objeto de la queja (\textit{referenece}) y la fecha de la notificación de la misma (\textit{date}).
+	Esta entidad almacenará las quejas realizadas por cualquier usuario hacia un comentario hacia otro usuario, para que los administradores tengan cons\-tancia de ello. La información que se almacenará para cada queja consta de una referencia al usuario que se queja (\textit{complainer}), una referencia al comentario que es objeto de la queja (\textit{referenece}) y la fecha de la notificación de la misma (\textit{date}).
 \begin{figure}[htp]
 \centering
 \includegraphics*[width=15cm]{imagenes/PersistenciaUserCommentComplaint.jpg}
@@ -229,7 +229,7 @@ Su DAO correspondiente implementa las operaciones básicas CRUD junto con tres nu
 \label{VideoCommentComplaintPersistance}
 \end{figure}
 
-Su DAO correspondiente implementa las operaciones básicas CRUD junto con tres nuevos métodos. El método \textit{countVideoCommentComplaints} permite a los administradores obtener el número total de quejas sobre comentarios de videos que no han sido atendidas hasta el momento, \textit{findVideoCommentComplaints} permite obtener un subconjunto de quejas sobre comentarios de videos, y \textit{hasComplaint} permite conocer si un usuario ya ha realizado una queja al administrador sobre un determinado comentario perteneciente a un video.
+Su DAO correspondiente implementa las operaciones básicas CRUD junto con tres nuevos métodos. El método \textit{countVideoCommentComplaints} permite a los administradores obtener el número total de quejas sobre comentarios de videos que no han sido atendidas hasta el momento, \textit{findVideoCommentComplaints} permite obtener un subconjunto de quejas sobre comenta\-rios de videos, y \textit{hasComplaint} permite conocer si un usuario ya ha realizado una queja al administrador sobre un determinado comentario perteneciente a un video.
 \item \textbf{Message}
 	
 	La entidad Message recogerá los mensajes enviados entre usuarios. Para cada mensaje se almacenarán el remitente del mensaje (\textit{sender}), el destinatario (\textit{receiver}) y en cuerpo de mensaje (\textit{text}).
@@ -304,8 +304,8 @@ Dentro de la fachada se definen los siguientes \textit{custom transfer objects}:
 \label{VideoService}
 \end{figure} 
 \begin{itemize}
-	\item \textbf{VideoBlock:} Almacena bloques de contenido referente a videos de usuarios.	Cada uno de esos bloques se encapsula en un objeto de este tipo, el cual, además de contener un subconjunto de videos, posee una propiedad para indicar si existen más bloques (\textit{existMoreVideos}).
-	\item \textbf{VideoCommentBlock:} Esta clase encapsula bloques de contenido referente a comentarios de videos (\textit{VideoComments}). Del mismo modo que el anterior, posee una propiedad para indicar si existen más comentarios (\textit{existMoreVideoComments}).
+	\item \textbf{VideoBlock:} Almacena bloques de contenido referente a videos de usua\-rios.	Cada uno de esos bloques se encapsula en un objeto de este tipo, el cual, además de contener un subconjunto de videos, posee una propiedad para indicar si existen más bloques (\textit{existMoreVideos}).
+	\item \textbf{VideoCommentBlock:} Esta clase encapsula bloques de contenido refe\-rente a comentarios de videos (\textit{VideoComments}). Del mismo modo que el anterior, posee una propiedad para indicar si existen más comentarios (\textit{exist\-MoreVideoComments}).
 \end{itemize}
 
 \subsubsection{Fachada de administración (\textit{AdminService})}
@@ -346,7 +346,7 @@ La configuración del sistema se basa en la declaración de \textit{beans}\footnot
 		p:configLocation="classpath:hibernate.cfg.xml"/>
 \end{verbatim}
 }
- Debemos tener en cuenta que el fichero \textit{hibernate.cfg.xml} es el fichero de configuración de \textit{Hibernate} y especifica los beans pertenecientes a los diferentes \textit{Transfer Object} pertenecientes a nuestras entidades persistentes.
+ Debemos tener en cuenta que el fichero \textit{hibernate.cfg.xml} es el fichero de configuración de \textit{Hibernate} y especifica los beans pertenecientes a los dife\-rentes \textit{Transfer Object} pertenecientes a nuestras entidades persistentes.
  \item \textbf{Transacciones:} Spring proporciona una serie de gestores de transacciones que delegan la responsabilidad de la gestión de las transacciones a implementaciones específicas de la plataforma utilizada, configurándose de la siguiente manera:
 {\tt \scriptsize
 \begin{verbatim}
@@ -389,7 +389,7 @@ El sistema se compone de 3 partes.
 Veamos cada una de estas partes por separado:
 \subsubsection{Codificadores o capas de codificación.}
 
-Para realizar una compresión se necesitan especificar detalles en cuanto a calidad y tamaño de video, audio e imágenes (en el caso de que queramos obtener un \textit{snapshot}\footnote{Captura en formato de imagen a partir de un video multimedia} de un determinado video).
+Para realizar una compresión se necesitan especificar detalles en cuanto a ca\-lidad y tamaño de video, audio e imágenes (en el caso de que queramos obtener un \textit{snapshot}\footnote{Captura en formato de imagen a partir de un video multimedia} de un determinado video).
 En el paquete \textit{codecs} se representan cada una de estas capas o \textit{layers}. En concreto tendremos una capa que se encargará especificar el tipo de compresión que se realizará sobre el video (\textit{VideoLayer}), una capa que hará lo mismo con el audio (\textit{AudioLayer}) y otra para el caso de la capturas de pantalla (\textit{SnapShotLayer}).
 \begin{figure}[htp]
 \centering
@@ -403,7 +403,7 @@ En cuanto a la implementación concreta se ha optado por la utilización del patró
 	\item Evita clases cargadas de funciones en la parte de arriba de la jerarquía.
 	\item Cambiar la piel de un objeto en vez de sus tripas.
 \end{enumerate}
-Dentro de la jerarquía, la clase abstracta \textit{AbstractCodec}, implementa el método concreto necesario para la obtención de los comandos para realizar la codificación. Este método llamado \textit{generateCommand()} implementa a su vez el patrón \textit{Plantilla}, dejando que sean el codificador base y sus capas las que determinen exactamente el comando final, mediante los métodos \textit{generateVideoOptions}, \textit{generateAudioOptions} y \textit{generateImageOptions}.
+Dentro de la jerarquía, la clase abstracta \textit{AbstractCodec}, implementa el método concreto necesario para la obtención de los comandos para realizar la codificación. Este método llamado \textit{generateCommand()} implementa a su vez el patrón \textit{Plantilla}, dejando que sean el codificador base y sus capas las que determinen exactamente el comando final, mediante los métodos \textit{generateVideoOptions}, \textit{ge\-nerateAudioOptions} y \textit{generateImageOptions}.
 La aplicación de este patrón se debe a que de esta manera somos capaces de controlar las extensiones de las subclases, para implementar las partes del algoritmo que son variables y ocultar de esta manera las partes del algoritmo que permanecen inalteradas.
 Del mismo modo, dicha clase abstracta obtiene mediante JNDI una referencia al path en el cual se encuentra nuestra aplicación en el servidor, con el fin de conformar el comando.
 
@@ -420,9 +420,9 @@ En nuestro sistema buscamos realmente poder realizar 3 tipos de compresiones con
 \caption{Factoría de codificación}
 \label{encodeFactory}
 \end{figure} 
-Una vez que tenemos claro lo que necesitamos, implementamos siguiendo el patrón \textit{Factoría Abstracta} una clase que nos permita obtener un codificador completo para cada una de estas compresiones que buscamos. Mediante esta clase abstracta proporcionamos una biblioteca de codificadores presentando su interfaz, pero no su implementación. Dicha clase abstracta \textit{AbstractEncoderFactory} declara la interfaz para las operaciones que crean codificadores abstractos (métodos de fabricación). Por otra parte, la clase \textit{EncoderFactory} implementa los métodos de fabricación de codificadores
+Una vez que tenemos claro lo que necesitamos, implementamos siguiendo el patrón \textit{Factoría Abstracta} una clase que nos permita obtener un codificador completo para cada una de estas compresiones que buscamos. Mediante esta clase abstracta proporcionamos una biblioteca de codificadores presentando su interfaz, pero no su implementación. Dicha clase abstracta \textit{AbstractEncoderFactory} declara la interfaz para las operaciones que crean codificadores abstractos (métodos de fa\-bricación). Por otra parte, la clase \textit{EncoderFactory} implementa los métodos de fabricación de codificadores
 concretos, creando para cada método un codificador que satisfaga la creación de un video o imagen a partir del comando que proporciona.
-Para la creación de los diferentes codificadores concretos se necesitan obtener determinados valores en tiempo de ejecución. Estos valores serán variables de la compresión como tiempo máximo del video resultante, calidad del audio y del video, tamaño de salida del video, bit rate\footnote{Tasa de bits (en inglés bit rate) define el número de bits que se transmiten por unidad de tiempo} del audio y del video, etc. Todas estas variables se obtienen mediante JNDI, facilitando de este modo que el administrador sea capaz de cambiarlas sin necesidad se detener el sistema.
+Para la creación de los diferentes codificadores concretos se necesitan obtener determinados valores en tiempo de ejecución. Estos valores serán varia\-bles de la compresión como tiempo máximo del video resultante, calidad del audio y del video, tamaño de salida del video, bit rate\footnote{Tasa de bits (en inglés bit rate) define el número de bits que se transmiten por unidad de tiempo} del audio y del video, etc. Todas estas variables se obtienen mediante JNDI, facilitando de este modo que el administrador sea capaz de cambiarlas sin necesidad se detener el sistema.
 
 \subsubsection{Sistema multiproceso}
 El objetivo final de todo lo explicado hasta el momento es poder realizar la compresión de videos de forma paralela mediante una aplicación exterior. Para ello se ha creado un sistema completo que se encargue de realizarlo, así como de mantener la integridad de los datos y videos de nuestro sistema y de nuestro contenedor multimedia.
@@ -461,7 +461,7 @@ Cuando un usuario desea añadir un video se genera una sucesión de procesos relac
 	\item Eliminar los ficheros de log producidos durante los procesos de codificación. Realizado por la clase \textit{LogDelete}.
 	\item Transferencia de los archivos creados (videos e imagen) junto con el archivo original a su correspondiente emplazamiento dentro del contenedor multimedia, realizado por la clase \textit{MoveTempFolder}.
 	\item Inserción de una referencia del video dentro del sistema, realizado por la clase \textit{AcceptVideo}.
-	\item Confirmar al usuario que su video se ha subido correctamente, o en caso contrario, comunicarle el porqué. Realizado por la clase \textit{ConfirmationMessage}.
+	\item Confirmar al usuario que su video se ha subido correctamente, o en caso contrario, comunicarle el porqué. Realizado por la clase \textit{ConfirmationMe\-ssage}.
 \end{enumerate}
 
 Cada una de estas tareas o \textit{UploadTask} generadas por cada usuario son administradas mediante una centralita de tareas denominada \textit{TaskCentral}. Será esta centralita la cual gestione la ejecución de cada una de las tareas (y subprocesos que la componen). Dentro del diseño de TaskCentral se ha utilizado el patrón Singleton por dos razones concretas:
@@ -694,7 +694,7 @@ En Tapestry 5 una aplicación web se compone de páginas. El controlador de cada p
 \label{componentes}
 \end{figure} 
 
-Es por esto que Tapestry es un framework orientado a componentes, ya que todo se ve como tal. Cada componente en concreto puede estar asociado a diferentes cosas: plantillas, mensajes internacionalizados, etc... (véase figura \ref{ElementosComponentes}).
+Es por esto que Tapestry es un framework orientado a componentes, ya que todo se ve como tal. Cada componente en concreto puede estar asociado a dife\-rentes cosas: plantillas, mensajes internacionalizados, etc... (véase figura \ref{ElementosComponentes}).
 \begin{figure}[htp]
 \centering
 \includegraphics[width=9cm]{imagenes/componenteElementos.jpg}
@@ -776,8 +776,8 @@ Este es el layout correspondiente al portal web:
 \end{figure} 
 \begin{itemize}
 	\item \textbf{Título, logo y pie de página}
-	\item \textbf{Lista de enlaces:} Compuesto por todos los enlaces accesibles por los usuarios. Solo cambia en el caso de que el usuario registrado sea administrador, en cuyo caso el número de enlaces aumenta para que pueda realizar sus labores administrativas.
-	\item \textbf{Barra de búsqueda:} Formada únicamente por un componente del tipo TextArea, que permitirá realizar la búsqueda de videos a partir de las palabras claves que se le propongan.
+	\item \textbf{Lista de enlaces:} Compuesto por todos los enlaces accesibles por los usua\-rios. Solo cambia en el caso de que el usuario registrado sea administrador, en cuyo caso el número de enlaces aumenta para que pueda realizar sus labores administrativas.
+	\item \textbf{Barra de búsqueda:} Formada únicamente por un componente del tipo TextArea, que permitirá realizar la búsqueda de videos a partir de las pala\-bras claves que se le propongan.
 	\item \textbf{Lista de más votados:} Lista dinámica con los videos más votados por los usuarios. La lista se actualiza en el caso de que se tenga que realizar un refresco completo de la misma.
 	\item \textbf{Contenido:} Es la parte cambiante de la plantilla. En muchos casos sólo se tiene que realizar un refresco sobre determinados datos contenidos en esta parte, por lo que el resto de la estructura permanece inalterable. Esto se debe a que Tapestry permite la utilización de elementos basados en Ajax \footnote{acrónimo de \textit{Asynchronous JavaScript And XML}} de manera nativa.
 \end{itemize}
@@ -807,7 +807,7 @@ Dentro de nuestra aplicación la estructura de la implementación de la vista corr
 \caption{Estructura Capa Vista}
 \label{estructuraVista}
 \end{figure} 
-Como se explicó anteriormente por cada página existirá un controlador y una plantilla. Ambas tendrán el mismo nombre aunque se encuentren en carpetas diferentes. Como se observa en la figura, una página de ejemplo denominada \textit{ShowVideos} tendrá asociado un controlador que se encontrará en la carpeta \textit{java} (ShowVideos.java) y un markup en la carpeta \textit{resources} (ShowVideos.tml). En concreto, ambos archivos tienen asociados otra clase de archivos del tipo \textit{properties}. Estos archivos contienen los mensajes internacionalizados visibles en dicha página, encontrándose en la misma localización que el markup de la página. Debemos tener en cuenta, que pueden existir mensajes internacionalizados que sean comunes a todas las páginas de la aplicación, y estos se encontrarán a la altura del fichero de configuración de la aplicación, en la ruta \textit{webapp/WEB-INF}.
+Como se explicó anteriormente por cada página exis\-tirá un controlador y una plantilla. Ambas tendrán el mismo nombre aunque se encuentren en carpetas diferentes. Como se observa en la figura, una página de ejemplo denominada \textit{ShowVideos} tendrá asociado un controlador que se encontrará en la carpeta \textit{java} (ShowVideos.java) y un markup en la carpeta \textit{resources} (ShowVideos.tml). En concreto, ambos archivos tienen asociados otra clase de archivos del tipo \textit{properties}. Estos archivos contienen los mensajes internaciona\-lizados visibles en dicha página, encontrándose en la misma localización que el markup de la página. Debemos tener en cuenta, que pueden existir mensajes internacionalizados que sean comunes a todas las páginas de la aplicación, y estos se encontrarán a la altura del fichero de configuración de la aplicación, en la ruta \textit{webapp/WEB-INF}.
 
 
 
