@@ -1,10 +1,10 @@
 \chapter{Conclusiones y trabajo futuro}
-El proyecto \textit{El Mas} aprovecha la sinergia entre televisión e internet para la creación de un programa de televisión que emite videos elaborados por los concursantes y valorados por los usuarios.
+El proyecto \textit{El Mas} aprovecha la sinergia entre televisión e Internet para la creación de un programa de televisión que emite videos elaborados por los concursantes y valorados por los usuarios.
 
 \section{Visión del trabajo realizado}
 Este proyecto aborda el diseño e implementación de un portal web destinado a albergar el contenido multimedia de un espacio televisivo a la vez de que le sirva al mismo como fuente de contenidos. Como parte de este proyecto también se consigue que determinadas funcionalidades de nuestro sistema sean accesibles mediante un portal optimizado para dispositivos móviles, como teléfonos con navegador o PDAs.
 
-Para el desarrollo de este proyecto, una vez realizado el estudio de tecnologías actuales, se ha utilizado un enfoque basado en tecnologías POJO mediante la integración de distintos frameworks \textit{open source} como son Hibernate 3, Spring Framework y Tapestry 5. Del mismo modo también se han utilizado otras tecnologías innovadoras en el ambito multimedia, como es el caso de los reproductores JW FLV Media Player, que permiten su utilización mediante código embebido. 
+Para el desarrollo de este proyecto, una vez realizado el estudio de tecnologías actuales, se ha utilizado un enfoque basado en tecnologías POJO mediante la integración de distintos frameworks \textit{open source} como son Hibernate 3, Spring Framework y Tapestry 5. Del mismo modo también se han utilizado otras tecnologías innovadoras en el ámbito multimedia, como es el caso de los reproductores JW FLV Media Player, que permiten su utilización mediante código embebido. 
 
 Con el fin de lograr una descentralización completa sobre los contenidos multimedia se ha optado por un diseño basado en dos aspectos:
 \begin{enumerate}
@@ -37,10 +37,10 @@ Se pueden destacar los siguientes aspectos favorables en el desarrollo de la apl
 	\item Se ha utilizado como lenguaje de programación JAVA, el cual, al ser multiplataforma nos ha permitido que el sistema sea independiente de plataforma, poder utilizar diversos contenedores de aplicaciones y cualquier base de datos relacional para la persistencia.
 	\item Es sistema resultante será configurable en tiempo de ejecución mediante ficheros XML, configuración que no necesita del reinicio o parada del sistema si este se encuentra en funcionamiento.
 	\item El diseño planteado sigue un patrón arquitectónico muy utilizado y fuertemente probado, como es el caso de MVC (\textit{Model-View-Controller}), el cuál permitirá tanto añadir funcionalidad como reutilización de código de forma sencilla.
-	\item Se han realizado pruebas exhaustivas a todo el sistema, entre las que se encuentran tanto pruebas de unidad como pruebas de integración. Del mismo modo también se han realizado test de estrés de la aplicación, los cuales no permiten tener una visión ampliada de la capacidad real del sistema.
+	\item Se han realizado pruebas exhaustivas a todo el sistema, entre las que se encuentran tanto pruebas de unidad como pruebas de integración. Del mismo modo también se han realizado tests de estrés de la aplicación, los cuales no permiten tener una visión ampliada de la capacidad real del sistema.
 	\item Gracias a las tecnologías utilizadas el producto resultante es escalable en todos los aspectos, siendo uno de los objetivos principales sobre todo a la hora del almacenamiento de datos mediante contenedores multimedia.
 	\item Se ha implementado un API completo que sirve de enlace entre la aplicación web y un sistema de compresión de video instalado en el propio servidor de la aplicación.
-	\item En todo momento se ha buscado que el mantenimiento necesario por parte de los administradores seas mínimo, como ha sucecido, ya que únicamente tendrán que encargarse de controlar la incidencias o quejas de los usuarios que el propio sistema se encarga de notificarles.
+	\item En todo momento se ha buscado que el mantenimiento necesario por parte de los administradores seas mínimo, como ha sucedido, ya que únicamente tendrán que encargarse de controlar la incidencias o quejas de los usuarios que el propio sistema se encarga de notificarles.
 	\item El diseño de las interfaces es completamente configurable sin tener grandes conocimientos sobre las tecnologías utilizadas, ya que Tapestry 5 utiliza HTML puro.
 	\item El sistema resultante tiene una aplicación real, ya que va a formar parte de un producto que se pretende vender a un usuario final, en este caso, una cadena de televisión.
 \end{itemize}
@@ -64,10 +64,10 @@ Como parte de futuras mejoras al sistema resultante se destacan:
 
 \begin{itemize}
 	\item Realización de un diseño más exhaustivo para el sistema de codificación de videos, ya que en la actualidad el sistema solo permite la codificación teniendo en cuenta determinados aspectos como la calidad del video o el bit rate, pero la aplicación externa permite establecer una mayor cantidad de parámetros a tener en cuenta.
-	\item Se ha implementado un sistema de mensajes básicos que sirve para el envio de mensajes administrativos que utilizará el sistema para advertir a los usuarios de determinados sucesos. Se puede utilizar este sistema inicial con el fin de dar un paso más allá en nuestra forma de ver el portal e intentar que llegue a la filosofía de las redes sociales, como son Facebook o Hi5.
-	\item Nuestra aplicación en concreto puede verse como un sistema inicial que puede evolucionar no sólo en el ambito de los navegadores, ya que en un futuro no muy lejano esta clase de contenidos será promovidos directamente para teminales del ámbito televisivo, por lo que una implementación orientada a dicho sector tecnológico sería plausible.
+	\item Se ha implementado un sistema de mensajes básicos que sirve para el envío de mensajes administrativos que utilizará el sistema para advertir a los usuarios de determinados sucesos. Se puede utilizar este sistema inicial con el fin de dar un paso más allá en nuestra forma de ver el portal e intentar que llegue a la filosofía de las redes sociales, como son Facebook o Hi5.
+	\item Nuestra aplicación en concreto puede verse como un sistema inicial que puede evolucionar no sólo en el ámbito de los navegadores, ya que en un futuro no muy lejano esta clase de contenidos será promovidos directamente para teminales del ámbito televisivo, por lo que una implementación orientada a dicho sector tecnológico sería plausible.
 	\item El diseño del sistema utiliza en todo caso tecnologías open source, pero eso no implica que existan implementaciones comerciales, en concreto en el caso de los reproductores multimedia para navegadores, que nos ofrezcan una mejor experiencia.
-	\item Se podría crear un servicio Rest para los administradores, de modo que la obtención de los videos y su información relacionada pudiese ser utilizada a través de otras aplicaciones.
+	\item Se podría crear un servicio Rest para los administradores, de modo que la obtención de los videos y su información relacionada pudiesen ser utilizada a través de otras aplicaciones.
 	\item Se podría implementar un filtro de contenidos, de modo que además que las quejas de los usuarios el sistema pudiese ser capaz de detectar cualquier contenido ofensivo y eliminarlo de forma eficaz.
 	\item Se podría implementar un subsistema que le ofrezca al usuario colecciones de videos que le pueden resultar interesantes a partir de sus videos favoritos.
 \end{itemize}

@@ -6,7 +6,7 @@ Una vez que se han especificado los requerimientos para ambos sistemas, se reali
 %% Seccion 1
 %%
 \section{Modelo de análisis}
-Un caso de uso es una secuencia de interacciones que se desarrollarán entre un sistema y sus actores en respuesta a un evento que inicia un actor principal sobre el propio sistema. Los diagramas de casos de uso sirven para especificar la comunicación y el comportamiento de un sistema mediante su interacción con los usuarios y/u otros sistemas.
+Un caso de uso es una secuencia de interacciones que se desarrollarán entre un sistema y sus actores en respuesta a un evento que inicia un actor principal sobre el propio sistema. Los diagramas de casos de uso sirven para especificar la comunicación y el comportamiento de un sistema mediante su interacción con los usuarios y / u otros sistemas.
 Dentro de un diagrama de uso se tendrá que tener en cuenta las siguientes definiciones para una mejor comprensión del mismo:
 \begin{itemize}
 \item \textbf{Actores:}
@@ -21,7 +21,7 @@ Las tres relaciones principales entre los casos de uso son soportadas por el est
 	\item \textbf{Extensión:}
 	Es otra forma de interacción, un caso de uso dado puede extender a otro. Esta relación indica que el comportamiento del caso de uso extensión puede ser insertado en el caso de uso extendido bajo ciertas condiciones. La notación es una flecha de punta abierta con línea discontinua, desde el caso de uso extensión al caso de uso extendido, con la etiqueta «extend».
 	\item \textbf{Herencia:}
-	En la tercera forma de relaciones entre casos de uso, existe una relación generalización/especialización. Un caso de uso dado puede estar en una forma especializada de un caso de uso exis\-ten\-te. La notación es una línea solida terminada en un triángulo dibujado desde el caso de uso especializado al caso de uso ge\-ne\-ral.	
+	En la tercera forma de relaciones entre casos de uso, existe una relación generalización / especialización. Un caso de uso dado puede estar en una forma especializada de un caso de uso exis\-ten\-te. La notación es una línea sólida terminada en un triángulo dibujado desde el caso de uso especializado al caso de uso ge\-ne\-ral.	
 	\end{itemize}
 \end{itemize}
 
@@ -40,7 +40,7 @@ Dentro del sistema se distinguen cuatro perfiles concretos.
 \label{Actores}
 \end{figure}
 
-Podemos distinguir entre los usuarios registrados, los participantes del concurso y los administradores, además de cualquier usuario no registrado que puede acceder al portal. Veamos ahora los casos de uso referente a los diferente perfiles que se han mencionado:
+Podemos distinguir entre los usuarios registrados, los participantes del concurso y los administradores, además de cualquier usuario no registrado que puede acceder al portal. Veamos ahora los casos de uso referentes a los diferente perfiles que se han mencionado:
 
 %%
 \subsection{Casos de usos de usuario}
@@ -84,15 +84,15 @@ A continuación se muestra el diagrama de casos de uso para un usuario que se cor
 %% Seccion 3
 %%
 \clearpage
-\section{Casos de uso del modelo para dispositivos moviles}
+\section{Casos de uso del modelo para dispositivos móviles}
 \subsection{Actores}
-En el caso del modelo para dispositivos moviles el número de actores no disminuye, pero se reduce considerablemente el número de casos de usos que se utilizan. En concreto, en el caso del perfil de administrador desaparecen completamente los casos de uso, ya que este modelo esta orientado exclusivamente al uso de usuarios registrados y participantes del concurso.
+En el caso del modelo para dispositivos móviles el número de actores no disminuye, pero se reduce considerablemente el número de casos de usos que se utilizan. En concreto, en el caso del perfil de administrador desaparecen completamente los casos de uso, ya que este modelo esta orientado exclusivamente al uso de usuarios registrados y participantes del concurso.
 \subsection{Casos de usos de todos los perfiles}
 A continuación se muestra el diagrama de casos de uso para un usuario que se corresponda con cada uno de los distintos perfiles.
 \begin{figure}[htb]
 \centering
 \includegraphics*[width=12cm]{imagenes/UserMobile.jpg}
-\caption{Perfiles del modelo para dispositivos moviles}
+\caption{Perfiles del modelo para dispositivos móviles}
 \label{UserMobile}
 \end{figure}
 
@@ -101,7 +101,7 @@ A continuación se muestra el diagrama de casos de uso para un usuario que se cor
 %%
 \newpage
 \section{Explicación de los casos de uso}
-Ahora que se han especificado los casos de uso para cada uno de los perfiles necesarios se realizará la explicacion de aquellos que se consideran más importantes dentro del sistema.
+Ahora que se han especificado los casos de uso para cada uno de los perfiles necesarios se realizará la explicación de aquellos que se consideran más importantes dentro del sistema.
 \subsection{Casos de usos de usuario}
 Login\\\\
 \begin{tabular}{|l|p{10cm}|}
@@ -110,7 +110,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Todos \\
   \hline
-  \textbf{Precondiciones}  & Ningun usuario logueado en la sesión. El nombre de usuario y la contraseña tienen que coincidir con los datos almacenados en el sistema\\
+  \textbf{Precondiciones}  & Ningún usuario logueado en la sesión. El nombre de usuario y la contraseña tienen que coincidir con los datos almacenados en el sistema\\
   \hline 
   \textbf{Poscondiciones}  & El usuario queda logueado en el sistema y es redireccionado a la página inicial o la página de donde se venía si el login es producto de una redirección. \\
   \hline 
@@ -124,7 +124,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Todos. \\
   \hline
-  \textbf{Precondiciones}  & Ningun usuario logueado en la sesión. \\
+  \textbf{Precondiciones}  & Ningún usuario logueado en la sesión. \\
   \hline 
   \textbf{Poscondiciones}  & El usuario se registra y queda logueado en el sistema. A su vez es redireccionado a la página inicial o la página de donde se venía si el login es producto de una redirección. \\
   \hline 
@@ -212,7 +212,7 @@ Login\\\\
   \hline
   \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión. \\
   \hline 
-  \textbf{Poscondiciones}  & Ningun usuario logueado en la sesión. \\
+  \textbf{Poscondiciones}  & Ningún usuario logueado en la sesión. \\
   \hline 
 \end{tabular}
 \newline\newline
@@ -239,7 +239,7 @@ Login\\\\
   \hline 
   \textbf{Actores}  & Usuarios registrados. \\
   \hline
-  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesion. \\
+  \textbf{Precondiciones}  & Tiene que haber un usuario logueado en la sesión. \\
   \hline 
   \textbf{Poscondiciones}  & Ninguna. \\
   \hline 
