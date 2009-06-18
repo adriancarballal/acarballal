@@ -59,7 +59,7 @@ Desarrollar con Tapestry permite:
 	\item Se requiere configurar 3 archivos para cada página a crear.
 \end{itemize}
 \subsection{JSF}
- Lo primero que se puede decir sobre Java Server Faces es que no es una implementación sino una especificación (JSR 127) aprobada por el Java Community Process (JCP) para construir interfaces de usuario para las aplicaciones que corren en un servidor. Esto quiere decir que es un estándar y pueden existir varias implementaciones mientras que cumplan con lo que exija la especificación.
+ Lo primero que se puede decir sobre Java Server Faces es que no es una implementación sino una especificación (JSR 127) aprobada por el Java Community Process (JCP) para construir interfaces de usuario para las aplicaciones que co\-rren en un servidor. Esto quiere decir que es un estándar y pueden existir varias implementaciones mientras que cumplan con lo que exija la especificación.
 
 JSF es otro framework modelo 2 que posee un controlador central (FrontControler) que se encarga de manejar todas las peticiones del cliente y gestionar su ciclo de vida. Está basado en un modelo de componentes para la interfaz de usuario. Un componente JSF es un elemento reutilizable y configurable que se puede utilizar en la interfaz de usuario. Los componentes se pueden anidar. Por ejemplo, una página contiene un componente mapa que a su vez contiene un componente botón. El diseño del framework permite navegar a través del árbol de componentes para acceder a sus propiedades. Además, los componentes pueden reaccionar a diferentes eventos y son capaces de almacenar su estado interno. 
 
@@ -154,7 +154,7 @@ Conociendo las excelencias e inconvenientes de cada uno de los framework comenta
 Es por estas razones que se ha escogido este framework. Veamos que otras tecnologías podemos utilizar con Tapestry para mantener la persistencia y gestionar las transacciones con las posible bases de datos que se nos presentan en el mercado.
 
 \section{Contenedores de componentes de negocio}
-Usualmente la arquitectura de una aplicación J2EE contiene varias capas separadas como se puede apreciar en la figura \ref{tresCapas}. 
+Usualmente la arquitectura de una aplicación J2EE contiene varias capas se\-paradas como se puede apreciar en la figura \ref{tresCapas}. 
 \begin{figure}[htb]
 \centering
 \includegraphics*[width=15cm]{imagenes/ejb3vsSpring.png}
@@ -187,7 +187,7 @@ Como contrapunto se introducen en EJB 3 las anotaciones de metadatos y de interc
 El principal objetivo de Spring Framework es el constituirse en una alternativa sencilla y fácil ante EJB. La simplificación del desarrollo de aplicaciones y de sus respectivas pruebas (testing) es una de las claves del éxito de Spring. Este Framework se sustenta en dos características básicas en su núcleo: Inversión de Control (Inversion of Control IoC) y la Programación Orientada a Aspectos (Aspect-orient programming).
 
 
-Usualmente, los objetos obtienen las referencias de otros objetos requeridos por si mismos (tal como en EJB 2.0 los beans obtienen los recursos necesarios usando JNDI). La inversión de control permite inyectar las dependencias en un bean al momento de su creación usando un manejador externo. El bean sólo necesita definir la propiedad requerida en su código así como el método de establecimiento (set() method). La fuente primaria de la inyección de dependencias es un archivo de configuración en formato XML. Se muestra la estructura de este framework en la siguiente figura:
+Usualmente, los objetos obtienen las referencias de otros objetos requeridos por si mismos (tal como en EJB 2.0 los beans obtienen los recursos necesarios usan\-do JNDI). La inversión de control permite inyectar las dependencias en un bean al momento de su creación usando un manejador externo. El bean sólo necesita definir la propiedad requerida en su código así como el método de establecimiento (set() method). La fuente primaria de la inyección de dependencias es un archivo de configuración en formato XML. Se muestra la estructura de este framework en la siguiente figura:
 
 \begin{figure}[htb]
 \centering
@@ -214,7 +214,7 @@ de componentes no acoplados de forma coherente y transparente. Además añade agil
 	\item \textbf{Integración:} Incluye integración con Hibernate así como con la mayoría de frameworks web, incluido Tapestry.
 \end{itemize}
 \subsection{Conclusión}
-Spring Framework es especialmente preferible para usarse en compañías pequeñas, en conjunto con otros productos Open-Source. Es un framework muy simple, conveniente y flexible, pero la mismo tiempo muy poderoso. Se recomienda el uso de Spring en los casos donde un contenedor de aplicaciones pesado no es necesario.
+Spring Framework es especialmente preferible para usarse en compañías peque\-ñas, en conjunto con otros productos Open-Source. Es un framework muy simple, conveniente y flexible, pero la mismo tiempo muy poderoso. Se recomienda el uso de Spring en los casos donde un contenedor de aplicaciones pesado no es necesario.
 
 \section{Persistencia}
 
@@ -259,7 +259,7 @@ Compuesto de dos partes:
 \subsection{Hibernate}
 Hibernate fue una iniciativa de un grupo de desarrolladores dispersos alrededor del mundo conducidos por Gavin King. Es una herramienta de Mapeo objeto-relacional para la plataforma Java (y disponible también para .Net con el nombre de NHibernate) que facilita el mapeo de atributos entre una base de datos relacional tradicional y el modelo de objetos de una aplicación, mediante archivos declarativos (XML) que permiten establecer estas relaciones. Veamos la estructura de este framework:
 
-La rama actual de desarrollo de Hibernate es la 3.x, la cual incorpora nuevas características, como una nueva arquitectura Interceptor / Callback, filtros definidos por el usuario, y opcionalmente el uso de anotaciones para definir la correspondencia en lugar (o conjuntamente con) los archivos XML. 
+La rama actual de desarrollo de Hibernate es la 3.x, la cual incorpora nuevas características, como una nueva arquitectura Interceptor / Callback, filtros defini\-dos por el usuario, y opcionalmente el uso de anotaciones para definir la co\-rrespondencia en lugar (o conjuntamente con) los archivos XML. 
 
 \begin{figure}[htb]
 \centering
@@ -293,7 +293,7 @@ En la actualidad existen diferentes sistemas de gestión de base de datos relacio
 \subsection{PostgreSQL}
 PostgreSQL es un sistema de gestión de base de datos relacional orientada a objetos de software libre, publicado bajo la licencia BSD.
 
-Como muchos otros proyectos \textit{open source}, el desarrollo de PostgreSQL no es manejado por una sola compañía sino que es dirigido por una comunidad de desarrolladores y organizaciones comerciales las cuales trabajan en su desarrollo. Dicha comunidad es denominada el PGDG (\textit{PostgreSQL Global Development Group}).
+Como muchos otros proyectos \textit{open source}, el desarrollo de PostgreSQL no es manejado por una sola compañía sino que es dirigido por una comunidad de desarrolladores y organizaciones comerciales las cuales trabajan en su desarro\-llo. Dicha comunidad es denominada el PGDG (\textit{PostgreSQL Global Development Group}).
 \subsubsection{Características}
 \begin{itemize}
 	\item Implementación del estándar SQL92/SQL99.
@@ -310,7 +310,7 @@ Como muchos otros proyectos \textit{open source}, el desarrollo de PostgreSQL no
 \subsection{MySQL}
 MySQL es un sistema de gestión de base de datos relacional, multihilo y multiusuario con más de seis millones de instalaciones. MySQL AB, desde enero de 2008 una subsidiaria de Sun Microsystems y ésta a su vez de Oracle Corporation desde abril de 2009, desarrolla MySQL como software libre en un esquema de licenciamiento dual.
 
-MySQL es muy utilizado en aplicaciones web, como Drupal o phpBB, en plataformas (Linux/Windows-Apache-MySQL-PHP/Perl/Python), y por herramientas de seguimiento de errores como Bugzilla.
+MySQL es muy utilizado en aplicaciones web, como Drupal o phpBB, en plataformas (Linux/Windows-Apache-MySQL-PHP/Perl/Python), y por herra\-mientas de seguimiento de errores como Bugzilla.
 \subsubsection{Características}
 \begin{itemize}
 	\item Lo mejor de MySQL es su velocidad a la hora de realizar las operaciones, lo que le hace uno de los gestores que ofrecen mayor rendimiento.
@@ -343,7 +343,7 @@ Todos los navegadores modernos interpretan el código Javascript integrado dentro
 AJAX, acrónimo de Asynchronous Javascript And XML (Javascript asíncrono y XML), es una técnica de desarrollo web para crear aplicaciones interactivas o RIA (Rich Internet Applications). Estas aplicaciones se ejecutan en el cliente, es decir, en el
 navegador de los usuarios mientras se mantiene la comunicación asíncrona con el servidor en segundo plano. De esta forma es posible realizar cambios sobre las páginas sin necesidad de recargarlas, lo que significa aumentar la interactividad, velocidad y usabilidad en las aplicaciones.
 
-Ajax es una tecnología asíncrona, en el sentido de que los datos adicionales se requieren del servidor y se cargan en segundo plano sin interferir con la visualización ni el comportamiento de la página. Javascript es el lenguaje interpretado (scripting
+Ajax es una tecnología asíncrona, en el sentido de que los datos adicionales se requieren del servidor y se cargan en segundo plano sin interferir con la visua\-lización ni el comportamiento de la página. Javascript es el lenguaje interpretado (scripting
 language) en el que normalmente se efectúan las funciones de llamada de Ajax mientras que el acceso a los datos se realiza mediante XMLHttpRequest, objeto disponible en los navegadores actuales. En cualquier caso, no es necesario que el contenido asíncrono esté formateado en XML.
 
 Ajax es una técnica válida para múltiples plataformas y utilizable en muchos sistemas operativos y navegadores dados que está basado en estándares abiertos como Javascript y Document Object Model (DOM).
@@ -366,7 +366,7 @@ Grid, que proporciona un centro que permite el funcionamiento de múltiples prueb
 
 En concreto utilizaremos CubicTest, que se trata de un plugin gráfico para Eclipse que permite escribir los test de Selenium.
 \subsection{JMeter}
-JMeter es un proyecto de Apache Jakarta que puede ser utilizado como una herramienta de prueba de carga para analizar y medir el desempeño de una variedad de servicios, con énfasis en aplicaciones web.
+JMeter es un proyecto de Apache Jakarta que puede ser utilizado como una herramienta de prueba de carga para analizar y medir el desempeño de una va\-riedad de servicios, con énfasis en aplicaciones web.
 
 JMeter puede ser usado como una herramienta de pruebas unitarias para conexiones de bases de datos con JDBC, FTP, LDAP, Servicios web, JMS, HTTP y conexiones TCP genéricas. JMeter puede también ser configurado como un monitor, aunque es comúnmente considerado una solución ad-hoc respecto de soluciones avanzadas de monitoreo.
 

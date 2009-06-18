@@ -21,8 +21,6 @@
 \makeindex
 
 \begin{document}
-
-
 % Definición de comandos
 \newcommand{\BibTeX}{\textsc{Bib}\TeX{}}
 \newcommand{\dvi}{\textsc{dvi}}
@@ -36,11 +34,15 @@
 
 % Mejora estéticamente
 %\renewcommand{\baselinestretch}{2}
-
-\maketitle
-\tableofcontents
-
-\listoffigures
+\pagestyle{empty}
+	\newpage{\pagestyle{empty}\cleardoublepage}
+	\include{portada}
+	\newpage{\pagestyle{empty}\cleardoublepage}
+	\include{resumen}
+	\newpage{\pagestyle{empty}\cleardoublepage}
+\pagestyle{headings}
+  \tableofcontents
+  \listoffigures
 
 \input{intro}
 \input{tecnologias}
@@ -53,6 +55,7 @@
 \input{planificacion}
 \input{conclusiones}
 \input{apendices}
+\input{bibliografia}
 \end{document}
 
 
