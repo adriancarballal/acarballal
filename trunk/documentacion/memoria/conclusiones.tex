@@ -1,7 +1,8 @@
 \chapter{Conclusiones y trabajo futuro}
+El proyecto \textit{El Mas} aprovecha la sinergia entre televisión e internet para la creación de un programa de televisión que emite videos elaborados por los concursantes y valorados por los usuarios.
 
 \section{Visión del trabajo realizado}
-Con el fin de realizar la puesta en marcha en programa de televisión nace el concepto que da lugar a este proyecto. En concreto, este proyecto aborda el diseño e implementación de un portal web destinado a albergar el contenido multimedia de un espacio televisivo a la vez de que le sirva al mismo como fuente de contenidos. Como parte de este proyecto también se consigue que determinadas funcionalidades de nuestro sistema sean accesibles mediante un portal optimizado para dispositivos móviles, como teléfonos con navegador o PDAs.
+Este proyecto aborda el diseño e implementación de un portal web destinado a albergar el contenido multimedia de un espacio televisivo a la vez de que le sirva al mismo como fuente de contenidos. Como parte de este proyecto también se consigue que determinadas funcionalidades de nuestro sistema sean accesibles mediante un portal optimizado para dispositivos móviles, como teléfonos con navegador o PDAs.
 
 Para el desarrollo de este proyecto, una vez realizado el estudio de tecnologías actuales, se ha utilizado un enfoque basado en tecnologías POJO mediante la integración de distintos frameworks \textit{open source} como son Hibernate 3, Spring Framework y Tapestry 5. Del mismo modo también se han utilizado otras tecnologías innovadoras en el ambito multimedia, como es el caso de los reproductores JW FLV Media Player, que permiten su utilización mediante código embebido. 
 
@@ -14,6 +15,18 @@ Con el fin de lograr una descentralización completa sobre los contenidos multime
 A lo largo del proyecto, se han realizado diferentes estudios para el almacenamiento de la información, los cuales han dado lugar a la conclusión de que el diseño por el que se ha optado es, a priori, el que permitirá con mayor facilidad y menor estrés el acceso a los videos del programa por mayor cantidad de usuarios al mismo tiempo.
 
 Para el desarrollo, como se ha explicado en anteriores capítulos, se ha seguido un ciclo de vida iterativo, donde con cada iteración se han añadido diferentes funcionalidades al sistema obtenido en la primera de las mismas. Gracias a la aplicación de esta metodología se han podido ir refinando la arquitectura del sistema hasta obtener el diseño definitivo que se expone en esta memoria.
+
+Una vez finalizado este proyecto, la implementación realizada permite:
+\begin{itemize}
+	\item Recoger videos de los concursantes
+	\item Comprimir videos a diferentes formatos multimedia
+	\item Realizar votaciones aleatorias sobre videos
+	\item Recibir mensajes administrativos
+	\item Realizar comentarios sobre usuarios y videos
+	\item Administrar los contenidos de la aplicación	
+	\item Obtener listas y videos originales para la creación del contenido específico del programa semanal
+	\item Acceder al sistema desde dispositivos móviles
+\end{itemize}
 
 \section{Aspectos favorables}
 
@@ -38,10 +51,10 @@ Se pueden destacar los siguientes aspectos desfavorables en el desarrollo de la 
 \begin{itemize}
 	\item El esfuerzo necesario y empleado en el aprendizaje de las diferentes tecnologías empleadas, ya que ninguno de los frameworks utilizados en el proyecto eran conocidos por el programador.
 	\item Se ha realizado un gran esfuerzo documental, sobre todo a la hora de la elección de las diferentes tecnologías, tal y como se expone en esta memoria en el capítulo \textit{Tecnologías}.
-	\item El diseño gráfico que se le ha dado a la vista de ambos portales dista del trabajo de un profesional dedicado a tal cometido, como puede ser el caso de un diseñador gráfico, pero el objetivo del sistema se basa principalmente en la obtención de un sistema completamente operativo.
+	\item El diseño gráfico que se le ha dado a la vista de ambos portales dista del trabajo de un profesional dedicado a tal cometido, como puede ser el caso de un diseñador gráfico, pero el objetivo del sistema se basa principalmente en la obtención de un sistema completamente operativo. Se complementa un manual para la modificación de la vista de la aplicación mediante html entre los apéndices de esta memoria.
 	\item Durante la realización nos hemos encontrado con la inexistencia de APIs de JAVA que no estén descatalogadas y que permitan la codificación de videos en cualquier formato, lo cual nos ha obligado a la integración con un programa externo mediante una implementación propia.
 	\item La integración del sistema de codificación ha supuesto un reto, ya que era la primera vez que el programador abordaba una tarea de esta índole, sobre todo para el caso de la codificación mediante multihilos de ejecución.
-	\item Aunque Tapestry 5 tenga una curva de aprendizaje considerablemente inferior a otros frameworks de su naturaleza, pero la falta de documentación de éste ha supuesto un reto, haciendo referencia a que de la poca documentación que existe no toda se encuentra en idiomas mayoritarios en nuestro país, como castellano o inglés.
+	\item Aunque Tapestry 5 tenga una curva de aprendizaje considerablemente inferior a otros frameworks de su naturaleza, la falta de documentación de éste ha supuesto un reto, haciendo referencia a que de la poca documentación que existe no toda se encuentra en idiomas mayoritarios en nuestro país, como castellano o inglés.
 	\item Otro de los problemas que nos ofrece Tapestry es que aunque nos permite su integración con IDEs como Eclipse, no se proporciona ninguna herramienta o plugin para la creación de las vistas de forma rápida y sencilla, teniendo que realizar esta tarea de forma precaria.
 \end{itemize}
 
@@ -53,8 +66,8 @@ Como parte de futuras mejoras al sistema resultante se destacan:
 	\item Realización de un diseño más exhaustivo para el sistema de codificación de videos, ya que en la actualidad el sistema solo permite la codificación teniendo en cuenta determinados aspectos como la calidad del video o el bit rate, pero la aplicación externa permite establecer una mayor cantidad de parámetros a tener en cuenta.
 	\item Se ha implementado un sistema de mensajes básicos que sirve para el envio de mensajes administrativos que utilizará el sistema para advertir a los usuarios de determinados sucesos. Se puede utilizar este sistema inicial con el fin de dar un paso más allá en nuestra forma de ver el portal e intentar que llegue a la filosofía de las redes sociales, como son Facebook o Hi5.
 	\item Nuestra aplicación en concreto puede verse como un sistema inicial que puede evolucionar no sólo en el ambito de los navegadores, ya que en un futuro no muy lejano esta clase de contenidos será promovidos directamente para teminales del ámbito televisivo, por lo que una implementación orientada a dicho sector tecnológico sería plausible.
-	\item El diseño del sistema utiliza en todo caso tecnologías open source, pero eso no implica que existan implementaciones comerciales, sobre todo en el caso de los reproductores multimedia para navegadores, que nos ofrezcan una mejor experiencia.
+	\item El diseño del sistema utiliza en todo caso tecnologías open source, pero eso no implica que existan implementaciones comerciales, en concreto en el caso de los reproductores multimedia para navegadores, que nos ofrezcan una mejor experiencia.
 	\item Se podría crear un servicio Rest para los administradores, de modo que la obtención de los videos y su información relacionada pudiese ser utilizada a través de otras aplicaciones.
 	\item Se podría implementar un filtro de contenidos, de modo que además que las quejas de los usuarios el sistema pudiese ser capaz de detectar cualquier contenido ofensivo y eliminarlo de forma eficaz.
-	\item Se podría implementar un subsistema que le ofrezca al usuario colecciones de videos que le pueden resultar interesantes a partir de los videos sus videos favoritos.
+	\item Se podría implementar un subsistema que le ofrezca al usuario colecciones de videos que le pueden resultar interesantes a partir de sus videos favoritos.
 \end{itemize}

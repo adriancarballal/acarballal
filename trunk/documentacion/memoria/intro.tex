@@ -1,25 +1,27 @@
 \chapter{Introducción}
 
 \section{Escenario}
-En los últimos años el número de aplicaciones multimedia ha crecido exponencialmente, debido principalmente a su gran proliferación en muchos campos, como es el caso de la televisión. En la actualidad es casi impensable que algún contenido de cualquier cadena de televisión no tenga asociado ni siquiera una página web, ya no sólo de forma oficial, sino que en muchos casos, existen gran cantidad de contenidos con portales completos no oficiales.
+En los últimos años el número de aplicaciones multimedia ha crecido enormemente, debido principalmente a su gran proliferación en muchos campos, como es el caso de la televisión. En la actualidad es casi impensable que algún contenido de cualquier cadena de televisión no tenga asociado ni siquiera una página web, ya no sólo de forma oficial, sino que en muchos casos, existen gran cantidad de contenidos con portales completos no oficiales.
  
-También tenemos que tener en cuenta que son muchos los portales de contenidos multimedia que se surten únicamente de contenidos agregados por los propios usuarios, de manera que el crecimiento del mismo no requiere apenas interacción de los administradores. Un ejemplo claro serían portales como \textit{MegaVideo} o \textit{YouTube}, incluyendo dentro de este campo las conocidas como redes sociales, \textit{Tuenti}, \textit{Facebook}, \textit{Hi5}, etc...
+También tenemos que tener en cuenta que son muchos los portales de contenidos multimedia que se surten únicamente de contenidos agregados por los propios usuarios, de manera que el crecimiento del mismo no requiere apenas interacción de los administradores. Un ejemplo claro serían portales como \textit{MegaVideo} o \textit{YouTube}, así como las conocidas como redes sociales, \textit{Tuenti}, \textit{Facebook}, \textit{Hi5}, etc...
 
 El proyecto El Mas nace de la idea de la creación de un programa de televisión que aproveche lo comentado anteriormente, que sean los propios usuarios del portal multimedia asociado los que nutran de videos con los que completar semanalmente un espacio televisivo en una franja horaria apropiada. La puesta en marcha de esta idea se realiza de manera conjunta entre la Facultad de Ciencias de la Comunición y la Facultad de Informática de A Coruña. En concreto, se ha dividido este proyecto conjunto en tres partes diferenciadas: 
 \begin{itemize}
-	\item Diseño de la imagen y publicidad del programa
-	\item Creación del programa piloto
+	\item Diseño de la imagen y mecánica del programa
+	\item Creación del programa piloto y campaña de marketing de lanzamiento
 	\item Creación del portal multimedia
 \end{itemize}
 
 A partir de este momento nos centraremos en el tercer punto, que compone el tema englobado en esta memoria.
 
 Se ha hecho muy popular la creación de páginas web y portales optimizados para dispositivos móviles, como teléfonos o PDAs. Esto permite que el acceso directo a nuestro programa no necesite obligatoriamente un ordenador con conexión a internet, ya que con un teléfono móvil actual es más que suficiente. Es por esta razón que dentro del desarrollo tecnológico que se va a exponer se ha optado por generar ambos portales, basandonos en que gracias a la tecnología que hemos utilizado, resulta poco costoso tanto en tiempo como en dinero.
+
 \section{Objetivos}
+El proyecto \textit{El mas} es un concurso-reality multiplataforma (televisión, Web, móvil), en el que los concursantes envían un video de hasta 90 segundos cada semana. Esos videos son votados mediante una plataforma Web y los que obtienen más votos son emitidos en un programa de televisión semanal de 30 minutos de duración. 
 
 Los objetivos globales del proyecto serán:
 \begin{enumerate}
-	\item La construcción de una aplicación web que de acceso al concurso, tanto para usuarios, concursantes o administradores de la misma. El objetivo concreto de la misma será proporcionar a los administradores del portal un servicio de selección de videos por parte de los usuarios que serán utilizados dentro de un programa de televisión de carácter semanal.
+	\item La construcción de una aplicación web que de acceso al concurso a usuarios, concursantes y administradores. Cada usuario podrá subir un video semanal, siendo este público para otros usuarios. La aplicación permitirá a los administradores obtener una selección de videos para conformar el contenido de un programa de televisión de carácter semanal.
 
 Los objetivos concretos planteados que persigue dicha aplicación web son:
 \begin{itemize}
@@ -31,17 +33,15 @@ Los objetivos concretos planteados que persigue dicha aplicación web son:
 
 	\item La creación de un portal para móvil que permita la visualización de videos pertenecientes al concurso a los que un usuario esté suscrito.
 \end{enumerate}
-\section{Descripción}
 
-El proyecto \textit{El mas} es un concurso-reality multiplataforma (televisión, Web, móvil), en el que los concursantes envían un video de hasta 90 segundos cada semana. Esos videos son votados mediante una plataforma Web y los que obtienen más votos son emitidos en un programa de televisión semanal de 30 minutos de duración. Este proyecto fin de carrera consistirá en el diseño e
-implementación de la plataforma Web/móvil que da soporte a este concurso, tanto desde la perspectiva de los concursantes y votantes como de los responsables del concurso.
+Este proyecto fin de carrera consistirá en el diseño e implementación de la plataforma Web/móvil que da soporte a este concurso, tanto desde la perspectiva de los concursantes y votantes como de los responsables del concurso.
 
 El proyecto incluirá:
 \begin{itemize}
 	\item Un portal que mostrará todas las opciones del concurso, y estará adaptado a los distintos perfiles (concursante, votante, administrador y usuario no identificado).
 	\item Un sistema de gestión de videos que permitirá a los participantes enviar videos en diferentes resoluciones y formatos, recodificará estos vídeos a formatos adecuados para Web y móvil, y verificará automáticamente que los videos cumplan una serie de restricciones. Los videos pasarán a formar parte de la página del concursante. Cada concursante y cada vídeo tendrán un foro asociado.
 	\item Un portal diseñado para móvil que permitirá visualizar los videos de los concursantes y sus favoritos a los que el usuario se ha suscrito y realizar votaciones, así como permitirles realizar su votación semanal.
-	\item Un sistema de votación que permite a los usuarios registrados seleccionar los vídeos que serán emitidos por televisión. Este sistema de votación permitirá a cada usuario registrado votar a un conjunto determinado de videos por semana, con la restricción de que se realizará de forma aleatoria.
+	\item Un sistema de votación que permite a los usuarios registrados seleccionar los vídeos que serán emitidos por televisión. Este sistema de votación permitirá a cada usuario registrado votar a un conjunto determinado de videos por semana.
 	\item Un sistema de mensajería entre usuarios, que será utilizada para la transmisión de mensajes administrativos entre los administradores con el resto de usuarios, pero con la idea de ampliar en un futuro el sistema para que cualquier usuario pueda enviar mensajes privados a otro usuario de igual manera que ocurre en las redes sociales.
 	\item Dentro del portal, todo usuario podrá comunicar a los administradores si el contenido de algún video o de algún comentario no sea apropiado, de modo que estos últimos sean capaces de eliminarlo en cuanto tengan conocimiento de ello.
 	\item Una serie de utilidades de administración que facilitan la labor de los responsables del concurso, entre las que podemos destacar la creación de una lista de emisión con los videos más valorados (teniendo en cuenta la votación del video semanal y la trayectoria del concurso) y la de administración de las quejas realizadas por los usuarios, las cuales pueden ser a causa de contenidos impropios en videos o comentarios.
