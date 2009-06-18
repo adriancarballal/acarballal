@@ -13,13 +13,13 @@ Este patrón permite una clara separación entre la vista de una aplicación web y 
 \section{Transfer Object} 
 Este patrón sirve para agrupar un conjunto de atributos procedentes de uno o varios objetos del dominio y es aplicable en el caso de que necesitemos representar un conjunto de atributos procedentes de uno o varios objetos del dominio.
 
-Cualquier componente que sigue este patrón ofrece getters \footnote{métodos para obtener el valor de un atributo} y/o setters \footnote{métodos que permiten asignar el valor a un atributo} para acceder y/o establecer a los atributos.
+Cualquier componente que sigue este patrón ofrece getters \footnote{métodos para obtener el valor de un atributo} y / o setters \footnote{métodos que permiten asignar el valor a un atributo} para acceder y / o establecer a los atributos.
 
 \section{Data Access Object}
 El principal objetivo de este patrón es desacoplar la lógica de negocio de la lógica de acceso a datos, de manera que se pueda sustituir la fuente de datos fácilmente. De esta manera, usando este patrón podremos seleccionar el tipo de fuente de datos durante la instalación o configuración de una aplicación.
 
 \section{Facade}
-El patrón facade (o fachada) sirve para proveer de una interfaz unificada y sencilla que haga de intermediaria entre el cliente y un interfaz o conjunto de interfaces más complejas. Esto basicamente consigue una independencia del código que la usa.
+El patrón facade (o fachada) sirve para proveer de una interfaz unificada y sencilla que haga de intermediaria entre el cliente y un interfaz o conjunto de interfaces más complejas. Esto básicamente consigue una independencia del código que la usa.
 
 En nuestro sistema, nos permite poder cambiar el código de acceso a datos sin tener que variar por ello la parte de código del modelo que sirve las funcionalidades al controlador.
 
@@ -42,7 +42,7 @@ Mediante la aplicación de este patrón se consigue:
 	\item Cuando no es práctico el uso de la herencia.
 \end{itemize}
 
-\section{Factoria abstracta}
+\section{Factoría abstracta}
 Este patrón utiliza una interfaz para la creación de familias de objetos relacionados sin especificar sus clases concretas, muy utilizado para proporcionar múltiples look-and-feels mediante la definición de un juego de componentes.
 
 La aplicabilidad de este patrón radica en:
@@ -88,18 +88,18 @@ La aplicabilidad de este patrón es:
 \begin{itemize}
 	\item Implementar las partes invariables de un algoritmo una única vez y permitir que las subclases definan el comportamiento que cambia.
 	\item Factorización de comportamiento común de las subclases en la superclase (evitar replicación de código mediante generalización)
-	\item Para controlar la extensiones de las subclases. 
+	\item Para controlar las extensiones de las subclases. 
 \end{itemize}
 
 \chapter{Manuales}
 \section{Manual de instalación}
 
-Mediante este apéndice se explicará las diferentes partes en las que se dividen la instalación del sistema dentro de un servidor, tal y como se encuentra en la actualidad. Todas las pruebas que se han realizado en el capítulo \titleref{pruebas} se han realizado contra dicho servidor cuando se han creido oportunas, como son el caso de la pruebas de integración (ver página \pageref{integracion}) y las pruebas de estrés (ver página \pageref{estres}).
+Mediante este apéndice se explicará las diferentes partes en las que se dividen la instalación del sistema dentro de un servidor, tal y como se encuentra en la actualidad. Todas las pruebas que se han realizado en el capítulo \titleref{pruebas} se han realizado contra dicho servidor cuando se han creído oportunas, como son el caso de la pruebas de integración (ver página \pageref{integracion}) y las pruebas de estrés (ver página \pageref{estres}).
 
 La instalación se centra en la plataforma Windows, tal y como se encuentra configurado en el sistema online, aunque, como ya se especificó, el sistema final es multiplataforma.
 
 \subsection{Base de datos}
-Para la instalación de MySql 5.0.45 (podemos encontrarlo en la carpeta \textit{INSTALACIÓN} dentro del CD-ROM no se modificarán las opciones proporcionadas por el instalador por defecto. Una vez finalizada se ejecutará el \textit{MySQL Server Instance Configuration Wizard}, donde tendremos que realizar los siguiente cambios:
+Para la instalación de MySql 5.0.45 (podemos encontrarlo en la carpeta \textit{INSTALACIÓN} dentro del CD-ROM no se modificarán las opciones proporcionadas por el instalador por defecto. Una vez finalizada se ejecutará el \textit{MySQL Server Instance Configuration Wizard}, donde tendremos que realizar los siguientes cambios:
 \begin{itemize}
 	\item Marcar la casilla referente a \textit{Best Support For Multilingualism (UTF-8)}.
 	\item Desmarcar la casilla \textit{Install As Windows Service}.
@@ -122,7 +122,7 @@ Una vez terminada la instalación debemos configurar nuestra propia base de datos
 	\item Podremos apagar el servidor de bases de datos con \textit{mysqladmin -u root shutdown}.
 \end{itemize}
 \subsection{Apache}
-Para la configuración del contenedor web mencionado durante todo esta memoria se utilizará Apache 2. Podremos obtener el instalador de este servidor http tanto en la carpeta \textit{INSTALACIÓN} en el CD-ROM proporcionado como en \URL{http://archive.apache.org/dist/httpd/}. El archivo de instalación para la plataforma Windows será \textit{apache\_2.2.4-win32-x86-no\_ssl.msi}.
+Para la configuración del contenedor web mencionado durante toda esta memoria se utilizará Apache 2. Podremos obtener el instalador de este servidor http tanto en la carpeta \textit{INSTALACIÓN} en el CD-ROM proporcionado como en \URL{http://archive.apache.org/dist/httpd/}. El archivo de instalación para la plataforma Windows será \textit{apache\_2.2.4-win32-x86-no\_ssl.msi}.
 
 Una vez que lo hemos instalado siguiendo el instalador tendremos que configurar nuestro contenedor añadiendo el siguiente texto al archivo \textit{httpd.conf} que se encuentra en la carpeta \textit{conf}:
 
@@ -318,7 +318,7 @@ Antes de nada, cabe destacar que la modificaciones que se pueden realizar sobre 
 	\item Modificando el CSS asociado a las diferentes páginas, pero que obliga a que la estructura de la vista no sea modificable.
 	\item Modificando las plantillas o tml asociados a cada página dentro de la implementación, lo cuál si permite modificar la estructura de la vista.
 \end{itemize}
-Como el primer punto no supone ningun problema, ya que sólo se necesita modificar el fichero css determinado, no vamos a centra en como se puede modificar un tml.
+Como el primer punto no supone ningún problema, ya que sólo se necesita modificar el fichero css determinado, no vamos a centra en como se puede modificar un tml.
 
 \begin{figure}[htp]
 \centering
@@ -346,7 +346,7 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 	\begin{itemize}
 		\item Cualquier elemento o atributo que tenga prefijo t pertenece al
 espacio de nombres de Tapestry
-		\item En el markup generado, no se incluye la importacion del
+		\item En el markup generado, no se incluye la importación del
 espacio de nombres de Tapestry
 	\end{itemize}
 	\item \textbf{Componentes}
@@ -365,12 +365,12 @@ espacio de nombres de Tapestry
 \end{verbatim}
 }
 
-	\textit{Message}: indica que valor es la clave de un mensaje del catálogo de mensajes. Dicho catálogo forma parte del soporte de internacionalizacion que proporciona Tapestry:
+	\textit{Message}: indica que valor es la clave de un mensaje del catálogo de mensajes. Dicho catálogo forma parte del soporte de internacionalización que proporciona Tapestry:
 \begin{itemize}
 	\item Permiten que los textos fijos de las plantillas, en lugar de escribirlos directamente en ellas, se escriban
 en un fichero de mensajes
 	\item Ficheros .properties
-	\item Existe un catalogo de mensajes general para toda la aplicacion
+	\item Existe un catalogo de mensajes general para toda la aplicación
 	\item Es posible definir un fichero de mensajes específicos para una página
 \end{itemize}
 	\item \textbf{Objetos inyectados o propiedades}
@@ -378,7 +378,7 @@ en un fichero de mensajes
 	En el caso de acceso a propiedades es posible:	
 \begin{itemize}
 	\item Referirse a subpropiedades
-	\item Invocar a un metodo del objeto que no sea un getter (utilizando parentesis a continuacion del
+	\item Invocar a un método del objeto que no sea un getter (utilizando parentesis a continuacion del
 nombre del metodo)
 \end{itemize}
 \end{itemize}

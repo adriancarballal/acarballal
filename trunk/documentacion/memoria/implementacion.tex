@@ -21,7 +21,7 @@ El usuario interactúa con la interfaz de usuario de alguna forma. El controlador
 
 \section{Estructura de paquetes}
 \subsection{Paquete es.udc.acarballal.elmas.model}
-En este paquete se implementa toda la lógica de negocio, separándola de otros aspectos, como es el caso de la vista y el controlador (ver Figura \ref{model}). A su vez implementa tanto los diferentes casos de uso recogidos en las tres fachadas (userservice, videoservice y adminservice) como el tratamento de las diferentes entidades participantes con su correspondiente persistencia.
+En este paquete se implementa toda la lógica de negocio, separándola de otros aspectos, como es el caso de la vista y el controlador (ver Figura \ref{model}). A su vez implementa tanto los diferentes casos de uso recogidos en las tres fachadas (userservice, videoservice y adminservice) como el tratamiento de las diferentes entidades participantes con su correspondiente persistencia.
 
 \begin{figure}[htp]
 \centering
@@ -87,7 +87,7 @@ Los paquetes en los que a su vez se subdivide son:
 
 \begin{itemize}
 \item \textbf{es.udc.acarballal.ffmpeg.encoder:} Contiene las clases que representan los comandos de codificación necesarios para la integración con la aplicación de compresión de video FFMpeg.
-\item \textbf{es.udc.acarballal.ffmpeg.encoder.codecs:} Contiene las clases que representan las capas de compresión para crear un modelo de compresión de video e imagenes necesarios por los diferentes portales.
+\item \textbf{es.udc.acarballal.ffmpeg.encoder.codecs:} Contiene las clases que representan las capas de compresión para crear un modelo de compresión de video e imágenes necesarios por los diferentes portales.
 \item \textbf{es.udc.acarballal.ffmpeg.encoder.configuration:} Contiene las clases necesarias para la recuperación de variables mediante \textit{JNDI} (Interfaz de Nombrado y Directorio Java).
 \item \textbf{es.udc.acarballal.ffmpeg.process:} Contiene las clases que representan los procesos de compresión.
 \item \textbf{es.udc.acarballal.ffmpeg.process.exceptions:} Contiene las clases que representan las excepciones que se pueden producir durante un proceso de compresión de video.
@@ -100,7 +100,7 @@ Los paquetes en los que a su vez se subdivide son:
 \subsection{Almacenamiento persistente}
 \label{persist}
 Para el almacenamiento persistente de datos se utilizará una base de datos relacional. El manejo de los datos se realizará mediante un mapeador objeto-relacional, Hibernate 3, de modo que se simplifica la programación de la capa de persistencia.
-De este modo, mediante la utilización de un ORM, no se oculta el tipo de base de datos pero no se especifica la bases de datos concreta que se utiliza.
+De este modo, mediante la utilización de un ORM, no se oculta el tipo de base de datos pero no se especifica la base de datos concreta que se utiliza.
 Esta elección nos aportará las siguientes ventajas:
 \begin{itemize}
 	\item Transparencia
@@ -133,7 +133,7 @@ En este apartado se definen los conceptos del dominio utilizados. Para cada uno 
 		\subitem \textit{COMPETITOR}: el usuario es un participante del concurso y como tal puede añadir gestionar videos propios asociados a su cuenta.
 		\subitem \textit{ADMIN}: el usuario es un administrador del sistema, tiene permisos para realizar operaciones de administración como resolución de quejas o obtención de informes de los videos más votados.
 		
-Para esta entidad se implementa un DAO específico que da soporte para las operaciones CRUD básicas, además se implementa una operación de busqueda mediante HQL (Hibernate Query Language). 
+Para esta entidad se implementa un DAO específico que da soporte para las operaciones CRUD básicas, además se implementa una operación de búsqueda mediante HQL (Hibernate Query Language). 
 \begin{figure}[htp]
 \centering
 \includegraphics*[width=12cm]{imagenes/PersistenciaUserProfile.jpg}
@@ -172,7 +172,7 @@ Para que todo esto se cumpla se utiliza el metodo \textit{findRandomVotableVideo
 
 La votación (\textit{vote}) se realiza de manera cuantitativa, donde el usuario deberá elegir la calidad del video de entre las siguientes: muy malo, malo, normal, bueno y muy bueno, representado mediante números comprendidos entre el 1 y el 5 respectivamente. En cuanto a la persistencia de este dato en concreto dejamos que el propio mapeador lo almacene como un entero, el cual nos servirá posteriormente para realizar los rankings de los videos más votados.
 
-El DAO de esta entidad implementa dos metodos de busqueda, correspondientes con la busqueda de los videos más votados entre dos fecha proporcionadas y la busqueda de los videos más votados de los que devolverá un numero concreto de videos (\textit{findMostVoted}, ambos análogos). Del mismo modo también se implementa otros dos metodos, uno sirve para conocer si un usuario ha votado por un determinado video (\textit{alreadyVoted}) y el otro para conocer el numero de votaciones restantes que puede realizar un usuario para la semana actual (\textit{votesRemaining}).	
+El DAO de esta entidad implementa dos métodos de búsqueda, correspondientes con la búsqueda de los videos más votados entre dos fecha proporcionadas y la búsqueda de los videos más votados de los que devolverá un numero concreto de videos (\textit{findMostVoted}, ambos análogos). Del mismo modo también se implementa otros dos métodos, uno sirve para conocer si un usuario ha votado por un determinado video (\textit{alreadyVoted}) y el otro para conocer el numero de votaciones restantes que puede realizar un usuario para la semana actual (\textit{votesRemaining}).	
 \item \textbf{UserComment}
 	
 	La entidad UserComment almacenará los comentarios realizados hacia un determinado usuario, el cual, deberá ser un participante del concurso. 
@@ -187,7 +187,7 @@ Para cada comentario se recoge una relación al usuario que comenta (\textit{comm
 Su DAO correspondiente implementa, además de las operaciones básicas CRUD, dos métodos de búsqueda de comentarios atendiendo a los usuarios relacionados con los mismos. De este modo, esos dos métodos son \textit{findCommentByCommentator} que realiza la búsqueda de todos los comentarios que ha realizado un determinado usuario, y \textit{findCommentByCommented} que busca todos los comentarios de los que un usuario es objeto.
 	\item \textbf{VideoComment} 
 	
-	La entidad VideoComment almacerá los comentarios realizados hacia un determinado video, el cual, deberá existir en el sistema en todo momento. Para cada comentario se recoge una relación al usuario que comenta el video (\textit{commentator}), una referencia al video que se comenta (\textit{video}), el comentario propiamente dicho (\textit{comment}) y la fecha correspondiente a su publicación (\textit{date}).
+	La entidad VideoComment almacenará los comentarios realizados hacia un determinado video, el cual, deberá existir en el sistema en todo momento. Para cada comentario se recoge una relación al usuario que comenta el video (\textit{commentator}), una referencia al video que se comenta (\textit{video}), el comentario propiamente dicho (\textit{comment}) y la fecha correspondiente a su publicación (\textit{date}).
 \begin{figure}[htp]
 \centering
 \includegraphics*[width=15cm]{imagenes/PersistenciaVideoComment.jpg}
@@ -209,7 +209,7 @@ El DAO correspondiente a esta entidad implementa a mayores dos métodos de búsque
 El DAO correspondiente a esta entidad, además de las operaciones que comparte con el resto de DAOs comentados hasta el momento implementa tres nuevas operaciones. El método \textit{countUserCommentComplaints()} permite a los administradores obtener el número total de quejas sobre comentarios de usuarios que no han sido atendidas, \textit{findUserCommentComplaints} permite obtener un subconjunto de quejas, y por último, \textit{hasComplaint} permite conocer si un usuario ya ha rea\-li\-za\-do una queja al administrador sobre un determinado comentario de usuario.
 	\item \textbf{VideoComplaint} 
 	
-	Esta entidad almacenará las quejas realizadas hacia un video por parte de cualquier usuario que no sea el propio poseedor del video. A partir de esta quejas los administradores tendrán constancia para hacer lo que estimen oportuno. La información que compone dicha queja es un referencia al usuario que ha realizado la queja (\textit{complainer}), el video que es objeto de la queja (\textit{reference}) y la fecha de notificación de la misma (\textit{date}).
+	Esta entidad almacenará las quejas realizadas hacia un video por parte de cualquier usuario que no sea el propio poseedor del video. A partir de estas quejas los administradores tendrán constancia para hacer lo que estimen oportuno. La información que compone dicha queja es un referencia al usuario que ha realizado la queja (\textit{complainer}), el video que es objeto de la queja (\textit{reference}) y la fecha de notificación de la misma (\textit{date}).
 \begin{figure}[htp]
 \centering
 \includegraphics*[width=15cm]{imagenes/PersistenciaVideoComplaint.jpg}
@@ -221,7 +221,7 @@ Su DAO correspondiente implementa las operaciones básicas CRUD junto con tres nu
 \newpage
 	\item \textbf{VideoCommentComplaint} 
 	
-	Esta entidad almacerá las quejas realizadas hacia un comentario de un video que ha realizado cualquier otro usuario del sistema. La información que compone dicha queja es una referencia al usuario que ha la realizado (\textit{complainer}), una referencia al comentario de video sobre la que se realiza la quejas (\textit{reference}) y la fecha de la notificación de la queja (\textit{date}).
+	Esta entidad almacenará las quejas realizadas hacia un comentario de un video que ha realizado cualquier otro usuario del sistema. La información que compone dicha queja es una referencia al usuario que ha la realizado (\textit{complainer}), una referencia al comentario de video sobre la que se realiza la quejas (\textit{reference}) y la fecha de la notificación de la queja (\textit{date}).
 \begin{figure}[htp]
 \centering
 \includegraphics*[width=15cm]{imagenes/PersistenciaVideoCommentComplaint.jpg}
@@ -240,12 +240,12 @@ Su DAO correspondiente implementa las operaciones básicas CRUD junto con tres nu
 \label{MessagePersistance}
 \end{figure}
 
-El DAO de esta entidad implementa dos métodos a mayores de las basicas ya citadas. Estos métodos son \textit{getInBox} que permitirá obtener un conjunto de mensajes que se encuentren relacionados con un usuario (el usuario sea el destinatario de esos mensajes), y \textit{inBoxTotal} que proporciona el número total de mensajes de los que un usuario es destinatario.
+El DAO de esta entidad implementa dos métodos a mayores de las básicas ya citadas. Estos métodos son \textit{getInBox} que permitirá obtener un conjunto de mensajes que se encuentren relacionados con un usuario (el usuario sea el destinatario de esos mensajes), y \textit{inBoxTotal} que proporciona el número total de mensajes de los que un usuario es destinatario.
 
-	En cuanto a la implementación real de sistema, los mensajes que pueden aparecer son únicamente de administracion, mensajes enviados de un usuario administrador a cualquier otro usuario. Como existe la posibilidad de ampliar la funcionalidad del sistema para que los usuarios se puedan mandar mensajes privados en el futuro se optó por utilizar un sistema generalizado en lugar de uno específico sólo para mensajes administrativos.
+	En cuanto a la implementación real de sistema, los mensajes que pueden aparecer son únicamente de administración, mensajes enviados de un usuario administrador a cualquier otro usuario. Como existe la posibilidad de ampliar la funcionalidad del sistema para que los usuarios se puedan mandar mensajes privados en el futuro se optó por utilizar un sistema generalizado en lugar de uno específico sólo para mensajes administrativos.
 \item \textbf{Favourite}
 
-	La entidad Favourite almacerá la relación de los videos favoritos de un usuarios dentro de los existentes dentro del sistema. Para cada favorito se almacena una referencia al usuario que lo ha elegido como tal y otra referencia hacia el video en cuestión.
+	La entidad Favourite almacenará la relación de los videos favoritos de un usuarios dentro de los existentes dentro del sistema. Para cada favorito se almacena una referencia al usuario que lo ha elegido como tal y otra referencia hacia el video en cuestión.
 \begin{figure}[htp]
 \centering
 \includegraphics*[width=13cm]{imagenes/PersistenciaFavourite.jpg}
@@ -268,7 +268,7 @@ El origen de Spring framework se remonta al framework llamado Interface 21 el cu
 	\item Se comunica fácilmente con otros frameworks como lo son: Struts, \emph{Hibernate}, iBatis, \emph{Tapestry}, entre otros.
 \end{itemize}
 
-Con el objetivo de implementar las diferentes fachadas del sistema se ha optado por una implementación basada en la utilización de patrones muy usados para este fin, como son el caso del patrón \textit{Facade} y del patrón \textit{Business Delegate}. Mediante la combinación de estos dos patrones podemos crear una implementación sencilla en la que se oculte la implementación concreta de los métodos de negocio, teniendo en cuenta que el propio Spring implementa gran parte del codigo necesario gracias a su injección de dependencias.
+Con el objetivo de implementar las diferentes fachadas del sistema se ha optado por una implementación basada en la utilización de patrones muy usados para este fin, como son el caso del patrón \textit{Facade} y del patrón \textit{Business Delegate}. Mediante la combinación de estos dos patrones podemos crear una implementación sencilla en la que se oculte la implementación concreta de los métodos de negocio, teniendo en cuenta que el propio Spring implementa gran parte del código necesario gracias a su inyección de dependencias.
 Una vez dicho esto, veamos las diferentes fachadas en las que se divide el sistema. Se han creado tres fachadas concretas en las que se recogen todos los casos de uso comentados en el capítulo denominado \textit{\titleref{chapterAnalisis}} (página \pageref{chapterAnalisis}). 
 
 \subsubsection{Fachada de usuarios (\textit{UserService})}
@@ -295,7 +295,7 @@ Además, dentro de la fachada se definen los siguientes \textit{custom transfer o
 \end{figure} 
 
 \subsubsection{Fachada de videos (\textit{VideoService})}
-En la fachada de videos se definen todos aquellos casos de uso referentes a la gestión de los videos, de las votaciones y los favoritos de cada usuario, asi como de las quejas que un usuario puede hacer en referencia tanto a videos como a comentarios de videos.
+En la fachada de videos se definen todos aquellos casos de uso referentes a la gestión de los videos, de las votaciones y los favoritos de cada usuario, así como de las quejas que un usuario puede hacer en referencia tanto a videos como a comentarios de videos.
 Dentro de la fachada se definen los siguientes \textit{custom transfer objects}:
 \begin{figure}[htp]
 \centering
@@ -325,7 +325,7 @@ Dentro de la fachada se definen los siguientes \textit{custom transfer objects}:
 Como se mostró en la figura \ref{model} en la página \pageref{model}, la fachada de servicio posee dos paquetes denominados \textit{Thread} y \textit{Util}, que contienen las clases necesarias para la integración del sistema de codificación proporcionado por el servicio externo y los casos de usos que las manejan. Todo este tema se explicará con mas detalle en la sección \textit{\titleref{ExternalServices}} en la página \pageref{ExternalServices}.
 
 \subsubsection{Ejemplo de configuración}
-La configuración del sistema se basa en la declaración de \textit{beans}\footnote{Bean: componente software que tiene la particularidad de ser reutilizable}. Las posibles dependencias existentes entre los distintos beans se mantiene mediante la injección de dependencias basada en ``setters''. Veamos un ejemplo de configuración para la integración de Spring con Hibernate 3. En el fichero de configuración de Spring deberemos especificar varias cosas:
+La configuración del sistema se basa en la declaración de \textit{beans}\footnote{Bean: componente software que tiene la particularidad de ser reutilizable}. Las posibles dependencias existentes entre los distintos beans se mantiene mediante la inyección de dependencias basada en ``setters''. Veamos un ejemplo de configuración para la integración de Spring con Hibernate 3. En el fichero de configuración de Spring deberemos especificar varias cosas:
 \begin{itemize}
 	\item \textbf{DataSource:} Se necesita configurar una referencia a un DataSource. Spring proporciona, entre otras, las varias opciones para configurar un bean de tipo DataSource, definidos directamente sobre un driver JDBC o localizados via JNDI (este último es nuestro caso). Dentro del fichero de configuración se especificaría de la siguiente manera:
 {\tt \scriptsize
@@ -347,7 +347,7 @@ La configuración del sistema se basa en la declaración de \textit{beans}\footnot
 \end{verbatim}
 }
  Debemos tener en cuenta que el fichero \textit{hibernate.cfg.xml} es el fichero de configuración de \textit{Hibernate} y especifica los beans pertenecientes a los diferentes \textit{Transfer Object} pertenecientes a nuestras entidades persistentes.
- \item \textbf{Transacciones:} Spring proporciona una serie de gestores de transacciones que delegan la responsabilidad de la gestión de las transacciones a implementaciones específicas de la plataforma utilizada, configurandose de la siguiente manera:
+ \item \textbf{Transacciones:} Spring proporciona una serie de gestores de transacciones que delegan la responsabilidad de la gestión de las transacciones a implementaciones específicas de la plataforma utilizada, configurándose de la siguiente manera:
 {\tt \scriptsize
 \begin{verbatim}
 	<bean id="'transactionManager"
@@ -363,7 +363,7 @@ La configuración del sistema se basa en la declaración de \textit{beans}\footnot
     p:sessionFactory-ref="sessionFactory" />
 \end{verbatim}
 }	
-	\item \textbf{Fachadas:} Del mismo modo que ocurre con los DAOs, para cada fachada es necesario declarar su bean correspondente.
+	\item \textbf{Fachadas:} Del mismo modo que ocurre con los DAOs, para cada fachada es necesario declarar su bean correspondiente.
 	{\tt \scriptsize
 \begin{verbatim}
 	<bean id="userService"
@@ -378,7 +378,7 @@ La configuración del sistema se basa en la declaración de \textit{beans}\footnot
 \subsection{Integración con servicios externos}
 \label{ExternalServices}
 
-A la hora de realizar la compresión de los videos se ha optado por la utilización de un programa open source como FFMpeg, muy conocido en el campo, que es utilizado como base de otros codificadores multiplataforma, como es el caso de Mencoder. Al no existir en la actualidad ningun API multiproceso para la codificación de videos basado en FFMpeg, se ha creado un sistema completo que interactue con este programa, el cual debe encontrarse instalado en la maquina servidor.
+A la hora de realizar la compresión de los videos se ha optado por la utilización de un programa open source como FFMpeg, muy conocido en el campo, que es utilizado como base de otros codificadores multiplataforma, como es el caso de Mencoder. Al no existir en la actualidad ninguna API multiproceso para la codificación de videos basado en FFMpeg, se ha creado un sistema completo que interactúe con este programa, el cual debe encontrarse instalado en la maquina servidor.
 El sistema se compone de 3 partes.
 \begin{itemize}
 	\item Codificadores o capas de codificación.
@@ -389,7 +389,7 @@ El sistema se compone de 3 partes.
 Veamos cada una de estas partes por separado:
 \subsubsection{Codificadores o capas de codificación.}
 
-Para realizar una compresión se necesitan especificar detalles en cuanto a calidad y tamaño de video, audio e imagenes (en el caso de que queramos obtener un \textit{snapshot}\footnote{Captura en formato de imagen a partir de un video multimedia} de un determinado video).
+Para realizar una compresión se necesitan especificar detalles en cuanto a calidad y tamaño de video, audio e imágenes (en el caso de que queramos obtener un \textit{snapshot}\footnote{Captura en formato de imagen a partir de un video multimedia} de un determinado video).
 En el paquete \textit{codecs} se representan cada una de estas capas o \textit{layers}. En concreto tendremos una capa que se encargará especificar el tipo de compresión que se realizará sobre el video (\textit{VideoLayer}), una capa que hará lo mismo con el audio (\textit{AudioLayer}) y otra para el caso de la capturas de pantalla (\textit{SnapShotLayer}).
 \begin{figure}[htp]
 \centering
@@ -397,20 +397,20 @@ En el paquete \textit{codecs} se representan cada una de estas capas o \textit{l
 \caption{Capa de codificación}
 \label{codecs}
 \end{figure} 
-En cuanto a la implementación concreta se ha optado por la utilización del patrón \textit{Decodador}. Para la compresión de un determinado video se crea una capa de compresión basica denominada \textit{Codec}, a la cual se le van añadiendo capas en función del resultado que esperamos obtener. La elección de este patrón se basó en:
+En cuanto a la implementación concreta se ha optado por la utilización del patrón \textit{Decodador}. Para la compresión de un determinado video se crea una capa de compresión básica denominada \textit{Codec}, a la cual se le van añadiendo capas en función del resultado que esperamos obtener. La elección de este patrón se basó en:
 \begin{enumerate}
 	\item Más flexibilidad que la herencia estática.
 	\item Evita clases cargadas de funciones en la parte de arriba de la jerarquía.
 	\item Cambiar la piel de un objeto en vez de sus tripas.
 \end{enumerate}
-Dentro de la jeraquía, la clase abstracta \textit{AbstractCodec}, implementa el método concreto necesario para la obtención de los comandos para realizar la codificación. Este método llamado \textit{generateCommand()} implementa a su vez el patrón \textit{Plantilla}, dejando que sean el codificador base y sus capas las que determinen exactamente el comando final, mediante los métodos \textit{generateVideoOptions}, \textit{generateAudioOptions} y \textit{generateImageOptions}.
+Dentro de la jerarquía, la clase abstracta \textit{AbstractCodec}, implementa el método concreto necesario para la obtención de los comandos para realizar la codificación. Este método llamado \textit{generateCommand()} implementa a su vez el patrón \textit{Plantilla}, dejando que sean el codificador base y sus capas las que determinen exactamente el comando final, mediante los métodos \textit{generateVideoOptions}, \textit{generateAudioOptions} y \textit{generateImageOptions}.
 La aplicación de este patrón se debe a que de esta manera somos capaces de controlar las extensiones de las subclases, para implementar las partes del algoritmo que son variables y ocultar de esta manera las partes del algoritmo que permanecen inalteradas.
 Del mismo modo, dicha clase abstracta obtiene mediante JNDI una referencia al path en el cual se encuentra nuestra aplicación en el servidor, con el fin de conformar el comando.
 
 \subsubsection{Factoria de codificadores}
-En nuestro sistemas buscamos realmente poder realizar 3 tipos de compresiones concretas:
+En nuestro sistema buscamos realmente poder realizar 3 tipos de compresiones concretas:
 \begin{itemize}
-	\item Compresión de un video a formato FLV\footnote{formato de archivo propietario usado para transmitir video sobre internet usando \textit{Adobe Flash Player}}.
+	\item Compresión de un video a formato FLV\footnote{formato de archivo propietario usado para transmitir video sobre Internet usando \textit{Adobe Flash Player}}.
 	\item Compresión de un video a formato 3gp\footnote{formato de archivos usado por teléfonos móviles para almacenar información multimedia (audio y video)}.
 	\item Obtención de una captura de imagen en formato JPEG\footnote{formato de archivo para la compresión de imágenes fotográficas} a partir de un video.
 \end{itemize}
@@ -425,11 +425,11 @@ concretos, creando para cada método un codificador que satisfaga la creación de 
 Para la creación de los diferentes codificadores concretos se necesitan obtener determinados valores en tiempo de ejecución. Estos valores serán variables de la compresión como tiempo máximo del video resultante, calidad del audio y del video, tamaño de salida del video, bit rate\footnote{Tasa de bits (en inglés bit rate) define el número de bits que se transmiten por unidad de tiempo} del audio y del video, etc. Todas estas variables se obtienen mediante JNDI, facilitando de este modo que el administrador sea capaz de cambiarlas sin necesidad se detener el sistema.
 
 \subsubsection{Sistema multiproceso}
-El objetivo final de todo lo explicado hasta el momento es poder realizar la compresión de videos de forma paralela mediante una aplicación exterior. Para ello se ha creado un sistema completo que se encargue de realizarlo, asi como de mantener la integridad de los datos y videos de nuestro sistema y de nuestro contenedor multimedia.
+El objetivo final de todo lo explicado hasta el momento es poder realizar la compresión de videos de forma paralela mediante una aplicación exterior. Para ello se ha creado un sistema completo que se encargue de realizarlo, así como de mantener la integridad de los datos y videos de nuestro sistema y de nuestro contenedor multimedia.
 Se han creado procesos concretos para cada video, que se encargan no solo de realizar la codificación, sino de eliminar los ficheros de log de dichas compresiones, de utilizar una captura de imagen por defecto si no se puede realizar correctamente la extracción de una perteneciente al video, de crear una referencia al video dentro del sistema, de mover los videos resultantes al contenedor multimedia, etc.
 
 Antes de ver esos procesos, veamos como se realizan un proceso de compresión de manera individual: 
-Cada proceso del sistema seguirá la interfaz \textit{IProcess}, la cual, a su vez, implementa el patron \textit{Comando}. Se ha elegido esta implementación basandonos en tres aspectos:
+Cada proceso del sistema seguirá la interfaz \textit{IProcess}, la cual, a su vez, implementa el patron \textit{Comando}. Se ha elegido esta implementación basándonos en tres aspectos:
 \begin{enumerate}
 	\item Especificar, encolar, y ejecutar peticiones en diferentes momentos
 	\item Soporte de Deshacer (\textit{Undo})
@@ -454,10 +454,10 @@ La salida que recoge la clase StreamGobbler se va guardando en ficheros en forma
 El interfaz IProcess no lo utilizan únicamente los procesos de compresión, sino que todos los procesos que toman partido durante un proceso inserción de un video dentro del sistema y del contenedor implementan dicho interfaz.
 Cuando un usuario desea añadir un video se genera una sucesión de procesos relacionados entre si (\textit{UploadTask}), todos del tipo IProcess. Todos estos procesos seguirán el siguiente orden de ejecución:
 \begin{enumerate}
-	\item Codificación del video en formato FLV. La clase FlvEncoder (ver figura \ref{encodeFactory} pág. \pageref{encodeFactory}) se encargá de realizar dicha codificación.
-	\item Codificación del video en formato 3gp. La clase RPEncoder (ver figura \ref{encodeFactory} pág. \pageref{encodeFactory}) se encargá de realizar dicha codificación.
+	\item Codificación del video en formato FLV. La clase FlvEncoder (ver figura \ref{encodeFactory} pág. \pageref{encodeFactory}) se encargará de realizar dicha codificación.
+	\item Codificación del video en formato 3gp. La clase RPEncoder (ver figura \ref{encodeFactory} pág. \pageref{encodeFactory}) se encargará de realizar dicha codificación.
 	\item Mover la captura de pantalla por defecto a la carpeta de trabajo actual, realizado por la clase \textit{FileCopy}.
-	\item Obtención de una captura del imagen del video en formato JPEG. La clase SnapShotEncoder (ver figura \ref{encodeFactory} pág. \pageref{encodeFactory}) se encargá de realizar dicha codificación.
+	\item Obtención de una captura del imagen del video en formato JPEG. La clase SnapShotEncoder (ver figura \ref{encodeFactory} pág. \pageref{encodeFactory}) se encargará de realizar dicha codificación.
 	\item Eliminar los ficheros de log producidos durante los procesos de codificación. Realizado por la clase \textit{LogDelete}.
 	\item Transferencia de los archivos creados (videos e imagen) junto con el archivo original a su correspondiente emplazamiento dentro del contenedor multimedia, realizado por la clase \textit{MoveTempFolder}.
 	\item Inserción de una referencia del video dentro del sistema, realizado por la clase \textit{AcceptVideo}.
@@ -466,7 +466,7 @@ Cuando un usuario desea añadir un video se genera una sucesión de procesos relac
 
 Cada una de estas tareas o \textit{UploadTask} generadas por cada usuario son administradas mediante una centralita de tareas denominada \textit{TaskCentral}. Será esta centralita la cual gestione la ejecución de cada una de las tareas (y subprocesos que la componen). Dentro del diseño de TaskCentral se ha utilizado el patrón Singleton por dos razones concretas:
 \begin{enumerate}
-  \item Para garantizar que existe unicamente una instancia en el servidor.
+  \item Para garantizar que existe únicamente una instancia en el servidor.
 	\item Para tener acceso controlado a la única instancia.
 \end{enumerate}
 Internamente TaskCentral se compone de un numero dinámico de hilos de flujo o \textit{TaskList} (vease figura \ref{procesos} en página \pageref{procesos}), que encapsulan un conjunto de procesos de ejecución en orden de entrada, es decir, sin prioridad. Este conjunto de hilos sigue el principio de procesamiento paralelo que vamos buscando, ya que cada hilo de flujo es controlado únicamente por TaskCentral, la cual va insertando procesos (UploadTask) para que sea el propio hilo el que los ejecute en orden de llegada. Se utiliza una variable obtenida mediante JNDI para determinar el número de procesos paralelos máximos que puede realizar la máquina, lo cual nos indicará el número de hilos de procesamiento que podemos tener. Se recomienda que se utilice la siguiente regla a la hora de especificar el número de procesamiento paralelos en caso de que no se tengan conocimientos específicos del sistema.
@@ -487,7 +487,7 @@ n & \textrm{número de procesadores del servidor}
 La razón se basa principalmente en mantener el servidor con el menor estrés posible. Utilizando n-1 procesadores de la máquina nos aseguramos que al menos un procesador en todo momento pueda atender a las peticiones que reciba (en este caso nos referimos a peticiones de ambos portales), de modo que cuando sea necesario tener varios hilos de procesamiento en ejecución al mismo tiempo se pueda seguir dando soporte a la aplicación web.
 
 \subsection{Almacenamiento multimedia}
-En la sección \titleref{persist} en la página \ref{persist} se especifica como se almacena la información referente a los usuarios, videos y demás referentes a nuestra aplicación, pero no toda la información se guarda en base de datos, como es el caso de los videos. Una opción era la de almacenamiento persistente dentro de la base de datos al igual que el resto de los datos, pero eso conllevaría una gran carga a la hora de suministrar los videos por lo que se optó por un concepto muy extendido hoy en dia, la utilización de contenedores multimedia.
+En la sección \titleref{persist} en la página \ref{persist} se especifica como se almacena la información referente a los usuarios, videos y demás referentes a nuestra aplicación, pero no toda la información se guarda en base de datos, como es el caso de los videos. Una opción era la de almacenamiento persistente dentro de la base de datos al igual que el resto de los datos, pero eso conllevaría una gran carga a la hora de suministrar los videos por lo que se optó por un concepto muy extendido hoy en día, la utilización de contenedores multimedia.
 
 Estos contenedores no serán más que carpetas de acceso público en modo de \textit{sólo lectura}, los cuales se configurarán mediante la utilización de un servidor web HTTP de código abierto (\textit{Apache}). Gracias a esta implementación la única restricción que sufrirá la reproducción de los videos será debida al ancho de banda que se le proporcione a nuestro servidor o servidores web, que serán los encargados de suministrar los videos para su posterior reproducción.
 
@@ -686,7 +686,7 @@ Como se comentó con anterioridad la aplicación sigue el patrón arquitectónico \t
 En nuestro caso, las clases inferiores componen el modelo (explicado en la sección anterior), mientras que esta capa representa a la vista y al controlador.
 Se eligió el framework web \textit{Tapestry 5}, en su versión 5.0.18 Stable (Junio 2008). Este framework es totalmente orientado a objetos, donde cada pantalla de la aplicación se compondrá por un lado del aspecto visual, en HTML plano (ficheros \textit{tml}), y por otro por los componentes que implementan las acciones asociadas a dicha pantalla o controladores.
 
-En Tapestry 5 una aplicación web se compone de páginas. El controlador de cada página está compuesto por diferentes componentes, los cuales a su vez pueden estár compuestos por otros subcomponentes (véase figura \ref{componentes}).
+En Tapestry 5 una aplicación web se compone de páginas. El controlador de cada página está compuesto por diferentes componentes, los cuales a su vez pueden estar compuestos por otros subcomponentes (véase figura \ref{componentes}).
 \begin{figure}[htp]
 \centering
 \includegraphics[width=9cm]{imagenes/componentes.jpg}
@@ -707,8 +707,8 @@ El controlador será el encargado de transmitir los eventos que se producen en la
 En el caso de Tapestry, es el propio framework el que se encarga de gestionar las peticiones, estando esta implementación oculta para el desarrollador. En cambio, si que se tendrá que definir lo siguiente:
 \begin{enumerate}
 	\item Los componentes comunes para todas las páginas. En nuestro caso, todas las paginas de la aplicación derivan de un modelo o plantilla, dependiendo de si se tratan de páginas optimizadas para dispositivos móviles o para páginas visualizables con cualquier navegador convencional.
-	\item Los controladores para cada una de las distintas páginas que componen la aplicación. Cada pagina poseerá un controlador propio que interacturá directamente con el modelo y será capaz de posibilitar la navegación hacia otras páginas de la aplicación.
-	\item Los ASO's o \textit{Application State Objects}, objetos que estén accesibles a todas las páginas. Estos objetos contendrá información que será necesaria dentro de la sesión de un usuario. En nuestra aplicación existen dos, uno guarda la información referente al usuario registrado que maneja la sesión, y en la otra se guarda información referente a la navegación entre páginas.
+	\item Los controladores para cada una de las distintas páginas que componen la aplicación. Cada pagina poseerá un controlador propio que interactuará directamente con el modelo y será capaz de posibilitar la navegación hacia otras páginas de la aplicación.
+	\item Los ASO's o \textit{Application State Objects}, objetos que estén accesibles a todas las páginas. Estos objetos contendran información que será necesaria dentro de la sesión de un usuario. En nuestra aplicación existen dos, uno guarda la información referente al usuario registrado que maneja la sesión, y en la otra se guarda información referente a la navegación entre páginas.
 	\item Servicios de gestión de peticiones y mantenimiento de la sesión. Tapestry posee su propio gestor de peticiones que implementa el patrón \textit{Cadena de Responsabilidad} con comandos para analizar peticiones y procesarlas de forma adecuada.
 Se nos permite establecer filtros dentro de la cadena de modo que podamos establecer un control sobre el acceso a las diferentes páginas.
 \end{enumerate}
@@ -721,7 +721,7 @@ Se nos permite establecer filtros dentro de la cadena de modo que podamos establ
 El funcionamiento normal del sistema se basa en que sean las propias páginas las que establezcan el flujo de redireccionamiento. En nuestro caso, mediante la creación de un filtro de control, somos capaces de establecer controles de acceso a determinadas páginas en función de los privilegios que un usuario tiene. El sistema seguiría el siguiente flujo:
 \begin{enumerate}
 	\item Una página se dispone a realizar el cambio a otra página por medio de una petición al servidor.
-	\item Dentro del servidor el filtro de control determina si el usuario asociado a la sesión posee privilegios suficientes para que la petición se lleve a cabo con exito.
+	\item Dentro del servidor el filtro de control determina si el usuario asociado a la sesión posee privilegios suficientes para que la petición se lleve a cabo con éxito.
 	\item Si el usuario posee privilegios suficientes se le redirige a la página que se solicitaba.
 	\item Si el usuario no posee los privilegios necesarios, se le redirige a otra página.
 \end{enumerate}
@@ -729,7 +729,7 @@ La implementación de lo comentado hasta este punto se compone de:
 \begin{itemize}
 	\item \textbf{AppModule:} Inyecta los dos servicios como argumentos del método, para poder añadirlos a la cadena de comandos que utilizará Tapestry. Estos servicios son para mantener la información de sesión y el filtro de redireccionamiento comentado anteriormente.
 	
-	\item \textbf{SessionDispatcher} Servicio \textit{Dispacher} que permite mantener la información de usuario dentro de la sesion. Está directamente relacionado con el ASO \textit{UserSession}.
+	\item \textbf{SessionDispatcher} Servicio \textit{Dispacher} que permite mantener la información de usuario dentro de la sesión. Está directamente relacionado con el ASO \textit{UserSession}.
 
 	\item \textbf{AuthenticationDispatcher} Servicio \textit{Dispacher} que permite establecer un filtro para controlar si el usuario de la sesión tiene permisos suficientes para acceder a determinados recursos.
 	
@@ -745,7 +745,7 @@ La implementación de lo comentado hasta este punto se compone de:
 \end{itemize}
 \end{itemize}
 
-Para que Tapestry utilice el filtro debemos de especificarselo en su fichero de configuración de la siguiente manera:
+Para que Tapestry utilice el filtro debemos de especificárselo en su fichero de configuración de la siguiente manera:
 {\tt \scriptsize
 \begin{verbatim}
 <filter>
@@ -759,8 +759,8 @@ Cada página tiene asociada una plantilla y una clase Java. La clase Java será el
 
 Junto con de los diferentes controladores que existen para cada página, en realidad se necesita el diseño concreto de la misma o plantilla (Tapestry las llama \textit{markups}). Gracias a Tapestry tanto controlador como diseño de página están totalmente desacoplados, lo cual conlleva una ventaja a la hora del desarrollo, permitiendo que un diseñador y un programador trabajen de forma paralela sin que el diseñador tenga conocimiento específico sobre el código del controlador asociado.
 
-Una plantilla es un documento XML que permite generar un markup. En el caso de una aplicacion Web, el markup es normalmente
-HTML o XHTML, pero tambien podria ser, por ejemplo, XML. Tiene extensión .tml (\textit{Tapestry Markup Language}). Tanto el controlador como la plantilla deben tener el mismo nombre.
+Una plantilla es un documento XML que permite generar un markup. En el caso de una aplicación Web, el markup es normalmente
+HTML o XHTML, pero también podría ser, por ejemplo, XML. Tiene extensión .tml (\textit{Tapestry Markup Language}). Tanto el controlador como la plantilla deben tener el mismo nombre.
 
 Todas las páginas, tanto las pertenecientes al portal web como las del portal optimizado para móviles siguen un diseño específico a partir de una plantilla general de diseño o \textit{layout}. Este layout define la estructura y la disposición de los elementos que componen nuestro diseño. 
 
@@ -793,7 +793,7 @@ Este es el layout correspondiente al otro portal de la aplicación:
 \end{figure} 
 \begin{itemize}
 	\item \textbf{Título}
-	\item \textbf{Barra de acceso:} Esta barra posee dos estados, no hay ningun usuario registrado en la sesión y proporciona un link a la página de acceso, y el otro es cuando existe un usuario y nos permite cerrar la sesión actual.
+	\item \textbf{Barra de acceso:} Esta barra posee dos estados, no hay ningún usuario registrado en la sesión y proporciona un link a la página de acceso, y el otro es cuando existe un usuario y nos permite cerrar la sesión actual.
 	\item \textbf{Contenido:} Es la parte cambiante de la plantilla. En muchos casos sólo se tiene que realizar un refresco sobre determinados datos contenidos en esta parte, por lo que el resto de la estructura permanece inalterable. Esto se debe a que Tapestry permite la utilización de elementos basados en Ajax de manera nativa.
 \end{itemize}
 
@@ -807,7 +807,7 @@ Dentro de nuestra aplicación la estructura de la implementación de la vista corr
 \caption{Estructura Capa Vista}
 \label{estructuraVista}
 \end{figure} 
-Como se explicó anteriormente por cada página existirá un controlador y una plantilla. Ambas tendrán el mismo nombre aunque se encuentren en carpetas diferentes. Como se observa en la figura, una página de ejemplo denominada \textit{ShowVideos} tendrá asociado un controlador que se encontrará en la carpeta \textit{java} (ShowVideos.java) y un markup en la carpeta \textit{resources} (ShowVideos.tml). En concreto, ambos archivos tienen asociados otra clase de archivos del tipo \textit{properties}. Estos archivos contienen los mensajes internacionalizados visibles en dicha página, encontrandose en la misma localización que el markup de la página. Debemos tener en cuenta, que pueden existir mensajes internacionalizados que sean comunes a todas las páginas de la aplicación, y estos se encontrarán a la altura del fichero de configuración de la aplicación, en la ruta \textit{webapp/WEB-INF}.
+Como se explicó anteriormente por cada página existirá un controlador y una plantilla. Ambas tendrán el mismo nombre aunque se encuentren en carpetas diferentes. Como se observa en la figura, una página de ejemplo denominada \textit{ShowVideos} tendrá asociado un controlador que se encontrará en la carpeta \textit{java} (ShowVideos.java) y un markup en la carpeta \textit{resources} (ShowVideos.tml). En concreto, ambos archivos tienen asociados otra clase de archivos del tipo \textit{properties}. Estos archivos contienen los mensajes internacionalizados visibles en dicha página, encontrándose en la misma localización que el markup de la página. Debemos tener en cuenta, que pueden existir mensajes internacionalizados que sean comunes a todas las páginas de la aplicación, y estos se encontrarán a la altura del fichero de configuración de la aplicación, en la ruta \textit{webapp/WEB-INF}.
 
 
 

@@ -2,14 +2,14 @@
 \label{pruebas}
 
 Toda aplicación con un tamaño razonable necesita la realización de pruebas paulatinas a largo de toda su implementación y antes de su implantación. De esta manera, se intentará en todo momento minimizar el número de errores lo más tempranamente posible, para que estos no aparezcan en fases avanzadas del proyecto.
-En contreto, durante la realización de esta aplicación se han utilizado tres tipos de test:
+En concreto, durante la realización de esta aplicación se han utilizado tres tipos de test:
 \begin{itemize}
 	\item Test de unidad
 	\item Test de integración
 	\item Test de estrés
 \end{itemize}
 
-A lo largo de este capítulo se intentarán explicar tanto el contenido de cada uno de ellos, como los resultados que se obtenieron en los mismos.
+A lo largo de este capítulo se intentarán explicar tanto el contenido de cada uno de ellos, como los resultados que se obtuvieron en los mismos.
 \section{Tests de unidad}
 El primer tipo de test que vamos a detallar son los test de unidad. Este tipo de test se utilizan para comprobar y depurar los posibles errores que pudiesen aparecer en la capa modelo. Esta depuración previa permitirá al programador realizar las capas superiores al modelo de una manera mucho más fiable.
 
@@ -57,7 +57,7 @@ Gracias a la integración del plugin con Eclipse, se nos proporciona una interfaz
 
 Este avance otorgará al programador un gran ahorro de tiempo en la generación de los test necesarios para comprobar la correcta integración de los elementos constituyentes del sistema final.
 
-Se ha decidido optar por una visión basada en perfiles. De esta manera se han realizado baterias de pruebas sobre la aplicación agrupadas según los perfiles de usuarios:
+Se ha decidido optar por una visión basada en perfiles. De esta manera se han realizado baterías de pruebas sobre la aplicación agrupadas según los perfiles de usuarios:
 \begin{itemize}
 	\item Portal Web, usuario no registrado
 	\item Portal Web, usuario registrado
@@ -68,8 +68,8 @@ Se ha decidido optar por una visión basada en perfiles. De esta manera se han re
 \end{itemize}
 \subsection{Portal Web}
 Para este caso se han creado 4 baterías de pruebas, una por cada uno de los posibles perfiles que pueden interactuar en el sistema.
-Dichas baterías se han generado de forma incremental según funcionalidad, de modo que todo aquello que es capaz de realizar un un perfil de menor privilegio no se recomprueba en los siguientes. Se ha optado por realizarlo de esta manera ya que gracias a los test de unidad utilizados se comprueba en todo momento la correcta ejecución de los perfiles, y comprobando los más restrictivos será más que suficiente.
-Para esta baterías se han generado un total de 224 comprobaciones de navegación repartidas de la siguiente forma:
+Dichas baterías se han generado de forma incremental según funcionalidad, de modo que todo aquello que es capaz de realizar un perfil de menor privilegio no se recomprueba en los siguientes. Se ha optado por realizarlo de esta manera ya que gracias a los test de unidad utilizados se comprueba en todo momento la correcta ejecución de los perfiles, y comprobando los más restrictivos será más que suficiente.
+Para estas baterías se han generado un total de 224 comprobaciones de navegación repartidas de la siguiente forma:
 \begin{itemize}
 	\item 52 comprobaciones para usuarios no registrados
 	\item 42 comprobaciones para usuarios registrados
@@ -78,14 +78,14 @@ Para esta baterías se han generado un total de 224 comprobaciones de navegación 
 \end{itemize}
 \subsection{Portal optimizado para dispositivos móviles}
 En cambio, en el caso del portal optimizado para móviles se han generado 2 baterias de pruebas, una por cada perfil funcional. Como la funcionalidad es la misma, las pruebas son idénticas, pero se ha seguido la visión adoptada en un principio para su creación.
-Para esta baterías se han generado un total de 48 comprobaciones de navegación repartidas equitativamentes por ambos perfiles.
+Para estas baterías se han generado un total de 48 comprobaciones de navegación repartidas equitativamenten por ambos perfiles.
 \newpage
 \section{Tests de estrés}
 \label{estres}
 
-Se ha creado un escenario de pruebas genérico para ambos portales, en el cual se realizan peticiones http sobre los mismo. Estas peticiones en concreto se harán sobre el portal web serán:
+Se ha creado un escenario de pruebas genérico para ambos portales, en el cual se realizan peticiones http sobre los mismos. Estas peticiones en concreto se harán sobre el portal web serán:
 \begin{itemize}
-	\item Pagina inicial del portal
+	\item Página inicial del portal
 	\item Login del usuario \textit{voter}
 	\item Listado de videos del usuario \textit{voter}
 	\item Búsqueda de videos con clave \textit{e}
@@ -110,7 +110,7 @@ Para la realización de los test de estrés se realizarán una serie de baterías de
 
 \subsection{Test 1.- Usuarios: 10, Período de subida: 30 seg}
 Para el primer test de estrés se considerarán 10 hilos (simulación de 10 usuarios) y un periodo de subida de 30 segundos (3 segundos entre el lanzamiento de cada hilo). De esta simulación obtendremos los resultados necesarios para su interpretación de dos elementos de diagnóstico llamados \textit{Gráfico de Resultados} y \textit{Summary Report}. 
-Para poder interpretar los datos obtenidos realizaremos una breve descripción de los elementos que aparecen en las figuras que será mostradas a lo largo de este capítulo:
+Para poder interpretar los datos obtenidos realizaremos una breve descripción de los elementos que aparecen en las figuras que serán mostradas a lo largo de este capítulo:
 En la parte superior de la imagen aparece la información obtenida mediante el Gráfico de Resultados:
 \begin{itemize}
 	\item \textbf{Datos:} muestra los valores actuales de los datos.
@@ -176,7 +176,7 @@ En este momento se cambia el periodo de subida a 120 segundos manteniendo el núm
 \label{test4}
 \end{figure}
 
-De nuevo, no hemos obtenido errores pero la latencia. En cambio ll rendimiento nos muestra que para una simulación de 120 usuarios junto a un periodo de subida de 120 segundos el servidor es capaz de aceptar una media de 3,2 peticiones por segundo, por que se ve ligeramente rebajada.
+De nuevo, no hemos obtenido errores pero la latencia. En cambio el rendimiento nos muestra que para una simulación de 120 usuarios junto a un periodo de subida de 120 segundos el servidor es capaz de aceptar una media de 3,2 peticiones por segundo, por que se ve ligeramente rebajada.
 
 \subsection{Test 5.- Usuarios: 120, Período de subida: 30 seg}
 Por tanto se ejecuta un hilo cada medio segundo.
@@ -190,7 +190,7 @@ Por tanto se ejecuta un hilo cada medio segundo.
 Observamos que comienzan a aparecer los primeros errores en un tanto por ciento considerable (1,23\%) sobre el total de las peticiones realizadas por el global de las muestras. La latencia se ve aumentada hasta un valor de 1678 ms, lo cual aún no se puede considerar como inaceptable.
 
 \subsection{Test 6.- Usuarios: 100, Período de subida: 10 seg}
-Una vez obtenidos e interpretados estos resultados lanzaremos de nuevo simulando 100 usuarios con un periodo de subida. En la simulación anterior la latencia aumentó considerablemente, acercandose a unos valores cuasi-inaceptables. Intentaremos mediante este test comprobar la capacidad máxima de la aplicación. Para este test no se han tenido en cuenta los resultados acumulados.
+Una vez obtenidos e interpretados estos resultados lanzaremos de nuevo simulando 100 usuarios con un periodo de subida. En la simulación anterior la latencia aumentó considerablemente, acercándose a unos valores cuasi-inaceptables. Intentaremos mediante este test comprobar la capacidad máxima de la aplicación. Para este test no se han tenido en cuenta los resultados acumulados.
 \begin{figure}[htb]
 \centering
 \includegraphics*[width=15cm]{imagenes/100u_10sec.PNG}

@@ -12,7 +12,7 @@ Veamos las diferentes páginas que componen nuestro sistema.
 \caption{Página principal}
 \label{inicio}
 \end{figure}
-Esta pagina, al igual que el resto, sigue la estructura básica con la barra de busqueda, la barra lateral de links y la barra lateral de videos mas votados. En el caso de la barra de links, todos son visibles al usuario, aunque para poder acceder a su contenido necesitan determinados privilegios. En caso de que estos privilegios no sean correctos el usuario será redirigido. Existe un link oculto, el de informes para administradores, ya que se considera que sólo usuarios con privilegios de administración podrán acceder a él.
+Esta pagina, al igual que el resto, sigue la estructura básica con la barra de búsqueda, la barra lateral de links y la barra lateral de videos mas votados. En el caso de la barra de links, todos son visibles al usuario, aunque para poder acceder a su contenido necesitan determinados privilegios. En caso de que estos privilegios no sean correctos el usuario será redirigido. Existe un link oculto, el de informes para administradores, ya que se considera que sólo usuarios con privilegios de administración podrán acceder a él.
 	\item \textbf{Página de login: }
 \begin{figure}[htb]
 \centering
@@ -30,7 +30,7 @@ mensaje de error indicando el problema.
 \label{register}
 \end{figure}	
 En esta página un usuario se podrá registrar en el sistema introduciendo los datos que se le piden, nombre, apellidos, correo, identificador y contraseña. Si se introduce un dato erróneo o el identificador ya está usado por otro usuario se mostrará un mensaje de error. En caso de que el registro se realiza satisfactoriamente el usuario será redirigido a la página principal.
-	\item \textbf{Página de mensajes: }Se muestran los mensajes administrativos que le han sido enviado a un usuario registrado. En todo momento se pueden eliminar los mensajes sin realizar una redirección desde esta página mediante AJAX. En caso de no existir mensajes disponibles se le avisará al usuario.
+	\item \textbf{Página de mensajes: } Se muestran los mensajes administrativos que le han sido enviado a un usuario registrado. En todo momento se pueden eliminar los mensajes sin realizar una redirección desde esta página mediante AJAX. En caso de no existir mensajes disponibles se le avisará al usuario.
 \begin{figure}[htb]
 \centering
 \includegraphics*[width=9cm]{imagenes/cap-mensajes.png}
@@ -44,7 +44,7 @@ En esta página un usuario se podrá registrar en el sistema introduciendo los dat
 \caption{Página de Mis Videos}
 \label{misvideos}
 \end{figure}	
-Para un usuario participante se muestran los videos que este ha subido hasta la fecha, permitiendole también eliminarlos. Se puede acceder a un video utilizando la imagen preliminar del mismo como link. Gracias a los links referentes a \textit{Anterior} y \textit{Siguiente} se puede navegar entre los diferentes videos.
+Para un usuario participante se muestran los videos que este ha subido hasta la fecha, permitiéndole también eliminarlos. Se puede acceder a un video utilizando la imagen preliminar del mismo como link. Gracias a los links referentes a \textit{Anterior} y \textit{Siguiente} se puede navegar entre los diferentes videos.
 \item \textbf{Página de Mis favoritos: }
 \begin{figure}[htb]
 \centering
@@ -52,7 +52,7 @@ Para un usuario participante se muestran los videos que este ha subido hasta la 
 \caption{Página de Mis Favoritos}
 \label{favoritos}
 \end{figure}	
-En esta página se muestran los videos favoritos de un usuario registrado, permitiendole eliminarlos de sus favoritos en cualquier momento. Se puede acceder a cualquier videos utilizando la imagen preliminar como link. Al igual que es resto de búsquedas, posee links de \textit{Anterior} y \textit{Siguiente} para navegar.
+En esta página se muestran los videos favoritos de un usuario registrado, permitiéndole eliminarlos de sus favoritos en cualquier momento. Se puede acceder a cualquier video utilizando la imagen preliminar como link. Al igual que es resto de búsquedas, posee links de \textit{Anterior} y \textit{Siguiente} para navegar.
 	\item \textbf{Página de Agregación de videos: }
 \begin{figure}[htb]
 \centering
@@ -60,7 +60,7 @@ En esta página se muestran los videos favoritos de un usuario registrado, permit
 \caption{Página de Agregación de videos}
 \label{agregar}
 \end{figure}
-En esta página se permite a un usuario concursante subir un video nuevo cada semana. En caso de que el video subido no cumple las condiciones de calidad o el nombre y comentario no sean válidos, se muestra en la pantalla un mensaje de error. En caso de que el video sea válido y una vez que ha sido subido al servidos, el usuario es redirigido a la página principal.
+En esta página se permite a un usuario concursante subir un video nuevo cada semana. En caso de que el video subido no cumple las condiciones de calidad o el nombre y comentario no sean válidos, se muestra en la pantalla un mensaje de error. En caso de que el video sea válido y una vez que ha sido subido al servidor, el usuario es redirigido a la página principal.
 \item \textbf{Página de Votación semanal: }
 \begin{figure}[htb]
 \centering
@@ -84,7 +84,7 @@ Esta página muestra los comentarios que otros usuario han escrito sobre ti. Para
 \caption{Página de comentarios sobre mi}
 \label{comentarios}
 \end{figure}
-En el caso de las página de \textit{Comentarios sobre usuarios} y \textit{Comentarios sobre videos}, a partir de ahora las veremos como una sóla, permiten ver los comentarios realizados por el usuario. Para cada comentario se muestra tanto como el comentario como la fecha, y se permite eliminarlos en cualquier momento.
+En el caso de las página de \textit{Comentarios sobre usuarios} y \textit{Comentarios sobre videos}, a partir de ahora las veremos como una sola, permiten ver los comentarios realizados por el usuario. Para cada comentario se muestra tanto como el comentario como la fecha, y se permite eliminarlos en cualquier momento.
 \item \textbf{Bases de concurso: }
 \begin{figure}[htb]
 \centering
@@ -100,7 +100,7 @@ En esta página se le notifican al usuario la Bases de participación en el concur
 \caption{Página de bases del concurso}
 \label{busqueda}
 \end{figure}
-En esta página se muestran los resultados obtenidos tras realizar una busqueda a partir de una determinada clave. Se muestran los videos que satisfagan los criterios de búsqueda. Se permite navegar entre los resultados mediante los links de \textit{Anterior} y \textit{Siguiente}. Se puede acceder a cada uno de los videos para su reproducción mediante la imagen.
+En esta página se muestran los resultados obtenidos tras realizar una búsqueda a partir de una determinada clave. Se muestran los videos que satisfagan los criterios de búsqueda. Se permite navegar entre los resultados mediante los links de \textit{Anterior} y \textit{Siguiente}. Se puede acceder a cada uno de los videos para su reproducción mediante la imagen.
 \item \textbf{Página de visualización de un video: }
 \begin{figure}[htb]
 \centering
@@ -108,7 +108,7 @@ En esta página se muestran los resultados obtenidos tras realizar una busqueda a
 \caption{Página de visualización de un video}
 \label{video}
 \end{figure}
-En esta página se permite visualizar un video. Además, se permiten realizar cuatro acciones sobre el mismo en función de los privilegios y la relación del usuario con el video en cuestión, las cuale son respectivamente:
+En esta página se permite visualizar un video. Además, se permiten realizar cuatro acciones sobre el mismo en función de los privilegios y la relación del usuario con el video en cuestión, las cuales son respectivamente:
 \begin{itemize}
 	\item Visualizar comentarios sobre dicho video
 	\item Visualizar comentarios sobre el propietario del video
