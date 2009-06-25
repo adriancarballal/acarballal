@@ -28,7 +28,6 @@ public class DirectoryGenerator {
 				created = dir.mkdir();
 			}
 		} catch (MissingConfigurationParameterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		return dir;

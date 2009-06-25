@@ -25,7 +25,7 @@ public class FindVideos {
 	@Inject
 	private Locale locale;
 	
-	@Persist
+	@Persist("client")
 	private int startIndex;
 	
 	@SuppressWarnings("unused")

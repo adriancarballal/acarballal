@@ -21,7 +21,6 @@ public class Process implements IProcess{
 		try {
 			logWriter = new OutputStreamWriter(new FileOutputStream(logFile), FILE_FORMAT);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -43,8 +42,6 @@ public class Process implements IProcess{
 	private boolean run() throws NoCommandAvailableException, ProcessErrorException{
 		
 		String[] cmd = encoder.getEncodingCommand().split(" ");
-		//TODO
-		System.out.println(encoder.getEncodingCommand());
 		if(cmd==null) throw new NoCommandAvailableException();
         try{            
             Runtime rt = Runtime.getRuntime();

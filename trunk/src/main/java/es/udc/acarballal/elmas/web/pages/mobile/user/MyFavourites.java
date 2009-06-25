@@ -24,7 +24,7 @@ public class MyFavourites {
 private static final int COUNT = 5;
 
 	
-	@Persist
+	@Persist("client")
 	private int startIndex;
 	
 	@ApplicationState
@@ -46,7 +46,7 @@ private static final int COUNT = 5;
 		try {
 			videoBlock = videoService.findFavourites(userSession.getUserProfileId(), startIndex, COUNT);
 		} catch (InstanceNotFoundException e) {
-			// TODO Auto-generated catch block
+			// NOT IMPLEMENTED		
 		}		
 	}
 
@@ -71,7 +71,6 @@ private static final int COUNT = 5;
 	}
 	
 	void onActivate() {
-		startIndex=0;
 		fill();
 	}
 	

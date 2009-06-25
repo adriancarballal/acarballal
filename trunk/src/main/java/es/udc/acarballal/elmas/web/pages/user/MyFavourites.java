@@ -51,7 +51,7 @@ private static final int COUNT = 5;
 		try {
 			videoBlock = videoService.findFavourites(userSession.getUserProfileId(), startIndex, COUNT);
 		} catch (InstanceNotFoundException e) {
-			// TODO Auto-generated catch block
+			// NOT IMPLEMENTED
 		}		
 	}
 

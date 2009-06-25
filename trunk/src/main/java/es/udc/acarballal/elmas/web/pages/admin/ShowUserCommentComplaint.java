@@ -38,7 +38,7 @@ public class ShowUserCommentComplaint {
 	@Inject
 	private Locale locale;
 	
-	@Persist
+	@Persist("client")
 	private int startIndex;
 	
 	@SuppressWarnings("unused")
@@ -65,9 +65,9 @@ public class ShowUserCommentComplaint {
 				adminService.findUserCommentComplaints(userSession.getUserProfileId(),
 						startIndex, COUNT);
 		} catch (InstanceNotFoundException e) {
-			// TODO
+			// NOT IMPLEMENTED
 		} catch (InsufficientPrivilegesException e) {
-			// TODO
+			// NOT IMPLEMENTED
 		}
 	}
 	
@@ -95,7 +95,6 @@ public class ShowUserCommentComplaint {
 	}
 	
 	void onActivate(){
-		startIndex=0;
 		fill();
 	}
 	

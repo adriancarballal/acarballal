@@ -42,7 +42,6 @@ public class UploadTask {
 			unavailableSnapshot =
 				ConfigurationParametersManager.getParameter(UNAVAILABLE_PICTURE_PARAMETER);
 		} catch (MissingConfigurationParameterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -92,7 +91,6 @@ public class UploadTask {
 			logWriter.flush();
 			logWriter.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -124,7 +122,6 @@ public class UploadTask {
 		IProcess snapProcess = (IProcess) new Process(snapLog, snapEncoder);
 		processes.add(snapProcess);
 		
-		//TODO
 		//DELETE LOGS
 		List<File> logs = new ArrayList<File>();
 		logs.add(new File(flvLog));

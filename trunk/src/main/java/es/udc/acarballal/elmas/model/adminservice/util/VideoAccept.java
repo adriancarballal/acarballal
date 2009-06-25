@@ -16,7 +16,6 @@ public class VideoAccept implements IProcess{
 			containerURL = 
 				ConfigurationParametersManager.getParameter(URL_CONTAINER_PARAMETER);
 		} catch (MissingConfigurationParameterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
