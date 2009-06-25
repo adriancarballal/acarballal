@@ -101,9 +101,9 @@ public class ShowVideoComplaint {
 		try {
 			videoComplaint = adminService.findFirstVideoComplaints(userSession.getUserProfileId());
 		} catch (InstanceNotFoundException e) {
-			//TODO
+			//NOT IMPLEMENTED
 		} catch (InsufficientPrivilegesException e) {
-			// TODO
+			//NOT IMPLEMENTED
 		}
 		if(videoComplaint!=null) video = videoComplaint.getReference();
 		

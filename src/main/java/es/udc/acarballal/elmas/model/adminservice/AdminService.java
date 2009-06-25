@@ -46,11 +46,4 @@ public interface AdminService {
 	public int getNumberOfVideoComplaints(Long userProfileId) 
 		throws InsufficientPrivilegesException, InstanceNotFoundException;
 	
-	//TODO
-//	public void sendConfirmationMessage(Long to, String message) 
-//		throws InstanceNotFoundException;
-//
-//	public void sendErrorMessage(Long to, String message) 
-//		throws InstanceNotFoundException;
-
 }

@@ -1,7 +1,7 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
 	t:type="Layout" t:pageTitle="${message:title}">
 
-<t:zone t:id="comments">
+<t:zone t:id="comments" t:update="show">
 	<t:if t:test="userComments.empty">
 		<p>${message:nocomments}.</p>
 		<t:parameter name="else">
@@ -18,14 +18,9 @@
 							</t:actionLink>
 						<t:parameter name="else">
 							<t:if t:test="notComplainted">
-								<t:zone t:id="complaintZone">
-									<t:actionLink t:id="complaintComment" zone="complaintZone" context="userComment.commentId">
+									<t:actionLink t:id="complaintComment" zone="comments" context="${userComment.commentId}">
 										<spam class="nonVideoComplaint" title="${message:complaintVideo}" />
 									</t:actionLink>
-								</t:zone>
-								<t:block t:id="alreadyComplaint">
-									<spam class="videoComplaint" title="${message:alreadyComplaint}" />
-								</t:block>
 							<t:parameter name="else">
 								<spam class="videoComplaint" title="${message:alreadyComplaint}" />
 							</t:parameter>

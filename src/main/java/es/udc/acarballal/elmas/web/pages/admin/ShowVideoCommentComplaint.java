@@ -38,7 +38,7 @@ public class ShowVideoCommentComplaint {
 	@Inject
 	private Locale locale;
 	
-	@Persist
+	@Persist("client")
 	private int startIndex;
 
 	@SuppressWarnings("unused")
@@ -64,9 +64,9 @@ public class ShowVideoCommentComplaint {
 			videoCommentComplaintBlock = adminService.findVideoCommentComplaints(
 					userSession.getUserProfileId(), startIndex, COUNT);
 		} catch (InstanceNotFoundException e) {
-			// TODO 
+			// NOT IMPLEMENTED
 		} catch (InsufficientPrivilegesException e) {
-			// TODO 
+			// NOT IMPLEMENTED
 		}
 	}
 	
@@ -91,7 +91,6 @@ public class ShowVideoCommentComplaint {
 	}
 
 	void onActivate() {
-		startIndex=0;
 		fill();
 	}
 

@@ -23,7 +23,7 @@
 <!-- Logo. -->
 <div id="logo">
 	<a href="#" t:type="PageLink" t:page="Index">
-		<img src="http://adriancarballal.dynalias.com/container/logo.png" /> 
+		<img src="http://elmas.udc.es:8081/logo.png" /> 
 	</a>
 </div>
 

@@ -22,7 +22,7 @@ public class MyVideos {
 	
 	private static final int COUNT = 5;
 	
-	@Persist
+	@Persist("client")
 	private int startIndex;
 	
 	@ApplicationState

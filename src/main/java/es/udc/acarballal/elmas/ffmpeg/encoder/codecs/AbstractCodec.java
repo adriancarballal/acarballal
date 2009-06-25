@@ -14,7 +14,6 @@ public abstract class AbstractCodec {
 			application_path = 
 				ConfigurationParametersManager.getParameter(APPLICATION_PATH_PARAMETERS);
 		} catch (MissingConfigurationParameterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}

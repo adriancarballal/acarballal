@@ -17,16 +17,10 @@
 								<spam class="removeComment"  title="${message:delete}" />	
 							</t:actionLink>
 						<t:parameter name="else">
-						
 							<t:if t:test="notComplainted">
-								<t:zone t:id="complaintZone">
-									<t:actionLink t:id="complaintComment" zone="complaintZone" context="videoComment.commentId">
+									<t:actionLink t:id="complaintComment" zone="comments" context="videoComment.commentId">
 										<spam class="nonVideoComplaint" title="${message:complaintVideo}" />
 									</t:actionLink>
-								</t:zone>
-								<t:block t:id="alreadyComplaint">
-									<spam class="videoComplaint" title="${message:alreadyComplaint}" />
-								</t:block>
 							<t:parameter name="else">
 								<spam class="videoComplaint" title="${message:alreadyComplaint}" />
 							</t:parameter>

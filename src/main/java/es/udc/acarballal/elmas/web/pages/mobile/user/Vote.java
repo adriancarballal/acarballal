@@ -18,11 +18,9 @@ import es.udc.acarballal.elmas.model.videoservice.VideoService;
 import es.udc.acarballal.elmas.web.pages.mobile.errors.AlreadyVotedVideo;
 import es.udc.acarballal.elmas.web.pages.mobile.errors.InstanceNotFound;
 import es.udc.acarballal.elmas.web.pages.mobile.errors.InvalidOperation;
-import es.udc.acarballal.elmas.web.pages.user.Vote.VOTE_TYPES;
 import es.udc.acarballal.elmas.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
-//@AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
 public class Vote {
 		
 	private static final int PRESELECTED_VIDEO_WINDOW = 100;

@@ -20,7 +20,6 @@ public class ThreadCentral {
 			maxParallelThreads = new Integer(
 				ConfigurationParametersManager.getParameter(MAX_PARALLELS_PROCESSES_PARAMATER));
 		} catch (MissingConfigurationParameterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

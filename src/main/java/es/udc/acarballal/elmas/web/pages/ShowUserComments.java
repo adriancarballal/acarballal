@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -51,17 +50,17 @@ public class ShowUserComments {
 	@Inject
 	private Locale locale;
 	
-	@Inject
-	private Block alreadyComplaint;
+	//@Inject
+	//private Block alreadyComplaint;
 	
-	@SuppressWarnings("unused")
-	@InjectComponent
-	private Zone complaintZone;
+	//@SuppressWarnings("unused")
+	//@InjectComponent
+	//private Zone complaintZone;
 	
 	@Inject
 	private Messages messages;
 	
-	@Persist
+	@Persist("client") 
 	private int startIndex;
 	
 	@SuppressWarnings("unused")
@@ -123,6 +122,7 @@ public class ShowUserComments {
 
 	void onActivate(Long userId){
 		this.userId = userId;
+		//this.startIndex=0;
 		fill();		
 	}
 	
@@ -166,14 +166,13 @@ public class ShowUserComments {
 		if (!commentForm.isValid()) {
 			return;
 		}
-		try {
-			userService.commentUser(userId, userId,	comment, Calendar.getInstance());
+		try{
+			userService.commentUser(userId, userSession.getUserProfileId(), 
+					comment, Calendar.getInstance());
 		} catch (InstanceNotFoundException e) {
 			commentForm.recordError(messages.get("error-instancenotfound"));
 		} catch (InvalidOperationException e) {
 			commentForm.recordError(messages.get("error-invalidOperation"));
-		} catch (Exception e){
-			return;
 		}
 	}
 	
@@ -201,7 +200,7 @@ public class ShowUserComments {
 			return InstanceNotFound.class;
 		}
 		fill();
-		return alreadyComplaint;
+		return comments;
 	}
 
 }

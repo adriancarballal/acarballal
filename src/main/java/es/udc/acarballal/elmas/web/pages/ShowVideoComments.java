@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -49,12 +48,12 @@ public class ShowVideoComments {
 	@InjectComponent
 	private Zone comments;
 	
-	@Inject
-	private Block alreadyComplaint;
+	//@Inject
+	//private Block alreadyComplaint;
 	
-	@SuppressWarnings("unused")
-	@InjectComponent
-	private Zone complaintZone;
+	//@SuppressWarnings("unused")
+	//@InjectComponent
+	//private Zone complaintZone;
 	
 	@Inject
 	private Locale locale;
@@ -62,7 +61,7 @@ public class ShowVideoComments {
 	@Inject
 	private Messages messages;
 	
-	@Persist
+	@Persist("client")
 	private int startIndex;
 	
 	@SuppressWarnings("unused")
@@ -125,7 +124,6 @@ public class ShowVideoComments {
 		try {
 			video = videoService.findVideoById(videoId);
 		} catch (InstanceNotFoundException e) {
-			//TODO
 			//MAYBE BUG
 		}
 		fill();
@@ -209,7 +207,7 @@ public class ShowVideoComments {
 			return InstanceNotFound.class;
 		}
 		fill();
-		return alreadyComplaint;
+		return comments;
 	}
 
 }

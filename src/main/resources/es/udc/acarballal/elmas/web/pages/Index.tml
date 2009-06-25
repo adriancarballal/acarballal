@@ -5,7 +5,7 @@
 <p class="welcome2">${message:site}</p>-->
 
 <p class="slogan">
-	<img src="http://adriancarballal.dynalias.com/container/title2.png" />
+	<img src="http://elmas.udc.es:8081/title2.png" />
 </p>
 
 
