@@ -1,0 +1,91 @@
+\chapter{Patrones de diseño utilizados}
+
+\section{MVC}
+Este patrón permite una clara separación entre la vista de una aplicación web y su modelo correspondiente, gracias a un controlador que los mantiene desacoplados en todo momento, de modo que no necesiten conocer la naturaleza el uno del otro.
+
+\begin{itemize}
+\item \textbf{Modelo:} Esta es la representación específica de la información con la cual el sistema opera. La lógica de datos asegura la integridad de estos y permite derivar nuevos datos.
+\item \textbf{Vista:} Este presenta el modelo en un formato adecuado para interactuar, usualmente la interfaz de usuario.
+\item \textbf{Controlador:} Este responde a eventos, usualmente acciones del usuario e invoca cambios en el modelo y probablemente en la vista.
+\end{itemize}
+
+\section{Transfer Object} 
+Este patrón sirve para agrupar un conjunto de atributos procedentes de uno o varios objetos del dominio y es aplicable en el caso de que necesitemos representar un conjunto de atributos procedentes de uno o varios objetos del dominio.
+
+Cualquier componente que sigue este patrón ofrece getters \footnote{métodos para obtener el valor de un atributo} y / o setters \footnote{métodos que permiten asignar el valor a un atributo} para acceder y / o establecer a los atributos.
+
+\section{Data Access Object}
+El principal objetivo de este patrón es desacoplar la lógica de negocio de la lógica de acceso a datos, de manera que se pueda sustituir la fuente de datos fácilmente. De esta manera, usando este patrón podremos seleccionar el tipo de fuente de datos durante la instalación o configuración de una aplicación.
+
+\section{Facade}
+El patrón facade (o fachada) sirve para proveer de una interfaz unificada y sencilla que haga de intermediaria entre el cliente y un interfaz o conjunto de interfaces más complejas. Esto básicamente consigue una independencia del código que la usa.
+
+En nuestro sistema, nos permite poder cambiar el código de acceso a datos sin tener que variar por ello la parte de código del modelo que sirve las funcionalidades al controlador.
+
+\section{Business delegate}
+El objetivo de este patrón es facilitar a la capa cliente ocultando las tecnologías utilizadas en el modelo. Este patrón es utilizado cuando se quiere proporcionar una capa de acceso al modelo que oculte la tecnología usada en su implementación.
+Las ventajas que proporciona el uso de este patrón:
+\begin{itemize}
+	\item Mejora el mantenimiento.
+	\item Permite la separación de roles: creadores de la capa cliente y creadores de la capa modelo.
+	\item Puede proporcionar caché para mejorar la eficiencia.
+\end{itemize}
+
+\section{Decorador}
+Este patrón permite añadir responsabilidades a un objeto dinámicamente, proporcionando una alternativa flexible a la extensión de una clase, es decir, se sirven de la herencia para extender sus responsabilidades.
+
+Mediante la aplicación de este patrón se consigue:
+\begin{itemize}
+	\item Añadir responsabilidades a objetos de manera dinámica y transparente.
+	\item Para suprimir responsabilidades de los objetos.
+	\item Cuando no es práctico el uso de la herencia.
+\end{itemize}
+
+\section{Factoría abstracta}
+Este patrón utiliza una interfaz para la creación de familias de objetos relacionados sin especificar sus clases concretas, muy utilizado para proporcionar múltiples look-and-feels mediante la definición de un juego de componentes.
+
+La aplicabilidad de este patrón radica en:
+\begin{itemize}
+	\item Un sistema debe ser independiente de la forma en que sus productos son creados y representados.
+	\item Un sistema debe ser configurado con una de muchas familias de productos disponibles.
+	\item Una familia de productos son diseñados para su uso conjunto, y se requiere asegurar este uso conjunto
+	\item Se desea proporcionar una biblioteca de productos presentando su interfaz, pero no su implementación
+\end{itemize}
+
+\section{Singleton}
+El patrón singleton (o instancia única) se utiliza cuando es necesario asegurarse de que una clase tiene sólo una instancia y se quiere proporcionar un punto global de acceso a ella.
+
+Este patrón está compuesto por una clase que define como privado su cons\-tructor, con el fin de evitar la creación de nuevos objetos, e incluye un atributo de clase privado que se usa para alojar la instancia única y un método que permite el acceso a dicha instancia.
+
+\section{Command}
+El patrón Command (Comando) encapsula una petición como un objeto, de modo que permite la parametrización de clientes con diferentes peticiones, crear colas de peticiones y soporte de operaciones cancelables (undo).
+
+La aplicabilidad de este patrón radica en:
+\begin{itemize}
+	\item Establecer como parámetro de un objeto la acción a realizar.
+	\item Especificar, encolar, y ejecutar peticiones en diferentes momentos.
+	\item Soporte de Deshacer.
+	\item Soporte de Logging
+	\item Soporte de Transacciones
+\end{itemize}
+
+\section{Chain of Responsability}
+El patrón Chain of Responsability (Cadena de responsabilidad) permite la posibilidad de gestionar una petición a más de un objeto mediante el encadenamiento de receptores desacoplando el emisor de la petición de los receptores (receptor implícito). Se establece una cadena de objetos que delegan la petición
+hasta que uno se hace cargo.
+
+Veamos su diversas aplicaciones:
+\begin{itemize}
+	\item Más de un objeto puede manejar una petición, y no se conoce a priori cual de ellos.
+	\item No se desea identificar explícitamente el receptor de una petición.
+	\item Los objetos que pueden manejar la petición varían dinámicamente.
+\end{itemize}
+
+\section{Template}
+El patrón Plantilla define el esqueleto de un algoritmo en una operación, pero difiere algunos pasos a las subclases, con el objetivo de implementar un método que difiera en otros métodos abstractos las partes del algoritmo que no se conocen o que son específicas. En otras palabras, es un método que define un algoritmo en base a una serie de operaciones abstractas que son redefinidas por las subclases para obtener un comportamiento concreto.
+
+La aplicabilidad de este patrón es:
+\begin{itemize}
+	\item Implementar las partes invariables de un algoritmo una única vez y permitir que las subclases definan el comportamiento que cambia.
+	\item Factorización de comportamiento común de las subclases en la superclase (evitar replicación de código mediante generalización)
+	\item Para controlar las extensiones de las subclases. 
+\end{itemize}
