@@ -4,7 +4,7 @@ Una vez determinados los objetivos buscados es necesario realizar un estudio de 
 \section{Frameworks Web}
 \subsection{Struts}
 
-Struts es por el momento el más difundido de los frameworks opensource en el ámbito java. Está basado en el modelo 2 y consta, por lo tanto, de un servlet que actúa de controlador central que recibe todas las peticiones de los clientes. Las facilidades de desarrollo que ofrece son:
+Struts\cite{11}\cite{12} es por el momento el más difundido de los frameworks opensource en el ámbito java. Está basado en el modelo 2 y consta, por lo tanto, de un servlet que actúa de controlador central que recibe todas las peticiones de los clientes. Las facilidades de desarrollo que ofrece son:
 \begin{itemize}
 	\item Lógica de navegación entre páginas
 	\item Binding entre java y html
@@ -31,7 +31,7 @@ Aunque se adapta a las incorporaciones de diferentes bibliotecas de tags no está
 	\item No es una especificación.
 \end{itemize}
 \subsection{Tapestry}
-Tapestry es otro framework open-source modelo 2 mantenido por la comunidad Apache y una de sus principales características es que está basado en un modelo de componentes. Esto provee una estructura consistente, permitiendo al framework asumir responsabilidades sobre conceptos como la construcción de URL, el despacho, el almacenamiento del estado en el cliente o en el servidor, la validación del usuario, la localización / internacionalización, el manejo de reportes, etc. Un componente es un objeto que tiene sus responsabilidades definidas por el diseño y la estructura del framework en el cual se encuentra. Es decir, sigue una serie de convenciones (nomenclatura, implementación de ciertas interfaces, etc) que le exige el framework. Tapestry, al igual que todos los frameworks de modelo 2, tiene un servlet que centraliza toda la lógica de comunicación. 
+Tapestry\cite{20}\cite{21} es otro framework open-source modelo 2 mantenido por la comunidad Apache y una de sus principales características es que está basado en un modelo de componentes. Esto provee una estructura consistente, permitiendo al framework asumir responsabilidades sobre conceptos como la construcción de URL, el despacho, el almacenamiento del estado en el cliente o en el servidor, la validación del usuario, la localización / internacionalización, el manejo de reportes, etc. Un componente es un objeto que tiene sus responsabilidades definidas por el diseño y la estructura del framework en el cual se encuentra. Es decir, sigue una serie de convenciones (nomenclatura, implementación de ciertas interfaces, etc) que le exige el framework. Tapestry, al igual que todos los frameworks de modelo 2, tiene un servlet que centraliza toda la lógica de comunicación. 
 
 Desarrollar con Tapestry permite:
 \begin{itemize}
@@ -59,7 +59,7 @@ Desarrollar con Tapestry permite:
 	\item Se requiere configurar 3 archivos para cada página a crear.
 \end{itemize}
 \subsection{JSF}
- Lo primero que se puede decir sobre Java Server Faces es que no es una implementación sino una especificación (JSR 127) aprobada por el Java Community Process (JCP) para construir interfaces de usuario para las aplicaciones que co\-rren en un servidor. Esto quiere decir que es un estándar y pueden existir varias implementaciones mientras que cumplan con lo que exija la especificación.
+ Lo primero que se puede decir sobre Java Server Faces\cite{11}\cite{12} es que no es una implementación sino una especificación (JSR 127) aprobada por el Java Community Process (JCP) para construir interfaces de usuario para las aplicaciones que co\-rren en un servidor. Esto quiere decir que es un estándar y pueden existir varias implementaciones mientras que cumplan con lo que exija la especificación.
 
 JSF es otro framework modelo 2 que posee un controlador central (FrontControler) que se encarga de manejar todas las peticiones del cliente y gestionar su ciclo de vida. Está basado en un modelo de componentes para la interfaz de usuario. Un componente JSF es un elemento reutilizable y configurable que se puede utilizar en la interfaz de usuario. Los componentes se pueden anidar. Por ejemplo, una página contiene un componente mapa que a su vez contiene un componente botón. El diseño del framework permite navegar a través del árbol de componentes para acceder a sus propiedades. Además, los componentes pueden reaccionar a diferentes eventos y son capaces de almacenar su estado interno. 
 
@@ -87,7 +87,7 @@ Desarrollar con JSF permite:
 	\item Requiere Javascript.
 	\end{itemize}
 \subsection{Ruby On Rails}
- Ruby on Rails (ROR) es un framework para desarrollar aplicaciones webs basado en el lenguaje Ruby. En realidad no sólo aplica para la capa de presentación sino que es posible definir desde la lógica de navegación hasta el acceso a datos. ROR busca simplificar el desarrollo de aplicaciones promoviendo las convenciones sobre la configuración. De hecho, el framework no posee archivos de configuración (en realidad posee uno pero es para temas generales como dirección de la base de datos, etc).
+ Ruby on Rails (ROR)\cite{11}\cite{13} es un framework para desarrollar aplicaciones webs basado en el lenguaje Ruby. En realidad no sólo aplica para la capa de presentación sino que es posible definir desde la lógica de navegación hasta el acceso a datos. ROR busca simplificar el desarrollo de aplicaciones promoviendo las convenciones sobre la configuración. De hecho, el framework no posee archivos de configuración (en realidad posee uno pero es para temas generales como dirección de la base de datos, etc).
 
 Para crear una aplicación con ROR se utiliza un script que genera toda la estructura base con los directorios donde se deben situar los diferentes archivos de código. Por ejemplo, hay directorios para el modelo, la vista y el controlador ya que ROR también está basado en el patrón MVC.
 
@@ -114,7 +114,7 @@ Desarrollar aplicaciones con ROR permite
 \end{itemize}
 
 \subsection{ASP.NET}
- ASP.NET es un conjunto de tecnologías definidas por Microsoft para la capa de presentación WEB que forma parte del .NET Framework. En pocas palabras, una página ASP.NET es un archivo de texto con extensión aspx que el servidor sabe que debe procesar de una manera especial. El texto de las páginas puede ser html junto con código scripting que se compila dinámicamente y se ejecuta en el servidor. La página aspx se compila (sólo la primera vez) a código ejecutable .net cuando algún cliente la solicita al servidor. Para incluir código embebido en la página se utilizan separadores. En este sentido es similar al funcionamiento de las páginas JSP de java. Sin embargo la potencia de este framework no reside en estas características sino en las que se describen a continuación.
+ ASP.NET\cite{11}\cite{12} es un conjunto de tecnologías definidas por Microsoft para la capa de presentación WEB que forma parte del .NET Framework. En pocas palabras, una página ASP.NET es un archivo de texto con extensión aspx que el servidor sabe que debe procesar de una manera especial. El texto de las páginas puede ser html junto con código scripting que se compila dinámicamente y se ejecuta en el servidor. La página aspx se compila (sólo la primera vez) a código ejecutable .net cuando algún cliente la solicita al servidor. Para incluir código embebido en la página se utilizan separadores. En este sentido es similar al funcionamiento de las páginas JSP de java. Sin embargo la potencia de este framework no reside en estas características sino en las que se describen a continuación.
 
 Las páginas ASP.NET pueden tener controles que se ejecutan del lado del servidor (server controls) que son objetos que representan elementos de la interfaz de usuario que se ejecutan en el servidor y generan código html como resultado de su ejecución. Los controles tienen propiedades, métodos y eventos a los que pueden responder y mediante los que se puede modificar su estado y comportamiento. Este comportamiento se puede declarar en los atributos de su declaración html o de manera programática. 
 
@@ -154,7 +154,7 @@ Conociendo las excelencias e inconvenientes de cada uno de los framework comenta
 Es por estas razones que se ha escogido este framework. Veamos que otras tecnologías podemos utilizar con Tapestry para mantener la persistencia y gestionar las transacciones con las posible bases de datos que se nos presentan en el mercado.
 
 \section{Contenedores de componentes de negocio}
-Usualmente la arquitectura de una aplicación J2EE contiene varias capas se\-paradas como se puede apreciar en la figura \ref{tresCapas}. 
+Usualmente la arquitectura de una aplicación J2EE\cite{16}\cite{27}\cite{28} contiene varias capas se\-paradas como se puede apreciar en la figura \ref{tresCapas}. 
 \begin{figure}[htb]
 \centering
 \includegraphics*[width=15cm]{imagenes/ejb3vsSpring.png}
@@ -164,7 +164,7 @@ Usualmente la arquitectura de una aplicación J2EE contiene varias capas se\-para
 
 La capa de servidor típicamente contiene componentes de servidor con lógica de negocio, estos son manejados por un contenedor. El contenedor es parte del servidor de aplicaciones. El servidor de aplicaciones provee el ciclo de vida de los componentes, así como servicios de seguridad y manejo de transacciones.
 \subsection{EJB3}
-Una de las metas de la arquitectura EJB es la de poder escribir de manera fácil aplicaciones de negocio orientadas a objetos y distribuidas, basadas en el lenguaje de programación JAVA. Desafortunadamente, las versiones 1.0 a 2.1 de EJB fueron demasiado complejas y no alcanzaron esta meta. El propósito de EJB 3 es el de proveer el soporte de la arquitectura de EJB y al mismo tiempo reducir la complejidad para el desarrollo de aplicaciones empresariales. Para simplificar la arquitectura EJB se realizaron los siguientes cambios:
+Una de las metas de la arquitectura EJB\cite{27}\cite{28} es la de poder escribir de manera fácil aplicaciones de negocio orientadas a objetos y distribuidas, basadas en el lenguaje de programación JAVA. Desafortunadamente, las versiones 1.0 a 2.1 de EJB fueron demasiado complejas y no alcanzaron esta meta. El propósito de EJB 3 es el de proveer el soporte de la arquitectura de EJB y al mismo tiempo reducir la complejidad para el desarrollo de aplicaciones empresariales. Para simplificar la arquitectura EJB se realizaron los siguientes cambios:
 \begin{itemize}
 	\item Se introduce las anotaciones de metadatos (metadata annotations) las mismas que pueden ser usadas en combinación con el descriptor de despliegue (deployment descriptor) ó separadas del mismo, para anotar aplicaciones EJB (especificar tipos de componentes, comportamiento, etc.), como una manera de encapsular dependencias del ambiente de trabajo y recursos.
 	\item Se elimina el requerimiento de especificar una interfaz \textit{home}.
@@ -184,7 +184,7 @@ Como contrapunto se introducen en EJB 3 las anotaciones de metadatos y de interc
 \end{itemize}
 
 \subsection{Spring Framework}
-El principal objetivo de Spring Framework es el constituirse en una alternativa sencilla y fácil ante EJB. La simplificación del desarrollo de aplicaciones y de sus respectivas pruebas (testing) es una de las claves del éxito de Spring. Este Framework se sustenta en dos características básicas en su núcleo: Inversión de Control (Inversion of Control IoC) y la Programación Orientada a Aspectos (Aspect-orient programming).
+El principal objetivo de Spring Framework\cite{14}\cite{15} es el constituirse en una alternativa sencilla y fácil ante EJB. La simplificación del desarrollo de aplicaciones y de sus respectivas pruebas (testing) es una de las claves del éxito de Spring. Este Framework se sustenta en dos características básicas en su núcleo: Inversión de Control (Inversion of Control IoC) y la Programación Orientada a Aspectos (Aspect-orient programming).
 
 
 Usualmente, los objetos obtienen las referencias de otros objetos requeridos por si mismos (tal como en EJB 2.0 los beans obtienen los recursos necesarios usan\-do JNDI). La inversión de control permite inyectar las dependencias en un bean al momento de su creación usando un manejador externo. El bean sólo necesita definir la propiedad requerida en su código así como el método de establecimiento (set() method). La fuente primaria de la inyección de dependencias es un archivo de configuración en formato XML. Se muestra la estructura de este framework en la siguiente figura:
@@ -219,7 +219,7 @@ Spring Framework es especialmente preferible para usarse en compañías peque\-ñas
 \section{Persistencia}
 
 \subsection{iBatis}
-iBATIS es un framework de código abierto basado en capas desarrollado por \textit{Apache Software Foundation} (2001), que se ocupa de la capa de Persistencia (se sitúa entre la lógica de Negocio y la capa de la Base de Datos). Puede ser implementado en Java y .NET (también existe un port para Ruby on Rails llamado RBatis).
+iBATIS\cite{11}\cite{38} es un framework de código abierto basado en capas desarro\-llado por \textit{Apache Software Foundation} (2001), que se ocupa de la capa de Persistencia (se sitúa entre la lógica de Negocio y la capa de la Base de Datos). Puede ser implementado en Java y .NET (también existe un port para Ruby on Rails llamado RBatis).
 
 iBATIS asocia objetos de modelo (JavaBeans) con sentencias SQL o procedimientos almacenados mediante ficheros descriptores XML, simplificando la utilización de bases de datos. No se trata de un ORM puro ya que aún tenemos que escribir los SQL y el mapping se realiza a partir de los resultados del SQL.
 
@@ -257,7 +257,7 @@ Compuesto de dos partes:
 \end{itemize}
 
 \subsection{Hibernate}
-Hibernate fue una iniciativa de un grupo de desarrolladores dispersos alrededor del mundo conducidos por Gavin King. Es una herramienta de Mapeo objeto-relacional para la plataforma Java (y disponible también para .Net con el nombre de NHibernate) que facilita el mapeo de atributos entre una base de datos relacional tradicional y el modelo de objetos de una aplicación, mediante archivos declarativos (XML) que permiten establecer estas relaciones. Veamos la estructura de este framework:
+Hibernate\cite{17}\cite{19} fue una iniciativa de un grupo de desarrolladores dispersos alrededor del mundo conducidos por Gavin King. Es una herramienta de Mapeo objeto-relacional para la plataforma Java (y disponible también para .Net con el nombre de NHibernate) que facilita el mapeo de atributos entre una base de datos relacional tradicional y el modelo de objetos de una aplicación, mediante archivos declarativos (XML) que permiten establecer estas relaciones. Veamos la estructura de este framework:
 
 La rama actual de desarrollo de Hibernate es la 3.x, la cual incorpora nuevas características, como una nueva arquitectura Interceptor / Callback, filtros defini\-dos por el usuario, y opcionalmente el uso de anotaciones para definir la co\-rrespondencia en lugar (o conjuntamente con) los archivos XML. 
 
@@ -291,7 +291,7 @@ Hibernate es probablemente el ORM más utilizado. Aunque no es un standard ofrece
 En la actualidad existen diferentes sistemas de gestión de base de datos relacional orientada a objetos, entre los más conocidos están PostgreSQL, MySQL y Oracle. De estos Oracle es el único que es estrictamente comercial, por lo cuál no entrará dentro de nuestra selección previa.
 
 \subsection{PostgreSQL}
-PostgreSQL es un sistema de gestión de base de datos relacional orientada a objetos de software libre, publicado bajo la licencia BSD.
+PostgreSQL\cite{39} es un sistema de gestión de base de datos relacional orientada a objetos de software libre, publicado bajo la licencia BSD.
 
 Como muchos otros proyectos \textit{open source}, el desarrollo de PostgreSQL no es manejado por una sola compañía sino que es dirigido por una comunidad de desarrolladores y organizaciones comerciales las cuales trabajan en su desarro\-llo. Dicha comunidad es denominada el PGDG (\textit{PostgreSQL Global Development Group}).
 \subsubsection{Características}
@@ -308,7 +308,7 @@ Como muchos otros proyectos \textit{open source}, el desarrollo de PostgreSQL no
 \end{itemize}
 
 \subsection{MySQL}
-MySQL es un sistema de gestión de base de datos relacional, multihilo y multiusuario con más de seis millones de instalaciones. MySQL AB, desde enero de 2008 una subsidiaria de Sun Microsystems y ésta a su vez de Oracle Corporation desde abril de 2009, desarrolla MySQL como software libre en un esquema de licenciamiento dual.
+MySQL\cite{3} es un sistema de gestión de base de datos relacional, multihilo y multiusuario con más de seis millones de instalaciones. MySQL AB, desde enero de 2008 una subsidiaria de Sun Microsystems y ésta a su vez de Oracle Corporation desde abril de 2009, desarrolla MySQL como software libre en un esquema de licenciamiento dual.
 
 MySQL es muy utilizado en aplicaciones web, como Drupal o phpBB, en plataformas (Linux/Windows-Apache-MySQL-PHP/Perl/Python), y por herra\-mientas de seguimiento de errores como Bugzilla.
 \subsubsection{Características}
@@ -331,7 +331,7 @@ MySQL es más rápida que PostgreSQL a la hora de resolver consultas, tiene mejor 
 \section{Otras tecnologías utilizadas}
 \label{otras}
 \subsection{Javascript}
-Javascript es un lenguaje de programación interpretado, es decir, que no requiere compilación, utilizado principalmente en páginas web, con una sintaxis semejante a la del lenguaje Java y el lenguaje C.
+Javascript\cite{8}\cite{9} es un lenguaje de programación interpretado, es decir, que no requiere compilación, utilizado principalmente en páginas web, con una sintaxis semejante a la del lenguaje Java y el lenguaje C.
 
 El lenguaje fue inventado por Brendan Eich en la empresa Netscape Communications, que es la que desarrolló los primeros navegadores web comerciales. Apareció por primera vez en el producto de Netscape llamado Netscape Navigator 2.0.
 
@@ -340,40 +340,40 @@ Al igual que Java, Javascript es un lenguaje orientado a objetos propiamente dic
 Todos los navegadores modernos interpretan el código Javascript integrado dentro de las páginas web. Para interactuar con una página web se provee al lenguaje Javascript de una implementación del DOM.
 
 \subsection{AJAX}
-AJAX, acrónimo de Asynchronous Javascript And XML (Javascript asíncrono y XML), es una técnica de desarrollo web para crear aplicaciones interactivas o RIA (Rich Internet Applications). Estas aplicaciones se ejecutan en el cliente, es decir, en el
-navegador de los usuarios mientras se mantiene la comunicación asíncrona con el servidor en segundo plano. De esta forma es posible realizar cambios sobre las páginas sin necesidad de recargarlas, lo que significa aumentar la interactividad, velocidad y usabilidad en las aplicaciones.
+AJAX\cite{13}, acrónimo de Asynchronous Javascript And XML (Javascript asín\-crono y XML), es una técnica de desarrollo web para crear aplicaciones interactivas o RIA (Rich Internet Applications). Estas aplicaciones se ejecutan en el cliente, es decir, en el
+navegador de los usuarios mientras se mantiene la comunicación asíncrona con el ser\-vidor en segundo plano. De esta forma es posible realizar cambios sobre las páginas sin necesidad de recargarlas, lo que significa aumentar la interactividad, velocidad y usabilidad en las aplicaciones.
 
 Ajax es una tecnología asíncrona, en el sentido de que los datos adicionales se requieren del servidor y se cargan en segundo plano sin interferir con la visua\-lización ni el comportamiento de la página. Javascript es el lenguaje interpretado (scripting
 language) en el que normalmente se efectúan las funciones de llamada de Ajax mientras que el acceso a los datos se realiza mediante XMLHttpRequest, objeto disponible en los navegadores actuales. En cualquier caso, no es necesario que el contenido asíncrono esté formateado en XML.
 
 Ajax es una técnica válida para múltiples plataformas y utilizable en muchos sistemas operativos y navegadores dados que está basado en estándares abiertos como Javascript y Document Object Model (DOM).
 \subsection{CSS}
-Las hojas de estilo en cascada (\textit{Cascading Style Sheets, CSS}) son un lenguaje formal usado para definir la presentación de un documento estructurado escrito en HTML o XML (y por extensión en XHTML). El W3C (\textit{World Wide Web Consortium}) es el encargado de formular la especificación de las hojas de estilo que servirán de estándar para los agentes de usuario o navegadores.
+Las hojas de estilo en cascada (\textit{Cascading Style Sheets, CSS})\cite{7} son un lenguaje formal usado para definir la presentación de un documento estructurado escrito en HTML o XML (y por extensión en XHTML). El W3C (\textit{World Wide Web Consortium}) es el encargado de formular la especificación de las hojas de estilo que servirán de estándar para los agentes de usuario o navegadores.
 
 La idea que se encuentra detrás del desarrollo de CSS es separar la estructura de un documento de su presentación.
 \subsection{JUnit}
-JUnit es un conjunto de bibliotecas creadas por Erich Gamma y Kent Beck que son utilizadas en programación para hacer pruebas unitarias de aplicaciones Java.
+JUnit\cite{2} es un conjunto de bibliotecas creadas por Erich Gamma y Kent Beck que son utilizadas en programación para hacer pruebas unitarias de aplicaciones Java.
 
 JUnit es un conjunto de clases (\textit{framework}) que permite realizar la ejecución de clases Java de manera controlada, para poder evaluar si el funcionamiento de cada uno de los métodos de la clase se comporta como se espera. Es decir, en función de algún valor de entrada se evalúa el valor de retorno esperado; si la clase cumple con la especificación, entonces JUnit devolverá que el método de la clase pasó exitosamente la prueba; en caso de que el valor esperado sea diferente al que regresó el método durante la ejecución, JUnit devolverá un fallo en el método correspondiente.
 
 En la actualidad las herramientas de desarrollo como NetBeans y Eclipse cuentan con plug-ins que permiten que la generación de las plantillas necesarias para la creación de las pruebas de una clase Java se realice de manera automática, facilitando al programador enfocarse en la prueba y el resultado esperado, y dejando a la herramienta la creación de las clases que permiten coordinar las pruebas.
 \subsection{Selenium (CubicTest)}
 \label{selenium}
-Selenium es un software multiplataforma de pruebas para aplicaciones web. Los tests se pueden escribir como HTML o código de tablas en una popular serie de lenguajes de programación y se puede ejecutar directamente en la mayoría de los navegadores web. Selenium puede ser desplegado en Windows, Linux y Macintosh.
+Selenium\cite{37} es un software multiplataforma de pruebas para aplicaciones web. Los tests se pueden escribir como HTML o código de tablas en una popular serie de lenguajes de programación y se puede ejecutar directamente en la mayoría de los navegadores web. Selenium puede ser desplegado en Windows, Linux y Macintosh.
 
 Selenium fue desarrollado por un equipo de programadores y probadores en ThoughtWorks. Es un software de código abierto, liberado bajo la licencia Apache 2.0 y puede descargarse y utilizarse sin costo alguno. El último proyecto es parte de selenium
 Grid, que proporciona un centro que permite el funcionamiento de múltiples pruebas de selenium simultáneamente en cualquier número de sistemas locales o remotos, reduciendo así al mínimo el tiempo de ejecución de prueba.
 
 En concreto utilizaremos CubicTest, que se trata de un plugin gráfico para Eclipse que permite escribir los test de Selenium.
 \subsection{JMeter}
-JMeter es un proyecto de Apache Jakarta que puede ser utilizado como una herramienta de prueba de carga para analizar y medir el desempeño de una va\-riedad de servicios, con énfasis en aplicaciones web.
+JMeter\cite{30} es un proyecto de Apache Jakarta que puede ser utilizado como una herramienta de prueba de carga para analizar y medir el desempeño de una va\-riedad de servicios, con énfasis en aplicaciones web.
 
 JMeter puede ser usado como una herramienta de pruebas unitarias para conexiones de bases de datos con JDBC, FTP, LDAP, Servicios web, JMS, HTTP y conexiones TCP genéricas. JMeter puede también ser configurado como un monitor, aunque es comúnmente considerado una solución ad-hoc respecto de soluciones avanzadas de monitoreo.
 
 Mientras que JMeter es clasificado como una herramienta de \textit{generación de carga}, no es una descripción completa de la herramienta. JMeter soporta aserciones para asegurarse que los datos recibidos son correctos, por cookies de hilos, configuración de variables y una variedad de reportes.
 
 \subsection{JW FLV Media Player}
-JW FLV Player es un reproductor de Video FLV hecho en Flash de código fuente abierto el cual puedes descargar y emplearlo para incluir videos FLV. Incluye todas las funcionalidades básicas de un player incluso la opción para fullscreen.
+JW FLV Player\cite{32} es un reproductor de Video FLV hecho en Flash de código fuente abierto el cual puedes descargar y emplearlo para incluir videos FLV. Incluye todas las funcionalidades básicas de un player incluso la opción para fullscreen.
 
 Incluir videos en un website es sencillo con este player, llega con incluir el siguiente código embebido, el cual utiliza SWFObject.
 
