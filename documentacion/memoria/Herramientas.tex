@@ -1,7 +1,7 @@
 \chapter{Herramientas}
 Para la implementación de nuestra aplicación web se han utilizado las dife\-rentes herramientas que se presentan a continuación.
 \section{Eclipse}
-Eclipse es un entorno de desarrollo integrado de código abierto multiplataforma para desarrollar lo que el proyecto llama \textit{Aplicaciones de Cliente Enriquecido}, opuesto a las aplicaciones \textit{Cliente-liviano} basadas en navegadores. Esta plataforma, típicamente ha sido usada para desarrollar entornos de desarrollo integrados (del inglés IDE), como el IDE de Java llamado Java Development Toolkit (JDT) y el compilador (ECJ) que se entrega como parte de Eclipse (y que son usados también para desarrollar el mismo Eclipse). Sin embargo, también se puede usar para otros tipos de aplicaciones cliente, como BitTorrent Azureus.
+Eclipse\cite{24} es un entorno de desarrollo integrado de código abierto multiplataforma para desarrollar lo que el proyecto llama \textit{Aplicaciones de Cliente Enriquecido}, opuesto a las aplicaciones \textit{Cliente-liviano} basadas en navegadores. Esta plataforma, típicamente ha sido usada para desarrollar entornos de desarrollo integrados (del inglés IDE), como el IDE de Java llamado Java Development Toolkit (JDT) y el compilador (ECJ) que se entrega como parte de Eclipse (y que son u\-sados también para desarrollar el mismo Eclipse). Sin embargo, también se puede usar para otros tipos de aplicaciones cliente, como BitTorrent Azureus.
 
 Eclipse es también una comunidad de usuarios, extendiendo constantemente las áreas de aplicación cubiertas. Un ejemplo es el recientemente creado Eclipse Modeling Project, cubriendo casi todas las áreas de Model Driven Engineering.
 
@@ -27,13 +27,13 @@ Existen 3 versiones estables para Eclipse, de las cuales se han utilizado dos en
 	\item Ganymede (Junio 2008) utilizado para la realización de las pruebas de integración y de estrés debido a que permite la integración con los frameworks utilizados para dicho fin.
 \end{itemize}
 \section{Maven}
-Maven es una herramienta de software para la gestión y construcción de proyectos Java creada por Jason van Zyl, de Sonatype, en 2002. Es similar en funcionalidad a \textit{Apache Ant} (y en menor medida a PEAR de PHP y CPAN de Perl), pero tiene un modelo de configuración de construcción más simple, basado en un formato XML. Estuvo integrado inicialmente dentro del proyecto Jakarta pero ahora ya es un proyecto de nivel superior de la Apache Software Foundation.
+Maven\cite{22} es una herramienta de software para la gestión y construcción de proyectos Java creada por Jason van Zyl, de Sonatype, en 2002. Es similar en funcionalidad a \textit{Apache Ant} (y en menor medida a PEAR de PHP y CPAN de Perl), pero tiene un modelo de configuración de construcción más simple, basado en un formato XML. Estuvo integrado inicialmente dentro del proyecto Jakarta pero ahora ya es un proyecto de nivel superior de la Apache Software Foundation.
 
 Maven utiliza un \textit{Project Object Model} (POM) para describir el proyecto de software a construir, sus dependencias de otros módulos y componentes externo, y el orden de construcción de los elementos. Viene con objetivos predefinidos para realizar ciertas tareas claramente definidas, como la compilación del código y su empaquetado.
 
 Una característica clave de Maven es que está listo para usar en red. El motor incluido en su núcleo puede dinámicamente descargar plugins de un repositorio, el mismo repositorio que provee acceso a muchas versiones de diferentes proyectos \textit{Open Source} en Java, de \textit{Apache} y otras organizaciones y desarrolladores. Este repositorio y su sucesor reorganizado, el repositorio \textit{Maven 2}, pugnan por ser el mecanismo de facto de distribución de aplicaciones en Java, pero su adopción ha sido muy lenta. Maven provee soporte no sólo para obtener archivos de su repositorio, sino también para subir artefactos al repositorio al final de la construcción de la aplicación, dejándola al acceso de todos los usuarios. Una caché local de artefactos actúa como la primera fuente para sincronizar la salida de los proyectos a un sistema local.
 \section{Subversion}
-Subversion es un software de sistema de control de versiones diseñado específicamente para reemplazar al popular \textit{CVS}, el cual posee varias deficiencias. Es software libre bajo una licencia de tipo \textit{Apache/BSD} y se le conoce también como svn por ser ese el nombre de la herramienta de línea de comandos. Una característica importante de Subversion es que, a diferencia de CVS, los archivos versionados no tienen cada uno un número de revisión independiente. En cambio, todo el repositorio tiene un único número de versión que identifica un estado común de todos los archivos del repositorio en cierto punto del tiempo.
+Subversion\cite{25} es un software de sistema de control de versiones diseñado específicamente para reemplazar al popular \textit{CVS}, el cual posee varias deficiencias. Es software libre bajo una licencia de tipo \textit{Apache/BSD} y se le conoce también como svn por ser ese el nombre de la herramienta de línea de comandos. Una característica importante de Subversion es que, a diferencia de CVS, los archivos versionados no tienen cada uno un número de revisión independiente. En cambio, todo el repositorio tiene un único número de versión que identifica un estado común de todos los archivos del repositorio en cierto punto del tiempo.
 
 \subsection{Ventajas}
 \begin{itemize}
@@ -55,7 +55,7 @@ Subversion es un software de sistema de control de versiones diseñado específica
 Existen varias interfaces a Subversion, ya sea programas individuales como interfaces que lo integran en entornos de desarrollo. En nuestro caso se ha utilizado un cliente llamado \textit{Subclipse}, que se trata de un plugin que integra Subversion al entorno Eclipse.
 
 \section{Apache (\textit{Jakarta Tomcat})}
-El servidor HTTP Apache es un servidor web HTTP de código abierto para \textit{plataformas Unix} (BSD, GNU/Linux, etc.), \textit{Windows, Macintosh} y otras, que implementa el protocolo \textit{HTTP/1.1} y la noción de sitio virtual.
+El servidor HTTP Apache\cite{29} es un servidor web HTTP de código abierto para \textit{plataformas Unix} (BSD, GNU/Linux, etc.), \textit{Windows, Macintosh} y otras, que implementa el protocolo \textit{HTTP/1.1} y la noción de sitio virtual.
 
 El servidor Apache se desarrolla dentro del proyecto HTTP Server (httpd) de la \textit{Apache Software Foundation}.
 
@@ -75,7 +75,7 @@ Apache es usado para muchas otras tareas donde el contenido necesita ser puesto 
 \end{itemize}
 
 \section{MagicDraw UML}
-MagicDraw es una herramienta visual de modelado UML. Diseñado para analistas de negocio, analistas software, programadores, ingenieros de control de ca\-lidad y escritores de documentación, esta herramienta facilita el análisis y diseño orientado a objetos. Por otra parte posee soporte total para J2EE incluyendo herramientas de ingeniería inversa.
+MagicDraw\cite{6} es una herramienta visual de modelado UML. Diseñado para analistas de negocio, analistas software, programadores, ingenieros de control de ca\-lidad y escritores de documentación, esta herramienta facilita el análisis y diseño orientado a objetos. Por otra parte posee soporte total para J2EE incluyendo herramientas de ingeniería inversa.
 
 MagicDraw provee soporte completo para metamodelos UML 2.0, incluyendo diagramas de clases, casos de uso, comunicación, secuencia, estado, actividad, implantación, paquetes, componentes, estructuras compuestas y de distribución.
 
@@ -83,7 +83,7 @@ MagicDraw genera automáticamente partes del modelo, todo de acuerdo con los patr
 
 \section{Microsoft Proyect 2000}
 
-Microsoft Project es un programa de la suite Microsoft Office usado para la gestión de proyectos.
+Microsoft Project\cite{40} es un programa de la suite Microsoft Office usado para la gestión de proyectos.
 
 Microsoft Project (o MSP) es un software de administración de proyectos diseñado, desarrollado y comercializado por Microsoft para asistir a administradores de proyectos en el desarrollo de planes, asignación de recursos a tareas, dar seguimiento al progreso, administrar presupuesto y analizar cargas de trabajo.
 

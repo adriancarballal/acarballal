@@ -2,7 +2,7 @@
 Tras la definición que se ha dado de la funcionalidad real que debe de cumplir el sistema, se detallarán las decisiones tomadas para el diseño e implementación del sistema. 
 
 \section{Arquitectura}
-Una vez que se realizó el estudio de las diferentes tecnologías disponibles en la actualidad se ha optado por una implementación utilizando una arquitectura MVC (Modelo-Vista-Controlador) mediante la integración de Hibernate y Spring para la capa modelo y el uso de Tapestry 5 en el caso de las capas vista y controlador.
+Una vez que se realizó el estudio de las diferentes tecnologías disponibles en la actualidad se ha optado por una implementación utilizando una arquitectura MVC (Modelo-Vista-Controlador) mediante la integración de Hibernate\cite{17}\cite{19} y Spring\cite{14}\cite{15} para la capa modelo y el uso de Tapestry 5\cite{18} en el caso de las capas vista y controlador.
 \begin{figure}[h]
 \centering
 \includegraphics*[width=5cm]{imagenes/mvc.png}
@@ -686,7 +686,7 @@ Como se comentó con anterioridad la aplicación sigue el patrón arquitectónico \t
 En nuestro caso, las clases inferiores componen el modelo (explicado en la sección anterior), mientras que esta capa representa a la vista y al controlador.
 Se eligió el framework web \textit{Tapestry 5}, en su versión 5.0.18 Stable (Junio 2008). Este framework es totalmente orientado a objetos, donde cada pantalla de la aplicación se compondrá por un lado del aspecto visual, en HTML plano (ficheros \textit{tml}), y por otro por los componentes que implementan las acciones asociadas a dicha pantalla o controladores.
 
-En Tapestry 5 una aplicación web se compone de páginas. El controlador de cada página está compuesto por diferentes componentes, los cuales a su vez pueden estar compuestos por otros subcomponentes (véase figura \ref{componentes}).
+En Tapestry 5\cite{12}\cite{18} una aplicación web se compone de páginas. El controlador de cada página está compuesto por diferentes componentes, los cuales a su vez pueden estar compuestos por otros subcomponentes (véase figura \ref{componentes}).
 \begin{figure}[htp]
 \centering
 \includegraphics[width=9cm]{imagenes/componentes.jpg}
